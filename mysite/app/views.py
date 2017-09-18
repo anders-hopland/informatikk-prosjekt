@@ -1,3 +1,6 @@
 from django.shortcuts import render
+from . models import Artist
 
-# Create your views here.
+def dashboard(request):
+    object_list = Artist.objects.all()
+    return render(request, 'app/dashboard.html', {'artists' : object_list})
