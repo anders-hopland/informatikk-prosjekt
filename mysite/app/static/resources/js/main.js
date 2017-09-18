@@ -4,7 +4,7 @@
 // Setter disse inn i verdi 1, verdi2 osv.
 
 let headValues = ["verdi1, verdi2, verdi3, verdi4, verdi5"];
-let rader = ["rad1", "rad2", "rad3"];
+let antallRader = 5;
 
 // Henter ut elementene jeg skal håndtere i dashboard.html
 let tabellen = document.getElementById("tabellen");
@@ -23,6 +23,14 @@ function createTable(headValues) {
     }
 
     tblTr.appendChild(newTr);
+
+    for (let j = 0; j < antallRader; j++) {
+        let newRow = document.createElement("tr");
+        let newTh = document.createElement("th");
+        newRow.appendChild(newTh);
+
+        tblBody.appendChild(newRow);
+    }
 }
 
 createTable(headValues);
