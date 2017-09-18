@@ -1,7 +1,7 @@
 
 
 // Kan henter fra databasen hvor mange titler eller verdier som trengs
-// Setter disse inn i verdi 1, verdi2 osv.
+// Setter disse inn i verdi 1, verdi2 osv
 
 let headValues = ["verdi1, verdi2, verdi3, verdi4, verdi5"];
 let antallRader = 5;
