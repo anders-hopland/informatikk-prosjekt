@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from . models import Artist
 
 def dashboard(request):
-    return render(request, 'app/dashboard.html', {})
+    object_list = Artist.objects.all()
+    return render(request, 'app/dashboard.html', {'artists' : object_list})

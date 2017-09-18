@@ -1,15 +1,31 @@
 {% extends '../base.html' %}
 
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
 {% block content %}
 <table id="tabellen">
+    <p>{{ artist.navn }}</p>
     <thead>
         <tr id="tblTr">
-
+                <th>NAVN</th>
+                <th>Zjanger</th>
+                <th>Krav</th>
         </tr>
     </thead>
     <tbody id="tblBody">
-
+        {% for artist in artists %}
+            <tr>
+                <td>{{ artist.navn }}</td>
+                <td>{{ artist.sjanger }}</td>
+                <td>{{ artist.krav }}</td>
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
+
+
 
 {% endblock %}
