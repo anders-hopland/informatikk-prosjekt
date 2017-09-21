@@ -1,1 +1,3 @@
 ../.idea
+/mysite/__pycache__/
+/mysite/app/__pycache__/
