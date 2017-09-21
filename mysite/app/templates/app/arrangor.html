@@ -1,0 +1,39 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<table id="tabellen">
+    <thead>
+        <tr id="tblTr">
+                <th>Artist navn</th>
+                <th>Tidspunkt</th>
+                <th>Scene</th>
+                <th>Medlemmer i rigging</th>
+        </tr>
+    </thead>
+    <tbody id="tblBody">
+        {% for konsert in konserts %}
+            <tr>
+                <td>{{ konsert.a_navn.navn }}</td>
+                <td>{{ konsert.s_tidspunkt }}</td>
+                <td>{{ konsert.sceneNavn }}</td>
+                <td>
+                {% for rigging in konsert.rigging.all %}
+                    {% for person in rigging.person.all %}
+                        {{ person.user }}
+                        {{ person.role }} <br>
+                    {% endfor %}
+                {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock %}
