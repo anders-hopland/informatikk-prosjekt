@@ -2,23 +2,25 @@
 <html>
 <head>
     <title>Green Week</title>
-    <link rel="stylesheet" href="../static/resources/css/stylesheet.css">
-
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
     {% block styles %}
-
     {% endblock %}
 </head>
 <body>
-<div class="page-header">
-    <h1>Oversikt:</h1>
-</div>
 
-<div>
-    {% block content %}
-    {% endblock %}
-</div>
+    {% include "header.html" %}
 
-<script src="../static/resources/js/main.js"></script>
+    <div class="page-header">
+        <h1>Oversikt:</h1>
+    </div>
+
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% include "footer.html" %}
+<script src="../static/js/main.js"></script>
 
 </body>
 </html>
