@@ -19,8 +19,8 @@ class Konsert(models.Model):
     s_tidspunkt = models.DateField()
     rigging = models.ManyToManyField(rigging)
 
-    '''def __str__(self):
-        return '''
+    def __str__(self):
+        return "funker"
 
 
 class Tilbud(models.Model):

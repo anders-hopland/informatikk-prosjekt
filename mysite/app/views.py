@@ -7,4 +7,4 @@ def dashboard(request):
 
 def arrangor(request):
     object_list = Konsert.objects.all();
-    return render(request, 'app/arrangor.html', {'konserter' : object_list})
+    return render(request, 'app/arrangor.html', {'konserts' : object_list})
