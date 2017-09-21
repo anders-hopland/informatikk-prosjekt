@@ -17,6 +17,7 @@ class Artist(models.Model):
 class Konsert(models.Model):
     a_navn = models.OneToOneField(Artist)
     s_tidspunkt = models.DateField()
+    sceneNavn = models.CharField(max_length=250, default="Hovedscenen")
     rigging = models.ManyToManyField(rigging)
 
     def __str__(self):

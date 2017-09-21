@@ -11,6 +11,7 @@
         <tr id="tblTr">
                 <th>Artist navn</th>
                 <th>Tidspunkt</th>
+                <th>Scene</th>
                 <th>Medlemmer i rigging</th>
         </tr>
     </thead>
@@ -19,6 +20,7 @@
             <tr>
                 <td>{{ konsert.a_navn.navn }}</td>
                 <td>{{ konsert.s_tidspunkt }}</td>
+                <td>{{ konsert.sceneNavn }}</td>
                 <td>
                 {% for rigging in konsert.rigging.all %}
                     {% for person in rigging.person.all %}
