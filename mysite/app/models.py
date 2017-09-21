@@ -19,6 +19,9 @@ class Konsert(models.Model):
     s_tidspunkt = models.DateField()
     rigging = models.ManyToManyField(rigging)
 
+    '''def __str__(self):
+        return '''
+
 
 class Tilbud(models.Model):
     a_navn = models.OneToOneField(Konsert)
