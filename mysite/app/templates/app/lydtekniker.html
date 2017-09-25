@@ -15,16 +15,11 @@
         </tr>
     </thead>
     <tbody id="tblBody">
-        <tr>
-            <td>Green Day</td>
-            <td>Okt. 9, 2017</td>
-            <td>Festningen</td>
-        </tr>
-        <tr>
-            <td>GDDE</td>
-            <td>Des. 11, 2017</td>
-            <td>Trønderscenen</td>
-        </tr>
+        {% for konsert in konserts %}
+            <td>{{ konsert.artist }}</td>
+            <td>{{ konsert.tidspunkt }}</td>
+            <td>{{ konsert.sceneNavn }}</td>
+        {% endfor %}
     </tbody>
 </table>
 {% endblock %}

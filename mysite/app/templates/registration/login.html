@@ -1,0 +1,18 @@
+
+
+    <h1>Log in page</h1>
+    {% if form.errors %}
+      <h3>
+        Password and username did not match, please try again or contact your local sysadmin
+      </h3>
+    {% else %}
+      <p>Please, use the following form to log-in. In case you do not have a profile, please contact your sysadmin</p>
+    {% endif %}
+    <div class="login-form">
+        <form action="{% url 'login' %}" method="post" class="form-group">
+          {{ form.as_p }}
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ dashboard }}" />
+          <p><input type="submit" value="Log-in"></p>
+        </form>
+    </div>
