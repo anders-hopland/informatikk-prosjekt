@@ -8,3 +8,9 @@ def dashboard(request):
 def arrangor(request):
     object_list = Konsert.objects.all();
     return render(request, 'app/arrangor.html', {'konserts' : object_list})
+
+def lydtekniker(request):
+    '''object_list = Konsert.objects.all();
+    object_list.filter()
+    return render(request, 'app/lydtekniker.html', {'konserts' : object_list})'''
+    return render(request, 'app/lydtekniker.html', {})

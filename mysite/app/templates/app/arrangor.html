@@ -18,14 +18,15 @@
     <tbody id="tblBody">
         {% for konsert in konserts %}
             <tr>
-                <td>{{ konsert.a_navn.navn }}</td>
-                <td>{{ konsert.s_tidspunkt }}</td>
+                <td>{{ konsert.artist.navn }}</td>
+                <td>{{ konsert.tidspunkt }}</td>
                 <td>{{ konsert.sceneNavn }}</td>
                 <td>
                 {% for rigging in konsert.rigging.all %}
                     {% for person in rigging.person.all %}
-                        {{ person.user }}
-                        {{ person.role }} <br>
+                        {{ person }}
+                        -
+                        {{ person.extend_user.role }} <br>
                     {% endfor %}
                 {% endfor %}
                 </td>
@@ -33,7 +34,4 @@
         {% endfor %}
     </tbody>
 </table>
-
-
-
 {% endblock %}
