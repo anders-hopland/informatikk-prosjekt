@@ -3,14 +3,14 @@ from django.db import models
 # Create your models here.
 from django.contrib.auth.models import User
 
-STATUS_VALG = (
+STATUS_CHOICES = (
     ('arrangor', 'Arrangør'),
     ('tekniker', 'Tekniker')
 )
 
-class extend_user(models.Model):
+class Extend_user(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    role = models.CharField(max_length=250, choices=STATUS_VALG)
+    role = models.CharField(max_length=250, choices=STATUS_CHOICES)
 
     def __str__(self):
         return self.user.username
@@ -19,7 +19,7 @@ class extend_user(models.Model):
         verbose_name = 'Extend user'
         verbose_name_plural = 'Extend users'
 
-class rigging(models.Model):
+class Rigging(models.Model):
     person = models.ManyToManyField(User)
 
     def __str__(self):
@@ -27,7 +27,7 @@ class rigging(models.Model):
 
     class Meta:
         verbose_name = 'Rigging'
-        verbose_name_plural = 'Rigginger'
+        verbose_name_plural = 'Riggings'
 
 class Artist(models.Model):
     navn = models.CharField(max_length=250)
@@ -41,22 +41,22 @@ class Artist(models.Model):
         verbose_name = 'Artist'
         verbose_name_plural = 'Artister'
 
-class Konsert(models.Model):
+class Consert(models.Model):
     artist = models.OneToOneField(Artist)
     tidspunkt = models.DateField()
     sceneNavn = models.CharField(max_length=250, default="Hovedscenen")
-    rigging = models.ManyToManyField(rigging)
+    rigging = models.ManyToManyField(Rigging)
 
     def __str__(self):
         return self.artist.navn
 
     class Meta:
-        verbose_name = 'Konsert'
-        verbose_name_plural = 'Konserter'
+        verbose_name = 'consert'
+        verbose_name_plural = 'conserts'
 
 
 class Tilbud(models.Model):
-    a_navn = models.OneToOneField(Konsert)
+    a_navn = models.OneToOneField(Consert)
     pris = models.IntegerField()
     ex_date = models.DateField()
 
