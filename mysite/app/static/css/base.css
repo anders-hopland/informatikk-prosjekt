@@ -5,68 +5,64 @@
 
 body {
     background-color: #f8f8f8;
-    margin:0px;
+    margin: 0;
+    overflow: hidden;
 }
 
-.page-header{
+h1 {
+    display: flex;
+    justify-content: center;
+}
 
-    /*background-color: green;*/
+.page-container {
     margin-top:5rem;
-
-
 }
 
-#contentA{
-    padding: 2rem 10px 2rem 20px;
-
+.page-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-ul {
-    list-style-type: none;
+nav {
+    background-color: white;
+    box-shadow: 0 2px 0 #dddddd;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    height: 5rem;
-    background-color: white;
-    box-shadow: 0px 2px 0px #dddddd;
     position: fixed;
     top: 0;
     width: 100%;
 }
 
-li {
-    float: left;
-}
-
-li a, .dropbtn {
-    margin-top:1rem;
-    display: inline-block;
+nav > a {
     color: grey;
-    text-align: center;
-    padding: 14px 16px;
+    display: flex;
+    float: left;
+    padding: 1em 1em;
     text-decoration: none;
+    transition: 0.5s ease;
 }
 
-li a:hover, .dropdown:hover .dropbtn {
-    background-color: #f8f8f8;
+nav > a:hover {
+    background-color: whitesmoke;
+    transition: background-color 0.2s ease;
 }
 
-li.dropdown {
+a.dropdown {
     display: inline-block;
     position:relative;
     float:right;
 }
 
 .dropdown-content {
-    display: block;
-    opacity: 1;
-    float:right;
-    position: relative;
     background-color: white;
-    min-width: 160px;
+    border:2px solid #dddddd;
     max-width: 165px;
-    border-left:2px solid #dddddd;
-    border-right:2px solid #dddddd;
+    min-width: 160px;
+    opacity: 1;
+    position: fixed;
+    right: 0;
+    top: 0;
     z-index: 10;
 }
 
@@ -76,18 +72,13 @@ li.dropdown {
     text-decoration: none;
     display: block;
     text-align: left;
-    border-bottom:2px solid #dddddd;
+    border-bottom:1px solid #dddddd;
+}
+
+.dropdown-content a:last-child {
+    border-bottom:0;
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1;
-    position: relative;
-    display: block;
-
-}
-
-.dropdown a:hover .dropdown-content {
-    display: block;
-    opacity: 1;
-
+    background-color: whitesmoke;
 }

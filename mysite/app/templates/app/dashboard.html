@@ -6,15 +6,15 @@
 {% endblock %}
 
 {% block content %}
-<table id="tabellen">
+<table>
     <thead>
-        <tr id="tblTr">
+        <tr>
             <th>NAVN</th>
             <th>Zjanger</th>
             <th>Krav</th>
         </tr>
     </thead>
-    <tbody id="tblBody">
+    <tbody>
         {% for artist in artists %}
             <tr>
                 <td>{{ artist.navn }}</td>

@@ -10,13 +10,14 @@
 
 {% include "header.html" %}
 
-    <div class="page-header">
-        <h1>Oversikt:</h1>
-    </div>
+    <div class="page-container">
 
-    <div>
-        {% block content %}
-        {% endblock %}
+        <h1>Oversikt:</h1>
+
+        <div class="page-content" style="justify-content: center; display: flex">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
 
     {% include "footer.html" %}
