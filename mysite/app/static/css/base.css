@@ -18,11 +18,15 @@ h1 {
     margin-top:5rem;
 }
 
+/* får ikke denne til å fungere, finn ut hvorfor
+    Fjern så inline css i base.html
+
 .page-content {
     display: flex;
-    align-items: center;
     justify-content: center;
 }
+
+*/
 
 nav {
     background-color: white;
