@@ -13,9 +13,8 @@ h1 {
     justify-content: center;
 }
 
-nav > img {
+.img {
     height: 3em;
-    float: left;
 }
 
 .page-container {
@@ -35,6 +34,11 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
+}
+
+nav a:first-child {
+    padding: 0;
+    margin-left: 0.5em;
 }
 
 nav > a {
