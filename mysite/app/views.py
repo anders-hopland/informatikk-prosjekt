@@ -21,7 +21,7 @@ def lydtekniker(request):
     if not request.user.is_authenticated():
         return render(request, 'app/dashboard.html', {})
 
-    if user.profile.role == 'arrangor':
+    if user.profile.role == 'tekniker':
         object_list = Consert.objects.filter(rigging__person__username=user.username)
         return render(request, 'app/lydtekniker.html', {'conserts': object_list})
     else:

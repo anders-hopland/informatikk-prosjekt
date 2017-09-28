@@ -16,9 +16,11 @@
     </thead>
     <tbody>
         {% for consert in conserts %}
+        <tr>
             <td>{{ consert.artist }}</td>
             <td>{{ consert.tidspunkt }}</td>
             <td>{{ consert.sceneNavn }}</td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>

@@ -6,23 +6,5 @@
 {% endblock %}
 
 {% block content %}
-<table>
-    <thead>
-        <tr>
-            <th>NAVN</th>
-            <th>Zjanger</th>
-            <th>Krav</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for artist in artists %}
-            <tr>
-                <td>{{ artist.navn }}</td>
-                <td>{{ artist.sjanger }}</td>
-                <td>{{ artist.krav }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
 
 {% endblock %}

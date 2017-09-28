@@ -21,10 +21,6 @@
         </div>
     </div>
 
-    {% if request.user.is_authenticated %}
-        <h1> User logged in {{ request.user.username }}</h1>
-    {% endif %}
-
     {% include "footer.html" %}
 
 </body>
