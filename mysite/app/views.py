@@ -2,7 +2,6 @@ from django.shortcuts import render
 from . models import Artist, Consert
 
 def dashboard(request):
-    object_list = Artist.objects.all()
     return render(request, 'app/dashboard.html', {})
 
 def arrangor(request):
