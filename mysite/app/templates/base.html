@@ -3,6 +3,7 @@
 <head>
     <title>Green Week</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     {% block styles %}
     {% endblock %}
 </head>
@@ -14,7 +15,7 @@
 
         <h1>Oversikt:</h1>
 
-        <div class="page-content" style="justify-content: center; display: flex">
+        <div class="page-content">
             {% block content %}
             {% endblock %}
         </div>
@@ -25,7 +26,6 @@
     {% endif %}
 
     {% include "footer.html" %}
-<script src="../static/js/main.js"></script>
 
 </body>
 </html>
