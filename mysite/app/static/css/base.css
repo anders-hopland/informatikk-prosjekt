@@ -42,6 +42,10 @@ nav a:first-child {
     margin-right: 0.5em;
 }
 
+nav a:last-child {
+    float: right;
+}
+
 nav > a {
     color: grey;
     display: flex;
