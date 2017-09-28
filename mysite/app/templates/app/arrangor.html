@@ -18,11 +18,11 @@
     <tbody>
         {% for konsert in konserts %}
             <tr>
-                <td>{{ konsert.artist.navn }}</td>
-                <td>{{ konsert.tidspunkt }}</td>
-                <td>{{ konsert.sceneNavn }}</td>
+                <td>{{ consert.artist.navn }}</td>
+                <td>{{ consert.tidspunkt }}</td>
+                <td>{{ consert.sceneNavn }}</td>
                 <td>
-                {% for rigging in konsert.rigging.all %}
+                {% for rigging in consert.rigging.all %}
                     {% for person in rigging.person.all %}
                         {{ person }}
                         -
