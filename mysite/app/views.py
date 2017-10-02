@@ -34,3 +34,15 @@ def lydtekniker(request):
         return render(request, 'app/lydtekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'registration/login.html', {})
+
+def lystekniker(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'app/dashboard.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'tekniker':
+        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
+        return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'registration/login.html', {})
