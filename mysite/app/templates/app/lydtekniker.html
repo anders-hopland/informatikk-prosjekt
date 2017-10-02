@@ -6,25 +6,22 @@
 {% endblock %}
 
 {% block content %}
-<table id="tabellen">
+<table>
     <thead>
-        <tr id="tblTr">
-                <th>Band</th>
-                <th>Tidspunkt</th>
-                <th>Scene</th>
+        <tr>
+            <th>Band</th>
+            <th>Tidspunkt</th>
+            <th>Scene</th>
         </tr>
     </thead>
-    <tbody id="tblBody">
+    <tbody>
+        {% for consert in conserts %}
         <tr>
-            <td>Green Day</td>
-            <td>Okt. 9, 2017</td>
-            <td>Festningen</td>
+            <td>{{ consert.artist }}</td>
+            <td>{{ consert.tidspunkt }}</td>
+            <td>{{ consert.sceneNavn }}</td>
         </tr>
-        <tr>
-            <td>GDDE</td>
-            <td>Des. 11, 2017</td>
-            <td>Trønderscenen</td>
-        </tr>
+        {% endfor %}
     </tbody>
 </table>
 {% endblock %}

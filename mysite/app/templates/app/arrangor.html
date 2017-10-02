@@ -6,23 +6,23 @@
 {% endblock %}
 
 {% block content %}
-<table id="tabellen">
+<table>
     <thead>
-        <tr id="tblTr">
-                <th>Artist navn</th>
-                <th>Tidspunkt</th>
-                <th>Scene</th>
-                <th>Medlemmer i rigging</th>
+        <tr>
+            <th>Artist navn</th>
+            <th>Tidspunkt</th>
+            <th>Scene</th>
+            <th>Medlemmer i rigging</th>
         </tr>
     </thead>
-    <tbody id="tblBody">
-        {% for konsert in konserts %}
+    <tbody>
+        {% for consert in conserts %}
             <tr>
-                <td>{{ konsert.artist.navn }}</td>
-                <td>{{ konsert.tidspunkt }}</td>
-                <td>{{ konsert.sceneNavn }}</td>
+                <td>{{ consert.artist.navn }}</td>
+                <td>{{ consert.tidspunkt }}</td>
+                <td>{{ consert.sceneNavn }}</td>
                 <td>
-                {% for rigging in konsert.rigging.all %}
+                {% for rigging in consert.rigging.all %}
                     {% for person in rigging.person.all %}
                         {{ person }}
                         -

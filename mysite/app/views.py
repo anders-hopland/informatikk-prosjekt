@@ -1,16 +1,36 @@
 from django.shortcuts import render
-from . models import Artist, Konsert
+from . models import Artist, Consert
 
 def dashboard(request):
-    object_list = Artist.objects.all()
-    return render(request, 'app/dashboard.html', {'artists' : object_list})
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 def arrangor(request):
-    object_list = Konsert.objects.all();
-    return render(request, 'app/arrangor.html', {'konserts' : object_list})
+    user = request.user
+
+    if not request.user.is_authenticated():
+        return render(request, 'app/dashboard.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'arrangor':
+        object_list = Consert.objects.all().order_by('tidspunkt')
+        print(rolle)
+        return render(request, 'app/arrangor.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'registration/login.html', {})
 
 def lydtekniker(request):
-    '''object_list = Konsert.objects.all();
-    object_list.filter()
-    return render(request, 'app/lydtekniker.html', {'konserts' : object_list})'''
-    return render(request, 'app/lydtekniker.html', {})
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'app/dashboard.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'tekniker':
+        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
+        return render(request, 'app/lydtekniker.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'registration/login.html', {})
