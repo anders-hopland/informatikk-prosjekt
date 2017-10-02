@@ -1,10 +1,11 @@
 from django.conf.urls import url, include
-from app.views import arrangor, lydtekniker, dashboard
+from app.views import arrangor, lydtekniker, dashboard, lystekniker
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^arrangor/$', arrangor, name='arrangor'),
     url(r'^lydtekniker/$', lydtekniker, name='lydtekniker'),
+    url(r'^lystekniker/$', lystekniker, name='lystekniker'),
     url(r'^dashboard/$', dashboard, name='dashboard'),
 
     #login logout

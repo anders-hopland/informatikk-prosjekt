@@ -7,19 +7,13 @@
         </a>
         {% if rolle == "arrangor" %}
             <a href="{% url 'arrangor' %}">Total oversikt</a>
-        <!--{% elif rolle == "lydtekniker" %}
+        {% elif rolle == "lydtekniker" %}
             <a href="{% url 'lydtekniker' %}">Total oversikt</a>
-        {% elif rolle == "lystekniker" %}
-            <a href="{% url 'lydtekniker' %}">Total oversikt</a>
-        {% elif rolle == "manager" %}
-            <a href="{% url 'lydtekniker' %}">Total oversikt</a>
-        {% elif rolle == "tekniker" %}
-            <a href="{% url 'bookingansvarlig' %}">Total oversikt</a>
-        {% elif rolle == "tekniker" %}
-            <a href="{% url 'bookingsjef' %}">Total oversikt</a>-->
         {% endif %}
         <a href="{% url 'logout' %}">Logout</a>
     {% else %}
         <a href="{% url 'login' %}">Log-in</a>
     {% endif %}
 </nav>
+
+
