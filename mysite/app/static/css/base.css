@@ -22,6 +22,10 @@ table tr td {
     height: 3em;
 }
 
+#backgroundImg {
+    background-image: url('../images/login.png');
+}
+
 .page-container {
     margin-top:5rem;
 }
