@@ -7,4 +7,15 @@
 
 {% block content %}
 
+    <h1>Hva ønsker du å gjøre {{rolle}}?</h1>
+
+    <marquee scrolldelay="85" width="30%" behavior="scroll" loop="-1">
+        <i>
+            Dagens dato :  <span id="spnTime"> </span>
+        </i>
+        <i>
+            Været i dag : <span>18 grader og sol</span>
+        </i>
+    </marquee>
+
 {% endblock %}
