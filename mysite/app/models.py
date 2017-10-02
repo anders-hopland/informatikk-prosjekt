@@ -1,6 +1,4 @@
 from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse, reverse_lazy
 
@@ -17,6 +15,14 @@ SCENER = (
     ('hallen', 'Hallen'),
     ('hovedscenen', 'Hovedscenen'),
     ('storhallen', 'Storhallen')
+)
+
+NEED_CHOICES = (
+    ('teknsike', 'Tekniske'),
+    ('instrumenter', 'Instrumenter'),
+    ('lyd', 'Lyd'),
+    ('lys', 'Lys'),
+    ('andre', 'Andre')
 )
 
 class Extend_user(models.Model):
@@ -40,10 +46,18 @@ class Rigging(models.Model):
         verbose_name = 'Rigging'
         verbose_name_plural = 'Riggings'
 
+class Behov(models.Model):
+    type = models.CharField(max_length=250, choices=NEED_CHOICES)
+    behov = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.behov
+
+
 class Artist(models.Model):
     navn = models.CharField(max_length=250)
     sjanger = models.CharField(max_length=250)
-    krav = models.CharField(max_length=250)
+    behov = models.ManyToManyField(Behov)
 
     def __str__(self):
         return self.navn
@@ -51,6 +65,7 @@ class Artist(models.Model):
     class Meta:
         verbose_name = 'Artist'
         verbose_name_plural = 'Artister'
+
 
 class Consert(models.Model):
     artist = models.OneToOneField(Artist)
@@ -80,3 +95,4 @@ class Tilbud(models.Model):
 
     def __str__(self):
         return "noe smart etter hvert"
+

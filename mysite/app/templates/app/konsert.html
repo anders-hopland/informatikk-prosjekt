@@ -2,52 +2,40 @@
 
 {% load static %}
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/konsert.css' %}" type="text/css">
 {% endblock %}
 
 {% block content %}
-<table>
-    <div id="konsert-band-liste">
-        <thead>
-            <tr>
-                <th>Artist navn</th>
-                <th>Artist sjanger</th>
-                <th>Tidspunkt</th>
-                <th>Scene</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for consert in conserts %}
-                <tr>
-                    <td>{{ consert.artist.navn }}</td>
-                    <td>{{ consert.artist.sjanger }}</td>
-                    <td>{{ consert.tidspunkt }}</td>
-                    <td>{{ consert.sceneNavn }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </div>
+<div>
+    {% for consert in conserts %}
+    <label>Navn:</label>
+    <span>{{ consert.artist }}</span>
+    <label>Dato:</label>
+    <span>{{ consert.tidspunkt }}</span>
+    <label>Scene:</label>
+    <span>{{ consert.scene }}</span>
+    <label>Sjanger:</label>
+    <span>{{ consert.sceneNavn }}</span>
+    {% endfor %}
+</div>
 
-    <div id="konsert-rigging-medlemmer-liste">
-        <h3>Medlemmer i rigging</h3>
-        <thead>
-            <tr>
-                <th>Navn</th>
-                <th>Rolle</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for consert in conserts %}
-                <tr>
-                {% for rigging in consert.rigging.all %}
-                    {% for person in rigging.person.all %}
-                        <td>{{ person.profile }}</td>
-                        <td>{{ person.profile.role }}</td>
-                    {% endfor %}
-                {% endfor %}
-                </tr>
+<div>
+    {% for consert in conserts %}
+        {% for rigging in consert.rigging.all %}
+            {% for person in rigging.person.all %}
+                <label>Medlemmer:</label>
+                <span>{{ person }}</span>
             {% endfor %}
-        </tbody>
-    </div>
-</table>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+<div>
+    <h2>Tekniske behov</h2>
+    <h3>Behov for utstyr</h3>
+    <span>2 mikrofoner</span>
+    <span>2 staver</span>
+    <h3>Behov for instrument</h3>
+    <span></span>
+</div>
 {% endblock %}

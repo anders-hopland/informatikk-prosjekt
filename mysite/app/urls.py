@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from app.views import arrangor, lydtekniker, dashboard, lystekniker, konsert
+from app.views import arrangor, lydtekniker, dashboard, lystekniker, konsert, scener
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^lystekniker/$', lystekniker, name='lystekniker'),
     url(r'^dashboard/$', dashboard, name='dashboard'),
     url(r'^konsert/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<post_id>\d+)/$', konsert, name='konsert'),
+    url(r'^cener/?P<scenenavn>/s+', scener, name='scener'),
 
     #login logout
     url('^', include('django.contrib.auth.urls')),
