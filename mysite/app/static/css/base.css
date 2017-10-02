@@ -22,6 +22,11 @@ table tr td {
     height: 3em;
 }
 
+.login-form {
+    display: flex;
+    justify-content: space-around;
+}
+
 #backgroundImg {
     background-image: url('../images/login.png');
 }

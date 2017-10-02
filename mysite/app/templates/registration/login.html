@@ -7,13 +7,10 @@
 
 {% block content %}
 
-
-    <div id="backgroundImg">
-        <img src="../static/images/login.png">
-    </div>
-
-
+<div class="page-container">
     <h1>Logg inn</h1>
+
+    <div class="page-content">
     {% if form.errors %}
       <h3>
         Brukernavn og/eller passordet er ikke riktig,
@@ -24,6 +21,7 @@
           Hvis du ikke har bruker, vennligst kontakt systemadmin.
       </p>
     {% endif %}
+    </div>
     <div class="login-form">
         <form action="{% url 'login' %}" method="post" class="form-group">
           {{ form.as_p }}
@@ -32,6 +30,7 @@
           <p><input type="submit" value="Log-in"></p>
         </form>
     </div>
+</div>
 {% endblock %}
 
 
