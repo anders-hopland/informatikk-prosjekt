@@ -8,13 +8,16 @@
 {% block content %}
 
     <img class="img" src="../static/images/login.png">
-    <h1>Log in page</h1>
+    <h1>Logg inn</h1>
     {% if form.errors %}
       <h3>
-        Password and username did not match, please try again or contact your local sysadmin
+        Brukernavn og/eller passordet er ikke riktig,
+          vennligst prøv igjen eller kontakt din lokale systemadministrator.
       </h3>
     {% else %}
-      <p>Please, use the following form to log-in. In case you do not have a profile, please contact your sysadmin</p>
+      <p>Vennligst, bruk følgende form for å logge inn.
+          Hvis du ikke har bruker, vennligst kontakt systemadmin.
+      </p>
     {% endif %}
     <div class="login-form">
         <form action="{% url 'login' %}" method="post" class="form-group">
