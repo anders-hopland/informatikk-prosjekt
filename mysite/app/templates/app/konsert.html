@@ -1,0 +1,53 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<table>
+    <div id="konsert-band-liste">
+        <thead>
+            <tr>
+                <th>Artist navn</th>
+                <th>Artist sjanger</th>
+                <th>Tidspunkt</th>
+                <th>Scene</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for consert in conserts %}
+                <tr>
+                    <td>{{ consert.artist.navn }}</td>
+                    <td>{{ consert.artist.sjanger }}</td>
+                    <td>{{ consert.tidspunkt }}</td>
+                    <td>{{ consert.sceneNavn }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </div>
+
+    <div id="konsert-rigging-medlemmer-liste">
+        <h3>Medlemmer i rigging</h3>
+        <thead>
+            <tr>
+                <th>Navn</th>
+                <th>Rolle</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for consert in conserts %}
+                <tr>
+                {% for rigging in consert.rigging.all %}
+                    {% for person in rigging.person.all %}
+                        <td>{{ person.profile }}</td>
+                        <td>{{ person.profile.role }}</td>
+                    {% endfor %}
+                {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </div>
+</table>
+{% endblock %}

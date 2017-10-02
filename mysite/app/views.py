@@ -46,3 +46,15 @@ def lystekniker(request):
         return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'registration/login.html', {})
+
+def konsert(request, year, month, day, post_id):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'app/dashboard.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'arrangor':
+        object_list = Consert.objects.filter(id = post_id)
+        return render(request, 'app/konsert.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'registration/login.html', {})

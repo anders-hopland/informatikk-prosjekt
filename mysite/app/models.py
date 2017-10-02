@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse, reverse_lazy
 
 STATUS_CHOICES = (
     ('arrangor', 'Arrangør'),
@@ -10,6 +11,12 @@ STATUS_CHOICES = (
     ('manager', 'Manager'),
     ('bookingansvarlig', 'Bookingansvarlig'),
     ('bookingsjef', 'Bookingsjef')
+)
+
+SCENER = (
+    ('hallen', 'Hallen'),
+    ('hovedscenen', 'Hovedscenen'),
+    ('storhallen', 'Storhallen')
 )
 
 class Extend_user(models.Model):
@@ -48,11 +55,18 @@ class Artist(models.Model):
 class Consert(models.Model):
     artist = models.OneToOneField(Artist)
     tidspunkt = models.DateField()
-    sceneNavn = models.CharField(max_length=250, default="Hovedscenen")
+    sceneNavn = models.CharField(max_length=250, choices=SCENER)
     rigging = models.ManyToManyField(Rigging)
 
     def __str__(self):
         return self.artist.navn
+
+    def get_absolute_url(self):
+        return reverse('konsert', args=[self.tidspunkt.year, self.tidspunkt.strftime('%m'),
+        self.tidspunkt.strftime('%d'), self.id])
+
+    def get_scenes(self):
+        return SCENER
 
     class Meta:
         verbose_name = 'consert'
