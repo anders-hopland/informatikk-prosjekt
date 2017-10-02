@@ -6,32 +6,39 @@
 {% endblock %}
 
 {% block content %}
-<table>
-    <thead>
-        <tr>
-            <th>Artist navn</th>
-            <th>Tidspunkt</th>
-            <th>Scene</th>
-            <th>Medlemmer i rigging</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for consert in conserts %}
-            <tr>
-                <td>{{ consert.artist.navn }}</td>
-                <td>{{ consert.tidspunkt }}</td>
-                <td>{{ consert.sceneNavn }}</td>
-                <td>
-                {% for rigging in consert.rigging.all %}
-                    {% for person in rigging.person.all %}
-                        {{ person }}
-                        -
-                        {{ person.extend_user.role }} <br>
-                    {% endfor %}
+
+<div class="page-container">
+    <h1>Oversikt over konserter:</h1>
+    <div class="page-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Artist navn</th>
+                    <th>Tidspunkt</th>
+                    <th>Scene</th>
+                    <th>Medlemmer i rigging</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consert in conserts %}
+                    <tr>
+                        <td>{{ consert.artist.navn }}</td>
+                        <td>{{ consert.tidspunkt }}</td>
+                        <td>{{ consert.sceneNavn }}</td>
+                        <td>
+                        {% for rigging in consert.rigging.all %}
+                            {% for person in rigging.person.all %}
+                                {{ person }}
+                                -
+                                {{ person.extend_user.role }} <br>
+                            {% endfor %}
+                        {% endfor %}
+                        </td>
+                    </tr>
                 {% endfor %}
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 {% endblock %}
