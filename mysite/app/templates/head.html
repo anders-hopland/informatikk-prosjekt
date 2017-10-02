@@ -11,6 +11,12 @@
             <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
         {% elif rolle == "lystekniker" %}
             <a href="{% url 'lystekniker' %}">Lysoversikt</a>
+        {% elif rolle == "manager" %}
+            <a href="{% url 'manager' %}">Manageroversikt</a>
+        {% elif rolle == "bookingansvarlig" %}
+            <a href="{% url 'bookingansvarlig' %}">bookingansvarligoversikt</a>
+        {% elif rolle == "bookingsjef" %}
+            <a href="{% url 'bookingsjef' %}">bookingsjef</a>
         {% endif %}
         <a href="{% url 'logout' %}">Logout</a>
     {% else %}

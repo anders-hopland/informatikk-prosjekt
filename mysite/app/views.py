@@ -46,3 +46,40 @@ def lystekniker(request):
         return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'registration/login.html', {})
+
+def manager(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'app/manager.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'manager':
+        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
+        return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'registration/login.html', {})
+
+def bookingansvarlig(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'app/manager.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig':
+        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
+        return render(request, 'app/bookingansvarlig.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'registration/login.html', {})
+
+def bookingsjef(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'app/bookingsjef.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingsjef':
+        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
+        return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'registration/login.html', {})
+
