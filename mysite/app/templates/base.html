@@ -3,24 +3,25 @@
 <head>
     <title>Green Week</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     {% block styles %}
     {% endblock %}
 </head>
 <body>
 
-    {% include "header.html" %}
+{% include "head.html" %}
 
-    <div>
-        {% block content %}
-        {% endblock %}
+    <div class="page-container">
+
+        <h1>Oversikt:</h1>
+
+        <div class="page-content">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
 
-    {% if request.user.is_authenticated %}
-        <h1> User logged in {{ request.user.username }}</h1>
-    {% endif %}
-
     {% include "footer.html" %}
-<script src="../static/js/main.js"></script>
 
 </body>
 </html>

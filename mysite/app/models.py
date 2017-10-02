@@ -5,7 +5,11 @@ from django.contrib.auth.models import User
 
 STATUS_CHOICES = (
     ('arrangor', 'Arrangør'),
-    ('tekniker', 'Tekniker')
+    ('lydtekniker', 'Tekniker'),
+    ('lystekniker', 'Lystekniker'),
+    ('manager', 'Manager'),
+    ('bookingansvarlig', 'Bookingansvarlig'),
+    ('bookingsjef', 'Bookingsjef')
 )
 
 class Extend_user(models.Model):
