@@ -1,3 +1,6 @@
 window.onload = function () {
-    document.getElementById("spnTime").innerHTML = new Date().toLocaleDateString();
+    let timeElem = document.getElementById("spnTime");
+    if (timeElem) {
+        timeElem.innerHTML = new Date().toLocaleDateString();
+    }
 };
