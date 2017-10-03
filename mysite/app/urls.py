@@ -1,5 +1,5 @@
 from django.conf.urls import url, include
-from app.views import arrangor, lydtekniker, dashboard, lystekniker
+from app.views import arrangor, lydtekniker, dashboard, lystekniker, manager, bookingansvarlig, bookingsjef
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -7,6 +7,9 @@ urlpatterns = [
     url(r'^lydtekniker/$', lydtekniker, name='lydtekniker'),
     url(r'^lystekniker/$', lystekniker, name='lystekniker'),
     url(r'^dashboard/$', dashboard, name='dashboard'),
+    url(r'^manager/$', manager, name='manager'),
+    url(r'^bookingansvarlig/$', bookingansvarlig, name='bookingansvarlig'),
+    url(r'^bookingsjef/$', bookingsjef, name='bookingsjef'),
 
     #login logout
     url('^', include('django.contrib.auth.urls')),

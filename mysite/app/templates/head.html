@@ -7,10 +7,28 @@
         </a>
         {% if rolle == "arrangor" %}
             <a href="{% url 'arrangor' %}">Arrangøroversikt</a>
+            <a href="">Scener</a>
         {% elif rolle == "lydtekniker" %}
             <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
         {% elif rolle == "lystekniker" %}
             <a href="{% url 'lystekniker' %}">Lysoversikt</a>
+        {% elif rolle == "manager" %}
+            <a href="{% url 'manager' %}">Manageroversikt</a>
+            <a href="">MAILBOX</a>
+            <a href="">Registrer band</a>
+            <a href="">Rediger band</a>
+        {% elif rolle == "bookingansvarlig" %}
+            <a href="{% url 'bookingansvarlig' %}">bookingansvarligoversikt</a>
+            <a href="">Book band</a>
+            <a href="">Tidligere festivaler</a>
+            <a href="">Tidligere band</a>
+            <a href="">Send forslag</a>
+        {% elif rolle == "bookingsjef" %}
+            <a href="{% url 'bookingsjef' %}">bookingsjef</a>
+            <a href="">MAILBOX</a>
+            <a href="">Økonomi</a>
+            <a href="">Vurder marked</a>
+        {% elif rolle == "bookingsjef" %}
         {% endif %}
         <a href="{% url 'logout' %}">Logout</a>
     {% else %}
