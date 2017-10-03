@@ -2,6 +2,17 @@ from django.conf.urls import url, include
 from app.views import arrangor, lydtekniker, dashboard, lystekniker, konsert, scener
 from django.contrib.auth import views as auth_views
 
+
+'''
+INFO
+urlpatterns is a list of different urls. Each url has 3
+arguments, a regular expression for trying to match the
+url the user has typed in, a view it will call to render
+the page given that the url is correct and a name, which makes
+it easier to refer to the url in our html using jinja
+'''
+
+
 urlpatterns = [
     url(r'^arrangor/$', arrangor, name='arrangor'),
     url(r'^lydtekniker/$', lydtekniker, name='lydtekniker'),

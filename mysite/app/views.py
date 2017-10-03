@@ -1,6 +1,19 @@
 from django.shortcuts import render
 from . models import Artist, Consert
 
+
+'''
+INFO
+A view in Django is a where you pass data to each html page.
+A url is connected to a view, and will redirect to the correct view based
+on which url it gets passed. The view will in turn query the database for
+data, check for user permissions and return the render funcion which in turn
+takes three parameters, the request which holds data such as which user is logged
+in, an html page and a dictionary with data from the database. The data from the
+dictionary will in turn be rendered in the html by the templating engine jinja
+'''
+
+
 def dashboard(request):
     user = request.user
     if not request.user.is_authenticated():
