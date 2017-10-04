@@ -47,6 +47,7 @@ table tr td {
 .page-content {
     display: flex;
     justify-content: center;
+    margin-top: 2em;
 }
 
 /* navbar */
