@@ -1,16 +1,32 @@
-    <h1>Log in page</h1>
-    {% if form.errors %}
-      <h3>
-        Password and username did not match, please try again or contact your local sysadmin
-      </h3>
-    {% else %}
-      <p>Please, use the following form to log-in. In case you do not have a profile, please contact your sysadmin</p>
-    {% endif %}
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+<img id="bgImg" src="../../static/images/login.jpg" alt="">
+
+<div class="page-container">
+    <div class="page-content">
     <div class="login-form">
+        <h2>Green Week</h2>
         <form action="{% url 'login' %}" method="post" class="form-group">
-          {{ form.as_p }}
-          {% csrf_token %}
-          <input type="hidden" name="next" value="{{ dashboard }}" />
-          <p><input type="submit" value="Log-in"></p>
+            <input id="id_username" type="text" name="username" maxlength="254"
+               placeholder="Brukernavn" autofocus required>
+            <input id="id_password" type="password" name="password"
+                   placeholder="Passord" required>
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ dashboard }}" />
+            <button type="submit">Logg inn</button>
         </form>
     </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

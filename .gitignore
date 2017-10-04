@@ -88,5 +88,5 @@ target/
 __pycache__/
 local_settings.py
 
-.env
-mysite/db.sqlite3
+*.env
+*.sqlite3

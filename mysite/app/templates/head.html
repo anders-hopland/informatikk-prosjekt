@@ -30,10 +30,6 @@
             <a href="">Vurder marked</a>
         {% elif rolle == "bookingsjef" %}
         {% endif %}
-        <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
-        <a href="{% url 'login' %}">Log-in</a>
+        <a href="{% url 'logout' %}">Logg ut</a>
     {% endif %}
 </nav>
-
-

@@ -1,5 +1,5 @@
 * {
-    font-family: Arial,monospace;
+    font-family: Arial, Verdana, Helvetica, monospace;
 }
 
 body {
@@ -8,9 +8,15 @@ body {
     overflow: hidden;
 }
 
-h1 {
+h1, h2 {
     display: flex;
     justify-content: center;
+    margin:0;
+}
+
+h2 {
+    color: white;
+    font-size: 2em;
 }
 
 table tr td {
@@ -20,6 +26,50 @@ table tr td {
 
 .img {
     height: 3em;
+}
+
+#bgImg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    object-fit: contain;
+    z-index: -1;
+}
+
+.form-group {
+    margin: 0;
+}
+
+.login-form {
+    margin: 0;
+    background-color: #33C413;
+    border-radius: 2em;
+    height: 16em;
+    padding: 2em;
+    width: 22em;
+}
+
+.login-form input {
+    border-radius: 0.2em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: whitesmoke;
+    font-size: 1.5em;
+    width: 100%;
+    margin: 0.5em 0 0.5em 0;
+    padding: 0.3em;
+}
+
+.login-form button {
+    background-color: whitesmoke;
+    border: 2px solid gray;
+    border-radius: 1em;
+    font-size: 1.5em;
+    padding:0.5em;
+    margin: 0.5em 0 0.5em 0;
+    width: 100%;
 }
 
 .page-container {
