@@ -3,7 +3,7 @@
 <nav>
     {% if request.user.is_authenticated %}
         <a href="{% url 'dashboard' %}">
-            <img class="img" src="../static/images/logo.png">
+            <img id="logoImg" src="../static/images/logo.png">
         </a>
         {% if rolle == "arrangor" %}
             <a href="{% url 'arrangor' %}">Arrangøroversikt</a>

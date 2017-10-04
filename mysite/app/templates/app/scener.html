@@ -7,16 +7,27 @@
 
 {% block content %}
     <div>
-        <!-- legg til onchangefunksjon for søk -->
+        <!-- legg til onchangefunksjon for søk
+            Her skal listen over alle scener
+        -->
         <input id="searchBar" type="search" placeholder="Søk i scener">
     </div>
     <div class="page-container">
         <h1>Scener:</h1>
         <div class="page-content">
-            <a href="">Scene 1</a>
-            <a href="">Scene 2</a>
-            <a href="">Scene 3</a>
-            <a href="">Scene 4</a>
+            <div class="scene-link-container">
+                <a href="" class="scene-link">scene1</a>
+                <a href="" class="scene-link">scene2</a>
+                <a href="" class="scene-link">scene3</a>
+                <a href="" class="scene-link">scene4</a>
+                <a href="" class="scene-link">scene5</a>
+            </div>
+
+            <!-- {% for scene in scener %}
+            sceneoversikt over alle konserter som foregår på denne scenen
+            Denne skal vise en tabell for tilsvarende scene
+            <a class="scene-link" href="sceneoversikt">{scene.navn}</a>
+            {% endfor %}-->
         </div>
     </div>
 {% endblock %}
