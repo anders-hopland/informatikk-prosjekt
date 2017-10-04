@@ -69,11 +69,24 @@ def konsert(request, year, month, day, post_id):
     if rolle == 'arrangor':
         object_list = Consert.objects.filter(id=post_id)
 
+        lysteknikere = {}
+        lydteknikere = {}
+        andre = {}
+
+        for consert in Consert.objects.filter(id=post_id).all():
+            for rigging in consert.rigging.all():
+                for person in rigging.person.all():
+                    if person.profile.role == 'lystekniker':
+                        lysteknikere[person] = person
+                    elif person.profile.role == 'lydtekniker':
+                        lydteknikere[person] = person
+                    else:
+                        andre[person] = person
+
         instrument_list = {}
         annet_list = {}
         lyd_list = {}
         lys_list = {}
-
 
         for consert in Consert.objects.filter(id=post_id).all():
             for behov in consert.artist.behov.all():
@@ -86,12 +99,16 @@ def konsert(request, year, month, day, post_id):
                 elif behov.type == 'lys':
                     lys_list[behov] = behov
 
-
-        print(annet_list)
-        print(instrument_list)
-
-        return render(request, 'app/konsert.html', {'conserts': object_list, 'rolle': rolle, 'instruments': instrument_list,
-                                                    'annet_list': annet_list, 'lyd_list': lyd_list, 'lys_list': lys_list})
+        return render(request, 'app/konsert.html', {'conserts': object_list,
+                                                    'rolle': rolle,
+                                                    'instruments': instrument_list,
+                                                    'annet_list': annet_list,
+                                                    'lyd_list': lyd_list,
+                                                    'lys_list': lys_list,
+                                                    'lysteknikere': lysteknikere,
+                                                    'lydteknikere': lydteknikere,
+                                                    'andre': andre,
+                                                    })
     else:
         return render(request, 'registration/login.html', {})
 

@@ -3,38 +3,59 @@
 {% load static %}
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/konsert.css' %}" type="text/css">
 {% endblock %}
 
 {% block content %}
 <div class="page-container">
-    <h1>Detaljeside for {{ consert }}</h1>
+    {% for consert in conserts %}
+        <h1>Detaljeside for {{ consert.artist }}</h1>
+    {% endfor %}
     <div class="page-content">
-        <div>
+        <div class="detail-container detail-wrap">
             {% for consert in conserts %}
-            <label>Navn:</label>
-            <span>{{ consert.artist }}</span>
-            <label>Dato:</label>
-            <span>{{ consert.tidspunkt }}</span>
-            <label>Scene:</label>
-            <span>{{ consert.scene }}</span>
-            <label>Sjanger:</label>
-            <span>{{ consert.sceneNavn }}</span>
+            <label for="artist">Navn:</label>
+            <span id="artist">{{ consert.artist }}</span>
+            <label for="dato">Dato:</label>
+            <span id="dato">{{ consert.tidspunkt }}</span>
+            <label for="scene">Scene:</label>
+            <span id="scene">{{ consert.sceneNavn }}</span>
+            <label for="sjanger">Sjanger:</label>
+            <span id="sjanger">{{ consert.artist.sjanger }}</span>
             {% endfor %}
         </div>
 
-        <div>
-            <label>Medlemmer:</label>
-            {% for consert in conserts %}
-                {% for rigging in consert.rigging.all %}
-                    {% for person in rigging.person.all %}
-                        <span>{{ person }}</span>
-                    {% endfor %}
+        <div class="detail-container">
+            <h3>Medlemmer:</h3>
+
+            <h4>Lydteknikere:</h4>
+            {% if lydteknikere %}
+                {% for person in lydteknikere %}
+                    <p>{{ person }}</p>
                 {% endfor %}
-            {% endfor %}
+            {% else %}
+                <p>Ingen lydteknikere.</p>
+            {% endif %}
+
+            <h4>Lysteknikere:</h4>
+            {% if lysteknikere %}
+                {% for lys in lys_list %}
+                    <p>{{ lys }}</p>
+                {% endfor %}
+            {% else %}
+                <p>Ingen lysteknikere.</p>
+            {% endif %}
+
+            <h4>Andre:</h4>
+            {% if andre %}
+                {% for person in andre %}
+                    <p>{{ person }}</p>
+                {% endfor %}
+            {% else %}
+                <p>Ingen andre.</p>
+            {% endif %}
         </div>
 
-        <div>
+        <div class="detail-container">
             <h3>Tekniske behov:</h3>
 
             {% if instruments %}

@@ -20,6 +20,10 @@ h2 {
     font-size: 2em;
 }
 
+h3 {
+    margin: 0;
+}
+
 table tr td {
     padding: 1em;
     text-align: center;
@@ -47,7 +51,8 @@ table tr td {
 .page-content {
     display: flex;
     justify-content: center;
-    margin-top: 2em;
+    margin: 2em 10vw 0 10vw;
+    height: 100vh;
 }
 
 /* navbar */
@@ -152,4 +157,26 @@ i {
 	display: flex;
 	flex-wrap: wrap;
     width:80vw;
+}
+
+/* css for de tre divene på detailssiden */
+
+.detail-container {
+    max-width: 33%;
+	width: 33%;
+    max-height: 30em;
+}
+
+.detail-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.detail-container > label {
+    color: gray;
+}
+
+.detail-container > span {
+    margin: 0 0 1em 0;
 }
