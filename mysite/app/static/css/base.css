@@ -6,6 +6,8 @@ body {
     background-color: #f8f8f8;
     margin: 0;
     overflow: hidden;
+    min-height: calc(100vh - 200px);
+
 }
 
 h1 {
@@ -68,4 +70,50 @@ nav > a:not(:first-child):hover {
 
 i {
     font-size: 2em;
+}
+footer {
+  background: #052208;
+  color: white;
+  height: 180px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  overflow:hidden;
+}
+
+.left{
+    float: left;
+    position: relative;
+    display:inline-block;
+    margin-left:20px;
+    margin-top:5px;
+    color: #3dc378;
+}
+
+.center{
+    float: left;
+    position: relative;
+    display:inline-block;
+    left: 17%;
+    padding-top:85px;
+    color: #34914e;
+}
+
+.center i{
+    font-size:15px;
+
+}
+left h3{
+padding-top:0;
+
+  height: 180px;
+}
+.right{
+    float: right;
+    position: relative;
+    display:inline-block;
+    margin-top:65px;
+    margin-right:20px;
+
 }
