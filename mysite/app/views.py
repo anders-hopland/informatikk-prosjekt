@@ -119,3 +119,10 @@ def bookingsjef(request):
     else:
         return render(request, 'registration/login.html', {})
 
+def scener(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    return render(request, 'app/scener.html', {'rolle': rolle})
