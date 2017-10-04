@@ -23,6 +23,15 @@ table tr td {
     height: 3em;
 }
 
+#bgImg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    object-fit: contain;
+    z-index: -1;
+}
+
 .form-group {
     margin: 0;
 }
