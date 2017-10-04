@@ -14,7 +14,7 @@ h1, h2 {
     margin: 0;
 }
 
-/* Restriksjon på h2 der h2 er for logintittel */
+/* reservert til logintittel */
 h2 {
     color: white;
     font-size: 2em;
