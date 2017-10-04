@@ -7,13 +7,11 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="page-container">
-    <h1>Oversikt over konserter du skal rigge for:</h1>
-
+    <h1>Detaljeside for {{ consert }}</h1>
     <div class="page-content">
         <div>
-            {% for consert in conserts %}
+    {% for consert in conserts %}
             <label>Navn:</label>
             <span>{{ consert.artist }}</span>
             <label>Dato:</label>

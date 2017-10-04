@@ -11,9 +11,10 @@ body {
 h1, h2 {
     display: flex;
     justify-content: center;
-    margin:0;
+    margin: 0;
 }
 
+/* reservert til logintittel */
 h2 {
     color: white;
     font-size: 2em;
@@ -24,10 +25,11 @@ table tr td {
     text-align: center;
 }
 
-.img {
+#logoImg {
     height: 3em;
 }
 
+/* Bakgrunnsbilde */
 #bgImg {
     position: fixed;
     top: 0;
@@ -37,41 +39,7 @@ table tr td {
     z-index: -1;
 }
 
-.form-group {
-    margin: 0;
-}
-
-.login-form {
-    margin: 0;
-    background-color: #33C413;
-    border-radius: 2em;
-    height: 16em;
-    padding: 2em;
-    width: 22em;
-}
-
-.login-form input {
-    border-radius: 0.2em;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    background-color: whitesmoke;
-    font-size: 1.5em;
-    width: 100%;
-    margin: 0.5em 0 0.5em 0;
-    padding: 0.3em;
-}
-
-.login-form button {
-    background-color: whitesmoke;
-    border: 2px solid gray;
-    border-radius: 1em;
-    font-size: 1.5em;
-    padding:0.5em;
-    margin: 0.5em 0 0.5em 0;
-    width: 100%;
-}
-
+/* Page containers */
 .page-container {
     margin-top:5rem;
 }
@@ -81,6 +49,7 @@ table tr td {
     justify-content: center;
 }
 
+/* navbar */
 nav {
     background-color: white;
     box-shadow: 0 2px 0 #dddddd;
@@ -116,6 +85,70 @@ nav > a:not(:first-child):hover {
     transition: background-color 0.2s ease;
 }
 
+/* rulletekststørrelse */
 i {
     font-size: 2em;
+}
+
+/* Loginvinduet */
+.form-group {
+    margin: 0;
+}
+
+.login-form {
+    margin: 0;
+    background-color: #33C413;
+    border-radius: 2em;
+    height: 16em;
+    padding: 2em;
+    width: 22em;
+}
+
+.login-form input {
+    border-radius: 0.2em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: whitesmoke;
+    font-size: 1.5em;
+    width: 100%;
+    margin: 0.5em 0 0.5em 0;
+    padding: 0.3em;
+}
+
+.login-form button {
+    background-color: whitesmoke;
+    border: 2px solid gray;
+    border-radius: 1em;
+    font-size: 1.5em;
+    padding:0.5em;
+    margin: 0.5em 0 0.5em 0;
+    width: 100%;
+}
+
+/* scenelinker på scenesiden */
+.scene-link {
+    font-size: 2em;
+    display: flex;
+    color: black;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-decoration: none;
+    justify-content:center;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 33%;
+	width: 33%;
+	height: 3em;
+}
+
+.scene-link:hover {
+    text-decoration: underline;
+    color: darkblue;
+}
+
+.scene-link-container {
+	display: flex;
+	flex-wrap: wrap;
+    width:80vw;
 }
