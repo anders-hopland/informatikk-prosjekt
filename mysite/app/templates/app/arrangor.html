@@ -16,7 +16,8 @@
                     <th>Artist navn</th>
                     <th>Tidspunkt</th>
                     <th>Scene</th>
-                    <th>Medlemmer i rigging</th>
+                    <th>Sjanger</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -25,15 +26,8 @@
                         <td>{{ consert.artist.navn }}</td>
                         <td>{{ consert.tidspunkt }}</td>
                         <td>{{ consert.sceneNavn }}</td>
-                        <td>
-                        {% for rigging in consert.rigging.all %}
-                            {% for person in rigging.person.all %}
-                                {{ person }}
-                                -
-                                {{ person.extend_user.role }} <br>
-                            {% endfor %}
-                        {% endfor %}
-                        </td>
+                        <td>{{ consert.artist.sjanger }}</td>
+                        <td><a href="{{ consert.get_absolute_url }}">Se detaljer</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
