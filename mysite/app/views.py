@@ -41,7 +41,7 @@ def lydtekniker(request):
         return render(request, 'app/dashboard.html', {})
 
     rolle = user.profile.role
-    if rolle == 'tekniker':
+    if rolle == 'lydtekniker':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lydtekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
@@ -53,7 +53,7 @@ def lystekniker(request):
         return render(request, 'app/dashboard.html', {})
 
     rolle = user.profile.role
-    if rolle == 'tekniker':
+    if rolle == 'lystekniker':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
