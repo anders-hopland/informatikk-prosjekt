@@ -11,17 +11,11 @@
 
 {% include "head.html" %}
 
-    <div class="page-container">
+{% block content %}
+{% endblock %}
 
-        <h1>Oversikt:</h1>
 
-        <div class="page-content">
-            {% block content %}
-            {% endblock %}
-        </div>
-    </div>
-
-    {% include "footer.html" %}
+{% include "footer.html" %}
 
 </body>
 </html>
