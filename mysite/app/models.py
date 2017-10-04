@@ -18,7 +18,6 @@ SCENER = (
 )
 
 NEED_CHOICES = (
-    ('teknsike', 'Tekniske'),
     ('instrumenter', 'Instrumenter'),
     ('lyd', 'Lyd'),
     ('lys', 'Lys'),
@@ -100,7 +99,7 @@ class Artist(models.Model):
 class Consert(models.Model):
     artist = models.OneToOneField(Artist)
     tidspunkt = models.DateField()
-    sceneNavn = models.CharField(max_length=250, choices=SCENER)
+    sceneNavn = models.CharField(max_length=250, choices=SCENER, unique=True)
     rigging = models.ManyToManyField(Rigging)
 
     def __str__(self):

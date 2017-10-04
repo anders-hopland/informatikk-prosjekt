@@ -31,7 +31,8 @@ def arrangor(request):
     rolle = user.profile.role
     if rolle == 'arrangor':
         object_list = Consert.objects.all().order_by('tidspunkt')
-        return render(request, 'app/arrangor.html', {'conserts': object_list, 'rolle': rolle})
+
+        return render(request, 'app/arrangor.html', {'conserts': object_list})
     else:
         return render(request, 'registration/login.html', {})
 
@@ -67,7 +68,47 @@ def konsert(request, year, month, day, post_id):
     rolle = user.profile.role
     if rolle == 'arrangor':
         object_list = Consert.objects.filter(id=post_id)
-        return render(request, 'app/konsert.html', {'conserts': object_list, 'rolle': rolle})
+
+        lysteknikere = {}
+        lydteknikere = {}
+        andre = {}
+
+        for consert in Consert.objects.filter(id=post_id).all():
+            for rigging in consert.rigging.all():
+                for person in rigging.person.all():
+                    if person.profile.role == 'lystekniker':
+                        lysteknikere[person] = person
+                    elif person.profile.role == 'lydtekniker':
+                        lydteknikere[person] = person
+                    else:
+                        andre[person] = person
+
+        instrument_list = {}
+        annet_list = {}
+        lyd_list = {}
+        lys_list = {}
+
+        for consert in Consert.objects.filter(id=post_id).all():
+            for behov in consert.artist.behov.all():
+                if behov.type == 'instrumenter':
+                    instrument_list[behov] = behov
+                elif behov.type == 'andre':
+                    annet_list[behov] = behov
+                elif behov.type == 'lyd':
+                    lyd_list[behov] = behov
+                elif behov.type == 'lys':
+                    lys_list[behov] = behov
+
+        return render(request, 'app/konsert.html', {'conserts': object_list,
+                                                    'rolle': rolle,
+                                                    'instruments': instrument_list,
+                                                    'annet_list': annet_list,
+                                                    'lyd_list': lyd_list,
+                                                    'lys_list': lys_list,
+                                                    'lysteknikere': lysteknikere,
+                                                    'lydteknikere': lydteknikere,
+                                                    'andre': andre,
+                                                    })
     else:
         return render(request, 'registration/login.html', {})
 
@@ -119,3 +160,10 @@ def bookingsjef(request):
     else:
         return render(request, 'registration/login.html', {})
 
+def scener(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    return render(request, 'app/scener.html', {'rolle': rolle})
