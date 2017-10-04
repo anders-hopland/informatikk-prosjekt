@@ -91,7 +91,7 @@ def konsert(request, year, month, day, post_id):
         print(instrument_list)
 
         return render(request, 'app/konsert.html', {'conserts': object_list, 'rolle': rolle, 'instruments': instrument_list,
-                                                    'andre_list': annet_list, 'lyd_list': lyd_list, 'lys_list': lys_list})
+                                                    'annet_list': annet_list, 'lyd_list': lyd_list, 'lys_list': lys_list})
     else:
         return render(request, 'registration/login.html', {})
 

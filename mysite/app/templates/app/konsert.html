@@ -39,7 +39,24 @@
         <div>
             <h3>Tekniske behov</h3>
             <h4>Instrumenter</h4>
+            {% for instrument in instruments %}
+                <p>{{ instrument }}</p>
+            {% endfor %}
 
+            <h4>Lyd</h4>
+            {% for lyd in lyd_list %}
+                <p>{{ lyd }}</p>
+            {% endfor %}
+
+            <h4>Lys</h4>
+            {% for lys in lys_list %}
+                <p>{{ lys }}</p>
+            {% endfor %}
+
+            <h4>Annet</h4>
+            {% for annet in annet_list %}
+                <p>{{ annet }}</p>
+            {% endfor %}
         </div>
     </div>
 </div>
