@@ -8,10 +8,15 @@ body {
     overflow: hidden;
 }
 
-h1 {
+h1, h2 {
     display: flex;
     justify-content: center;
     margin:0;
+}
+
+h2 {
+    color: white;
+    font-size: 2em;
 }
 
 table tr td {
@@ -37,12 +42,12 @@ table tr td {
 }
 
 .login-form {
-    background-color: limegreen;
+    margin: 10vh 0;
+    background-color: #26B600;
     border-radius: 2em;
     height: 16em;
     padding: 1em 2em;
     width: 22em;
-    margin:0;
 }
 
 .login-form input {
@@ -57,8 +62,8 @@ table tr td {
 }
 
 .login-form button {
-    background-color: green;
-    border: 2px solid darkgreen;
+    background-color: whitesmoke;
+    border: 2px solid gray;
     border-radius: 1em;
     font-size: 1.5em;
     padding:0.5em;
