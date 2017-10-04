@@ -6,7 +6,7 @@
             <img id="logoImg" src="../static/images/logo.png">
         </a>
         {% if rolle == "arrangor" %}
-            <a href="{% url 'arrangor' %}">Oversikt</a>
+            <a href="{% url 'arrangor' %}">Arrangøroversikt</a>
             <a href="{% url 'scener' %}">Scener</a>
         {% elif rolle == "lydtekniker" %}
             <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
@@ -29,6 +29,8 @@
             <a href="">Økonomi</a>
             <a href="">Vurder marked</a>
         {% elif rolle == "bookingsjef" %}
+        {% else %}
+        <a>rollen er: {{rolle}}</a>
         {% endif %}
         <a href="{% url 'logout' %}">Logg ut</a>
     {% endif %}

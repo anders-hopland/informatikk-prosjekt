@@ -32,9 +32,9 @@ def arrangor(request):
     if rolle == 'arrangor':
         object_list = Consert.objects.all().order_by('tidspunkt')
 
-        return render(request, 'app/arrangor.html', {'conserts': object_list})
+        return render(request, 'app/arrangor.html', {'conserts': object_list,  'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {})
+        return render(request, 'registration/login.html', {'rolle': rolle})
 
 def lydtekniker(request):
     user = request.user
@@ -46,7 +46,7 @@ def lydtekniker(request):
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lydtekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {})
+        return render(request, 'registration/login.html', {'rolle': rolle})
 
 def lystekniker(request):
     user = request.user
@@ -58,7 +58,7 @@ def lystekniker(request):
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {})
+        return render(request, 'registration/login.html', {'rolle': rolle})
 
 def konsert(request, year, month, day, post_id):
     user = request.user
@@ -110,7 +110,7 @@ def konsert(request, year, month, day, post_id):
                                                     'andre': andre,
                                                     })
     else:
-        return render(request, 'registration/login.html', {})
+        return render(request, 'registration/login.html', {'rolle': rolle})
 
 def scener(request, scenenavn):
     user = request.user
@@ -122,7 +122,7 @@ def scener(request, scenenavn):
         object_list = Consert.objects.filter(sceneNavn = scenenavn)
         return render(request, 'app/konsert.html', {'scener': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {})
+        return render(request, 'registration/login.html', {'rolle': rolle})
 
 def manager(request):
     user = request.user
@@ -134,7 +134,7 @@ def manager(request):
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {})
+        return render(request, 'registration/login.html', {'rolle': rolle})
 
 def bookingansvarlig(request):
     user = request.user
@@ -146,7 +146,7 @@ def bookingansvarlig(request):
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/bookingansvarlig.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {})
+        return render(request, 'registration/login.html', {'rolle': rolle})
 
 def bookingsjef(request):
     user = request.user
@@ -158,7 +158,7 @@ def bookingsjef(request):
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {})
+        return render(request, 'registration/login.html', {'rolle': rolle})
 
 def scener(request):
     user = request.user
