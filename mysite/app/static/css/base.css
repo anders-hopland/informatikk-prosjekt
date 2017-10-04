@@ -43,14 +43,15 @@ table tr td {
 
 .login-form {
     margin: 10vh 0;
-    background-color: #26B600;
+    background-color: #33C413;
     border-radius: 2em;
     height: 16em;
-    padding: 1em 2em;
+    padding: 2em;
     width: 22em;
 }
 
 .login-form input {
+    border-radius: 0.2em;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
