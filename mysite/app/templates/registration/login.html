@@ -12,12 +12,6 @@
 
 <div class="page-container">
     <div class="page-content">
-    {% if form.errors %}
-      <h3>
-          Brukernavn og/eller passordet er ikke riktig,
-          vennligst prøv igjen eller kontakt din lokale systemadministrator.
-      </h3>
-    {% endif %}
     <div class="login-form">
         <h2>Green Week</h2>
         <form action="{% url 'login' %}" method="post" class="form-group">
