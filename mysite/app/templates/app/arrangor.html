@@ -21,15 +21,7 @@
                 <td>{{ consert.artist.navn }}</td>
                 <td>{{ consert.tidspunkt }}</td>
                 <td>{{ consert.sceneNavn }}</td>
-                <td>
-                {% for rigging in consert.rigging.all %}
-                    {% for person in rigging.person.all %}
-                        {{ person }}
-                        -
-                        {{ person.extend_user.role }} <br>
-                    {% endfor %}
-                {% endfor %}
-                </td>
+                <td><a href="{{ consert.get_absolute_url }}">Details</a></td>
             </tr>
         {% endfor %}
     </tbody>

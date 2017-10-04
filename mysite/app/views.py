@@ -1,6 +1,19 @@
 from django.shortcuts import render
 from . models import Artist, Consert
 
+
+'''
+INFO
+A view in Django is a where you pass data to each html page.
+A url is connected to a view, and will redirect to the correct view based
+on which url it gets passed. The view will in turn query the database for
+data, check for user permissions and return the render funcion which in turn
+takes three parameters, the request which holds data such as which user is logged
+in, an html page and a dictionary with data from the database. The data from the
+dictionary will in turn be rendered in the html by the templating engine jinja
+'''
+
+
 def dashboard(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -18,7 +31,6 @@ def arrangor(request):
     rolle = user.profile.role
     if rolle == 'arrangor':
         object_list = Consert.objects.all().order_by('tidspunkt')
-        print(rolle)
         return render(request, 'app/arrangor.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'registration/login.html', {})
@@ -44,6 +56,30 @@ def lystekniker(request):
     if rolle == 'tekniker':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'registration/login.html', {})
+
+def konsert(request, year, month, day, post_id):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'app/dashboard.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'arrangor':
+        object_list = Consert.objects.filter(id=post_id)
+        return render(request, 'app/konsert.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'registration/login.html', {})
+
+def scener(request, scenenavn):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'app/dashboard.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'arrangor':
+        object_list = Consert.objects.filter(sceneNavn = scenenavn)
+        return render(request, 'app/konsert.html', {'scener': object_list, 'rolle': rolle})
     else:
         return render(request, 'registration/login.html', {})
 

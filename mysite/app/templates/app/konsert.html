@@ -1,0 +1,41 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/konsert.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div>
+    {% for consert in conserts %}
+    <label>Navn:</label>
+    <span>{{ consert.artist }}</span>
+    <label>Dato:</label>
+    <span>{{ consert.tidspunkt }}</span>
+    <label>Scene:</label>
+    <span>{{ consert.scene }}</span>
+    <label>Sjanger:</label>
+    <span>{{ consert.sceneNavn }}</span>
+    {% endfor %}
+</div>
+
+<div>
+    {% for consert in conserts %}
+        {% for rigging in consert.rigging.all %}
+            {% for person in rigging.person.all %}
+                <label>Medlemmer:</label>
+                <span>{{ person }}</span>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+</div>
+
+<div>
+    <h2>Tekniske behov</h2>
+    <h3>Behov for utstyr</h3>
+    <span>2 mikrofoner</span>
+    <span>2 staver</span>
+    <h3>Behov for instrument</h3>
+    <span></span>
+</div>
+{% endblock %}
