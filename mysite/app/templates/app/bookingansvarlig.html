@@ -13,10 +13,10 @@
             <thead>
                 <tr>
                     <th>Artist navn</th>
-                    <th>Tidspunkt</th>
+                    <th>Dato</th>
                     <th>Scene</th>
-                    <th>Sjanger</th>
-                    <th></th>
+                    <th>Pris</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,8 +25,8 @@
                         <td>{{ consert.artist.navn }}</td>
                         <td>{{ consert.tidspunkt }}</td>
                         <td>{{ consert.sceneNavn }}</td>
-                        <td>{{ consert.artist.sjanger }}</td>
-                        <td><a href="{{ consert.consert_url }}">Se detaljer</a></td>
+                        <td>N/A</td>
+						<td>Ikke godkjent</td>
                     </tr>
                 {% endfor %}
             </tbody>
