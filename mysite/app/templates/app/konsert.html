@@ -11,7 +11,7 @@
         <h1>Detaljeside for {{ consert.artist }}</h1>
     {% endfor %}
     <div class="page-content">
-        <div class="detail-container detail-wrap">
+        <div class="detail-container detail-wrap" id="detail-wrap">
             {% for consert in conserts %}
             <label for="artist">Navn:</label>
             <span id="artist">{{ consert.artist }}</span>
@@ -24,7 +24,7 @@
             {% endfor %}
         </div>
 
-        <div class="detail-container">
+        <div class="detail-container" id="medlemmer">
             <h3>Medlemmer:</h3>
 
             <h4>Lydteknikere:</h4>
@@ -38,7 +38,7 @@
 
             <h4>Lysteknikere:</h4>
             {% if lysteknikere %}
-                {% for lys in lys_list %}
+                {% for lys in lysteknikere %}
                     <p>{{ lys }}</p>
                 {% endfor %}
             {% else %}
@@ -55,9 +55,10 @@
             {% endif %}
         </div>
 
-        <div class="detail-container">
+        <div class="detail-container" id="tekn-behov">
             <h3>Tekniske behov:</h3>
 
+            <h4>Instrumenter:</h4>
             {% if instruments %}
                 {% for instrument in instruments %}
                     <p>{{ instrument }}</p>
