@@ -9,7 +9,7 @@
 <div class="page-container">
     <h1>Oversikt over konserter:</h1>
     <div class="page-content">
-        <table>
+        <table id="arrangor-oversikt">
             <thead>
                 <tr>
                     <th>Artist navn</th>
@@ -26,7 +26,7 @@
                         <td>{{ consert.tidspunkt }}</td>
                         <td>{{ consert.sceneNavn }}</td>
                         <td>{{ consert.artist.sjanger }}</td>
-                        <td><a href="{{ consert.get_absolute_url_consert }}">Se detaljer</a></td>
+                        <td><a href="{{ consert.consert_url }}" class="info-button">Se detaljer</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

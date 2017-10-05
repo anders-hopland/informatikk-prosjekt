@@ -25,7 +25,7 @@ h3 {
 }
 
 table tr td {
-    padding: 1em;
+    padding: 2em;
     text-align: center;
 }
 
@@ -101,7 +101,7 @@ i {
 }
 
 .login-form {
-    margin: 0;
+    margin:16% 0 0 0;
     background-color: #33C413;
     border-radius: 2em;
     height: 16em;
@@ -131,25 +131,87 @@ i {
     width: 100%;
 }
 
-/* scenelinker på scenesiden */
-.scene-link {
-    font-size: 2em;
-    display: flex;
-    color: black;
-    flex-direction: row;
-    flex-wrap: wrap;
-    text-decoration: none;
-    justify-content:center;
-    align-items: center;
-    flex-grow: 1;
-    max-width: 33%;
-	width: 33%;
-	height: 3em;
+/* arrangør oversikt */
+#arrangor-oversikt th, td{
+    border-bottom: 1px solid #b9b9b9;
 }
 
-.scene-link:hover {
-    text-decoration: underline;
-    color: darkblue;
+#arrangor-oversikt tbody tr:hover {
+    background-color: #dadada
+}
+
+.info-button {
+    background-color: #7c97af;
+    border-radius: 0.2em;
+    color: white;
+    display: inline-block;
+    font-size: 1em;
+    padding: 1em 2.2em;
+    text-align: center;
+    text-decoration: none;
+}
+
+.info-button:hover {
+    background-color: #9cbcd4;
+    color: white;
+}
+
+/* konsert detaljer fra oversikt*/
+.detail-container {
+    max-width: 33%;
+    max-height: 40em;
+    overflow-y: scroll;
+	width: 33%;
+}
+
+.detail-container > h3{
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    padding:0.4em 0 0.4em 0;
+}
+
+.detail-container > h4{
+    border-top: 1px solid #ddd;
+    margin: 0.4em 0 1em 0;
+    padding:1em 0 0 1em;
+}
+
+.detail-container > p{
+    margin: 0.4em 0 1em 2em;
+}
+
+#detail-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin: 0 0.4em 0 0;
+    padding: 0 0.625em 0 0;
+    text-align: left;
+
+}
+
+#detail-wrap > label {
+    color: #6d6d6d;
+    font-weight: bold;
+}
+
+#detail-wrap > span {
+    margin: -1em 2em 1em 5em;
+}
+
+#medlemmer{
+    border: 1px solid #ddd;
+    margin: 0 1em 0 0;
+}
+
+#tekn-behov{
+    border: 1px solid #ddd;
+    margin:0 0 0 1em;
+}
+
+/* scenelinker på scenesiden */
+.page-container h1{
+    margin:0 0 2em 0;
 }
 
 .scene-link-container {
@@ -158,24 +220,39 @@ i {
     width:80vw;
 }
 
-/* css for de tre divene på detailssiden */
-
-.detail-container {
-    max-width: 33%;
-	width: 33%;
-    max-height: 30em;
-}
-
-.detail-wrap {
+.scene-link {
+    align-items: center;
+    font-size: 2em;
+    color: black;
     display: flex;
+    flex-direction: row;
+    flex-grow: 1;
     flex-wrap: wrap;
-    flex-direction: column;
+	height: 3em;
+    justify-content:center;
+    max-width: 33%;
+    text-decoration: none;
+	width: 33%;
 }
 
-.detail-container > label {
-    color: gray;
+.scene-link:hover {
+    background-color: #dadada
 }
 
-.detail-container > span {
-    margin: 0 0 1em 0;
+/* lysteknikker oversikt */
+#lys-ov th, td{
+    border-bottom: 1px solid #b9b9b9;
+}
+
+#lys-ov tbody tr:hover {
+    background-color: #dadada
+}
+
+/* lydteknikker oversikt */
+#lyd-ov th, td{
+    border-bottom: 0.1em solid #b9b9b9;
+}
+
+#lyd-ov tbody tr:hover {
+    background-color: #dadada
 }
