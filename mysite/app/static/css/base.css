@@ -43,6 +43,12 @@ table tr td {
     z-index: -1;
 }
 
+.page-container {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
 .page-content {
     display: flex;
     justify-content: center;
