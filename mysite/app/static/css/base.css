@@ -249,20 +249,11 @@ i {
     background-color: #dadada
 }
 
-/* lysteknikker oversikt */
-#lys-ov th, td {
+/* lydteknikker oversikt */
+.page-content th, td {
     border-bottom: 1px solid #b9b9b9;
 }
 
-#lys-ov tbody tr:hover {
-    background-color: #dadada
-}
-
-/* lydteknikker oversikt */
-#lyd-ov th, td {
-    border-bottom: 0.1em solid #b9b9b9;
-}
-
-#lyd-ov tbody tr:hover {
+.page-content tbody tr:hover {
     background-color: #dadada
 }
