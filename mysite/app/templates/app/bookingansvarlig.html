@@ -7,9 +7,30 @@
 
 {% block content %}
 <div class="page-container">
-    <h1><!-- Tittel her --></h1>
+    <h1>Oversikt over konserter:</h1>
     <div class="page-content">
-        <!-- HTML code here -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Artist navn</th>
+                    <th>Tidspunkt</th>
+                    <th>Scene</th>
+                    <th>Sjanger</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consert in conserts %}
+                    <tr>
+                        <td>{{ consert.artist.navn }}</td>
+                        <td>{{ consert.tidspunkt }}</td>
+                        <td>{{ consert.sceneNavn }}</td>
+                        <td>{{ consert.artist.sjanger }}</td>
+                        <td><a href="{{ consert.get_absolute_url }}">Se detaljer</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}
