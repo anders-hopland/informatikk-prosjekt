@@ -52,7 +52,6 @@ table tr td {
     display: flex;
     justify-content: center;
     margin: 2em 10vw 0 10vw;
-    height: 100vh;
 }
 
 /* navbar */

@@ -16,7 +16,7 @@ dictionary will in turn be rendered in the html by the templating engine jinja
 
 def dashboard(request):
     user = request.user
-    if not request.user.is_authenticated():
+    if not user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
@@ -26,7 +26,7 @@ def arrangor(request):
     user = request.user
 
     if not request.user.is_authenticated():
-        return render(request, 'app/dashboard.html', {})
+        return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'arrangor':
@@ -34,39 +34,39 @@ def arrangor(request):
 
         return render(request, 'app/arrangor.html', {'conserts': object_list,  'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {'rolle': rolle})
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 def lydtekniker(request):
     user = request.user
     if not request.user.is_authenticated():
-        return render(request, 'app/dashboard.html', {})
+        return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'lydtekniker':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lydtekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {'rolle': rolle})
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 def lystekniker(request):
     user = request.user
     if not request.user.is_authenticated():
-        return render(request, 'app/dashboard.html', {})
+        return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'lystekniker':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {'rolle': rolle})
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 def konsert(request, year, month, day, post_id):
     user = request.user
     if not request.user.is_authenticated():
-        return render(request, 'app/dashboard.html', {})
+        return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
-    if rolle == 'arrangor':
+    if rolle == 'arrangor' or rolle == 'bookingansvarlig':
         object_list = Consert.objects.filter(id=post_id)
 
         lysteknikere = {}
@@ -110,55 +110,55 @@ def konsert(request, year, month, day, post_id):
                                                     'andre': andre,
                                                     })
     else:
-        return render(request, 'registration/login.html', {'rolle': rolle})
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 def scener(request, scenenavn):
     user = request.user
     if not request.user.is_authenticated():
-        return render(request, 'app/dashboard.html', {})
+        return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'arrangor':
         object_list = Consert.objects.filter(sceneNavn = scenenavn)
         return render(request, 'app/konsert.html', {'scener': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {'rolle': rolle})
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 def manager(request):
     user = request.user
     if not request.user.is_authenticated():
-        return render(request, 'app/manager.html', {})
+        return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'manager':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {'rolle': rolle})
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 def bookingansvarlig(request):
     user = request.user
     if not request.user.is_authenticated():
-        return render(request, 'app/manager.html', {})
+        return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/bookingansvarlig.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {'rolle': rolle})
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 def bookingsjef(request):
     user = request.user
     if not request.user.is_authenticated():
-        return render(request, 'app/bookingsjef.html', {})
+        return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'bookingsjef':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'registration/login.html', {'rolle': rolle})
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 def scener(request):
     user = request.user
