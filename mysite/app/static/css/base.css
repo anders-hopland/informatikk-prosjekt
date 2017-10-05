@@ -140,9 +140,9 @@ i {
     background-color: #dadada
 }
 
-#info-button {
+.info-button {
     background-color: #7c97af;
-    border: none;
+    border-radius: 0.2em;
     color: white;
     display: inline-block;
     font-size: 1em;
@@ -151,7 +151,7 @@ i {
     text-decoration: none;
 }
 
-#info-button:hover {
+.info-button:hover {
     background-color: #9cbcd4;
     color: white;
 }
@@ -222,7 +222,6 @@ i {
 
 .scene-link {
     align-items: center;
-    border: 2px solid #e7e7e7;
     font-size: 2em;
     color: black;
     display: flex;
@@ -231,14 +230,12 @@ i {
     flex-wrap: wrap;
 	height: 3em;
     justify-content:center;
-    margin:0 2.5vw 0 2.5vw;
-    max-width: 20vw;
+    max-width: 33%;
     text-decoration: none;
 	width: 33%;
 }
 
 .scene-link:hover {
-    color: darkblue;
     background-color: #dadada
 }
 
