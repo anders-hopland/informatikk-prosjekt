@@ -80,9 +80,6 @@ class Behov(models.Model):
         return self.behov
 
 
-'''
-
-'''
 class Artist(models.Model):
     navn = models.CharField(max_length=250)
     sjanger = models.CharField(max_length=250)
@@ -105,13 +102,9 @@ class Consert(models.Model):
     def __str__(self):
         return self.artist.navn
 
-    def get_absolute_url(self):
+    def consert_url(self):
         return reverse('konsert', args=[self.tidspunkt.year, self.tidspunkt.strftime('%m'),
-        self.tidspunkt.strftime('%d'), self.id])
-
-    #get all of the different scenes
-    def get_scenes(self):
-        return SCENER
+                                        self.tidspunkt.strftime('%d'), self.id])
 
     class Meta:
         verbose_name = 'consert'

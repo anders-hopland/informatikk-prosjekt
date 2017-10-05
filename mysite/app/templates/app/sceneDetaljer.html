@@ -1,0 +1,32 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Konsertoversikt</h1>
+    <div class="page-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Band</th>
+                    <th>Tidspunkt</th>
+                    <th>Scene</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consert in conserts %}
+                <tr>
+                    <td>{{ consert.artist }}</td>
+                    <td>{{ consert.tidspunkt }}</td>
+                    <td>{{ consert.sceneNavn }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
