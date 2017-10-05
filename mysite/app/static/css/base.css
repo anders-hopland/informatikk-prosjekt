@@ -43,15 +43,10 @@ table tr td {
     z-index: -1;
 }
 
-/* Page containers */
-.page-container {
-    margin-top:5rem;
-}
-
 .page-content {
     display: flex;
     justify-content: center;
-    margin: 2em 10vw 0 10vw;
+    align-items: center;
 }
 
 /* navbar */
@@ -101,7 +96,6 @@ i {
 }
 
 .login-form {
-    margin:16% 0 0 0;
     background-color: #33C413;
     border-radius: 2em;
     height: 16em;
@@ -240,7 +234,7 @@ i {
 }
 
 /* lysteknikker oversikt */
-#lys-ov th, td{
+#lys-ov th, td {
     border-bottom: 1px solid #b9b9b9;
 }
 
@@ -249,7 +243,7 @@ i {
 }
 
 /* lydteknikker oversikt */
-#lyd-ov th, td{
+#lyd-ov th, td {
     border-bottom: 0.1em solid #b9b9b9;
 }
 
