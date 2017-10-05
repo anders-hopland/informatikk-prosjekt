@@ -250,8 +250,12 @@ i {
 }
 
 /* lydteknikker oversikt */
-.page-content td, .page-content thead > tr {
+.page-content td, th, thead > tr {
     border-bottom: 1px solid #b9b9b9;
+}
+
+.page-content thead > tr {
+    background: gainsboro;
 }
 
 .page-content tbody tr:hover {
