@@ -250,7 +250,7 @@ i {
 }
 
 /* lydteknikker oversikt */
-.page-content th, td {
+.page-content td, .page-content thead > tr {
     border-bottom: 1px solid #b9b9b9;
 }
 
