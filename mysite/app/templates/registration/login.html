@@ -1,17 +1,14 @@
-{% extends '../base.html' %}
-
 {% load static %}
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
 {% endblock %}
 
 {% block content %}
 
 <img id="bgImg" src="../../static/images/login.jpg" alt="">
 
-<div class="page-container">
-    <div class="page-content">
+<div class="login-container">
+    <div class="login-content">
     <div class="login-form">
         <h2>Green Week</h2>
         <form action="{% url 'login' %}" method="post" class="form-group">

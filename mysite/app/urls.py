@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
-from app.views import arrangor, lydtekniker, dashboard, lystekniker, manager, bookingansvarlig, bookingsjef, konsert, \
-    scener
+from app.views import arrangor, lydtekniker, dashboard, lystekniker
+from app.views import manager, bookingansvarlig, bookingsjef, konsert, scener, detaljer_scener
 from django.contrib.auth import views as auth_views
 
 
@@ -15,12 +15,13 @@ it easier to refer to the url in our html using jinja
 
 
 urlpatterns = [
+    url(r'^info-scene/(?P<navn>\w+)$', detaljer_scener, name='detaljer_scener'),
     url(r'^arrangor/$', arrangor, name='arrangor'),
     url(r'^lydtekniker/$', lydtekniker, name='lydtekniker'),
     url(r'^lystekniker/$', lystekniker, name='lystekniker'),
     url(r'^dashboard/$', dashboard, name='dashboard'),
     url(r'^konsert/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<post_id>\d+)/$', konsert, name='konsert'),
-    url(r'^scener/?P<scenenavn>/s+', scener, name='scener'),
+    url(r'^scener/', scener, name='scener'),
     url(r'^manager/$', manager, name='manager'),
     url(r'^bookingansvarlig/$', bookingansvarlig, name='bookingansvarlig'),
     url(r'^bookingsjef/$', bookingsjef, name='bookingsjef'),

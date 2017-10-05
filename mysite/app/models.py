@@ -18,7 +18,6 @@ SCENER = (
 )
 
 NEED_CHOICES = (
-    ('teknsike', 'Tekniske'),
     ('instrumenter', 'Instrumenter'),
     ('lyd', 'Lyd'),
     ('lys', 'Lys'),
@@ -81,9 +80,6 @@ class Behov(models.Model):
         return self.behov
 
 
-'''
-
-'''
 class Artist(models.Model):
     navn = models.CharField(max_length=250)
     sjanger = models.CharField(max_length=250)
@@ -100,19 +96,15 @@ class Artist(models.Model):
 class Consert(models.Model):
     artist = models.OneToOneField(Artist)
     tidspunkt = models.DateField()
-    sceneNavn = models.CharField(max_length=250, choices=SCENER)
+    sceneNavn = models.CharField(max_length=250, choices=SCENER, unique=True)
     rigging = models.ManyToManyField(Rigging)
 
     def __str__(self):
         return self.artist.navn
 
-    def get_absolute_url(self):
+    def consert_url(self):
         return reverse('konsert', args=[self.tidspunkt.year, self.tidspunkt.strftime('%m'),
-        self.tidspunkt.strftime('%d'), self.id])
-
-    #get all of the different scenes
-    def get_scenes(self):
-        return SCENER
+                                        self.tidspunkt.strftime('%d'), self.id])
 
     class Meta:
         verbose_name = 'consert'

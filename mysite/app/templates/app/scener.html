@@ -6,16 +6,24 @@
 {% endblock %}
 
 {% block content %}
+    <div>
+        <!-- legg til onchangefunksjon for søk
+            Her skal listen over alle scener
+            for løkke gjennom alle scener
+            hvis scenenavn.contain(string i searchbar)
+            hvis scene, ellers fjern scenen fra listen
+        -->
+        <input id="searchBar" type="search" placeholder="Søk i scener">
+    </div>
     <div class="page-container">
         <h1>Scener:</h1>
         <div class="page-content">
-            <input type="search" placeholder="Søk i scener">
-            <a>Scene 1</a>
-            <a>Scene 2</a>
-            <a>Scene 3</a>
-            <a>Scene 4</a>
-            <a>Scene 5</a>
-            <a>Scene 6</a>
+            <div class="scene-link-container">
+                {% for scene in scener %}
+                    <a href="{% url 'detaljer_scener' scene.sceneNavn %}" class="scene-link">{{ scene.sceneNavn }}</a>
+                {% endfor %}
+            </div>
+
         </div>
     </div>
 {% endblock %}

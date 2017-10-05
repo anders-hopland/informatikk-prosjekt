@@ -9,13 +9,14 @@
 <div class="page-container">
     <h1>Oversikt over konserter:</h1>
     <div class="page-content">
-        <table>
+        <table id="arrangor-oversikt">
             <thead>
                 <tr>
                     <th>Artist navn</th>
                     <th>Tidspunkt</th>
                     <th>Scene</th>
-                    <th>Medlemmer i rigging</th>
+                    <th>Sjanger</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -24,15 +25,8 @@
                         <td>{{ consert.artist.navn }}</td>
                         <td>{{ consert.tidspunkt }}</td>
                         <td>{{ consert.sceneNavn }}</td>
-                        <td>
-                        {% for rigging in consert.rigging.all %}
-                            {% for person in rigging.person.all %}
-                                {{ person }}
-                                -
-                                {{ person.extend_user.role }} <br>
-                            {% endfor %}
-                        {% endfor %}
-                        </td>
+                        <td>{{ consert.artist.sjanger }}</td>
+                        <td><a href="{{ consert.consert_url }}" class="info-button">Se detaljer</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
