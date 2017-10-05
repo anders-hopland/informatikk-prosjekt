@@ -112,15 +112,16 @@ def konsert(request, year, month, day, post_id):
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
-def scener(request, scenenavn):
+def detaljer_scener(request, navn):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'arrangor':
-        object_list = Consert.objects.filter(sceneNavn = scenenavn)
-        return render(request, 'app/konsert.html', {'scener': object_list, 'rolle': rolle})
+        object_list = Consert.objects.filter(sceneNavn=navn)
+        print(object_list)
+        return render(request, 'app/sceneDetaljer.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
@@ -166,4 +167,7 @@ def scener(request):
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
-    return render(request, 'app/scener.html', {'rolle': rolle})
+    if rolle == 'arrangor':
+        object_list = Consert.objects.values('sceneNavn').distinct()
+        return render(request, 'app/scener.html', {'scener': object_list, 'rolle': rolle})
+    return render(request, 'app/dashboard.html', {'rolle': rolle})
