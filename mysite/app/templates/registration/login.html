@@ -9,18 +9,18 @@
 
 <div class="login-container">
     <div class="login-content">
-    <div class="login-form">
-        <h2>Green Week</h2>
-        <form action="{% url 'login' %}" method="post" class="form-group">
-            <input id="id_username" type="text" name="username" maxlength="254"
-               placeholder="Brukernavn" autofocus required>
-            <input id="id_password" type="password" name="password"
-                   placeholder="Passord" required>
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{{ dashboard }}" />
-            <button type="submit">Logg inn</button>
-        </form>
-    </div>
+        <div class="login-form">
+            <h2>Green Week</h2>
+            <form action="{% url 'login' %}" method="post" class="form-group">
+                <input id="id_username" type="text" name="username" maxlength="254"
+                   placeholder="Brukernavn" autofocus required>
+                <input id="id_password" type="password" name="password"
+                       placeholder="Passord" required>
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ role }}" />
+                <button type="submit">Logg inn</button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

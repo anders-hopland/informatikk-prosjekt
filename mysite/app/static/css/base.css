@@ -33,7 +33,7 @@ table tr td {
     text-align: center;
 }
 
-#logoImg {
+.logoImg {
     height: 3em;
 }
 
@@ -48,7 +48,7 @@ table tr td {
 }
 
 .page-container {
-    margin: 5em 10vw 5em 10vw;
+    margin: 6em 10vw 6em 10vw;
     min-height: 100vh;
 }
 
@@ -60,9 +60,9 @@ table tr td {
 /* navbar */
 nav {
     background-color: white;
-    box-shadow: 0 2px 0 #dddddd;
+    box-shadow: 0 0.2em 0 #33C413;
     margin: 0;
-    padding: 0;
+    padding: 0.5em auto 0.5em auto;
     position: fixed;
     top: 0;
     width: 100%;
@@ -83,6 +83,7 @@ nav > a {
     color: grey;
     display: flex;
     float: left;
+    font-size: 1.3em;
     padding: 1em 0.5em 1em 0.5em;
     text-decoration: none;
     transition: 0.7s ease;
