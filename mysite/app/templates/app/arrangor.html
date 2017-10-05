@@ -6,29 +6,31 @@
 {% endblock %}
 
 {% block content %}
-<h1>Oversikt over konserter:</h1>
-<div class="page-content">
-    <table id="arrangor-oversikt">
-        <thead>
-            <tr>
-                <th>Artist navn</th>
-                <th>Tidspunkt</th>
-                <th>Scene</th>
-                <th>Sjanger</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for consert in conserts %}
+<div class="page-container">
+    <h1>Oversikt over konserter:</h1>
+    <div class="page-content">
+        <table id="arrangor-oversikt">
+            <thead>
                 <tr>
-                    <td>{{ consert.artist.navn }}</td>
-                    <td>{{ consert.tidspunkt }}</td>
-                    <td>{{ consert.sceneNavn }}</td>
-                    <td>{{ consert.artist.sjanger }}</td>
-                    <td><a href="{{ consert.consert_url }}" class="info-button">Se detaljer</a></td>
+                    <th>Artist navn</th>
+                    <th>Tidspunkt</th>
+                    <th>Scene</th>
+                    <th>Sjanger</th>
+                    <th></th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for consert in conserts %}
+                    <tr>
+                        <td>{{ consert.artist.navn }}</td>
+                        <td>{{ consert.tidspunkt }}</td>
+                        <td>{{ consert.sceneNavn }}</td>
+                        <td>{{ consert.artist.sjanger }}</td>
+                        <td><a href="{{ consert.consert_url }}" class="info-button">Se detaljer</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
