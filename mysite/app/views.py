@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from . models import Artist, Consert
+from . forms import LageTilbudForm
 
 
 '''
@@ -22,6 +23,7 @@ def dashboard(request):
     rolle = user.profile.role
     return render(request, 'app/dashboard.html', {'rolle': rolle})
 
+
 def arrangor(request):
     user = request.user
 
@@ -36,6 +38,7 @@ def arrangor(request):
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
+
 def lydtekniker(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -48,6 +51,7 @@ def lydtekniker(request):
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
+
 def lystekniker(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -59,6 +63,7 @@ def lystekniker(request):
         return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
+
 
 def konsert(request, year, month, day, post_id):
     user = request.user
@@ -112,6 +117,7 @@ def konsert(request, year, month, day, post_id):
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
+
 def detaljer_scener(request, navn):
     user = request.user
     if not request.user.is_authenticated():
@@ -125,6 +131,7 @@ def detaljer_scener(request, navn):
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
+
 def manager(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -136,6 +143,7 @@ def manager(request):
         return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
+
 
 def bookingansvarlig(request):
     user = request.user
@@ -149,6 +157,7 @@ def bookingansvarlig(request):
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
+
 def bookingsjef(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -161,6 +170,7 @@ def bookingsjef(request):
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
+
 def scener(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -171,3 +181,23 @@ def scener(request):
         object_list = Consert.objects.values('sceneNavn').distinct()
         return render(request, 'app/scener.html', {'scener': object_list, 'rolle': rolle})
     return render(request, 'app/dashboard.html', {'rolle': rolle})
+
+
+def send_tilbud_til_bookingansvarlig(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig':
+        if request.method == 'POST':
+            tilbud_form = LageTilbudForm(request.POST)
+            artist = Artist.objects.filter(navn=tilbud_form.cleaned_data['artist'])
+            if artist is not None:
+
+        else:
+            tilbud_form = LageTilbudForm()
+        return #riktig render
+
+    return render(request, 'app/dashboard.html', {'rolle': rolle})
+

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse, reverse_lazy
+import datetime
 
 STATUS_CHOICES = (
     ('arrangor', 'Arrangør'),
@@ -94,9 +95,9 @@ class Artist(models.Model):
 
 
 class Consert(models.Model):
-    artist = models.OneToOneField(Artist)
+    artist = models.ForeignKey(Artist)
     tidspunkt = models.DateField()
-    sceneNavn = models.CharField(max_length=250, choices=SCENER, unique=True)
+    sceneNavn = models.CharField(max_length=250, choices=SCENER)
     rigging = models.ManyToManyField(Rigging)
 
     def __str__(self):
@@ -113,10 +114,20 @@ class Consert(models.Model):
 
 #not used yet, will be used in a later sprint
 class Tilbud(models.Model):
-    a_navn = models.OneToOneField(Consert)
+    artist = models.OneToOneField(Artist)
     pris = models.IntegerField()
-    ex_date = models.DateField()
+    date = models.DateField()
+    godkjentAvSjef = models.BooleanField()
+    sendtAvAnsvarlig = models.BooleanField()
+    godkjentAvManager = models.BooleanField()
+
+    def save(self, artist, pris, *args, **kwargs):
+        #self.artist = Artist.save()
+        self.pris = pris
+        self.date = datetime.datetime
+        print(656565)
+        super(Tilbud, self).save()
 
     def __str__(self):
-        return "noe smart etter hvert"
+        return self.pris, ' ', self.date
 
