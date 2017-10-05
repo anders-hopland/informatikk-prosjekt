@@ -104,6 +104,12 @@ i {
     margin: 0;
 }
 
+.login-container {
+    display: flex;
+    justify-content: center;
+    min-height:100vh;
+}
+
 .login-form {
     background-color: #33C413;
     border-radius: 2em;
