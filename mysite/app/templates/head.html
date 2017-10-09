@@ -2,6 +2,7 @@
 
 {% if request.user.is_authenticated %}
 <nav>
+<div class="nav-cont1 nav-cont">
     <a href="{% url 'dashboard' %}">
         <img id="logoImg" src="../static/images/logo.png">
     </a>
@@ -9,6 +10,8 @@
         <a href="{% url 'arrangor' %}">Arrangøroversikt</a>
         <a href="{% url 'scener' %}">Scener</a>
     {% elif rolle == "lydtekniker" %}
+        <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
+        <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
         <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
     {% elif rolle == "lystekniker" %}
         <a href="{% url 'lystekniker' %}">Lysoversikt</a>
@@ -30,6 +33,10 @@
         <a href="">Vurder marked</a>
     {% elif rolle == "bookingsjef" %}
     {% endif %}
+</div>
+<div class="nav-cont2 nav-cont">
+        <a id="no-background">Du er logget in som: {{ rolle }}</a>
     <a href="{% url 'logout' %}">Logg ut</a>
+</div>
 </nav>
 {% endif %}

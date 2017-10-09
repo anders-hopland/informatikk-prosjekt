@@ -45,7 +45,8 @@ table tr td {
 
 /* Page containers */
 .page-container {
-    margin-top:5rem;
+    margin: 4em 10vw 4em 10vw;
+    min-height: 100vh;
 }
 
 .page-content {
@@ -60,34 +61,48 @@ nav {
     box-shadow: 0 2px 0 #dddddd;
     margin: 0;
     padding: 0;
-    position: fixed;
     top: 0;
     width: 100%;
+    display: flex;
+
 }
 
-nav a:first-child {
+.nav-cont{
+    flex:1;
+}
+
+.nav-cont1 a:first-child {
     padding: 0;
     margin-left: 0.5em;
     margin-right: 0.5em;
+    max-width: 3em;
 }
 
-nav a:last-child {
-    float: right;
-    padding:1em;
+.nav-cont2 a:last-child {
+    max-width: 5%;
+    text-align: right;
 }
 
-nav > a {
+.nav-cont > a {
     color: grey;
-    display: flex;
-    float: left;
-    padding: 1em 0.5em 1em 0.5em;
+    padding: 1em;
     text-decoration: none;
     transition: 0.7s ease;
+    flex:1;
 }
 
-nav > a:not(:first-child):hover {
+.nav-cont1 > a:not(:first-child):hover, .nav-cont2 > a:last-child:hover {
     background-color: whitesmoke;
     transition: background-color 0.2s ease;
+}
+
+#no-background{
+    flex:4;
+    text-align: right;
+}
+
+#no-background:hover{
+    background-color: transparent;
 }
 
 /* rulletekststørrelse */
