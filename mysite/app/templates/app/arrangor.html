@@ -7,7 +7,8 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over konserter:
+    <div id="scene-valg">
+    <h1>Oversikt over konserter på scene:</h1>
     <form action="{% url 'arrangor' %}" method="post">
         {% csrf_token %}
         <select onchange="this.form.submit()" name="scene-choices" id="scene-choices">
@@ -21,7 +22,7 @@
             {% endfor %}
         </select>
     </form>
-    </h1>
+    </div>
 
     <div class="page-content">
         <table id="arrangor-oversikt">

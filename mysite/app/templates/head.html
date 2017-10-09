@@ -7,11 +7,7 @@
     <a href="{% url 'dashboard' %}">
         <img id="logoImg" src="../static/images/logo.png">
     </a>
-    {% if rolle == "lydtekniker" %}
-        <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
-        <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
-        <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
-    {% elif rolle == "manager" %}
+    {% if rolle == "manager" %}
         <a href="">MAILBOX</a>
         <a href="">Registrer band</a>
         <a href="">Rediger band</a>
