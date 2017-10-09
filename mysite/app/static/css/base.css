@@ -93,11 +93,11 @@ nav {
 
 .nav-cont > a {
     color: grey;
+    flex:1;
     padding: 1em;
+    text-align: center;
     text-decoration: none;
     transition: 0.7s ease;
-    flex:1;
-    text-align: center;
 }
 
 .nav-cont1 > a:not(:first-child):hover, .nav-cont2 > a:last-child:hover {
@@ -243,31 +243,16 @@ i {
     margin:0 0 0 1em;
 }
 
-/* scenelinker på scenesiden */
-
-.scene-link-container {
-	display: flex;
-	flex-wrap: wrap;
-    width:80vw;
-}
-
-.scene-link {
-    align-items: center;
-    font-size: 2em;
-    color: black;
+/* valg av scene rulle meny */
+#scene-valg{
     display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    flex-wrap: wrap;
-	height: 3em;
-    justify-content:center;
-    max-width: 33%;
-    text-decoration: none;
-	width: 33%;
+    justify-content: center;
+    margin:0 0 2em 0;
 }
 
-.scene-link:hover {
-    background-color: #dadada
+#scene-choices{
+    margin: 0.4em 0 0 1em;
+    font-size:1.2em;
 }
 
 /* lydteknikker oversikt */
