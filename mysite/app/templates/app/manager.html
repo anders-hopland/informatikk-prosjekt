@@ -13,7 +13,7 @@
                 <tr>
                     <th>Band</th>
                     <th>Sjanger</th>
-                    <th>behov</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -21,12 +21,7 @@
                 <tr>
                     <td>{{ artist.navn }}</td>
                     <td>{{ artist.sjanger }}</td>
-                    <td>
-                    {{ artist.behov.all }}
-                    {% for beh in artist.behov.all %}
-                        {{ beh }} <br>
-                    {% endfor %}
-                    </td>
+                    <td><a href="{{  }}" class="info-button">Se detaljer</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
