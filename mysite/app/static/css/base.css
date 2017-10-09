@@ -14,6 +14,10 @@ h1, h2 {
     margin: 0;
 }
 
+h1 {
+    margin-bottom:0.5em;
+}
+
 /* reservert til logintittel */
 h2 {
     color: white;
@@ -43,7 +47,6 @@ table tr td {
     z-index: -1;
 }
 
-/* Page containers */
 .page-container {
     margin: 4em 10vw 4em 10vw;
     min-height: 100vh;
@@ -52,13 +55,13 @@ table tr td {
 .page-content {
     display: flex;
     justify-content: center;
-    margin: 2em 10vw 0 10vw;
 }
 
 /* navbar */
 nav {
     background-color: white;
-    box-shadow: 0 2px 0 #dddddd;
+    box-shadow: 0 0.2em 0 #23C000;
+    font-size: 1.3em;
     margin: 0;
     padding: 0;
     top: 0;
@@ -115,8 +118,19 @@ i {
     margin: 0;
 }
 
+.login-container {
+    display: flex;
+    justify-content: center;
+    min-height:100vh;
+}
+
+.login-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .login-form {
-    margin:16% 0 0 0;
     background-color: #33C413;
     border-radius: 2em;
     height: 16em;
@@ -175,7 +189,6 @@ i {
 .detail-container {
     max-width: 33%;
     max-height: 40em;
-    overflow-y: scroll;
 	width: 33%;
 }
 
@@ -225,9 +238,6 @@ i {
 }
 
 /* scenelinker på scenesiden */
-.page-container h1{
-    margin:0 0 2em 0;
-}
 
 .scene-link-container {
 	display: flex;
@@ -254,20 +264,11 @@ i {
     background-color: #dadada
 }
 
-/* lysteknikker oversikt */
-#lys-ov th, td{
+/* lydteknikker oversikt */
+.page-content td, th, thead > tr {
     border-bottom: 1px solid #b9b9b9;
 }
 
-#lys-ov tbody tr:hover {
-    background-color: #dadada
-}
-
-/* lydteknikker oversikt */
-#lyd-ov th, td{
-    border-bottom: 0.1em solid #b9b9b9;
-}
-
-#lyd-ov tbody tr:hover {
+.page-content tbody tr:hover {
     background-color: #dadada
 }

@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 
 STATUS_CHOICES = (
     ('arrangor', 'Arrangør'),
-    ('lydtekniker', 'Tekniker'),
+    ('lydtekniker', 'Lydtekniker'),
     ('lystekniker', 'Lystekniker'),
     ('manager', 'Manager'),
     ('bookingansvarlig', 'Bookingansvarlig'),
@@ -59,6 +59,8 @@ Rigging is just a many to many relation between person and Consert
 '''
 class Rigging(models.Model):
     person = models.ManyToManyField(User)
+    #Tidspunkt for når person skal være med på å rigge
+    tidspunkt = models.CharField(max_length=100)
 
     def __str__(self):
         return "rigging"
