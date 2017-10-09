@@ -1,11 +1,17 @@
 {% load staticfiles %}
 
 {% if request.user.is_authenticated %}
-<nav id="navBar">
+
+<nav>
+<div class="nav-cont1 nav-cont">
     <a href="{% url 'dashboard' %}">
         <img id="logoImg" src="../static/images/logo.png">
     </a>
-    {% if rolle == "manager" %}
+    {% if rolle == "lydtekniker" %}
+        <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
+        <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
+        <a href="{% url 'lydtekniker' %}">Lydoversikt</a>
+    {% elif rolle == "manager" %}
         <a href="">MAILBOX</a>
         <a href="">Registrer band</a>
         <a href="">Rediger band</a>
@@ -19,6 +25,10 @@
         <a href="">Økonomi</a>
         <a href="">Vurder marked</a>
     {% endif %}
+</div>
+<div class="nav-cont2 nav-cont">
+        <a id="no-background">Du er logget in som: {{ rolle }}</a>
     <a href="{% url 'logout' %}">Logg ut</a>
+</div>
 </nav>
 {% endif %}
