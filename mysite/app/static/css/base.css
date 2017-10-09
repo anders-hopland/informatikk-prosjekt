@@ -254,10 +254,6 @@ i {
     border-bottom: 1px solid #b9b9b9;
 }
 
-.page-content thead > tr {
-    background: gainsboro;
-}
-
 .page-content tbody tr:hover {
     background-color: #dadada
 }
