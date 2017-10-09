@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 {% if request.user.is_authenticated %}
-<nav>
+<nav id="navBar">
     <a href="{% url 'dashboard' %}">
         <img id="logoImg" src="../static/images/logo.png">
     </a>
