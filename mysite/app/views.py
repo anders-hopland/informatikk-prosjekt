@@ -120,6 +120,7 @@ def detaljer_scener(request, navn):
     rolle = user.profile.role
     if rolle == 'arrangor':
         object_list = Consert.objects.filter(sceneNavn=navn)
+        print(object_list)
         return render(request, 'app/sceneDetaljer.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})

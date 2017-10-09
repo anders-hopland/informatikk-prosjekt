@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 
 STATUS_CHOICES = (
     ('arrangor', 'Arrangør'),
-    ('lydtekniker', 'Tekniker'),
+    ('lydtekniker', 'Lydtekniker'),
     ('lystekniker', 'Lystekniker'),
     ('manager', 'Manager'),
     ('bookingansvarlig', 'Bookingansvarlig'),
