@@ -44,9 +44,17 @@ def arrangor(request):
 
     rolle = user.profile.role
     if rolle == 'arrangor':
-        object_list = Consert.objects.all().order_by('tidspunkt')
+        current_consert = request.POST.get('scene-choices')
+        print(current_consert)
+        if current_consert is not None and current_consert != 'alle':
+            object_list = Consert.objects.filter(sceneNavn=current_consert).order_by('tidspunkt')
+            print(333)
+        else:
+            object_list = Consert.objects.all().order_by('tidspunkt')
 
-        return render(request, 'app/arrangor.html', {'conserts': object_list,  'rolle': rolle})
+        scene_list = Consert.objects.values('sceneNavn').distinct()
+
+        return render(request, 'app/arrangor.html', {'conserts': object_list,  'rolle': rolle, 'sceneliste': scene_list, 'current_consert': current_consert})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
@@ -173,14 +181,3 @@ def bookingsjef(request):
         return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
-
-def scener(request):
-    user = request.user
-    if not request.user.is_authenticated():
-        return render(request, 'registration/login.html', {})
-
-    rolle = user.profile.role
-    if rolle == 'arrangor':
-        object_list = Consert.objects.values('sceneNavn').distinct()
-        return render(request, 'app/scener.html', {'scener': object_list, 'rolle': rolle})
-    return render(request, 'app/dashboard.html', {'rolle': rolle})
