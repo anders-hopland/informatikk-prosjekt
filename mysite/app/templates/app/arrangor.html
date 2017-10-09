@@ -7,7 +7,22 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over konserter:</h1>
+    <h1>Oversikt over konserter:
+    <form action="{% url 'arrangor' %}" method="post">
+        {% csrf_token %}
+        <select onchange="this.form.submit()" name="scene-choices" id="scene-choices">
+            <option value="alle">Alle</option>
+            {% for scene in sceneliste %}
+                {% if scene.sceneNavn == current_consert %}
+                    <option value="{{ scene.sceneNavn.lower }}" selected="selected">{{ scene.sceneNavn }}</option>
+                {% else %}
+                    <option value="{{ scene.sceneNavn.lower }}">{{ scene.sceneNavn }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </form>
+    </h1>
+
     <div class="page-content">
         <table id="arrangor-oversikt">
             <thead>
