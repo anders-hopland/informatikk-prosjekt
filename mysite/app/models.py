@@ -98,7 +98,7 @@ class Artist(models.Model):
 class Consert(models.Model):
     artist = models.OneToOneField(Artist)
     tidspunkt = models.DateField()
-    sceneNavn = models.CharField(max_length=250, choices=SCENER, unique=True)
+    sceneNavn = models.CharField(max_length=250, choices=SCENER)
     rigging = models.ManyToManyField(Rigging)
 
     def __str__(self):
