@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from . models import Artist, Consert
 
 
@@ -20,7 +20,21 @@ def dashboard(request):
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
-    return render(request, 'app/dashboard.html', {'rolle': rolle})
+    if rolle == 'arrangor':
+        return redirect('http://127.0.0.1:8000/arrangor/')
+    elif rolle == 'lystekniker':
+        return redirect('http://127.0.0.1:8000/lystekniker/')
+    elif rolle == 'lydtekniker':
+        return redirect('http://127.0.0.1:8000/lydtekniker/')
+    elif rolle == 'manager':
+        return redirect('http://127.0.0.1:8000/manager/')
+    elif rolle == 'bookingansvarlig':
+        return redirect('http://127.0.0.1:8000/bookingansvarlig/')
+    elif rolle == 'bookingsjef':
+        return redirect('http://127.0.0.1:8000/bookingsjef/')
+    else:
+        return render(request, 'registration/login.html', {})
+
 
 def arrangor(request):
     user = request.user
