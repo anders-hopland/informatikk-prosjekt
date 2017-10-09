@@ -189,7 +189,7 @@ def manager(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
-        object_list = Artist.objects.filter(manager=user.profile)
-        return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
+        object_list = Artist.objects.filter(manager=user.profile).values()
+        return render(request, 'app/manager.html', {'artists': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
