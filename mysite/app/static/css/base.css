@@ -71,6 +71,8 @@ nav {
 }
 
 .nav-cont{
+    align-items: center;
+    display:flex;
     flex:1;
 }
 
@@ -81,9 +83,12 @@ nav {
     max-width: 3em;
 }
 
+.nav-cont1 a:not(:first-child){
+    max-width: 7em;
+}
+
 .nav-cont2 a:last-child {
-    max-width: 5%;
-    text-align: right;
+    max-width: 10%;
 }
 
 .nav-cont > a {
@@ -92,6 +97,7 @@ nav {
     text-decoration: none;
     transition: 0.7s ease;
     flex:1;
+    text-align: center;
 }
 
 .nav-cont1 > a:not(:first-child):hover, .nav-cont2 > a:last-child:hover {
