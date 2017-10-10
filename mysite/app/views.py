@@ -193,3 +193,17 @@ def manager(request):
         return render(request, 'app/manager.html', {'artists': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
+
+def artist(request, navn):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'manager':
+        band = Artist.objects.get(slug=navn)
+        object_list = Consert.objects.filter(artist=band)
+        print(object_list)
+        return render(request, 'app/artist.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'app/dashboard.html', {'rolle': rolle})

@@ -1,0 +1,33 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Konserter som bandet har spilt</h1>
+    <div class="page-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Tidspunkt</th>
+                    <th>Scene</th>
+                    <th>Tilskuere</th>
+                    <th>Profitt</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consert in conserts %}
+                <tr>
+                    <td>{{ consert.tidspunkt }}</td>
+                    <td>{{ consert.sceneNavn }}</td>
+                    <td>{{ consert.tilskuertall }}</td>
+                    <td>{{ consert.inntekter }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</div>
+{% endblock %}

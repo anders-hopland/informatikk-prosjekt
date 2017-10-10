@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ artist.navn }}</td>
                     <td>{{ artist.sjanger }}</td>
-                    <td><a href="{{  }}" class="info-button">Se detaljer</a></td>
+                    <td><a href="{% url 'artist' artist.slug %}" class="info-button">Se detaljer, {{ artist.artist_url }}</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
