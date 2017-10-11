@@ -60,9 +60,8 @@ Rigging is just a many to many relation between person and Consert
 class Rigging(models.Model):
     person = models.ManyToManyField(User)
     #Tidspunkt for når person skal være med på å rigge
-    tidspunkt = models.CharField(max_length=100)
-    tidspunkt_etter_konsert = models.CharField(max_length=100)
     tidspunkt_for_konsert = models.CharField(max_length=100)
+    tidspunkt_etter_konsert = models.CharField(max_length=100)
 
     def __str__(self):
         return "rigging"
