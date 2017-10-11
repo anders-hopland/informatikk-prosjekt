@@ -158,15 +158,23 @@ def manager(request):
 
 def bookingansvarlig(request):
     user = request.user
-    if not request.user.is_authenticated():
+    if not user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/bookingansvarlig.html', {'conserts': object_list, 'rolle': rolle})
+        current_consert = request.POST.get('scene-choices')
+        if current_consert is not None and current_consert != 'alle':
+            object_list = Consert.objects.order_by('tidspunkt')
+        else:
+            object_list = Consert.objects.all().order_by('tidspunkt')
+
+        scene_list = Consert.objects.values('sceneNavn').distinct()
+
+        return render(request, 'app/bookingansvarlig.html', {'conserts': object_list,  'rolle': rolle, 'sceneliste': scene_list, 'current_consert': current_consert})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
+
 
 def bookingsjef(request):
     user = request.user
