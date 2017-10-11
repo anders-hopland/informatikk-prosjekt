@@ -45,10 +45,8 @@ def arrangor(request):
     rolle = user.profile.role
     if rolle == 'arrangor':
         current_consert = request.POST.get('scene-choices')
-        print(current_consert)
         if current_consert is not None and current_consert != 'alle':
             object_list = Consert.objects.filter(sceneNavn=current_consert).order_by('tidspunkt')
-            print(333)
         else:
             object_list = Consert.objects.all().order_by('tidspunkt')
 
@@ -203,7 +201,6 @@ def artist(request, navn):
     if rolle == 'manager':
         band = Artist.objects.get(slug=navn)
         object_list = Consert.objects.filter(artist=band)
-        print(object_list)
         return render(request, 'app/artist.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
