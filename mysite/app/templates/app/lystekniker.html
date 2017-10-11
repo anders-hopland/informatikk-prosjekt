@@ -23,8 +23,10 @@
                 {% for consert in conserts %}
                 <tr>
                     <td>{{ consert.artist }}</td>
-                    <td>kl 09.00-13.00</td>
-                    <td>kl 20.00-22.00</td>
+                    {% for rigging in consert.rigging.all %}
+                        <td>{{ rigging.tidspunkt_for_konsert}}</td>
+                        <td>{{ rigging.tidspunkt_etter_konsert }}</td>
+                    {% endfor %}
                     <td>{{ consert.tidspunkt }}</td>
                     <td>{{ consert.sceneNavn }}</td>
                 </tr>
