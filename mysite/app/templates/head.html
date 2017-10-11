@@ -9,8 +9,7 @@
     </a>
     {% if rolle == "manager" %}
         <a href="">MAILBOX</a>
-        <a href="">Registrer band</a>
-        <a href="">Rediger band</a>
+        <a href=" {% url 'redigerband' %}">Rediger band</a>
     {% elif rolle == "bookingansvarlig" %}
         <a href="">Book band</a>
         <a href="">Tidligere festivaler</a>

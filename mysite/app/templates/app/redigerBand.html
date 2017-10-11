@@ -7,9 +7,35 @@
 
 {% block content %}
 <div class="page-container">
-    <h1><!-- Tittel her --></h1>
+    <h1>Registreringsskjema:</h1>
     <div class="page-content">
-        <!-- HTML code here -->
+            <form id="regBandFrm" method="post">
+
+                <label for="bandSel">Band*:</label>
+                <select id="bandSel">
+                    <option>Velg band</option>
+                    {% for consert in conserts %}
+                        <option>{{ consert.artist.navn }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="datoInp">Dato*:</label>
+                <input id="datoInp" type="date" name="dato" required>
+
+                <label for="sjangerInp">Sjanger*:</label>
+                <input id="sjangerInp" type="text" name="sjanger" required>
+
+                <label for="sceneInp">Scene*:</label>
+                <input id="sceneInp" type="text" name="scene" required>
+
+
+
+                <h3>Tekniske behov:</h3>
+                <label>Mikrofoner:</label>
+                <textarea></textarea>
+                {% csrf_token %}
+                <button type="submit">Logg inn</button>
+            </form>
     </div>
 </div>
 {% endblock %}
