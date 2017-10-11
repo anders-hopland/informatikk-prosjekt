@@ -112,7 +112,7 @@ nav {
 
 #no-background{
     flex:4;
-    text-align: right;
+    justify-content: flex-end;
 }
 
 #no-background:hover{
