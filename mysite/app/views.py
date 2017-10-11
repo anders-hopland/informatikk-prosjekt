@@ -68,7 +68,7 @@ def lydtekniker(request):
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lydtekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return dashboard(request)
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 def lystekniker(request):
     user = request.user
