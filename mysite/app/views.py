@@ -45,7 +45,6 @@ def arrangor(request):
     rolle = user.profile.role
     if rolle == 'arrangor':
         current_consert = request.POST.get('scene-choices')
-        print(current_consert)
         if current_consert is not None and current_consert != 'alle':
             object_list = Consert.objects.filter(sceneNavn=current_consert).order_by('tidspunkt')
             print(333)

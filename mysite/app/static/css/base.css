@@ -25,6 +25,7 @@ h2 {
 }
 
 h3 {
+    text-align: center;
     margin: 0;
 }
 
@@ -48,7 +49,7 @@ table tr td {
 }
 
 .page-container {
-    margin: 4em 10vw 4em 10vw;
+    margin: 3em 10vw 3em 10vw;
     min-height: 100vh;
 }
 
@@ -111,7 +112,7 @@ nav {
 
 #no-background{
     flex:4;
-    text-align: right;
+    justify-content: flex-end;
 }
 
 #no-background:hover{
@@ -200,51 +201,48 @@ i {
     max-width: 33%;
     max-height: 40em;
 	width: 33%;
+    border: 1px solid #ddd;
+}
+
+.detail-container:nth-child(2) {
+    margin: 0 4em 0 4em;
 }
 
 .detail-container > h3{
     border-bottom: 1px solid #ddd;
     text-align: center;
-    padding:0.4em 0 0.4em 0;
+    padding: 0.5em 0 0.5em 0;
 }
 
-.detail-container > h4{
-    border-top: 1px solid #ddd;
-    margin: 0.4em 0 1em 0;
-    padding:1em 0 0 1em;
+.content-border > h4{
+    margin: 1em 0;
 }
 
-.detail-container > p{
-    margin: 0.4em 0 1em 2em;
+.content-border {
+    border-bottom: 1px solid #ddd;
+    padding: 0 1em 0 1em;
 }
 
-#detail-wrap {
+.content-border:last-child {
+    border-bottom: transparent;
+}
+
+.detail-info {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    margin: 0 0.4em 0 0;
-    padding: 0 0.625em 0 0;
     text-align: left;
+    padding:1em;
 
 }
 
-#detail-wrap > label {
+.detail-info > label {
     color: #6d6d6d;
     font-weight: bold;
 }
 
-#detail-wrap > span {
+.detail-info > span {
     margin: -1em 2em 1em 5em;
-}
-
-#medlemmer{
-    border: 1px solid #ddd;
-    margin: 0 1em 0 0;
-}
-
-#tekn-behov{
-    border: 1px solid #ddd;
-    margin:0 0 0 1em;
 }
 
 /* valg av scene rulle meny */
