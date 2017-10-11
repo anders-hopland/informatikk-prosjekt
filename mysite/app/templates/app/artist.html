@@ -7,26 +7,27 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Band du er manger for</h1>
+    <h1>Konserter som bandet har spilt</h1>
     <div class="page-content">
         <table>
             <thead>
                 <tr>
-                    <th>Band</th>
-                    <th>Sjanger</th>
-                    <th></th>
+                    <th>Tidspunkt</th>
+                    <th>Scene</th>
+                    <th>Tilskuere</th>
+                    <th>Profitt</th>
                 </tr>
             </thead>
             <tbody>
-                {% for artist in artists %}
+                {% for consert in conserts %}
                 <tr>
-                    <td>{{ artist.navn }}</td>
-                    <td>{{ artist.sjanger }}</td>
-                    <td><a href="{% url 'artist' artist.slug %}" class="info-button">Se detaljer, {{ artist.artist_url }}</a></td>
+                    <td>{{ consert.tidspunkt }}</td>
+                    <td>{{ consert.sceneNavn }}</td>
+                    <td>{{ consert.tilskuertall }}</td>
+                    <td>{{ consert.inntekter }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </div>
 </div>
 {% endblock %}
