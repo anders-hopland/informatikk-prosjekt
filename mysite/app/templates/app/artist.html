@@ -7,34 +7,27 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over konserter du skal rigge for:</h1>
+    <h1>Konserter som bandet har spilt</h1>
     <div class="page-content">
         <table>
             <thead>
                 <tr>
-                    <th>Band</th>
-                    <th>Før konsert</th>
-                    <th>Etter konsert</th>
-                    <th>Dato</th>
+                    <th>Tidspunkt</th>
                     <th>Scene</th>
+                    <th>Tilskuere</th>
+                    <th>Profitt</th>
                 </tr>
             </thead>
             <tbody>
                 {% for consert in conserts %}
                 <tr>
-                    <td>{{ consert.artist }}</td>
-
-                    {% for rigging in consert.rigging.all %}
-                        <td>{{ rigging.tidspunkt_for_konsert}}</td>
-                        <td>{{ rigging.tidspunkt_etter_konsert }}</td>
-                    {% endfor %}
-
                     <td>{{ consert.tidspunkt }}</td>
                     <td>{{ consert.sceneNavn }}</td>
+                    <td>{{ consert.tilskuertall }}</td>
+                    <td>{{ consert.inntekter }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </div>
 </div>
 {% endblock %}
