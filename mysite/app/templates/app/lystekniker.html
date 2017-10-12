@@ -13,7 +13,9 @@
             <thead>
                 <tr>
                     <th>Band</th>
-                    <th>Tidspunkt</th>
+                    <th>Før konsert</th>
+                    <th>Etter konsert</th>
+                    <th>Dato</th>
                     <th>Scene</th>
                 </tr>
             </thead>
@@ -21,6 +23,10 @@
                 {% for consert in conserts %}
                 <tr>
                     <td>{{ consert.artist }}</td>
+                    {% for rigging in consert.rigging.all %}
+                        <td>{{ rigging.tidspunkt_for_konsert}}</td>
+                        <td>{{ rigging.tidspunkt_etter_konsert }}</td>
+                    {% endfor %}
                     <td>{{ consert.tidspunkt }}</td>
                     <td>{{ consert.sceneNavn }}</td>
                 </tr>

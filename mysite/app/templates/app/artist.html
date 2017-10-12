@@ -7,30 +7,27 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over konserter:</h1>
+    <h1>Konserter som bandet har spilt</h1>
     <div class="page-content">
         <table>
             <thead>
                 <tr>
-                    <th>Artist navn</th>
                     <th>Tidspunkt</th>
                     <th>Scene</th>
-                    <th>Sjanger</th>
-                    <th>Detaljer</th>
+                    <th>Tilskuere</th>
+                    <th>Profitt</th>
                 </tr>
             </thead>
             <tbody>
                 {% for consert in conserts %}
-                    <tr>
-                        <td>{{ consert.artist.navn }}</td>
-                        <td>{{ consert.tidspunkt }}</td>
-                        <td>{{ consert.sceneNavn }}</td>
-                        <td>{{ consert.artist.sjanger }}</td>
-                        <td><a href="{{ consert.consert_url }}" class="info-button">Se detaljer</a></td>
-                    </tr>
+                <tr>
+                    <td>{{ consert.tidspunkt }}</td>
+                    <td>{{ consert.sceneNavn }}</td>
+                    <td>{{ consert.tilskuertall }}</td>
+                    <td>{{ consert.inntekter }}</td>
+                </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </div>
 </div>
 {% endblock %}
