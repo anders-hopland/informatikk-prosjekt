@@ -25,8 +25,8 @@
                     <td>{{ consert.artist }}</td>
 
                     {% for rigging in consert.rigging.all %}
-                        <td>{{ rigging.tidspunkt_for_konsert}}</td>
-                        <td>{{ rigging.tidspunkt_etter_konsert }}</td>
+                        <td>kl. {{ rigging.tidspunkt_for_konsert}}</td>
+                        <td>kl. {{ rigging.tidspunkt_etter_konsert }}</td>
                     {% endfor %}
 
                     <td>{{ consert.tidspunkt }}</td>
