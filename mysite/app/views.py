@@ -54,7 +54,7 @@ def arrangor(request):
 
         return render(request, 'app/arrangor.html', {'conserts': object_list,  'rolle': rolle, 'sceneliste': scene_list, 'current_consert': current_consert})
     else:
-        return render(request, 'app/login.html', {})
+        return render(request, 'dashboard', {'rolle': rolle})
 
 def lydtekniker(request):
     user = request.user
@@ -66,7 +66,7 @@ def lydtekniker(request):
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lydtekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'app/login.html', {})
+        return render(request, 'dashboard', {'rolle': rolle})
 
 def lystekniker(request):
     user = request.user
@@ -78,7 +78,7 @@ def lystekniker(request):
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'app/login.html', {})
+        return render(request, 'dashboard', {'rolle': rolle})
 
 def konsert(request, year, month, day, post_id):
     user = request.user
@@ -130,7 +130,7 @@ def konsert(request, year, month, day, post_id):
                                                     'andre': andre,
                                                     })
     else:
-        return render(request, 'app/login.html', {})
+        return render(request, 'dashbaord', {'rolle': rolle})
 
 def detaljer_scener(request, navn):
     user = request.user
@@ -142,19 +142,7 @@ def detaljer_scener(request, navn):
         object_list = Consert.objects.filter(sceneNavn=navn)
         return render(request, 'app/sceneDetaljer.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'app/login.html', {})
-
-def manager(request):
-    user = request.user
-    if not request.user.is_authenticated():
-        return render(request, 'registration/login.html', {})
-
-    rolle = user.profile.role
-    if rolle == 'manager':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
-    else:
-        return render(request, 'app/login.html', {})
+        return render(request, 'app/login.html', {'rolle': rolle})
 
 def bookingansvarlig(request):
     user = request.user
@@ -173,7 +161,7 @@ def bookingansvarlig(request):
 
         return render(request, 'app/bookingansvarlig.html', {'conserts': object_list,  'rolle': rolle, 'sceneliste': scene_list, 'current_consert': current_consert})
     else:
-        return render(request, 'app/login.html', {})
+        return render(request, 'dahsboard', {'rolle': rolle})
 
 
 def bookingsjef(request):
@@ -186,7 +174,7 @@ def bookingsjef(request):
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'app/login.html', {})
+        return render(request, 'app/login.html', {'rolle': rolle})
 
 def manager(request):
     user = request.user
@@ -195,10 +183,10 @@ def manager(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
-        object_list = Artist.objects.filter(manager=user.profile).values()
+        object_list = Artist.objects.filter(manager=user.profile).order_by('navn')
         return render(request, 'app/manager.html', {'artists': object_list, 'rolle': rolle})
     else:
-        return render(request, 'app/login.html', {})
+        return render(request, 'dashboard', {'rolle': rolle})
 
 def artist(request, navn):
     user = request.user
@@ -211,4 +199,4 @@ def artist(request, navn):
         object_list = Consert.objects.filter(artist=band)
         return render(request, 'app/artist.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'app/login.html', {})
+        return render(request, 'dashboard', {'rolle': rolle})
