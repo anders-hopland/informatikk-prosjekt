@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Konserter som bandet har spilt</h1>
+    <h1>Konserter som bandet/artisten skal spille</h1>
     <div class="page-content">
         <table>
             <thead>
@@ -15,7 +15,7 @@
                     <th>Tidspunkt</th>
                     <th>Scene</th>
                     <th>Tilskuere</th>
-                    <th>Profitt</th>
+                    <th>Honorar</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,10 +24,11 @@
                     <td>{{ consert.tidspunkt }}</td>
                     <td>{{ consert.sceneNavn }}</td>
                     <td>{{ consert.tilskuertall }}</td>
-                    <td>{{ consert.inntekter }}</td>
+                    <td>{{ consert.inntekter }} kr</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+    </div>
 </div>
 {% endblock %}

@@ -5,7 +5,7 @@
 body {
     background-color: #f8f8f8;
     margin: 0;
-    overflow: hidden;
+    overflow: auto;
 }
 
 h1, h2 {
@@ -49,14 +49,14 @@ table tr td {
 }
 
 .page-container {
-    margin: 3em 10vw 3em 10vw;
-    min-height: 100vh;
+    margin: 7em 10vw 3em 10vw;
 }
 
 .page-content {
     display: flex;
     justify-content: center;
 }
+
 
 /* navbar */
 nav {
@@ -68,6 +68,7 @@ nav {
     top: 0;
     width: 100%;
     display: flex;
+    position: fixed;
 }
 
 .nav-cont > a {
@@ -117,11 +118,6 @@ nav {
 
 #no-background:hover{
     background-color: transparent;
-}
-
-/* rulletekststørrelse */
-i {
-    font-size: 2em;
 }
 
 /* Loginvinduet */
@@ -199,7 +195,6 @@ i {
 /* konsert detaljer fra oversikt*/
 .detail-container {
     max-width: 33%;
-    max-height: 40em;
 	width: 33%;
     border: 1px solid #ddd;
 }
