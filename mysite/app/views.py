@@ -130,19 +130,7 @@ def konsert(request, year, month, day, post_id):
                                                     'andre': andre,
                                                     })
     else:
-        return render(request, 'dashbaord', {'rolle': rolle})
-
-def detaljer_scener(request, navn):
-    user = request.user
-    if not request.user.is_authenticated():
-        return render(request, 'registration/login.html', {})
-
-    rolle = user.profile.role
-    if rolle == 'arrangor':
-        object_list = Consert.objects.filter(sceneNavn=navn)
-        return render(request, 'app/sceneDetaljer.html', {'conserts': object_list, 'rolle': rolle})
-    else:
-        return render(request, 'app/login.html', {'rolle': rolle})
+        return render(request, 'dashboard', {'rolle': rolle})
 
 def bookingansvarlig(request):
     user = request.user
@@ -198,5 +186,17 @@ def artist(request, navn):
         band = Artist.objects.get(slug=navn)
         object_list = Consert.objects.filter(artist=band)
         return render(request, 'app/artist.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'dashboard', {'rolle': rolle})
+
+def band_search(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig':
+        object_list = Consert.objects.order_by('tidspunkt')
+        return render(request, 'app/bandSearch.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'dashboard', {'rolle': rolle})
