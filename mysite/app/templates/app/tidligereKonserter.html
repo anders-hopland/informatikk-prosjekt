@@ -1,0 +1,52 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div id="scene-valg">
+    <h1>Tidligere konserter i sjanger:</h1>
+    <form action="{% url 'bookingansvarlig' %}" method="post">
+        {% csrf_token %}
+        <select onchange="this.form.submit()" name="scene-choices" id="scene-choices">
+            <option value="alle">Alle</option>
+            {% for scene in sceneliste %}
+                {% if scene.sceneNavn == current_consert %}
+                    <option value="{{ scene.sceneNavn.lower }}" selected="selected">{{ scene.sceneNavn }}</option>
+                {% else %}
+                    <option value="{{ scene.sceneNavn.lower }}">{{ scene.sceneNavn }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </form>
+    </div>
+
+    <div class="page-content">
+        <table id="arrangor-oversikt">
+            <thead>
+                <tr>
+                    <th>Artist navn</th>
+                    <th>Tidspunkt</th>
+                    <th>Scene</th>
+                    <th>Sjanger</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consert in conserts %}
+                    <tr>
+                        <td>{{ consert.artist.navn }}</td>
+                        <td>{{ consert.tidspunkt }}</td>
+                        <td>{{ consert.sceneNavn }}</td>
+                        <td>{{ consert.artist.sjanger }}</td>
+                        <td><a href="{{ consert.consert_url }}" class="info-button">Se detaljer</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

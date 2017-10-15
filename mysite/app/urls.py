@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from app.views import arrangor, lydtekniker, dashboard, lystekniker
 from app.views import manager, bookingansvarlig, bookingsjef, konsert, detaljer_scener
+from app.views import tidligereKonserter
 from django.contrib.auth import views as auth_views
 
 
@@ -23,6 +24,7 @@ urlpatterns = [
     url(r'^konsert/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<post_id>\d+)/$', konsert, name='konsert'),
     url(r'^manager/$', manager, name='manager'),
     url(r'^bookingansvarlig/$', bookingansvarlig, name='bookingansvarlig'),
+    url(r'^bookingansvarlig/tidligereKonserter/', tidligereKonserter, name='tidligereKonserter'),
     url(r'^bookingsjef/$', bookingsjef, name='bookingsjef'),
 
     #login logout

@@ -5,7 +5,7 @@
 <nav>
 <div class="nav-cont1 nav-cont">
     <a href="{% url 'dashboard' %}">
-        <img id="logoImg" src="../static/images/logo.png">
+        <img id="logoImg" src="../../static/images/logo.png">
     </a>
     {% if rolle == "manager" %}
         <a href="">MAILBOX</a>
@@ -13,7 +13,7 @@
         <a href="">Rediger band</a>
     {% elif rolle == "bookingansvarlig" %}
         <a href="">Book band</a>
-        <a href="">Tidligere festivaler</a>
+        <a href="tidligereKonserter">Tidligere festivaler</a>
         <a href="">Tidligere band</a>
         <a href="">Send forslag</a>
     {% elif rolle == "bookingsjef" %}
