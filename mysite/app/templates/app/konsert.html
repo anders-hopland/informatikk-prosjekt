@@ -3,6 +3,9 @@
 {% load static %}
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+    {% if rolle == "manager" %}
+        <link rel="stylesheet" href="{% static 'css/managerKonsert.css' %}" type="text/css">
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -11,88 +14,116 @@
         <h1>Detaljeside for {{ consert.artist }}</h1>
     {% endfor %}
     <div class="page-content">
-        <div class="detail-container detail-wrap" id="detail-wrap">
-            {% for consert in conserts %}
-            <label for="artist">Navn:</label>
-            <span id="artist">{{ consert.artist }}</span>
-            <label for="dato">Dato:</label>
-            <span id="dato">{{ consert.tidspunkt }}</span>
-            <label for="scene">Scene:</label>
-            <span id="scene">{{ consert.sceneNavn }}</span>
-            <label for="sjanger">Sjanger:</label>
-            <span id="sjanger">{{ consert.artist.sjanger }}</span>
-            {% endfor %}
+        <div class="detail-container">
+            <h3>Informasjon:</h3>
+            <div class="detail-content detail-info">
+                {% for consert in conserts %}
+                    <label for="artist">Navn:</label>
+                    <span id="artist">{{ consert.artist }}</span>
+
+                    <label for="dato">Dato:</label>
+                    <span id="dato">{{ consert.tidspunkt }}</span>
+
+                    <label for="scene">Scene:</label>
+                    <span id="scene">{{ consert.sceneNavn }}</span>
+
+                    <label for="sjanger">Sjanger:</label>
+                    <span id="sjanger">{{ consert.artist.sjanger }}</span>
+
+                    {% if rolle == "manager" %}
+                        <label for="tilskuertall">Tilskuertall:</label>
+                        <span id="tilskuertall">{{ consert.tilskuertall }}</span>
+
+                        <label for="inntekter">Sjanger:</label>
+                        <span id="inntekter">{{ consert.inntekter }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
 
-        <div class="detail-container" id="medlemmer">
+        {% if rolle != "manager" %}
+        <div class="detail-container">
             <h3>Medlemmer:</h3>
-
-            <h4>Lydteknikere:</h4>
-            {% if lydteknikere %}
-                {% for person in lydteknikere %}
-                    <p>{{ person }}</p>
-                {% endfor %}
-            {% else %}
-                <p>Ingen lydteknikere.</p>
-            {% endif %}
-
-            <h4>Lysteknikere:</h4>
-            {% if lysteknikere %}
-                {% for lys in lysteknikere %}
-                    <p>{{ lys }}</p>
-                {% endfor %}
-            {% else %}
-                <p>Ingen lysteknikere.</p>
-            {% endif %}
-
-            <h4>Andre:</h4>
-            {% if andre %}
-                {% for person in andre %}
-                    <p>{{ person }}</p>
-                {% endfor %}
-            {% else %}
-                <p>Ingen andre.</p>
-            {% endif %}
+            <div class="detail-content">
+                <div class="content-border">
+                    <h4>Lydteknikere:</h4>
+                    {% if lydteknikere %}
+                        {% for person in lydteknikere %}
+                            <p>{{ person }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>Ingen lydteknikere.</p>
+                    {% endif %}
+                </div>
+                <div class="content-border">
+                    <h4>Lysteknikere:</h4>
+                    {% if lysteknikere %}
+                        {% for lys in lysteknikere %}
+                            <p>{{ lys }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>Ingen lysteknikere.</p>
+                    {% endif %}
+                </div>
+                <div class="content-border">
+                    <h4>Andre:</h4>
+                    {% if andre %}
+                        {% for person in andre %}
+                            <p>{{ person }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p>Ingen andre.</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
 
-        <div class="detail-container" id="tekn-behov">
+        {% endif %}
+
+        <div class="detail-container">
             <h3>Tekniske behov:</h3>
 
-            <h4>Behov for instrumenter:</h4>
-            {% if instruments %}
-                {% for instrument in instruments %}
-                    <p>{{ instrument }}</p>
-                {% endfor %}
-            {% else %}
-                <p>Ingen behov.</p>
-            {% endif %}
+            <div class="content-border">
+               <h4>Behov for instrumenter:</h4>
+                {% if instruments %}
+                    {% for instrument in instruments %}
+                        <p>{{ instrument }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ingen behov.</p>
+                {% endif %}
+            </div>
 
-            <h4>Behov for lyd:</h4>
-            {% if lyd_list %}
-                {% for lyd in lyd_list %}
-                    <p>{{ lyd }}</p>
-                {% endfor %}
-            {% else %}
-                <p>Ingen behov.</p>
-            {% endif %}
-
-            <h4>Behov for lys:</h4>
-            {% if lys_list %}
-                {% for lys in lys_list %}
-                    <p>{{ lys }}</p>
-                {% endfor %}
-            {% else %}
-                <p>Ingen behov.</p>
-            {% endif %}
-
-            <h4>Andre behov:</h4>
-            {% if annet_list %}
-                {% for annet in annet_list %}
-                    <p>{{ annet }}</p>
-                {% endfor %}
-            {% else %}
-                <p>Ingen behov.</p>
-            {% endif %}
+            <div class="content-border">
+                <h4>Behov for lyd:</h4>
+                {% if lyd_list %}
+                    {% for lyd in lyd_list %}
+                        <p>{{ lyd }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ingen behov.</p>
+                {% endif %}
+            </div>
+            <div class="content-border">
+                <h4>Behov for lys:</h4>
+                {% if lys_list %}
+                    {% for lys in lys_list %}
+                        <p>{{ lys }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ingen behov.</p>
+                {% endif %}
+            </div>
+            <div class="content-border">
+                <h4>Andre behov:</h4>
+                {% if annet_list %}
+                    {% for annet in annet_list %}
+                        <p>{{ annet }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ingen behov.</p>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>

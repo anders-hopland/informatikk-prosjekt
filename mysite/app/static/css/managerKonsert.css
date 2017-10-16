@@ -1,0 +1,8 @@
+.detail-container {
+    max-width: 50%;
+    width: 50%;
+}
+
+.detail-container:nth-child(2) {
+    margin: 0 0 0 0.4em;
+}

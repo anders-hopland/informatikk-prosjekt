@@ -60,7 +60,8 @@ Rigging is just a many to many relation between person and Consert
 class Rigging(models.Model):
     person = models.ManyToManyField(User)
     #Tidspunkt for når person skal være med på å rigge
-    tidspunkt = models.CharField(max_length=100)
+    tidspunkt_for_konsert = models.CharField(max_length=100)
+    tidspunkt_etter_konsert = models.CharField(max_length=100)
 
     def __str__(self):
         return "rigging"
@@ -83,12 +84,21 @@ class Behov(models.Model):
 
 
 class Artist(models.Model):
-    navn = models.CharField(max_length=250)
+    navn = models.CharField(max_length=250, unique=True)
     sjanger = models.CharField(max_length=250)
     behov = models.ManyToManyField(Behov)
+    manager = models.ManyToManyField(Extend_user)
+    slug = models.SlugField(max_length=50, blank=True, unique=True)
 
     def __str__(self):
         return self.navn
+
+    def create_slug(self):
+        self.slug = self.navn.replace(' ','')
+
+    def save(self, *args, **kwargs):
+        self.create_slug()
+        super().save()
 
     class Meta:
         verbose_name = 'Artist'
@@ -96,10 +106,12 @@ class Artist(models.Model):
 
 
 class Consert(models.Model):
-    artist = models.OneToOneField(Artist)
+    artist = models.ForeignKey(Artist)
     tidspunkt = models.DateField()
     sceneNavn = models.CharField(max_length=250, choices=SCENER)
     rigging = models.ManyToManyField(Rigging)
+    tilskuertall = models.IntegerField(default=1000, blank=True)
+    inntekter = models.IntegerField(default=20000, blank=True)
 
     def __str__(self):
         return self.artist.navn
