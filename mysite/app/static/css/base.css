@@ -14,10 +14,6 @@ h1, h2 {
     margin: 0;
 }
 
-h1 {
-    margin-bottom:0.5em;
-}
-
 /* reservert til logintittel */
 h2 {
     color: white;
@@ -30,6 +26,7 @@ h3 {
 }
 
 table tr td {
+    margin-top: 1em;
     padding: 1em;
     text-align: center;
 }
@@ -49,16 +46,18 @@ table tr td {
 }
 
 .page-container {
-    margin: 7em 10vw 3em 10vw;
+    margin: 2em 10vw 3em 10vw;
 }
 
 .page-content {
     display: flex;
     justify-content: center;
+    margin-top: 1em;
 }
 
 
 /* navbar */
+
 nav {
     background-color: white;
     box-shadow: 0 0.2em 0 #23C000;
@@ -68,7 +67,6 @@ nav {
     top: 0;
     width: 100%;
     display: flex;
-    position: fixed;
 }
 
 .nav-cont > a {
@@ -209,6 +207,36 @@ nav {
     padding: 0.5em 0 0.5em 0;
 }
 
+.detail-info {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: left;
+    padding: 0 1em;
+}
+
+.detail-info h3 {
+    margin-top: 1em;
+}
+
+.detail-info > label {
+    color: #6d6d6d;
+    font-weight: bold;
+}
+
+.detail-info > label {
+    margin: 1em 0 0.2em 0;
+}
+
+.detail-info > span {
+    margin: -1em 2em 1em 5em;
+}
+
+.btn-reg {
+    margin-top: 1em;
+    padding: 0.5em;
+}
+
 .content-border > h4{
     margin: 1em 0;
 }
@@ -220,24 +248,6 @@ nav {
 
 .content-border:last-child {
     border-bottom: transparent;
-}
-
-.detail-info {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    text-align: left;
-    padding:1em;
-
-}
-
-.detail-info > label {
-    color: #6d6d6d;
-    font-weight: bold;
-}
-
-.detail-info > span {
-    margin: -1em 2em 1em 5em;
 }
 
 /* valg av scene rulle meny */

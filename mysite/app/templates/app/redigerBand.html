@@ -9,42 +9,43 @@
 <div class="page-container">
     <h1>Redigeringsskjema for band:</h1>
     <div class="page-content">
-            <form id="regBandFrm" method="post">
-
-
-                <div class="detail-content detail-info">
-                <label for="bandSel">Band*:</label>
-                <select id="bandSel" autofocus>
-                    <option>Velg band</option>
-                    {% for consert in conserts %}
-                        <option>{{ consert.artist.navn }}</option>
-                    {% endfor %}
-                </select>
-
-                <label>Dato:</label>
-
-                <div>
-                    <label for="dayInp">Dag*:</label>
-                    <input id="dayInp" type="number" name="day" value="1" placeholder="d" min="1" max="31" required>
-
-                    <label for="monthInp">Måned*:</label>
-                    <input id="monthInp" type="number" name="month" value="1" placeholder="m" min="1" max="12" required>
-
-                    <label for="yearInp">År*:</label>
-                    <input id="yearInp" type="number" name="year" value="2017" placeholder="yyyy" min="1970" max="2050" required>
-                </div>
-
-                <label for="sjangerInp">Sjanger*:</label>
-                <input id="sjangerInp" type="text" name="sjanger" required>
-
-                <label for="sceneInp">Scene*:</label>
-                <input id="sceneInp" type="text" name="scene" required>
-
-                </div>
+            <form id="regBandFrm" onchange="this.form.submit()" method="POST">
 
                 <div class="detail-content detail-info">
+                    <label for="bandSel">Band*:</label>
+                    <select id="bandSel" onchange="" autofocus>
+                        <option>Velg band</option>
+                        {% for artist in artists %}
+                            <option>{{ artist.navn }}</option>
+                        {% endfor %}
+                    </select>
 
-                    <label>Tekniske behov:</label>
+                    <label>Dato:</label>
+                    <div>
+                        <label for="dayInp">Dag*:</label>
+                        <input id="dayInp" type="number" name="day"
+                               value="1" placeholder="d" min="1" max="31" required>
+
+                        <label for="monthInp">Måned*:</label>
+                        <input id="monthInp" type="number" name="month"
+                               value="1" placeholder="m" min="1" max="12" required>
+
+                        <label for="yearInp">År*:</label>
+                        <input id="yearInp" type="number" name="year"
+                               value="2017" placeholder="yyyy" min="1970" max="2050" required>
+                    </div>
+
+                    <label for="sjangerInp">Sjanger*:</label>
+                    <input id="sjangerInp" type="text" name="sjanger" required>
+
+                    <label for="sceneInp">Scene*:</label>
+                    <input id="sceneInp" type="text" name="scene" required>
+
+                </div>
+
+                <div class="detail-content detail-info">
+
+                    <h3>Tekniske behov:</h3>
                     <label>Behov for instrumenter:</label>
                     <textarea placeholder="Skriv inn behov for instrumenter"></textarea>
 
@@ -53,11 +54,12 @@
 
                     <label>Behov for lys:</label>
                     <textarea placeholder="Skriv inn tekniske behov for lyd her"></textarea>
+
+                    <button class="btn-reg info-button" type="submit">Registrer</button>
                 </div>
 
 
                 {% csrf_token %}
-                <button class="btn-reg" type="submit">Registrer</button>
             </form>
     </div>
 </div>
