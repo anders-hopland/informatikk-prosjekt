@@ -13,11 +13,11 @@
         {% csrf_token %}
         <select onchange="this.form.submit()" name="scene-choices" id="scene-choices">
             <option value="alle">Alle</option>
-            {% for scene in sceneliste %}
-                {% if scene.sceneNavn == current_consert %}
-                    <option value="{{ scene.sceneNavn.lower }}" selected="selected">{{ scene.sceneNavn }}</option>
+            {% for sjanger in sjangerliste %}
+                {% if sjanger.sjangerNavn == current_consert %}
+                    <option value="{{ sjanger.sjangerNavn.lower }}" selected="selected">{{ sjanger.sjangerNavn }}</option>
                 {% else %}
-                    <option value="{{ scene.sceneNavn.lower }}">{{ scene.sceneNavn }}</option>
+                    <option value="{{ sjanger.sjangerNavn.lower }}">{{ sjanger.sjangerNavn }}</option>
                 {% endif %}
             {% endfor %}
         </select>

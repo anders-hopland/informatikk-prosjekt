@@ -31,8 +31,7 @@
                     <th>Artist navn</th>
                     <th>Tidspunkt</th>
                     <th>Scene</th>
-                    <th>Sjanger</th>
-                    <th></th>
+                    <th>Publikums-antall</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,7 +41,6 @@
                         <td>{{ consert.tidspunkt }}</td>
                         <td>{{ consert.sceneNavn }}</td>
                         <td>{{ consert.artist.sjanger }}</td>
-                        <td><a href="{{ consert.consert_url }}" class="info-button">Se detaljer</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

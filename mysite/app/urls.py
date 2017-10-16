@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^konsert/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<post_id>\d+)/$', konsert, name='konsert'),
     url(r'^manager/$', manager, name='manager'),
     url(r'^bookingansvarlig/$', bookingansvarlig, name='bookingansvarlig'),
-    url(r'^bookingansvarlig/tidligereKonserter/', tidligereKonserter, name='tidligereKonserter'),
+    url(r'^bookingansvarlig/tidligereKonserter', tidligereKonserter, name='tidligereKonserter'),
     url(r'^bookingsjef/$', bookingsjef, name='bookingsjef'),
 
     #login logout
