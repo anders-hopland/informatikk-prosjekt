@@ -86,7 +86,7 @@ def konsert(request, year, month, day, post_id):
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
-    if rolle == 'arrangor' or rolle == 'bookingansvarlig':
+    if rolle == 'arrangor' or rolle == 'bookingansvarlig' or rolle == 'manager':
         object_list = Consert.objects.filter(id=post_id)
 
         lysteknikere = {}
