@@ -7,20 +7,32 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Registreringsskjema:</h1>
+    <h1>Redigeringsskjema for band:</h1>
     <div class="page-content">
             <form id="regBandFrm" method="post">
 
+
+                <div class="detail-content detail-info">
                 <label for="bandSel">Band*:</label>
-                <select id="bandSel">
+                <select id="bandSel" autofocus>
                     <option>Velg band</option>
                     {% for consert in conserts %}
                         <option>{{ consert.artist.navn }}</option>
                     {% endfor %}
                 </select>
 
-                <label for="datoInp">Dato*:</label>
-                <input id="datoInp" type="date" name="dato" required>
+                <label>Dato:</label>
+
+                <div>
+                    <label for="dayInp">Dag*:</label>
+                    <input id="dayInp" type="number" name="day" value="1" placeholder="d" min="1" max="31" required>
+
+                    <label for="monthInp">Måned*:</label>
+                    <input id="monthInp" type="number" name="month" value="1" placeholder="m" min="1" max="12" required>
+
+                    <label for="yearInp">År*:</label>
+                    <input id="yearInp" type="number" name="year" value="2017" placeholder="yyyy" min="1970" max="2050" required>
+                </div>
 
                 <label for="sjangerInp">Sjanger*:</label>
                 <input id="sjangerInp" type="text" name="sjanger" required>
@@ -28,12 +40,24 @@
                 <label for="sceneInp">Scene*:</label>
                 <input id="sceneInp" type="text" name="scene" required>
 
+                </div>
 
-                <h3>Tekniske behov:</h3>
-                <label>Mikrofoner:</label>
-                <textarea></textarea>
+                <div class="detail-content detail-info">
+
+                    <label>Tekniske behov:</label>
+                    <label>Behov for instrumenter:</label>
+                    <textarea placeholder="Skriv inn behov for instrumenter"></textarea>
+
+                    <label>Behov for lyd:</label>
+                    <textarea placeholder="Skriv inn tekniske behov for lyd her"></textarea>
+
+                    <label>Behov for lys:</label>
+                    <textarea placeholder="Skriv inn tekniske behov for lyd her"></textarea>
+                </div>
+
+
                 {% csrf_token %}
-                <button type="submit">Lagre</button>
+                <button class="btn-reg" type="submit">Registrer</button>
             </form>
     </div>
 </div>
