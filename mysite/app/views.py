@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from . models import Artist, Consert, Extend_user
+from . models import Artist, Consert, Tilbud
+
+from . forms import RegistrerTilbudForm
 
 
 '''
@@ -132,6 +134,7 @@ def konsert(request, year, month, day, post_id):
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
+
 def detaljer_scener(request, navn):
     user = request.user
     if not request.user.is_authenticated():
@@ -143,6 +146,7 @@ def detaljer_scener(request, navn):
         return render(request, 'app/sceneDetaljer.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
+
 
 def manager(request):
     user = request.user
@@ -188,6 +192,7 @@ def bookingsjef(request):
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
+
 def manager(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -199,6 +204,7 @@ def manager(request):
         return render(request, 'app/manager.html', {'artists': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
+
 
 def artist(request, navn):
     user = request.user
@@ -212,3 +218,22 @@ def artist(request, navn):
         return render(request, 'app/artist.html', {'conserts': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
+
+
+def lag_tilbud(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig':
+        if request.method == 'POST':
+            form = RegistrerTilbudForm(request.POST)
+            if form.is_valid():
+                form.save()
+                redirect('http://127.0.0.1:8000/lystekniker/')
+        form = RegistrerTilbudForm()
+        return render(request, 'app/lag-tilbud.html', {'form': form, 'rolle': rolle})
+    else:
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
+
