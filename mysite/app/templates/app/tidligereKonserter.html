@@ -11,7 +11,7 @@
     <h1>Tidligere konserter i sjanger:</h1>
     <form action="{% url 'bookingansvarlig' %}" method="post">
         {% csrf_token %}
-        <select onchange="this.form.submit()" name="scene-choices" id="scene-choices">
+        <select onchange="this.form.submit()" name="sjanger-choices" id="sjanger-choices">
             <option value="alle">Alle</option>
             {% for sjanger in sjangerliste %}
                 {% if sjanger.sjangerNavn == current_consert %}
