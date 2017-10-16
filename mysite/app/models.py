@@ -106,7 +106,7 @@ class Artist(models.Model):
 
 
 class Consert(models.Model):
-    artist = models.ForeignKey(Artist)
+    artist = models.ForeignKey(Artist, related_name='consert')
     tidspunkt = models.DateField()
     sceneNavn = models.CharField(max_length=250, choices=SCENER)
     rigging = models.ManyToManyField(Rigging)
