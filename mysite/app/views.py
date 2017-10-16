@@ -237,3 +237,5 @@ def lag_tilbud(request):
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
+
+

@@ -1,0 +1,43 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Oversikt over konserter:</h1>
+    <div class="page-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Artist navn</th>
+                    <th>Søknad</th>
+                    <th>Pris</th>
+                    <th>Godkjenn tilbud</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tilbud in tilbuds %}
+                    <tr>
+                        {% for artist in tilbud.artist.all %}
+                            <td>{{ artist }}</td>
+                        {% endfor %}
+                        <td>{{ tilbud.soknad }}</td>
+                        <td>{{ consert.sceneNavn }}</td>
+                        <td>{{ tilbud.pris }}</td>
+                        <td>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="submit" value="Submit" />
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
