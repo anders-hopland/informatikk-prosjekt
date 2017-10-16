@@ -5,7 +5,7 @@
     <nav>
        <div class="nav-cont1 nav-cont flex">
             <a href="{% url rolle %}">
-                <img id="logoImg" src="../static/images/logo.png">
+                <img id="logoImg" src="{% static "../static/images/logo.png" %}">
             </a>
             {% if rolle == "manager" %}
                 <a href="">MAILBOX</a>
