@@ -7,17 +7,17 @@
 
 {% block content %}
 <div class="page-container">
-    <div id="scene-valg">
+    <div id="sjanger-valg">
     <h1>Tidligere konserter i sjanger:</h1>
-    <form action="{% url 'bookingansvarlig' %}" method="post">
+    <form action="{% url 'tidligereKonserter' %}" method="post">
         {% csrf_token %}
         <select onchange="this.form.submit()" name="sjanger-choices" id="sjanger-choices">
             <option value="alle">Alle</option>
-            {% for sjanger in sjangerliste %}
-                {% if sjanger.sjangerNavn == current_consert %}
-                    <option value="{{ sjanger.sjangerNavn.lower }}" selected="selected">{{ sjanger.sjangerNavn }}</option>
+            {% for sjangerTittel in sjangerliste %}
+                {% if sjangerTittel.sjanger == current_consert %}
+                    <option value="{{ sjangerTittel.sjanger.lower }}" selected="selected">{{ sjangerTittel.sjanger }}</option>
                 {% else %}
-                    <option value="{{ sjanger.sjangerNavn.lower }}">{{ sjanger.sjangerNavn }}</option>
+                    <option value="{{ sjangerTittel.sjanger.lower }}">{{ sjangerTittel.sjanger }}</option>
                 {% endif %}
             {% endfor %}
         </select>
