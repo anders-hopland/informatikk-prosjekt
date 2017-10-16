@@ -25,8 +25,8 @@
 
                 {% for artist in artists %}
                     <tr>
-                        <td>{{ artist.navn }}</td>
-                        {% for consert in artist.consert %}
+                        {% for consert in artist.consert.all %}
+                            <td>{{ artist.navn }}</td>
                             <td>{{ consert.tidspunkt }}</td>
                             <td>{{ consert.sceneNavn }}</td>
                             <td>{{ artist.sjanger }}</td>
