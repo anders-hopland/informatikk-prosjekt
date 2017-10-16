@@ -13,17 +13,31 @@
             <thead>
                 <tr>
                     <th>Band</th>
+                    <th>Tidspunkt</th>
+                    <th>Scene</th>
                     <th>Sjanger</th>
-                    <th></th>
+                    <th>Honorar</th>
+                    <th>Detaljer</th>
                 </tr>
             </thead>
             <tbody>
+
+
                 {% for artist in artists %}
-                <tr>
-                    <td>{{ artist.navn }}</td>
-                    <td>{{ artist.sjanger }}</td>
-                    <td><a href="{% url 'artist' artist.slug %}" class="info-button">Se detaljer</a></td>
-                </tr>
+                    <tr>
+                        <td>{{ artist.navn }}</td>
+                        {% for consert in artist.consert %}
+                            <td>{{ consert.tidspunkt }}</td>
+                            <td>{{ consert.sceneNavn }}</td>
+                            <td>{{ artist.sjanger }}</td>
+                            <td>{{ consert.inntekter }} kr</td></tr>
+                            <td>
+                                <a href="{{ consert.consert_url }}" class="info-button">
+                                    Se detaljer
+                                </a>
+                            </td>
+                        {% endfor %}
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>

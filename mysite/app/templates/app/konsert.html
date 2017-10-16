@@ -31,11 +31,8 @@
                     <span id="sjanger">{{ consert.artist.sjanger }}</span>
 
                     {% if rolle == "manager" %}
-                        <label for="tilskuertall">Tilskuertall:</label>
-                        <span id="tilskuertall">{{ consert.tilskuertall }}</span>
-
-                        <label for="inntekter">Sjanger:</label>
-                        <span id="inntekter">{{ consert.inntekter }}</span>
+                        <label for="inntekter">Inntekter:</label>
+                        <span id="inntekter">{{ consert.inntekter }} kr</span>
                     {% endif %}
                 {% endfor %}
             </div>
