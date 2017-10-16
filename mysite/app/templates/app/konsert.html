@@ -3,6 +3,9 @@
 {% load static %}
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+    {% if rolle == "manager" %}
+        <link rel="stylesheet" href="{% static 'css/managerKonsert.css' %}" type="text/css">
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -15,14 +18,25 @@
             <h3>Informasjon:</h3>
             <div class="detail-content detail-info">
                 {% for consert in conserts %}
-                <label for="artist">Navn:</label>
-                <span id="artist">{{ consert.artist }}</span>
-                <label for="dato">Dato:</label>
-                <span id="dato">{{ consert.tidspunkt }}</span>
-                <label for="scene">Scene:</label>
-                <span id="scene">{{ consert.sceneNavn }}</span>
-                <label for="sjanger">Sjanger:</label>
-                <span id="sjanger">{{ consert.artist.sjanger }}</span>
+                    <label for="artist">Navn:</label>
+                    <span id="artist">{{ consert.artist }}</span>
+
+                    <label for="dato">Dato:</label>
+                    <span id="dato">{{ consert.tidspunkt }}</span>
+
+                    <label for="scene">Scene:</label>
+                    <span id="scene">{{ consert.sceneNavn }}</span>
+
+                    <label for="sjanger">Sjanger:</label>
+                    <span id="sjanger">{{ consert.artist.sjanger }}</span>
+
+                    {% if rolle == "manager" %}
+                        <label for="tilskuertall">Tilskuertall:</label>
+                        <span id="tilskuertall">{{ consert.tilskuertall }}</span>
+
+                        <label for="inntekter">Sjanger:</label>
+                        <span id="inntekter">{{ consert.inntekter }}</span>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

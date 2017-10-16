@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from . models import Artist, Consert
+from . models import Artist, Consert, Extend_user
 
 
 '''
@@ -47,7 +47,6 @@ def arrangor(request):
         current_consert = request.POST.get('scene-choices')
         if current_consert is not None and current_consert != 'alle':
             object_list = Consert.objects.filter(sceneNavn=current_consert).order_by('tidspunkt')
-            print(333)
         else:
             object_list = Consert.objects.all().order_by('tidspunkt')
 
@@ -55,7 +54,7 @@ def arrangor(request):
 
         return render(request, 'app/arrangor.html', {'conserts': object_list,  'rolle': rolle, 'sceneliste': scene_list, 'current_consert': current_consert})
     else:
-        return render(request, 'app/dashboard.html', {'rolle': rolle})
+        return render(request, 'dashboard', {'rolle': rolle})
 
 def lydtekniker(request):
     user = request.user
@@ -67,7 +66,7 @@ def lydtekniker(request):
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lydtekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'app/dashboard.html', {'rolle': rolle})
+        return render(request, 'dashboard', {'rolle': rolle})
 
 def lystekniker(request):
     user = request.user
@@ -79,7 +78,7 @@ def lystekniker(request):
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
         return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'app/dashboard.html', {'rolle': rolle})
+        return render(request, 'dashboard', {'rolle': rolle})
 
 def konsert(request, year, month, day, post_id):
     user = request.user
@@ -131,19 +130,39 @@ def konsert(request, year, month, day, post_id):
                                                     'andre': andre,
                                                     })
     else:
-        return render(request, 'app/dashboard.html', {'rolle': rolle})
+        return render(request, 'dashboard', {'rolle': rolle})
 
-def detaljer_scener(request, navn):
+def bookingansvarlig(request):
+    user = request.user
+    if not user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig':
+        current_consert = request.POST.get('scene-choices')
+        if current_consert is not None and current_consert != 'alle':
+            object_list = Consert.objects.order_by('tidspunkt')
+        else:
+            object_list = Consert.objects.all().order_by('tidspunkt')
+
+        scene_list = Consert.objects.values('sceneNavn').distinct()
+
+        return render(request, 'app/bookingansvarlig.html', {'conserts': object_list,  'rolle': rolle, 'sceneliste': scene_list, 'current_consert': current_consert})
+    else:
+        return render(request, 'dahsboard', {'rolle': rolle})
+
+
+def bookingsjef(request):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
-    if rolle == 'arrangor':
-        object_list = Consert.objects.filter(sceneNavn=navn)
-        return render(request, 'app/sceneDetaljer.html', {'conserts': object_list, 'rolle': rolle})
+    if rolle == 'bookingsjef':
+        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
+        return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'app/dashboard.html', {'rolle': rolle})
+        return render(request, 'app/login.html', {'rolle': rolle})
 
 def manager(request):
     user = request.user
@@ -152,10 +171,10 @@ def manager(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
+        object_list = Artist.objects.filter(manager=user.profile).order_by('navn')
+        return render(request, 'app/manager.html', {'artists': object_list, 'rolle': rolle})
     else:
-        return render(request, 'app/dashboard.html', {'rolle': rolle})
+        return render(request, 'dashboard', {'rolle': rolle})
 
 def redigerband(request):
     user = request.user
@@ -170,26 +189,27 @@ def redigerband(request):
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 
-def bookingansvarlig(request):
+def artist(request, navn):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'manager':
+        band = Artist.objects.get(slug=navn)
+        object_list = Consert.objects.filter(artist=band)
+        return render(request, 'app/artist.html', {'conserts': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'dashboard', {'rolle': rolle})
+
+def band_search(request):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/bookingansvarlig.html', {'conserts': object_list, 'rolle': rolle})
+        object_list = Consert.objects.order_by('tidspunkt')
+        return render(request, 'app/bandSearch.html', {'conserts': object_list, 'rolle': rolle})
     else:
-        return render(request, 'app/dashboard.html', {'rolle': rolle})
-
-def bookingsjef(request):
-    user = request.user
-    if not request.user.is_authenticated():
-        return render(request, 'registration/login.html', {})
-
-    rolle = user.profile.role
-    if rolle == 'bookingsjef':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
-    else:
-        return render(request, 'app/dashboard.html', {'rolle': rolle})
+        return render(request, 'dashboard', {'rolle': rolle})

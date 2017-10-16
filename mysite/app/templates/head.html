@@ -4,7 +4,7 @@
 
 <nav>
 <div class="nav-cont1 nav-cont">
-    <a href="{% url 'dashboard' %}">
+    <a href="{% url rolle %}">
         <img id="logoImg" src="../static/images/logo.png">
     </a>
     {% if rolle == "manager" %}
@@ -14,6 +14,7 @@
         <a href="">Book band</a>
         <a href="">Tidligere festivaler</a>
         <a href="">Tidligere band</a>
+        <a href="{% url 'band_search' %}">Info om band</a>
         <a href="">Send forslag</a>
     {% elif rolle == "bookingsjef" %}
         <a href="">MAILBOX</a>
