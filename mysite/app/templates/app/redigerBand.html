@@ -9,13 +9,13 @@
 <div class="page-container">
     <h1>Redigeringsskjema for band:</h1>
     <div class="page-content">
-        <form action="{% url 'manager' %}" method="POST">
+        <form action="{% url 'manager' %}" method="post">
             {% csrf_token %}
 
             <div class="detail-content detail-info">
                 <label for="bandSel">Band*:</label>
                 <select id="bandSel" onchange="" onchange="this.form.submit()"
-                        name="artist-choices" id="artist-choices" autofocus>
+                        name="artist-choices" id="artist-choices">
 
                     <option value="velgBand">Velg band</option>
                     {% for artist in artists %}
@@ -36,15 +36,15 @@
                 <div>
                     <label for="dayInp">Dag*:</label>
                     <input id="dayInp" type="number" name="day"
-                           value="{{ artist }}" placeholder="d" min="1" max="31" required>
+                           min="1" max="31" placeholder="1" required>
 
                     <label for="monthInp">Måned*:</label>
                     <input id="monthInp" type="number" name="month"
-                           value="1" placeholder="m" min="1" max="12" required>
+                           min="1" max="12" placeholder="1" required>
 
                     <label for="yearInp">År*:</label>
                     <input id="yearInp" type="number" name="year"
-                           value="2017" placeholder="yyyy" min="1970" max="2050" required>
+                           min="1970" max="2050" placeholder="2017" required>
                 </div>
 
                 <label for="sjangerInp">Sjanger*:</label>

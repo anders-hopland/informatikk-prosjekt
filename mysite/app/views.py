@@ -172,19 +172,16 @@ def manager(request):
     rolle = user.profile.role
     if rolle == 'manager':
 
-        current_artist = request.POST.get('scene-choices')
-        if current_consert is not None and current_consert != 'alle':
-            object_list = Consert.objects.filter(sceneNavn=current_consert).order_by('tidspunkt')
+        current_artist = request.POST.get('artist-choices')
+        if current_artist is not None and current_artist != 'velgBand':
+            object_list = Artist.objects.filter(manager=user.profile).order_by('navn')
         else:
-            object_list = Consert.objects.all().order_by('tidspunkt')
+            object_list = Artist.objects.all().order_by('navn')
 
-        scene_list = Consert.objects.values('sceneNavn').distinct()
-
-        return render(request, 'app/arrangor.html', {'conserts': object_list, 'rolle': rolle, 'sceneliste': scene_list,
-                                                     'current_consert': current_consert})
-
-        object_list = Artist.objects.filter(manager=user.profile).order_by('navn')
-        return render(request, 'app/manager.html', {'artists': object_list, 'rolle': rolle})
+        return render(request, 'app/manager.html', {'artists': object_list,
+                                                    'rolle': rolle,
+                                                    'current_artist': current_artist
+                                                    })
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 
