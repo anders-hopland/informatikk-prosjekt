@@ -42,6 +42,7 @@ table tr td {
     left: 0;
     width: 100vw;
     object-fit: contain;
+    background-repeat: no-repeat;
     z-index: -1;
 }
 
@@ -76,7 +77,6 @@ nav {
 }
 
 .nav-cont{
-    display:flex;
     flex:1;
 }
 
@@ -124,13 +124,11 @@ nav {
 }
 
 .login-container {
-    display: flex;
     justify-content: center;
     min-height:100vh;
 }
 
 .login-content {
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -145,7 +143,6 @@ nav {
 
 .login-form input {
     border-radius: 0.2em;
-    display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     background-color: whitesmoke;
@@ -208,7 +205,6 @@ nav {
 }
 
 .detail-info {
-    display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     text-align: left;
@@ -251,13 +247,12 @@ nav {
 }
 
 /* valg av scene rulle meny */
-#scene-valg{
-    display: flex;
+.scene-valg {
     justify-content: center;
     margin:0 0 2em 0;
 }
 
-#scene-choices{
+.scene-choices{
     margin: 0.4em 0 0 1em;
     font-size:1.2em;
 }
@@ -269,4 +264,9 @@ nav {
 
 .page-content tbody tr:hover {
     background-color: #dadada
+}
+
+/* general css */
+.flex {
+    display: flex;
 }

@@ -52,7 +52,10 @@ def arrangor(request):
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
 
-        return render(request, 'app/arrangor.html', {'conserts': object_list,  'rolle': rolle, 'sceneliste': scene_list, 'current_consert': current_consert})
+        return render(request, 'app/arrangor.html', {'conserts': object_list,
+                                                     'rolle': rolle,
+                                                     'sceneliste': scene_list,
+                                                     'current_consert': current_consert})
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 
@@ -173,6 +176,7 @@ def manager(request):
     if rolle == 'manager':
 
         current_artist = request.POST.get('artist-choices')
+
         if current_artist is not None and current_artist != 'velgBand':
             object_list = Artist.objects.filter(manager=user.profile).order_by('navn')
         else:

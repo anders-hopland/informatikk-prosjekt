@@ -9,7 +9,7 @@
 <div class="page-container">
     <h1>Redigeringsskjema for band:</h1>
     <div class="page-content">
-        <form action="{% url 'manager' %}" method="post">
+        <form class="flex" action="{% url 'manager' %}" method="post">
             {% csrf_token %}
 
             <div class="detail-content detail-info">

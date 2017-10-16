@@ -3,7 +3,7 @@
 {% if request.user.is_authenticated %}
 
     <nav>
-       <div class="nav-cont1 nav-cont">
+       <div class="nav-cont1 nav-cont flex">
             <a href="{% url rolle %}">
                 <img id="logoImg" src="../static/images/logo.png">
             </a>
@@ -22,7 +22,7 @@
                 <a href="">Vurder marked</a>
             {% endif %}
         </div>
-        <div class="nav-cont2 nav-cont">
+        <div class="nav-cont2 nav-cont flex">
             <a id="no-background">Du er logget in som: {{ rolle }}</a>
             <a href="{% url 'logout' %}">Logg ut</a>
         </div>
