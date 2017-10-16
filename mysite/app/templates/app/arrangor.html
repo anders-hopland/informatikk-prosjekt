@@ -9,19 +9,23 @@
 <div class="page-container">
     <div id="scene-valg">
     <h1>Oversikt over konserter på scene:</h1>
-    <form action="{% url 'arrangor' %}" method="post">
-        {% csrf_token %}
-        <select onchange="this.form.submit()" name="scene-choices" id="scene-choices">
-            <option value="alle">Alle</option>
-            {% for scene in sceneliste %}
-                {% if scene.sceneNavn == current_consert %}
-                    <option value="{{ scene.sceneNavn.lower }}" selected="selected">{{ scene.sceneNavn }}</option>
-                {% else %}
-                    <option value="{{ scene.sceneNavn.lower }}">{{ scene.sceneNavn }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-    </form>
+        <form action="{% url 'arrangor' %}" method="post">
+            {% csrf_token %}
+            <select onchange="this.form.submit()" name="scene-choices" id="scene-choices">
+                <option value="alle">Alle</option>
+                {% for scene in sceneliste %}
+                    {% if scene.sceneNavn == current_consert %}
+                        <option value="{{ scene.sceneNavn.lower }}" selected="selected">
+                            {{ scene.sceneNavn }}
+                        </option>
+                    {% else %}
+                        <option value="{{ scene.sceneNavn.lower }}">
+                            {{ scene.sceneNavn }}
+                        </option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </form>
     </div>
 
     <div class="page-content">
