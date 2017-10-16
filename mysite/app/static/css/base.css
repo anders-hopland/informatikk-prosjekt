@@ -175,7 +175,7 @@ nav {
 }
 
 .info-button {
-    background-color: #7c97af;
+    background-color: #23C000;
     border-radius: 0.2em;
     color: white;
     display: inline-block;
@@ -186,7 +186,7 @@ nav {
 }
 
 .info-button:hover {
-    background-color: #9cbcd4;
+    background-color: #23A000;
     color: white;
 }
 
