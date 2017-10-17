@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^manager/$', manager, name='manager'),
     url(r'^bookingansvarlig/$', bookingansvarlig, name='bookingansvarlig'),
     url(r'^bookingsjef/$', bookingsjef, name='bookingsjef'),
-    url(r'^lag-tilbud/$', lag_tilbud, name='lag_tilbud'),
+    url(r'^lag_tilbud/$', lag_tilbud, name='lag_tilbud'),
     url(r'^tilbudsliste_bookingsjef/$', tilbud_liste_bookingsjef, name='tilbud_liste_bookingsjef'),
     url(r'^godkjenn_tilbud_bookingsjef/(?P<tilbud_id>\d+)/$', godkjenn_tilbud_bookingsjef, name='godkjenn_tilbud_bookingsjef'),
 
