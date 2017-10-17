@@ -3,28 +3,28 @@
 {% if request.user.is_authenticated %}
 
 <nav>
-<div class="nav-cont1 nav-cont">
-    <a href="{% url 'dashboard' %}">
-        <img id="logoImg" src="../static/images/logo.png">
-    </a>
-    {% if rolle == "manager" %}
-        <a href="">MAILBOX</a>
-        <a href="">Registrer band</a>
-        <a href="">Rediger band</a>
-    {% elif rolle == "bookingansvarlig" %}
-        <a href="">Book band</a>
-        <a href="">Tidligere festivaler</a>
-        <a href="">Tidligere band</a>
-        <a href="">Send forslag</a>
-    {% elif rolle == "bookingsjef" %}
-        <a href="">MAILBOX</a>
-        <a href="">Økonomi</a>
-        <a href="">Vurder marked</a>
-    {% endif %}
-</div>
-<div class="nav-cont2 nav-cont">
-        <a id="no-background">Du er logget in som: {{ rolle }}</a>
-    <a href="{% url 'logout' %}">Logg ut</a>
-</div>
+    <div class="nav-cont1 nav-cont">
+        <a href="{% url 'dashboard' %}">
+            <img id="logoImg" src="{% static "../static/images/logo.png" %}">
+        </a>
+        {% if rolle == "manager" %}
+            <a href="">MAILBOX</a>
+            <a href="">Registrer band</a>
+            <a href="">Rediger band</a>
+        {% elif rolle == "bookingansvarlig" %}
+            <a href="">Book band</a>
+            <a href="">Tidligere festivaler</a>
+            <a href="">Tidligere band</a>
+            <a href="">Send forslag</a>
+        {% elif rolle == "bookingsjef" %}
+            <a href="">MAILBOX</a>
+            <a href="">Økonomi</a>
+            <a href="">Vurder marked</a>
+        {% endif %}
+    </div>
+    <div class="nav-cont2 nav-cont">
+            <a id="no-background">Du er logget in som: {{ rolle }}</a>
+        <a href="{% url 'logout' %}">Logg ut</a>
+    </div>
 </nav>
 {% endif %}
