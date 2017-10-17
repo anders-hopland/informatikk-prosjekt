@@ -9,57 +9,36 @@
 <div class="page-container">
     <h1>Godkjenn tilbud</h1>
     <div class="page-content">
-        <h3>Info om bandet</h3>
         <div class="detail-container">
             <h3>Tekniske behov:</h3>
 
             <div class="content-border">
-               <h4>Behov for instrumenter:</h4>
-                {% if instruments %}
-                    {% for instrument in instruments %}
-                        <p>{{ instrument }}</p>
-                    {% endfor %}
-                {% else %}
-                    <p>Ingen behov.</p>
-                {% endif %}
+               <h4>Artist</h4>
+               {% for artist in tilbud.artist.all %}
+                    <p>{{ artist.navn }}</p>
+               {% endfor %}
             </div>
 
             <div class="content-border">
-                <h4>Behov for lyd:</h4>
-                {% if lyd_list %}
-                    {% for lyd in lyd_list %}
-                        <p>{{ lyd }}</p>
-                    {% endfor %}
-                {% else %}
-                    <p>Ingen behov.</p>
-                {% endif %}
+                <h4>Søknad</h4>
+                <p>{{ tilbud.soknad }}</p>
             </div>
             <div class="content-border">
-                <h4>Behov for lys:</h4>
-                {% if lys_list %}
-                    {% for lys in lys_list %}
-                        <p>{{ lys }}</p>
-                    {% endfor %}
-                {% else %}
-                    <p>Ingen behov.</p>
-                {% endif %}
-            </div>
-            <div class="content-border">
-                <h4>Andre behov:</h4>
-                {% if annet_list %}
-                    {% for annet in annet_list %}
-                        <p>{{ annet }}</p>
-                    {% endfor %}
-                {% else %}
-                    <p>Ingen behov.</p>
-                {% endif %}
+                <h4>Pris:</h4>
+                <p>{{ tilbud.pris }}</p>
             </div>
         </div>
+    </div>
+
+    <br>
+    <br>
+
+    <center>
         <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Submit" />
         </form>
-    </div>
+    </center>
 </div>
 {% endblock %}
