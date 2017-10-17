@@ -26,8 +26,8 @@ urlpatterns = [
     url(r'^bookingansvarlig/$', bookingansvarlig, name='bookingansvarlig'),
     url(r'^bookingsjef/$', bookingsjef, name='bookingsjef'),
     url(r'^lag-tilbud/$', lag_tilbud, name='lag_tilbud'),
-    url(r'^tilbudsliste-bookingsjef/$', tilbud_liste_bookingsjef, name='tilbud_liste_bookingsjef'),
-    url(r'^godkjenn-tilbud-bookingsjef/(?P<tilbud_id>\d+)/$', godkjenn_tilbud_bookingsjef, name='godkjenn_tilbud_bookingsjef'),
+    url(r'^tilbudsliste_bookingsjef/$', tilbud_liste_bookingsjef, name='tilbud_liste_bookingsjef'),
+    url(r'^godkjenn_tilbud_bookingsjef/(?P<tilbud_id>\d+)/$', godkjenn_tilbud_bookingsjef, name='godkjenn_tilbud_bookingsjef'),
 
     #login logout
     url('^', include('django.contrib.auth.urls')),

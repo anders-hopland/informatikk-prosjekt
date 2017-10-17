@@ -254,7 +254,7 @@ def tilbud_liste_bookingsjef(request):
 
         object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=False)
 
-        return render(request, 'app/tilbud-liste-bookingsjef.html', {'tilbuds': object_list, 'rolle': rolle})
+        return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
@@ -274,7 +274,7 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
                 form.save()
                 redirect('http://127.0.0.1:8000/bookingmanager/')
 
-        return render(request, 'app/godkjenn-tilbud-bookingsjef.html', {'tilbud': tilbud, 'form': form, 'rolle': rolle})
+        return render(request, 'app/godkjenn_tilbud_bookingsjef.html', {'tilbud': tilbud, 'form': form, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
@@ -294,6 +294,6 @@ def tilbud_liste_bookingsjef(request):
 
         object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True).filter(godkjent_av_bookingmanager=False)
 
-        return render(request, 'app/tilbud-liste-bookingsjef.html', {'tilbuds': object_list, 'rolle': rolle})
+        return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
