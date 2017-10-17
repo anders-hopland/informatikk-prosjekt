@@ -277,3 +277,23 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
         return render(request, 'app/godkjenn-tilbud-bookingsjef.html', {'tilbud': tilbud, 'form': form, 'rolle': rolle})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
+
+def tilbud_liste_bookingsjef(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingsjef':
+        if request.method == 'POST':
+            form = GodkjennTilbudBookingSjefForm(request.POST)
+            if form.is_valid():
+                form.save()
+                redirect('http://127.0.0.1:8000/bookingmanager/')
+        form = GodkjennTilbudBookingSjefForm()
+
+        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True).filter(godkjent_av_bookingmanager=False)
+
+        return render(request, 'app/tilbud-liste-bookingsjef.html', {'tilbuds': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
