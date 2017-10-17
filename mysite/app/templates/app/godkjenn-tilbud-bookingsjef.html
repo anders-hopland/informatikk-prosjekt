@@ -1,0 +1,65 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Godkjenn tilbud</h1>
+    <div class="page-content">
+        <h3>Info om bandet</h3>
+        <div class="detail-container">
+            <h3>Tekniske behov:</h3>
+
+            <div class="content-border">
+               <h4>Behov for instrumenter:</h4>
+                {% if instruments %}
+                    {% for instrument in instruments %}
+                        <p>{{ instrument }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ingen behov.</p>
+                {% endif %}
+            </div>
+
+            <div class="content-border">
+                <h4>Behov for lyd:</h4>
+                {% if lyd_list %}
+                    {% for lyd in lyd_list %}
+                        <p>{{ lyd }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ingen behov.</p>
+                {% endif %}
+            </div>
+            <div class="content-border">
+                <h4>Behov for lys:</h4>
+                {% if lys_list %}
+                    {% for lys in lys_list %}
+                        <p>{{ lys }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ingen behov.</p>
+                {% endif %}
+            </div>
+            <div class="content-border">
+                <h4>Andre behov:</h4>
+                {% if annet_list %}
+                    {% for annet in annet_list %}
+                        <p>{{ annet }}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>Ingen behov.</p>
+                {% endif %}
+            </div>
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+</div>
+{% endblock %}

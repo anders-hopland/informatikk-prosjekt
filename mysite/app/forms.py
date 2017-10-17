@@ -27,24 +27,12 @@ class RegistrerTilbudForm(forms.ModelForm):
         tilbud = super(RegistrerTilbudForm, self).save(commit=False)
         tilbud.save()
         return tilbud
-'''
-class GodkjennTilbudBookingAnsvarligForm(forms.ModelForm):
+
+
+class GodkjennTilbudBookingSjefForm(forms.ModelForm):
+
     class Meta:
         model = Tilbud
-
-    def __init__(self, *args, **kwargs):
-        current_tilbud = kwargs.pop('current_tilbud')
-        self.fields['godkjent'] = forms.BooleanField(
-            label='myLabel',
-            required=False,
-            initial=False
-        )
-
-    def save(self):
-        tilbud = super(RegistrerTilbudForm, self).save(commit=False)
-        tilbud.save()
-        return tilbud
-
-'''
+        fields = ('godkjent_av_bookingssjef',)
 
 

@@ -134,7 +134,7 @@ class Tilbud(models.Model):
     godkjent_av_manager = models.BooleanField(blank=True, default=False)
 
     def __str__(self):
-        return "noe smart etter hvert"
+        return 'tilbud'
 
     class Meta:
         verbose_name = 'tilbud'

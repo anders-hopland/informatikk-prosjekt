@@ -13,27 +13,16 @@
             <thead>
                 <tr>
                     <th>Artist navn</th>
-                    <th>Søknad</th>
-                    <th>Pris</th>
-                    <th>Godkjenn tilbud</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 {% for tilbud in tilbuds %}
                     <tr>
                         {% for artist in tilbud.artist.all %}
-                            <td>{{ artist }}</td>
+                            <td>{{ artist.navn }}</td>
                         {% endfor %}
-                        <td>{{ tilbud.soknad }}</td>
-                        <td>{{ consert.sceneNavn }}</td>
-                        <td>{{ tilbud.pris }}</td>
-                        <td>
-                            <form action="" method="post">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <input type="submit" value="Submit" />
-                            </form>
-                        </td>
+                        <td><a href="{% url 'godkjenn_tilbud_bookingsjef' tilbud.id %}" class="info-button">Se detaljer</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

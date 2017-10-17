@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
-from app.views import arrangor, lydtekniker, dashboard, lystekniker, artist, lag_tilbud
-from app.views import manager, bookingansvarlig, bookingsjef, konsert, detaljer_scener
+from app.views import arrangor, lydtekniker, dashboard, lystekniker, artist, lag_tilbud, godkjenn_tilbud_bookingsjef
+from app.views import manager, bookingansvarlig, bookingsjef, konsert, detaljer_scener, tilbud_liste_bookingsjef
 from django.contrib.auth import views as auth_views
 
 
@@ -25,7 +25,9 @@ urlpatterns = [
     url(r'^manager/$', manager, name='manager'),
     url(r'^bookingansvarlig/$', bookingansvarlig, name='bookingansvarlig'),
     url(r'^bookingsjef/$', bookingsjef, name='bookingsjef'),
-    url(r'lag-tilbud', lag_tilbud, name='lag_tilbud'),
+    url(r'^lag-tilbud/$', lag_tilbud, name='lag_tilbud'),
+    url(r'^tilbudsliste-bookingsjef/$', tilbud_liste_bookingsjef, name='tilbud_liste_bookingsjef'),
+    url(r'^godkjenn-tilbud-bookingsjef/(?P<tilbud_id>\d+)/$', godkjenn_tilbud_bookingsjef, name='godkjenn_tilbud_bookingsjef'),
 
     #login logout
     url('^', include('django.contrib.auth.urls')),
