@@ -143,7 +143,14 @@ class Tilbud(models.Model):
 
 class Band_Info(models.Model):
     artist = models.CharField(max_length=500)
-    nøkkelInfo = models.CharField(max_length=2000)
-    strømtjeneste = models.CharField(max_length=500)
+    nokkelInfo = models.CharField(max_length=2000)
+    stromtjeneste = models.CharField(max_length=500)
     albumSalg = models.CharField(max_length=2000)
     norskeKonserter = models.CharField(max_length=2000)
+
+    def __str__(self):
+        return self.artist.navn
+
+    class Meta:
+        verbose_name = 'Band info'
+        verbose_name_plural = 'Band info'
