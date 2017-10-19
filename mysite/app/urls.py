@@ -1,6 +1,8 @@
 from django.conf.urls import url, include
-from .views import arrangor, lydtekniker, dashboard, lystekniker, artist
-from .views import manager, bookingansvarlig, bookingsjef, konsert, band_search
+
+from . views import arrangor, lydtekniker, dashboard, lystekniker, artist, lag_tilbud, godkjenn_tilbud_bookingsjef
+from . views import manager, bookingansvarlig, bookingsjef, konsert, tilbud_liste_bookingsjef, band_search
+
 from django.contrib.auth import views as auth_views
 
 
@@ -25,6 +27,9 @@ urlpatterns = [
     url(r'^bookingansvarlig/$', bookingansvarlig, name='bookingansvarlig'),
     url(r'^bookingsjef/$', bookingsjef, name='bookingsjef'),
     url(r'^band_search/$', band_search , name='band_search'),
+    url(r'^lag_tilbud/$', lag_tilbud, name='lag_tilbud'),
+    url(r'^tilbudsliste_bookingsjef/$', tilbud_liste_bookingsjef, name='tilbud_liste_bookingsjef'),
+    url(r'^godkjenn_tilbud_bookingsjef/(?P<tilbud_id>\d+)/$', godkjenn_tilbud_bookingsjef, name='godkjenn_tilbud_bookingsjef'),
 
     #login logout
     url('^', include('django.contrib.auth.urls')),

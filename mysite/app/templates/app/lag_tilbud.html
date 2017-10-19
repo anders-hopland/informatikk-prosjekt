@@ -7,9 +7,13 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Band med nøkkel informasjon:</h1>
+    <h1>Konserter som bandet har spilt</h1>
     <div class="page-content">
-        <!-- HTML code here -->
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" />
+        </form>
     </div>
 </div>
 {% endblock %}

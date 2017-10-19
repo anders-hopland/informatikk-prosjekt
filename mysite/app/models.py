@@ -106,7 +106,7 @@ class Artist(models.Model):
 
 
 class Consert(models.Model):
-    artist = models.ForeignKey(Artist)
+    artist = models.ForeignKey(Artist, related_name='concert')
     tidspunkt = models.DateField()
     sceneNavn = models.CharField(max_length=250, choices=SCENER)
     rigging = models.ManyToManyField(Rigging)
@@ -127,10 +127,23 @@ class Consert(models.Model):
 
 #not used yet, will be used in a later sprint
 class Tilbud(models.Model):
-    a_navn = models.OneToOneField(Consert)
+    artist = models.ManyToManyField(Artist)
+    soknad = models.TextField()
     pris = models.IntegerField()
-    ex_date = models.DateField()
+    godkjent_av_bookingssjef = models.BooleanField(blank=True, default=False)
+    sendt_av_bookingmanager = models.BooleanField(blank=True, default=False)
+    godkjent_av_manager = models.BooleanField(blank=True, default=False)
 
     def __str__(self):
-        return "noe smart etter hvert"
+        return 'tilbud'
 
+    class Meta:
+        verbose_name = 'tilbud'
+        verbose_name_plural = 'tilbud'
+
+class Band_Info(models.Model):
+    artist = models.CharField(max_length=500)
+    nøkkelInfo = models.CharField(max_length=2000)
+    strømtjeneste = models.CharField(max_length=500)
+    albumSalg = models.CharField(max_length=2000)
+    norskeKonserter = models.CharField(max_length=2000)
