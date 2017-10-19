@@ -7,9 +7,13 @@
 
 {% block content %}
 <div class="page-container">
-    <h1><!-- Tittel her --></h1>
+    <h1>Lag Tilbud</h1>
     <div class="page-content">
-        <!-- HTML code here -->
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" />
+        </form>
     </div>
 </div>
 {% endblock %}

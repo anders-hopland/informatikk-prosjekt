@@ -5,17 +5,13 @@
 body {
     background-color: #f8f8f8;
     margin: 0;
-    overflow: hidden;
+    overflow: auto;
 }
 
 h1, h2 {
     display: flex;
     justify-content: center;
     margin: 0;
-}
-
-h1 {
-    margin-bottom:0.5em;
 }
 
 /* reservert til logintittel */
@@ -30,7 +26,8 @@ h3 {
 }
 
 table tr td {
-    padding: 2em;
+    margin-top: 1em;
+    padding: 1em;
     text-align: center;
 }
 
@@ -49,16 +46,18 @@ table tr td {
 }
 
 .page-container {
-    margin: 3em 10vw 3em 10vw;
-    min-height: 100vh;
+    margin: 2em 10vw 3em 10vw;
 }
 
 .page-content {
     display: flex;
     justify-content: center;
+    margin-top: 1em;
 }
 
+
 /* navbar */
+
 nav {
     background-color: white;
     box-shadow: 0 0.2em 0 #23C000;
@@ -119,11 +118,6 @@ nav {
     background-color: transparent;
 }
 
-/* rulletekststørrelse */
-i {
-    font-size: 2em;
-}
-
 /* Loginvinduet */
 .form-group {
     margin: 0;
@@ -181,7 +175,7 @@ i {
 }
 
 .info-button {
-    background-color: #7c97af;
+    background-color: #23C000;
     border-radius: 0.2em;
     color: white;
     display: inline-block;
@@ -192,14 +186,13 @@ i {
 }
 
 .info-button:hover {
-    background-color: #9cbcd4;
+    background-color: #23A000;
     color: white;
 }
 
 /* konsert detaljer fra oversikt*/
 .detail-container {
     max-width: 33%;
-    max-height: 40em;
 	width: 33%;
     border: 1px solid #ddd;
 }
@@ -214,6 +207,36 @@ i {
     padding: 0.5em 0 0.5em 0;
 }
 
+.detail-info {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: left;
+    padding: 0 1em;
+}
+
+.detail-info h3 {
+    margin-top: 1em;
+}
+
+.detail-info > label {
+    color: #6d6d6d;
+    font-weight: bold;
+}
+
+.detail-info > label {
+    margin: 1em 0 0.2em 0;
+}
+
+.detail-info > span {
+    margin: -1.3em 2em 1em 5em;
+}
+
+.btn-reg {
+    margin-top: 1em;
+    padding: 0.5em;
+}
+
 .content-border > h4{
     margin: 1em 0;
 }
@@ -225,24 +248,6 @@ i {
 
 .content-border:last-child {
     border-bottom: transparent;
-}
-
-.detail-info {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    text-align: left;
-    padding:1em;
-
-}
-
-.detail-info > label {
-    color: #6d6d6d;
-    font-weight: bold;
-}
-
-.detail-info > span {
-    margin: -1em 2em 1em 5em;
 }
 
 /* valg av scene rulle meny */

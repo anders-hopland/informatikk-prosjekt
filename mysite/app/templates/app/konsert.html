@@ -31,11 +31,8 @@
                     <span id="sjanger">{{ consert.artist.sjanger }}</span>
 
                     {% if rolle == "manager" %}
-                        <label for="tilskuertall">Tilskuertall:</label>
-                        <span id="tilskuertall">{{ consert.tilskuertall }}</span>
-
-                        <label for="inntekter">Sjanger:</label>
-                        <span id="inntekter">{{ consert.inntekter }}</span>
+                        <label for="inntekter">Inntekter:</label>
+                        <span id="inntekter">{{ consert.inntekter }} kr</span>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -90,7 +87,7 @@
                         <p>{{ instrument }}</p>
                     {% endfor %}
                 {% else %}
-                    <p>Ingen behov.</p>
+                    <p>Ingen behov meldt inn.</p>
                 {% endif %}
             </div>
 
@@ -101,7 +98,7 @@
                         <p>{{ lyd }}</p>
                     {% endfor %}
                 {% else %}
-                    <p>Ingen behov.</p>
+                    <p>Ingen behov meldt inn.</p>
                 {% endif %}
             </div>
             <div class="content-border">
@@ -111,7 +108,7 @@
                         <p>{{ lys }}</p>
                     {% endfor %}
                 {% else %}
-                    <p>Ingen behov.</p>
+                    <p>Ingen behov meldt inn.</p>
                 {% endif %}
             </div>
             <div class="content-border">
