@@ -137,6 +137,7 @@ class Tilbud(models.Model):
     artist = models.ManyToManyField(Artist)
     soknad = models.TextField()
     pris = models.IntegerField()
+    tidspunkt = models.DateField()
     godkjent_av_bookingssjef = models.BooleanField(blank=True, default=False)
     sendt_av_ansvarlig = models.BooleanField(blank=True, default=False)
     godkjent_av_manager = models.BooleanField(blank=True, default=False)
