@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse, reverse_lazy
+from django import forms
 
 STATUS_CHOICES = (
     ('arrangor', 'Arrangør'),
@@ -103,6 +104,12 @@ class Artist(models.Model):
     class Meta:
         verbose_name = 'Artist'
         verbose_name_plural = 'Artister'
+
+class ArtistForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    class Meta:
+        model = Artist
+        fields = ['navn', 'sjanger', 'behov', 'manager', 'slug']
 
 
 class Consert(models.Model):
