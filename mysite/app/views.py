@@ -245,7 +245,8 @@ def artist(request, navn):
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 
-#def band_search(request):
+def band_search(request):
+    return
 
 
 def lag_tilbud(request):
