@@ -130,6 +130,7 @@ class Consert(models.Model):
     class Meta:
         verbose_name = 'consert'
         verbose_name_plural = 'conserts'
+        unique_together = ('tidspunkt', 'sceneNavn',)
 
 
 #not used yet, will be used in a later sprint

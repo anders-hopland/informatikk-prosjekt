@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Count
 from . models import Artist, Consert, Tilbud
 
 from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
@@ -290,6 +291,8 @@ def tilbud_liste_bookingsjef(request):
         form = GodkjennTilbudBookingSjefForm()
 
         object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=False)
+        num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
+        print(num_conserts)
 
         return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list, 'rolle': rolle})
     else:
