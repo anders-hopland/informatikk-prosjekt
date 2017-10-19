@@ -131,7 +131,7 @@ class Tilbud(models.Model):
     soknad = models.TextField()
     pris = models.IntegerField()
     godkjent_av_bookingssjef = models.BooleanField(blank=True, default=False)
-    sendt_av_bookingmanager = models.BooleanField(blank=True, default=False)
+    sendt_av_ansvarlig = models.BooleanField(blank=True, default=False)
     godkjent_av_manager = models.BooleanField(blank=True, default=False)
 
     def __str__(self):

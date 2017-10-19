@@ -15,7 +15,7 @@
             <a href="">Book band</a>
             <a href="">Tidligere festivaler</a>
             <a href="">Tidligere band</a>
-            <a href="">Send forslag</a>
+            <a href="{% url 'lag_tilbud' %}">Send forslag</a>
         {% elif rolle == "bookingsjef" %}
             <a href="{% url 'tilbud_liste_bookingsjef' %}">MAILBOX</a>
             <a href="">Økonomi</a>
