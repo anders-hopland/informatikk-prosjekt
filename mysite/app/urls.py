@@ -15,11 +15,11 @@ it easier to refer to the url in our html using jinja
 
 
 urlpatterns = [
+    url(r'^dashboard/$', dashboard, name='dashboard'),
     url(r'^artist/(?P<navn>\w+)$', artist, name='artist'),
     url(r'^arrangor/$', arrangor, name='arrangor'),
     url(r'^lydtekniker/$', lydtekniker, name='lydtekniker'),
     url(r'^lystekniker/$', lystekniker, name='lystekniker'),
-    url(r'^dashboard/$', dashboard, name='dashboard'),
     url(r'^konsert/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<post_id>\d+)/$', konsert, name='konsert'),
     url(r'^manager/redigerband/$', redigerband, name='redigerband'),
     url(r'^manager/$', manager, name='manager'),

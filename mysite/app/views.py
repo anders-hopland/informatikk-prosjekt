@@ -150,19 +150,6 @@ def detaljer_scener(request, navn):
     else:
         return render(request, 'app/dashboard', {'rolle': rolle})
 
-
-def manager(request):
-    user = request.user
-    if not request.user.is_authenticated():
-        return render(request, 'registration/login.html', {})
-
-    rolle = user.profile.role
-    if rolle == 'manager':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
-    else:
-        return render(request, 'app/dashboard', {'rolle': rolle})
-
 def bookingansvarlig(request):
     user = request.user
     if not user.is_authenticated():
