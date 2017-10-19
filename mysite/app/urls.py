@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from app.views import arrangor, lydtekniker, dashboard, lystekniker, artist, lag_tilbud, godkjenn_tilbud_bookingsjef
-from app.views import manager, bookingansvarlig, bookingsjef, konsert, detaljer_scener, tilbud_liste_bookingsjef
+from app.views import manager, bookingansvarlig, bookingsjef, konsert, detaljer_scener, tilbud_liste_bookingsjef, band_search, redigerband
 from django.contrib.auth import views as auth_views
 
 
