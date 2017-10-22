@@ -316,7 +316,7 @@ def tilbud_liste_bookingansvarlig(request):
 
 
 
-def godkjenn_tilbud_bookingsjef(request, tilbud_id):
+def send_tilbud_bookingansvarlig(request, tilbud_id):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
