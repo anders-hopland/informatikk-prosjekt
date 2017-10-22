@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Extend_user, Rigging, Consert, Artist, Tilbud, Behov
+from .models import Extend_user, Rigging, Consert, Artist, Tilbud, Behov
 
 # Register your models here.
 admin.site.register(Extend_user)
