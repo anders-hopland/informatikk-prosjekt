@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Count
 from . models import Artist, Consert, Tilbud
 
-from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
+from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm, GodkjennTilbudBookingAnsvarligForm
 
 
 '''
@@ -262,7 +262,7 @@ def lag_tilbud(request):
         return render(request, 'dashboard', {'rolle': rolle})
 
 
-
+#Bookingsjef får liste over tilbud og kan godkjenne
 def tilbud_liste_bookingsjef(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -277,7 +277,7 @@ def tilbud_liste_bookingsjef(request):
                 redirect('http://127.0.0.1:8000/bookingmanager/')
         form = GodkjennTilbudBookingSjefForm()
 
-        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=False)
+        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=None)
         num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
         print(num_conserts)
 
@@ -300,9 +300,56 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
             form = GodkjennTilbudBookingSjefForm(request.POST, instance=tilbud)
             if form.is_valid():
                 form.save()
-                redirect('http://127.0.0.1:8000/bookingmanager/')
+                print(32423)
+                return redirect('tilbud_liste_bookingsjef')
 
         return render(request, 'app/godkjenn_tilbud_bookingsjef.html', {'tilbud': tilbud, 'form': form, 'rolle': rolle})
+    else:
+        return render(request, 'dashboard', {'rolle': rolle})
+
+
+#Bookingansvarlig får godkjent tilbud og sender videre
+def tilbud_liste_bookingansvarlig(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig':
+        if request.method == 'POST':
+            form = GodkjennTilbudBookingSjefForm(request.POST)
+            if form.is_valid():
+                form.save()
+                redirect('http://127.0.0.1:8000/bookingmanager/')
+        form = GodkjennTilbudBookingSjefForm()
+
+        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=None)
+        num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
+        print(num_conserts)
+
+        return render(request, 'app/tilbud_liste_bookingansvarlig.html', {'tilbuds': object_list, 'rolle': rolle})
+    else:
+        return render(request, 'dashboard', {'rolle': rolle})
+
+
+
+def godkjenn_tilbud_bookingsjef(request, tilbud_id):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingsjef':
+        tilbud = Tilbud.objects.get(id=tilbud_id)
+        form = GodkjennTilbudBookingSjefForm(instance=tilbud)
+
+        if request.method == 'POST':
+            form = GodkjennTilbudBookingAnsvarligForm(request.POST, instance=tilbud)
+            if form.is_valid():
+                form.save()
+                return redirect('tilbud_liste_bookingansvarlig')
+
+        return render(request, 'app/godkjenn_tilbud_bookingansvarlig.html', {'tilbud': tilbud, 'form': form, 'rolle': rolle})
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 

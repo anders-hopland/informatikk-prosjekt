@@ -36,10 +36,9 @@ class GodkjennTilbudBookingSjefForm(forms.ModelForm):
         fields = ('godkjent_av_bookingssjef',)
 
 
-class GodkjennTilbudManager(forms.ModelForm):
+class GodkjennTilbudBookingAnsvarligForm(forms.ModelForm):
 
     class Meta:
         model = Tilbud
-        fields = ('godkjent_av_manager',)
-
+        fields = ('sendt_av_ansvarlig',)
 
