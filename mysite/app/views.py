@@ -59,7 +59,7 @@ def arrangor(request):
                                                      'sceneliste': scene_list,
                                                      'current_consert': current_consert})
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 def lydtekniker(request):
     user = request.user
@@ -214,11 +214,15 @@ def redigerband(request):
     rolle = user.profile.role
     if rolle == 'manager':
         current_artist = request.POST.get('artist-choices')
-        if current_artist is not None and current_artist != 'alle':
+        if current_artist is not None and current_artist != 'velgBand':
             conserts = Consert.objects.filter(name=current_artist).order_by('tidspunkt')
             artists = Artist.objects.filter(manager=user.profile).order_by('navn')
         else:
+            artists = Artist.objects.all()
             conserts = Consert.objects.all().order_by('tidspunkt')
+
+        print(rolle)
+        print(artists)
 
         return render(request, 'app/redigerBand.html', {'rolle': rolle,
                                                         'artists': artists,
@@ -226,7 +230,7 @@ def redigerband(request):
                                                         'current_artist': current_artist,
                                                         })
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect(request, 'dashboard', {'rolle': rolle})
 
 
 def artist(request, navn):

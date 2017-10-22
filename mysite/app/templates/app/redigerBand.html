@@ -17,7 +17,7 @@
                 <select id="bandSel" onchange="" onchange="this.form.submit()"
                         name="artist-choices" id="artist-choices">
 
-                    <option value="velgBand">Velg band</option>
+                    <option value="velgBand">Velg blant registrerte band</option>
                     {% for artist in artists %}
                         {% if artist.navn == current_artist %}
                              <option value="{{ artist.navn.lower }}" selected="selected">
