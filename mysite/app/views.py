@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Count
 from . models import Artist, Consert, Tilbud
 
-from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm, GodkjennTilbudBookingAnsvarligForm
+from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm, SendTilbudBookingAnsvarligForm
 
 
 '''
@@ -307,7 +307,7 @@ def tilbud_liste_bookingansvarlig(request):
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=False)
+        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=None)
         #num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
 
         return render(request, 'app/tilbud_liste_bookingansvarlig.html', {'tilbuds': object_list, 'rolle': rolle})
@@ -322,12 +322,12 @@ def send_tilbud_bookingansvarlig(request, tilbud_id):
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
-    if rolle == 'bookingsjef':
+    if rolle == 'bookingansvarlig':
         tilbud = Tilbud.objects.get(id=tilbud_id)
-        form = GodkjennTilbudBookingSjefForm(instance=tilbud)
+        form = SendTilbudBookingAnsvarligForm(instance=tilbud)
 
         if request.method == 'POST':
-            form = GodkjennTilbudBookingAnsvarligForm(request.POST, instance=tilbud)
+            form = SendTilbudBookingAnsvarligForm(request.POST, instance=tilbud)
             if form.is_valid():
                 form.save()
                 return redirect('tilbud_liste_bookingansvarlig')
