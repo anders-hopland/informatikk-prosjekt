@@ -270,16 +270,8 @@ def tilbud_liste_bookingsjef(request):
 
     rolle = user.profile.role
     if rolle == 'bookingsjef':
-        if request.method == 'POST':
-            form = GodkjennTilbudBookingSjefForm(request.POST)
-            if form.is_valid():
-                form.save()
-                redirect('http://127.0.0.1:8000/bookingmanager/')
-        form = GodkjennTilbudBookingSjefForm()
-
         object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=None)
-        num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
-        print(num_conserts)
+        #num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
 
         return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list, 'rolle': rolle})
     else:
@@ -300,7 +292,6 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
             form = GodkjennTilbudBookingSjefForm(request.POST, instance=tilbud)
             if form.is_valid():
                 form.save()
-                print(32423)
                 return redirect('tilbud_liste_bookingsjef')
 
         return render(request, 'app/godkjenn_tilbud_bookingsjef.html', {'tilbud': tilbud, 'form': form, 'rolle': rolle})
@@ -316,16 +307,8 @@ def tilbud_liste_bookingansvarlig(request):
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        if request.method == 'POST':
-            form = GodkjennTilbudBookingSjefForm(request.POST)
-            if form.is_valid():
-                form.save()
-                redirect('http://127.0.0.1:8000/bookingmanager/')
-        form = GodkjennTilbudBookingSjefForm()
-
-        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=None)
-        num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
-        print(num_conserts)
+        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=False)
+        #num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
 
         return render(request, 'app/tilbud_liste_bookingansvarlig.html', {'tilbuds': object_list, 'rolle': rolle})
     else:
@@ -349,7 +332,7 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
                 form.save()
                 return redirect('tilbud_liste_bookingansvarlig')
 
-        return render(request, 'app/godkjenn_tilbud_bookingansvarlig.html', {'tilbud': tilbud, 'form': form, 'rolle': rolle})
+        return render(request, 'app/send_tilbud_bookingansvarlig.html', {'tilbud': tilbud, 'form': form, 'rolle': rolle})
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 

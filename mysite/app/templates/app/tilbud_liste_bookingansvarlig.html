@@ -1,0 +1,34 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Oversikt over godkjente tilbud</h1>
+    <h3>For å få mer informasjon om et tilbud og eventuelt sende, klikk på se mer</h3>
+    <br>
+    <div class="page-content">
+        <table>
+            <thead>
+                <tr>
+                    <th>Artist navn</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tilbud in tilbuds %}
+                    <tr>
+                        {% for artist in tilbud.artist.all %}
+                            <td>{{ artist.navn }}</td>
+                        {% endfor %}
+                        <td><a href="{% url 'send_tilbud_bookingansvarlig' tilbud.id %}" class="info-button">Se detaljer</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
