@@ -213,8 +213,18 @@ def redigerband(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
-        object_list = Artist.objects.filter(manager=user.profile).order_by('navn')
-        return render(request, 'app/redigerBand.html', {'artists': object_list, 'rolle': rolle})
+        current_artist = request.POST.get('artist-choices')
+        if current_artist is not None and current_artist != 'alle':
+            conserts = Consert.objects.filter(name=current_artist).order_by('tidspunkt')
+            artists = Artist.objects.filter(manager=user.profile).order_by('navn')
+        else:
+            conserts = Consert.objects.all().order_by('tidspunkt')
+
+        return render(request, 'app/redigerBand.html', {'rolle': rolle,
+                                                        'artists': artists,
+                                                        'conserts': conserts,
+                                                        'current_artist': current_artist,
+                                                        })
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 

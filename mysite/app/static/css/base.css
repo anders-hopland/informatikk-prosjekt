@@ -170,10 +170,6 @@ nav {
     border-bottom: 1px solid #b9b9b9;
 }
 
-#arrangor-oversikt tbody tr:hover {
-    background-color: #dadada
-}
-
 .info-button {
     background-color: #23C000;
     border-radius: 0.2em;
@@ -265,8 +261,4 @@ nav {
 /* lydteknikker oversikt */
 .page-content td, th, thead > tr {
     border-bottom: 1px solid #b9b9b9;
-}
-
-.page-content tbody tr:hover {
-    background-color: #dadada
 }
