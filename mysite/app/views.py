@@ -182,15 +182,15 @@ def tidligereKonserter(request):
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        current_consert = request.POST.get('sjanger-choices')
-        if current_consert is not None and current_consert != 'alle':
-            object_list = Consert.objects.order_by('tidspunkt')
+        current_genre = request.POST.get('sjanger-choices')
+        if current_genre is not None and current_genre != 'alle':
+            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__year='2017')
         else:
-            object_list = Consert.objects.all().order_by('tidspunkt')
+            concert_list = Consert.objects.exclude(tidspunkt__year='2017')
 
         sjanger_list = Artist.objects.values('sjanger').distinct()
 
-        return render(request, 'app/tidligereKonserter.html', {'conserts': object_list, 'rolle': rolle, 'sjangerliste': sjanger_list, 'current_consert': current_consert})
+        return render(request, 'app/tidligereKonserter.html', {'conserts': concert_list, 'rolle': rolle, 'sjangerliste': sjanger_list, 'current_genre': current_genre})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 

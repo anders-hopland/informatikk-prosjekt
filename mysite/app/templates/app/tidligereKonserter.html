@@ -7,17 +7,17 @@
 
 {% block content %}
 <div class="page-container">
-    <div id="sjanger-valg">
+    <div id="scene-valg">
     <h1>Tidligere konserter i sjanger:</h1>
     <form action="{% url 'tidligereKonserter' %}" method="post">
         {% csrf_token %}
-        <select onchange="this.form.submit()" name="sjanger-choices" id="sjanger-choices">
+        <select onchange="this.form.submit()" name="sjanger-choices" id="scene-choices">
             <option value="alle">Alle</option>
             {% for sjangerTittel in sjangerliste %}
-                {% if sjangerTittel.sjanger == current_consert %}
-                    <option value="{{ sjangerTittel.sjanger.lower }}" selected="selected">{{ sjangerTittel.sjanger }}</option>
+                {% if sjangerTittel.sjanger == current_genre %}
+                    <option value="{{ sjangerTittel.sjanger }}" selected="selected">{{ sjangerTittel.sjanger }}</option>
                 {% else %}
-                    <option value="{{ sjangerTittel.sjanger.lower }}">{{ sjangerTittel.sjanger }}</option>
+                    <option value="{{ sjangerTittel.sjanger }}">{{ sjangerTittel.sjanger }}</option>
                 {% endif %}
             {% endfor %}
         </select>
@@ -25,14 +25,13 @@
     </div>
 
     <div class="page-content">
-        <table id="arrangor-oversikt">
+        <table id="tidligereKonserter-oversikt">
             <thead>
                 <tr>
                     <th>Artist navn</th>
-                    <th>Tidspunkt</th>
+                    <th>Dato</th>
                     <th>Scene</th>
-                    <th>Sjanger</th>
-                    <th></th>
+                    <th>Publikumsantall</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,8 +40,7 @@
                         <td>{{ consert.artist.navn }}</td>
                         <td>{{ consert.tidspunkt }}</td>
                         <td>{{ consert.sceneNavn }}</td>
-                        <td>{{ consert.artist.sjanger }}</td>
-                        <td><a href="{{ consert.consert_url }}" class="info-button">Se detaljer</a></td>
+                        <td>{{ consert.tilskuertall }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
