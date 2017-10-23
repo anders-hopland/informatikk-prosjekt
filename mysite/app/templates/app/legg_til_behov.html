@@ -1,12 +1,61 @@
-<center>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ behov_form.as_p }}
-        <input type="submit" value="Submit" />
-    </form>
-</center>
+{% extends '../base.html' %}
 
-{% for behov in artist.behov.all %}
-    {{ behov.type }} <br>
-    {{ behov.behov }} <br>
-{% endfor %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Redigeringsskjema for band:
+        <select id="bandSel" onchange="" onchange="this.form.submit()"
+                name="band-choices" id="band-choices">
+
+            <option value="velgBand">Velg blant registrerte band</option>
+            {% for artist in artists %}
+                     <option value="{{ artist }}" selected="selected">
+                         {{ artist.navn }}
+                     </option>
+            {% endfor %}
+        </select>
+    </h1>
+
+    <div class="page-content">
+        <div class="detail-info">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ behov_form.as_p }}
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+
+
+        <div class="detail-info">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Beskrivelse</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for behov in artist.behov.all %}
+                        <tr>
+                            <td>{{ behov.type }}</td>
+                            <td>{{ behov.behov }}</td>
+                            <td><button onclick="deleteBehov(this)">Slett</button></td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>Lyd</td>
+                        <td>Trenger to høytallere</td>
+                        <td><button>slett</button></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

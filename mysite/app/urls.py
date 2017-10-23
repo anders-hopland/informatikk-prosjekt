@@ -22,7 +22,6 @@ urlpatterns = [
     url(r'^lydtekniker/$', lydtekniker, name='lydtekniker'),
     url(r'^lystekniker/$', lystekniker, name='lystekniker'),
     url(r'^konsert/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<post_id>\d+)/$', konsert, name='konsert'),
-    #url(r'^manager/redigerband/$', redigerband, name='redigerband'),
     url(r'^legg_til_behov', legg_til_behov_manager, name='legg_til_behov_manager'),
     url(r'^manager/$', manager, name='manager'),
     url(r'^bookingansvarlig/$', bookingansvarlig, name='bookingansvarlig'),

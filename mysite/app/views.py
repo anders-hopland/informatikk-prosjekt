@@ -206,35 +206,6 @@ def manager(request):
         return render(request, 'dashboard', {'rolle': rolle})
 
 
-'''def redigerband(request):
-    user = request.user
-    if not request.user.is_authenticated():
-        return render(request, 'registration/login.html', {})
-
-    rolle = user.profile.role
-    if rolle == 'manager':
-        current_artist = request.POST.get('artist-choices')
-        if current_artist is not None and current_artist != 'velgBand':
-            conserts = Consert.objects.filter(name=current_artist).order_by('tidspunkt')
-            artists = Artist.objects.filter(manager=user.profile).order_by('navn')
-        else:
-            artists = Artist.objects.all()
-            conserts = Consert.objects.all().order_by('tidspunkt')
-
-        print(rolle)
-        print(artists)
-
-        return render(request, 'app/redigerBand.html', {'rolle': rolle,
-                                                        'artists': artists,
-                                                        'conserts': conserts,
-                                                        'current_artist': current_artist,
-                                                        })
-    else:
-        return redirect(request, 'dashboard', {'rolle': rolle})
-
-'''
-
-
 def legg_til_behov_manager(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -242,6 +213,7 @@ def legg_til_behov_manager(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
+        artists = Artist.objects.filter(manager=user.profile).order_by('navn')
         artist = Artist.objects.get(id=1)
         behov_form = LeggTilBehovForm()
         if request.method == 'POST':
@@ -250,7 +222,11 @@ def legg_til_behov_manager(request):
                 behov = form.save()
                 artist.behov.add(behov)
 
-        return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form, 'artist': artist,'rolle': rolle})
+        return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
+                                                           'artist': artist,
+                                                           'rolle': rolle,
+                                                           'artister': artists
+                                                           })
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 
