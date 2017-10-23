@@ -183,7 +183,7 @@ def bookingansvarlig(request):
     else:
         return render(request, 'dahsboard', {'rolle': rolle})
 
-def tidligereKonserter(request):
+def tidligere_konserter(request):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
@@ -198,7 +198,7 @@ def tidligereKonserter(request):
 
         sjanger_list = Artist.objects.values('sjanger').distinct()
 
-        return render(request, 'app/tidligereKonserter.html', {'conserts': concert_list, 'rolle': rolle, 'sjangerliste': sjanger_list, 'current_genre': current_genre})
+        return render(request, 'app/tidligere_konserter.html', {'conserts': concert_list, 'rolle': rolle, 'sjangerliste': sjanger_list, 'current_genre': current_genre})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 

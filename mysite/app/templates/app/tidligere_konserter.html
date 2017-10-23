@@ -9,7 +9,7 @@
 <div class="page-container">
     <div id="scene-valg">
     <h1>Tidligere konserter i sjanger:</h1>
-    <form action="{% url 'tidligereKonserter' %}" method="post">
+    <form action="{% url 'tidligere_konserter' %}" method="post">
         {% csrf_token %}
         <select onchange="this.form.submit()" name="sjanger-choices" id="scene-choices">
             <option value="alle">Alle</option>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="page-content">
-        <table id="tidligereKonserter-oversikt">
+        <table id="tidligere_konserter-oversikt">
             <thead>
                 <tr>
                     <th>Artist navn</th>
