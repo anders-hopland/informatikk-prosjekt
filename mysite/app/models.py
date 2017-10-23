@@ -105,13 +105,6 @@ class Artist(models.Model):
         verbose_name = 'Artist'
         verbose_name_plural = 'Artister'
 
-class ArtistForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    class Meta:
-        model = Artist
-        fields = ['navn', 'sjanger', 'behov', 'manager', 'slug']
-
-
 class Consert(models.Model):
     artist = models.ForeignKey(Artist, related_name='concert')
     tidspunkt = models.DateField()
