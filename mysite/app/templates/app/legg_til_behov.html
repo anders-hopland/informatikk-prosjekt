@@ -22,7 +22,7 @@
 
     <div class="page-content">
         <div class="detail-info">
-            <form action="" method="post">
+            <form id="behovFrm" action="" method="post">
                 {% csrf_token %}
                 {{ behov_form.as_p }}
                 <input type="submit" value="Submit" />
@@ -47,12 +47,6 @@
                             <td><button onclick="deleteBehov(this)">Slett</button></td>
                         </tr>
                     {% endfor %}
-                    <tr>
-                        <td>Lyd</td>
-                        <td>Trenger to høytallere</td>
-                        <td><button>slett</button></td>
-                    </tr>
-
                 </tbody>
             </table>
         </div>
