@@ -13,7 +13,7 @@
             <a href=" {% url 'redigerband' %}">Rediger band</a>
         {% elif rolle == "bookingansvarlig" %}
             <a href="">Book band</a>
-            <a href="">Tidligere festivaler</a>
+            <a href="{%  url 'tidligere_konserter' %}">Tidligere festivaler</a>
             <a href="">Tidligere band</a>
             <a href="{% url 'lag_tilbud' %}">Send forslag</a>
             <a href="{% url 'band_search' %}">Info om band</a>
