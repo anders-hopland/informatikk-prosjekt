@@ -1,13 +1,18 @@
 from django import forms
 from django.forms import ModelChoiceField
 
-from . models import Artist, Tilbud, Consert
+from . models import Artist, Tilbud, Behov
 
 
 #The choices html attribute with all artists in th database
 class MyModelChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
         return obj.navn
+
+
+class BehovTypeModelChoiceField(ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj
 
 
 class RegistrerTilbudForm(forms.ModelForm):
@@ -42,24 +47,15 @@ class GodkjennTilbudManager(forms.ModelForm):
         model = Tilbud
         fields = ('godkjent_av_manager',)
 
-class ArtistForm(forms.ModelForm):
-    name = forms.CharField(max_length=100)
-    sjanger = forms.CharField(max_length=100)
-    behov = forms.CharField()
+class LeggTilBehovForm(forms.ModelForm):
+    behov_typer = ['instrumenter', 'lyd', 'lys', 'andre']
+
+    #type = BehovTypeModelChoiceField(behov_typer)
+    behov = forms.CharField(max_length=200)
 
     class Meta:
-        model = Artist
-        fields = ('navn', 'sjanger', 'behov')
-
-
-class ConsertForm(forms.ModelForm):
-    artist = forms.CharField(max_length=100)
-    tidspunkt = forms.DateField()
-    sceneNavn = forms.CharField(max_length=250)
-
-    class Meta:
-        model = Consert
-        fields = ('artist', 'tidspunkt', 'sceneNavn')
+        model = Behov
+        fields = ('type', 'behov',)
 
 
 
