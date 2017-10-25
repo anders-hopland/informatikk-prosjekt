@@ -188,13 +188,16 @@ nav {
     color: white;
 }
 
-.small {
+.red {
     background: red;
-    padding: 0.5em 1em 0.5em 1em;
 }
 
-.small:hover {
+.red:hover {
     background: darkred;
+}
+
+.btn-small {
+    padding: 0.5em 1em 0.5em 1em;
 }
 
 /* konsert detaljer fra oversikt*/
@@ -249,12 +252,12 @@ nav {
 }
 
 .content-border > h4{
-    margin: 1em 0;
+    margin: 0 0 1em 0;
 }
 
 .content-border {
     border-bottom: 1px solid #ddd;
-    padding: 0 1em 0 1em;
+    padding: 1em;
 }
 
 .content-border:last-child {

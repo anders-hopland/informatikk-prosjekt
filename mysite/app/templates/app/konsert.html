@@ -84,7 +84,7 @@
                <h4>Behov for instrumenter:</h4>
                 {% if instruments %}
                     {% for instrument in instruments %}
-                        <p>{{ instrument }}</p>
+                        {{ instrument }};
                     {% endfor %}
                 {% else %}
                     <p>Ingen behov meldt inn.</p>
@@ -95,8 +95,9 @@
                 <h4>Behov for lyd:</h4>
                 {% if lyd_list %}
                     {% for lyd in lyd_list %}
-                        <p>{{ lyd }}</p>
+                        {{ lyd }};
                     {% endfor %}
+                    <p></p>
                 {% else %}
                     <p>Ingen behov meldt inn.</p>
                 {% endif %}
