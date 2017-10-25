@@ -7,39 +7,20 @@
 
 {% block content %}
 <div class="page-container">
-    <div class="choice-menu">
-        <h1>Behovsskjema for artist:</h1>
-        <form action="{% url 'legg_til_behov_manager' %}" method="post">
-            {% csrf_token %}
-            <select onchange="this.form.submit();"
-                name="artist-choices" id="artist-choices">
-                <option value="alle">Velg blant registrerte artister:</option>
-                {% for artist in artister %}
-                    {% if artist.navn == current_artist_name %}
-                            <option value="{{ artist.navn.lower }}" selected="selected">
-                                {{ artist.navn }}
-                            </option>
-                        {% else %}
-                            <option value="{{ artist.navn.lower }}">
-                                {{ artist.navn }}
-                            </option>
-                        {% endif %}
-                {% endfor %}
-            </select>
-        </form>
-    </div>
+    <h1>Rediger tekniske behov for {{ consert.artist.navn }}:</h1>
 
     <div id="pageContent" class="page-content">
         <div class="detail-info">
+            <h3>Redigeringsskjema:</h3>
             <form id="behovFrm" action="" method="post">
                 {% csrf_token %}
                 {{ behov_form.as_p }}
                 <input type="submit" value="Submit" />
             </form>
         </div>
-
-
+    
         <div class="detail-info">
+            <h3>Tabelloversikt over tekniske behov</h3>
             <table>
                 <thead>
                     <tr>

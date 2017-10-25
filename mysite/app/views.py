@@ -216,7 +216,6 @@ def manager(request):
         for consert in all_conserts:
             if consert.artist in artist_list:
                 conserts.append(consert)
-                print(conserts)
 
         return render(request, 'app/manager.html', {
                                                     'conserts': conserts,
@@ -224,7 +223,6 @@ def manager(request):
                                                     })
     else:
         return render(request, 'dashboard', {'rolle': rolle})
-
 
 def legg_til_behov_manager(request):
     user = request.user
