@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
+from django.db.models import Count
 from . models import Artist, Consert, Tilbud
 
-from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm, LeggTilBehovForm
+from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm
+from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
 
 
 '''
@@ -72,7 +74,7 @@ def lydtekniker(request):
         return render(request, 'app/lydtekniker.html', {'conserts': object_list,
                                                         'rolle': rolle})
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 def lystekniker(request):
     user = request.user
@@ -85,7 +87,7 @@ def lystekniker(request):
         return render(request, 'app/lystekniker.html', {'conserts': object_list,
                                                         'rolle': rolle})
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 def konsert(request, year, month, day, post_id):
     user = request.user
@@ -137,7 +139,7 @@ def konsert(request, year, month, day, post_id):
                                                     'andre': andre,
                                                     })
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 
 def detaljer_scener(request, navn):
@@ -152,7 +154,8 @@ def detaljer_scener(request, navn):
                                                           'rolle': rolle
                                                           })
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
+
 
 def bookingansvarlig(request):
     user = request.user
@@ -174,7 +177,7 @@ def bookingansvarlig(request):
                                                              'sceneliste': scene_list,
                                                              'current_consert': current_consert})
     else:
-        return render(request, 'dahsboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 def tidligere_konserter(request):
     user = request.user
@@ -197,7 +200,7 @@ def tidligere_konserter(request):
                                                                 'current_genre': current_genre
                                                                 })
     else:
-        return render(request, 'app/dashboard.html', {'rolle': rolle})
+        return redirect('dashboard')
 
 def bookingsjef(request):
     user = request.user
@@ -211,7 +214,7 @@ def bookingsjef(request):
                                                     'rolle': rolle
                                                     })
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 
 def manager(request):
@@ -235,7 +238,7 @@ def manager(request):
                                                     'rolle': rolle
                                                     })
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 def legg_til_behov_manager(request, year, month, day, post_id):
     user = request.user
@@ -289,7 +292,7 @@ def artist(request, navn):
                                                    'rolle': rolle
                                                    })
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 
 def band_search(request):
@@ -297,8 +300,8 @@ def band_search(request):
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
-    rolle = user.profile.role
-    return render(request, 'dashboard', {'rolle': rolle})
+    #rolle = user.profile.role
+    return redirect('dashboard')
 
 
 def lag_tilbud(request):
@@ -318,10 +321,10 @@ def lag_tilbud(request):
                                                        'rolle': rolle
                                                        })
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 
-
+#Bookingsjef får liste over tilbud og kan godkjenne
 def tilbud_liste_bookingsjef(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -329,20 +332,14 @@ def tilbud_liste_bookingsjef(request):
 
     rolle = user.profile.role
     if rolle == 'bookingsjef':
-        if request.method == 'POST':
-            form = GodkjennTilbudBookingSjefForm(request.POST)
-            if form.is_valid():
-                form.save()
-                redirect('http://127.0.0.1:8000/bookingmanager/')
-        form = GodkjennTilbudBookingSjefForm()
-
-        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=False)
+        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=None)
+        #num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
 
         return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list,
                                                                      'rolle': rolle
                                                                      })
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 
 def godkjenn_tilbud_bookingsjef(request, tilbud_id):
@@ -359,12 +356,50 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
             form = GodkjennTilbudBookingSjefForm(request.POST, instance=tilbud)
             if form.is_valid():
                 form.save()
-                redirect('http://127.0.0.1:8000/bookingmanager/')
+                return redirect('tilbud_liste_bookingsjef')
 
         return render(request, 'app/godkjenn_tilbud_bookingsjef.html', {'tilbud': tilbud,
                                                                         'form': form,
                                                                         'rolle': rolle
                                                                         })
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
+
+
+#Bookingansvarlig får godkjent tilbud og sender videre
+def tilbud_liste_bookingansvarlig(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig':
+        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=None)
+        #num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
+
+        return render(request, 'app/tilbud_liste_bookingansvarlig.html', {'tilbuds': object_list, 'rolle': rolle})
+    else:
+        return redirect('dashboard')
+
+
+
+def send_tilbud_bookingansvarlig(request, tilbud_id):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig':
+        tilbud = Tilbud.objects.get(id=tilbud_id)
+        form = SendTilbudBookingAnsvarligForm(instance=tilbud)
+
+        if request.method == 'POST':
+            form = SendTilbudBookingAnsvarligForm(request.POST, instance=tilbud)
+            if form.is_valid():
+                form.save()
+                return redirect('tilbud_liste_bookingansvarlig')
+
+        return render(request, 'app/send_tilbud_bookingansvarlig.html', {'tilbud': tilbud, 'form': form, 'rolle': rolle})
+    else:
+        return redirect('dashboard')
 

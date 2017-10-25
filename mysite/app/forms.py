@@ -41,11 +41,11 @@ class GodkjennTilbudBookingSjefForm(forms.ModelForm):
         fields = ('godkjent_av_bookingssjef',)
 
 
-class GodkjennTilbudManager(forms.ModelForm):
+class SendTilbudBookingAnsvarligForm(forms.ModelForm):
 
     class Meta:
         model = Tilbud
-        fields = ('godkjent_av_manager',)
+        fields = ('sendt_av_ansvarlig',)
 
 class LeggTilBehovForm(forms.ModelForm):
     behov_typer = ['instrumenter', 'lyd', 'lys', 'andre']
@@ -59,4 +59,13 @@ class LeggTilBehovForm(forms.ModelForm):
 
 
 
+
+class LeggTilBehovForm(forms.ModelForm):
+    behov_typer = ['instrymenter', 'lyd', 'lys', 'andre']
+    type = BehovTypeModelChoiceField(behov_typer)
+    behov = forms.CharField(max_length=200)
+
+    class Meta:
+        model = Behov
+        fields = ('type', 'behov',)
 
