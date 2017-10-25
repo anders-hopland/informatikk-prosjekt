@@ -8,7 +8,7 @@
 {% block content %}
 <div class="page-container">
     <div class="scene-valg">
-    <h1>Oversikt over konserter på scene:</h1>
+        <h1>Oversikt over konserter på scene:</h1>
         <form action="{% url 'arrangor' %}" method="post">
             {% csrf_token %}
             <select onchange="this.form.submit()" name="scene-choices" class="scene-choices">
