@@ -231,19 +231,20 @@ def legg_til_behov_manager(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
+        current_artist = request.POST.get('artist-choices')
         artists = Artist.objects.filter(manager=user.profile).order_by('navn')
-        artist = Artist.objects.get(id=1)
+
         behov_form = LeggTilBehovForm()
         if request.method == 'POST':
             form = LeggTilBehovForm(request.POST)
             if form.is_valid():
                 behov = form.save()
-                artist.behov.add(behov)
+                current_artist.behov.add(behov)
 
         return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
                                                            'rolle': rolle,
                                                            'artister': artists,
-                                                           'current_artist': artist
+                                                           'current_artist': current_artist
                                                            })
     else:
         return render(request, 'dashboard', {'rolle': rolle})

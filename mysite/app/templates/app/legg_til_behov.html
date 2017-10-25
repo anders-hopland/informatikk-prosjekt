@@ -8,20 +8,20 @@
 {% block content %}
 <div class="page-container">
     <div class="choice-menu">
-        <h1>Redigeringsskjema for band:</h1>
+        <h1>Behovsskjema for artist:</h1>
         <form action="{% url 'legg_til_behov_manager' %}" method="post">
             {% csrf_token %}
-            <select id="bandSel" onchange="this.form.submit()"
-                name="band-choices" id="band-choices">
-                <option selected="selected">Velg blant registrerte band</option>
+            <select onchange="this.form.submit()"
+                name="artist-choices" id="artist-choices">
+                <option value="alle">Velg blant registrerte artister:</option>
                 {% for artist in artister %}
                     {% if artist.navn == current_artist %}
                             <option value="{{ artist.navn.lower }}" selected="selected">
-                                {{ artist.navn.lower }}
+                                {{ artist.navn }}
                             </option>
                         {% else %}
                             <option value="{{ artist.navn.lower }}">
-                                {{ artist.navn.lower }}
+                                {{ artist.navn }}
                             </option>
                         {% endif %}
                 {% endfor %}
