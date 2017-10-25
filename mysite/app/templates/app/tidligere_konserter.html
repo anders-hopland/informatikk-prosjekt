@@ -7,21 +7,22 @@
 
 {% block content %}
 <div class="page-container">
-    <div id="scene-valg">
-    <h1>Tidligere konserter i sjanger:</h1>
-    <form action="{% url 'tidligere_konserter' %}" method="post">
-        {% csrf_token %}
-        <select onchange="this.form.submit()" name="sjanger-choices" id="scene-choices">
-            <option value="alle">Alle</option>
-            {% for sjangerTittel in sjangerliste %}
-                {% if sjangerTittel.sjanger == current_genre %}
-                    <option value="{{ sjangerTittel.sjanger }}" selected="selected">{{ sjangerTittel.sjanger }}</option>
-                {% else %}
-                    <option value="{{ sjangerTittel.sjanger }}">{{ sjangerTittel.sjanger }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-    </form>
+    <div class="scene-valg">
+        <h1>Tidligere konserter i sjanger:</h1>
+        <form action="{% url 'tidligere_konserter' %}" method="post">
+            {% csrf_token %}
+            <select onchange="this.form.submit()"
+                    name="sjanger-choices" id="scene-choices" class="scene-choices">
+                <option value="alle">Alle</option>
+                {% for sjangerTittel in sjangerliste %}
+                    {% if sjangerTittel.sjanger == current_genre %}
+                        <option value="{{ sjangerTittel.sjanger }}" selected="selected">{{ sjangerTittel.sjanger }}</option>
+                    {% else %}
+                        <option value="{{ sjangerTittel.sjanger }}">{{ sjangerTittel.sjanger }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </form>
     </div>
 
     <div class="page-content">
