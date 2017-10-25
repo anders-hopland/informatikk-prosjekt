@@ -15,7 +15,7 @@
                 name="band-choices" id="band-choices">
                 <option selected="selected">Velg blant registrerte band</option>
                 {% for artist in artister %}
-                    {% if artist.navn == current_artist.navn %}
+                    {% if artist.navn == current_artist %}
                             <option value="{{ artist.navn.lower }}" selected="selected">
                                 {{ artist.navn.lower }}
                             </option>
