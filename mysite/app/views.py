@@ -233,34 +233,26 @@ def manager(request):
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 
-def legg_til_behov_manager(request, navn):
+def legg_til_behov_manager(request, name):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'manager':
-        current_artist_name = request.POST.get('artist-choices')
-        artists = Artist.objects.filter(manager=user.profile).order_by('navn')
-        print(current_artist_name)
+        current_artist = Artist.objects.filter(navn=name)[0]
+        print(current_artist)
 
         behov_form = LeggTilBehovForm()
         if request.method == 'POST':
-            current_artist_name = request.POST.get('artist-choices')
             form = LeggTilBehovForm(request.POST)
             if form.is_valid():
                 behov = form.save()
-                current_artist_name.behov.add(behov)
-                print(current_artist_name)
-                print(Artist.objects.filter(manager=user.profile)[0])
-                print(Artist.objects.filter(manager=user.profile, navn=current_artist_name))
-                print(Artist.objects.filter(manager=user.profile, navn=current_artist_name)[0])
-                #Artist.objects.filter(manager=user.profile, navn=current_artist_name)[0].behov.add(behov)
+                current_artist.behov.add(behov)
 
         return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
                                                            'rolle': rolle,
-                                                           'artister': artists,
-                                                           'current_artist_name': current_artist_name
+                                                           'artist': current_artist
                                                            })
     else:
         return render(request, 'dashboard', {'rolle': rolle})

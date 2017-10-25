@@ -170,7 +170,9 @@ nav {
     border-bottom: 1px solid #b9b9b9;
 }
 
-.info-button {
+
+/* buttons */
+.btn-greeny {
     background-color: #23C000;
     border-radius: 0.2em;
     color: white;
@@ -181,9 +183,18 @@ nav {
     text-decoration: none;
 }
 
-.info-button:hover {
+.btn-greeny:hover {
     background-color: #23A000;
     color: white;
+}
+
+.small {
+    background: red;
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+.small:hover {
+    background: darkred;
 }
 
 /* konsert detaljer fra oversikt*/
@@ -226,6 +237,10 @@ nav {
 
 .detail-info > span {
     margin: -1.3em 2em 1em 5em;
+}
+
+.detail-info th {
+    min-width: 100px;
 }
 
 .btn-reg {
