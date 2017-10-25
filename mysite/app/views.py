@@ -169,6 +169,24 @@ def bookingansvarlig(request):
     else:
         return render(request, 'dahsboard', {'rolle': rolle})
 
+def tidligere_konserter(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig':
+        current_genre = request.POST.get('sjanger-choices')
+        if current_genre is not None and current_genre != 'alle':
+            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__year='2017')
+        else:
+            concert_list = Consert.objects.exclude(tidspunkt__year='2017')
+
+        sjanger_list = Artist.objects.values('sjanger').distinct()
+
+        return render(request, 'app/tidligere_konserter.html', {'conserts': concert_list, 'rolle': rolle, 'sjangerliste': sjanger_list, 'current_genre': current_genre})
+    else:
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 def bookingsjef(request):
     user = request.user
