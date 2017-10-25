@@ -247,7 +247,7 @@ nav {
 }
 
 /* valg av scene rulle meny */
-.scene-valg{
+.valg-meny {
     display: flex;
     justify-content: center;
     margin:0 0 2em 0;
