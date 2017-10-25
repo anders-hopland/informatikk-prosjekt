@@ -11,11 +11,11 @@
         <h1>Behovsskjema for artist:</h1>
         <form action="{% url 'legg_til_behov_manager' %}" method="post">
             {% csrf_token %}
-            <select onchange="this.form.submit()"
+            <select onchange="this.form.submit();"
                 name="artist-choices" id="artist-choices">
                 <option value="alle">Velg blant registrerte artister:</option>
                 {% for artist in artister %}
-                    {% if artist.navn == current_artist %}
+                    {% if artist.navn == current_artist_name %}
                             <option value="{{ artist.navn.lower }}" selected="selected">
                                 {{ artist.navn }}
                             </option>
@@ -29,7 +29,7 @@
         </form>
     </div>
 
-    <div class="page-content">
+    <div id="pageContent" class="page-content">
         <div class="detail-info">
             <form id="behovFrm" action="" method="post">
                 {% csrf_token %}

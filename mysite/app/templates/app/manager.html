@@ -12,30 +12,34 @@
         <table>
             <thead>
                 <tr>
-                    <th>Band</th>
+                    <th>Band navn</th>
                     <th>Tidspunkt</th>
                     <th>Scene</th>
                     <th>Sjanger</th>
                     <th>Honorar</th>
-                    <th></th>
+                    <th>Behov</th>
+                    <th>Detaljer</th>
                 </tr>
             </thead>
             <tbody>
-                {% for artist in artists %}
-                    {% for consert in artist.consert.all %}
-                        <tr>
-                            <td>{{ artist.navn }}</td>
-                            <td>{{ consert.tidspunkt }}</td>
-                            <td>{{ consert.sceneNavn }}</td>
-                            <td>{{ artist.sjanger }}</td>
-                            <td>{{ consert.inntekter }} kr</td>
-                            <td>
-                                <a href="{{ consert.consert_url }}" class="info-button">
-                                    Se detaljer
-                                </a>
-                            </td>
-                        </tr>
-                    {% endfor %}
+                {% for consert in conserts %}
+                    <tr>
+                        <td>{{ consert.artist.navn }}</td>
+                        <td>{{ consert.tidspunkt }}</td>
+                        <td>{{ consert.sceneNavn }}</td>
+                        <td>{{ consert.artist.sjanger }}</td>
+                        <td>{{ consert.inntekter }} kr</td>
+                        <td>
+                            <a href="{% url 'legg_til_behov_manager' %}" class="info-button">
+                                Rediger behov
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ consert.consert_url }}" class="info-button">
+                                Se detaljer
+                            </a>
+                        </td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>

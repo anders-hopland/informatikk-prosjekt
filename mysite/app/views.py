@@ -209,16 +209,18 @@ def manager(request):
     rolle = user.profile.role
     if rolle == 'manager':
 
-        current_artist = request.POST.get('artist-choices')
+        all_conserts = Consert.objects.all().order_by('tidspunkt')
+        artist_list = Artist.objects.filter(manager=user.profile).order_by('navn')
+        conserts = []
 
-        if current_artist is not None and current_artist != 'velgBand':
-            object_list = Artist.objects.filter(manager=user.profile).order_by('navn')
-        else:
-            object_list = Artist.objects.all().order_by('navn')
+        for consert in all_conserts:
+            if consert.artist in artist_list:
+                conserts.append(consert)
+                print(conserts)
 
-        return render(request, 'app/manager.html', {'artists': object_list,
-                                                    'rolle': rolle,
-                                                    'current_artist': current_artist
+        return render(request, 'app/manager.html', {
+                                                    'conserts': conserts,
+                                                    'rolle': rolle
                                                     })
     else:
         return render(request, 'dashboard', {'rolle': rolle})
@@ -231,20 +233,27 @@ def legg_til_behov_manager(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
-        current_artist = request.POST.get('artist-choices')
+        current_artist_name = request.POST.get('artist-choices')
         artists = Artist.objects.filter(manager=user.profile).order_by('navn')
+        print(current_artist_name)
 
         behov_form = LeggTilBehovForm()
         if request.method == 'POST':
+            current_artist_name = request.POST.get('artist-choices')
             form = LeggTilBehovForm(request.POST)
             if form.is_valid():
                 behov = form.save()
-                current_artist.behov.add(behov)
+                current_artist_name.behov.add(behov)
+                print(current_artist_name)
+                print(Artist.objects.filter(manager=user.profile)[0])
+                print(Artist.objects.filter(manager=user.profile, navn=current_artist_name))
+                print(Artist.objects.filter(manager=user.profile, navn=current_artist_name)[0])
+                #Artist.objects.filter(manager=user.profile, navn=current_artist_name)[0].behov.add(behov)
 
         return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
                                                            'rolle': rolle,
                                                            'artister': artists,
-                                                           'current_artist': current_artist
+                                                           'current_artist_name': current_artist_name
                                                            })
     else:
         return render(request, 'dashboard', {'rolle': rolle})
