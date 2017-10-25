@@ -16,9 +16,13 @@
                 <option value="alle">Alle</option>
                 {% for sjangerTittel in sjangerliste %}
                     {% if sjangerTittel.sjanger == current_genre %}
-                        <option value="{{ sjangerTittel.sjanger }}" selected="selected">{{ sjangerTittel.sjanger }}</option>
+                        <option value="{{ sjangerTittel.sjanger }}" selected="selected">
+                            {{ sjangerTittel.sjanger }}
+                        </option>
                     {% else %}
-                        <option value="{{ sjangerTittel.sjanger }}">{{ sjangerTittel.sjanger }}</option>
+                        <option value="{{ sjangerTittel.sjanger }}">
+                            {{ sjangerTittel.sjanger }}
+                        </option>
                     {% endif %}
                 {% endfor %}
             </select>
