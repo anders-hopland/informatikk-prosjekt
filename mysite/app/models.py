@@ -87,7 +87,7 @@ class Behov(models.Model):
 class Artist(models.Model):
     navn = models.CharField(max_length=250, unique=True)
     sjanger = models.CharField(max_length=250)
-    behov = models.ManyToManyField(Behov, blank=True, null=True)
+    behov = models.ManyToManyField(Behov, blank=True)
     manager = models.ManyToManyField(Extend_user)
     slug = models.SlugField(max_length=50, blank=True, unique=True)
 
