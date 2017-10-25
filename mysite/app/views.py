@@ -69,7 +69,8 @@ def lydtekniker(request):
     rolle = user.profile.role
     if rolle == 'lydtekniker':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/lydtekniker.html', {'conserts': object_list, 'rolle': rolle})
+        return render(request, 'app/lydtekniker.html', {'conserts': object_list,
+                                                        'rolle': rolle})
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 
@@ -81,7 +82,8 @@ def lystekniker(request):
     rolle = user.profile.role
     if rolle == 'lystekniker':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
+        return render(request, 'app/lystekniker.html', {'conserts': object_list,
+                                                        'rolle': rolle})
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 
@@ -146,7 +148,9 @@ def detaljer_scener(request, navn):
     rolle = user.profile.role
     if rolle == 'arrangor':
         object_list = Consert.objects.filter(sceneNavn=navn)
-        return render(request, 'app/sceneDetaljer.html', {'conserts': object_list, 'rolle': rolle})
+        return render(request, 'app/sceneDetaljer.html', {'conserts': object_list,
+                                                          'rolle': rolle
+                                                          })
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 
@@ -241,7 +245,6 @@ def legg_til_behov_manager(request, name):
     rolle = user.profile.role
     if rolle == 'manager':
         current_artist = Artist.objects.filter(navn=name)[0]
-        print(current_artist)
 
         behov_form = LeggTilBehovForm()
         if request.method == 'POST':
@@ -267,6 +270,7 @@ def artist(request, navn):
     if rolle == 'manager':
         band = Artist.objects.get(slug=navn)
         object_list = Consert.objects.filter(artist=band)
+
         return render(request, 'app/artist.html', {'conserts': object_list,
                                                    'rolle': rolle
                                                    })
