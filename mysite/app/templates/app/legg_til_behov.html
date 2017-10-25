@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Rediger tekniske behov for: {{ artist.navn }}</h1>
+    <h1>Rediger tekniske behov for: {{ consert.artist }}</h1>
 
     <div id="pageContent" class="page-content space-between">
         <div class="detail-info">
@@ -30,7 +30,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for behov in artist.behov.all %}
+                    {% for behov in consert.behov.all %}
                         <tr>
                             <td>{{ behov.type }}</td>
                             <td>{{ behov.behov }}</td>
@@ -40,7 +40,6 @@
                                 </a>
                             </td>
                         </tr>
-                    {% endfor %}
                 </tbody>
             </table>
         </div>

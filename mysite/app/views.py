@@ -237,25 +237,29 @@ def manager(request):
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 
-def legg_til_behov_manager(request, name):
+def legg_til_behov_manager(request, year, month, day, post_id):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'manager':
-        current_artist = Artist.objects.filter(navn=name)[0]
+        try:
+            consert = Consert.objects.get(id=post_id)
+        except:
+            #should have a more suitable error here
+            FileNotFoundError
 
         behov_form = LeggTilBehovForm()
         if request.method == 'POST':
             form = LeggTilBehovForm(request.POST)
             if form.is_valid():
                 behov = form.save()
-                current_artist.behov.add(behov)
+                consert.behov.add(behov)
 
         return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
                                                            'rolle': rolle,
-                                                           'artist': current_artist
+                                                           'consert': consert
                                                            })
     else:
         return render(request, 'dashboard', {'rolle': rolle})
