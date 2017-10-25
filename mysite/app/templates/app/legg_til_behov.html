@@ -7,12 +7,12 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Rediger tekniske behov for {{ artist.navn }}:</h1>
+    <h1>Rediger tekniske behov for: {{ artist.navn }}</h1>
 
-    <div id="pageContent" class="page-content">
+    <div id="pageContent" class="page-content space-between">
         <div class="detail-info">
-            <h3>Redigeringsskjema:</h3>
             <form id="behovFrm" action="" method="post">
+                <h5>Redigeringsskjema:</h5>
                 {% csrf_token %}
                 {{ behov_form.as_p }}
                 <input type="submit" value="Submit" />
@@ -20,13 +20,13 @@
         </div>
 
         <div class="detail-info">
-            <h3>Tabelloversikt over tekniske behov</h3>
+            <h5>Tabelloversikt over tekniske behov</h5>
             <table>
                 <thead>
                     <tr>
                         <th>Type</th>
                         <th>Beskrivelse</th>
-                        <th></th>
+                        <th>Slett</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -172,7 +172,7 @@ nav {
 
 
 /* buttons */
-.btn-greeny {
+.btn-greeny, #behovFrm > input {
     background-color: #23C000;
     border-radius: 0.2em;
     color: white;
@@ -225,16 +225,13 @@ nav {
     padding: 0 1em;
 }
 
-.detail-info h3 {
+.detail-info h3, #behovFrm h5 {
     margin-top: 1em;
 }
 
-.detail-info > label {
+.detail-info > label, #behovFrm label {
     color: #6d6d6d;
     font-weight: bold;
-}
-
-.detail-info > label {
     margin: 1em 0 0.2em 0;
 }
 
@@ -279,6 +276,30 @@ nav {
 /* lydteknikker oversikt */
 .page-content td, th, thead > tr {
     border-bottom: 1px solid #b9b9b9;
+}
+
+/* manager redigeringsside */
+.space-between {
+    justify-content: space-around;
+}
+
+.page-content h5 {
+    margin: 0 0 1em 0;
+    font-size: 1.4em;
+}
+
+#behovFrm {
+    display: flex;
+    flex-direction: column;
+}
+
+#behovFrm p {
+    display: flex;
+    flex-direction: column;
+}
+
+#behovFrm p label {
+    margin: 0;
 }
 
 /* logout */
