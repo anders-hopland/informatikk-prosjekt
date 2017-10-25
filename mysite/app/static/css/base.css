@@ -247,13 +247,13 @@ nav {
 }
 
 /* valg av scene rulle meny */
-.valg-meny {
+.choice-menu {
     display: flex;
     justify-content: center;
     margin:0 0 2em 0;
 }
 
-.scene-choices{
+.choice-menu select {
     margin: 0.4em 0 0 1em;
     font-size:1.2em;
 }

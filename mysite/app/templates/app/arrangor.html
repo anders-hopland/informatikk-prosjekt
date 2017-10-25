@@ -7,11 +7,11 @@
 
 {% block content %}
 <div class="page-container">
-    <div class="valg-meny">
+    <div class="choice-menu">
         <h1>Oversikt over konserter på scene:</h1>
         <form action="{% url 'arrangor' %}" method="post">
             {% csrf_token %}
-            <select onchange="this.form.submit()" name="scene-choices" class="scene-choices">
+            <select onchange="this.form.submit()" name="scene-choices">
                 <option value="alle">Alle</option>
                 {% for scene in sceneliste %}
                     {% if scene.sceneNavn == current_consert %}

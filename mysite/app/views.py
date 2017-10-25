@@ -241,7 +241,7 @@ def legg_til_behov_manager(request):
                 artist.behov.add(behov)
 
         return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
-                                                           'artist': artist,
+                                                           'current_artist': artist,
                                                            'rolle': rolle,
                                                            'artister': artists
                                                            })

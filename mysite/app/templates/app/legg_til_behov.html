@@ -7,18 +7,27 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Redigeringsskjema for band:
-        <select id="bandSel" onchange="" onchange="this.form.submit()"
+    <div class="choice-menu">
+        <h1>Redigeringsskjema for band:</h1>
+        <form action="{% url 'legg_til_behov_manager' %}" method="post">
+            {% csrf_token %}
+            <select id="bandSel" onchange="this.form.submit()"
                 name="band-choices" id="band-choices">
-
-            <option value="velgBand">Velg blant registrerte band</option>
-            {% for artist in artists %}
-                     <option value="{{ artist }}" selected="selected">
-                         {{ artist.navn }}
-                     </option>
-            {% endfor %}
-        </select>
-    </h1>
+                <option selected="selected">Velg blant registrerte band</option>
+                {% for artist in artister %}
+                    {% if artist.navn == current_artist.navn %}
+                            <option value="{{ artist.navn.lower }}" selected="selected">
+                                {{ artist.navn.lower }}
+                            </option>
+                        {% else %}
+                            <option value="{{ artist.navn.lower }}">
+                                {{ artist.navn.lower }}
+                            </option>
+                        {% endif %}
+                {% endfor %}
+            </select>
+        </form>
+    </div>
 
     <div class="page-content">
         <div class="detail-info">
