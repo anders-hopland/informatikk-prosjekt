@@ -42,6 +42,10 @@ urlpatterns = [
         konsert,
         name='konsert'),
 
+    url(r'^bookingansvarlig/tidligere_konserter/$',
+        tidligere_konserter,
+        name='tidligere_konserter'),
+
     url(r'^manager/$',
         manager,
         name='manager'),
