@@ -4,6 +4,7 @@ migrate:
 	@echo Migrating database
 	@python3 manage.py migrate
 
+#hente data: python3 manage.py dumpdata --exclude contenttypes --exclude admin.logentry --exclude auth.permission --exclude sessions.session --indent 4 > user.json
 rebuild-db:
 	@echo Rebuilding database
 	@rm -rf db.sqlite3
