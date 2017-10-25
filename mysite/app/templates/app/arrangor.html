@@ -36,7 +36,7 @@
                     <th>Tidspunkt</th>
                     <th>Scene</th>
                     <th>Sjanger</th>
-                    <th></th>
+                    <th>Detaljer</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +46,7 @@
                         <td>{{ consert.tidspunkt }}</td>
                         <td>{{ consert.sceneNavn }}</td>
                         <td>{{ consert.artist.sjanger }}</td>
-                        <td><a href="{{ consert.consert_url }}" class="btn-greeny btn-small">Se detaljer</a></td>
+                        <td><a href="{{ consert.consert_url }}" class="btn-greeny">Se detaljer</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

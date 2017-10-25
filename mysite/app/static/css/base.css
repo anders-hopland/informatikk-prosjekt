@@ -178,7 +178,7 @@ nav {
     color: white;
     display: inline-block;
     font-size: 1em;
-    padding: 1em 2.2em;
+    padding: 1em;
     text-align: center;
     text-decoration: none;
 }
@@ -279,4 +279,9 @@ nav {
 /* lydteknikker oversikt */
 .page-content td, th, thead > tr {
     border-bottom: 1px solid #b9b9b9;
+}
+
+/* logout */
+#logoutP {
+    margin: 0;
 }
