@@ -3,7 +3,7 @@ from django.conf.urls import url, include
 from app.views import arrangor, lydtekniker, dashboard, lystekniker, artist
 from app.views import legg_til_behov_manager, lag_tilbud, godkjenn_tilbud_bookingsjef
 from app.views import manager, bookingansvarlig, bookingsjef, konsert, detaljer_scener
-from app.views import tidligere_konserter, tilbud_liste_bookingsjef, band_search
+from app.views import tidligere_konserter, tilbud_liste_bookingsjef, band_search, delete_behov_manager
 
 from django.contrib.auth import views as auth_views
 
@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^lystekniker/$', lystekniker, name='lystekniker'),
     url(r'^konsert/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<post_id>\d+)/$', konsert, name='konsert'),
     url(r'^legg_til_behov/(?P<name>\w+)$', legg_til_behov_manager, name='legg_til_behov_manager'),
+    url(r'^manager/(?P<pk>\w+)$', delete_behov_manager, name='delete_behov_manager'),
     url(r'^manager/$', manager, name='manager'),
     url(r'^bookingansvarlig/$', bookingansvarlig, name='bookingansvarlig'),
     url(r'^bookingansvarlig/tidligere_konserter', tidligere_konserter, name='tidligere_konserter'),

@@ -261,6 +261,16 @@ def legg_til_behov_manager(request, name):
         return render(request, 'dashboard', {'rolle': rolle})
 
 
+def delete_behov_manager(request, pk):
+    return
+    #return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
+                                                       #'rolle': rolle,
+                                                       #'artist': current_artist
+                                                       #})
+    #query = Behov.objects.get(pk=id)
+    #query.delete()
+    #return HttpResponse("Deleted!")
+
 def artist(request, navn):
     user = request.user
     if not request.user.is_authenticated():
