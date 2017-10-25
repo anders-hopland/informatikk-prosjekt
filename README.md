@@ -19,7 +19,13 @@ Etter at du har lastet ned python 3 må du laste ned django. Dette gjøres ved �
 
 For å kjøre serveren og se at alt funker skriver du: 
 -   `cd informatikk-prosjektarbeid/mysite`
+-   `python3 manage.py makemigrations`
 -   `python3 manage.py runserver`
 - Deretter åpner du nettleseren din og går inn på `http://127.0.0.1:8000/`. Om du nå får opp noe vet du at alt funker.
+
+Om du har make (unix kommando) kan du skrive:
+-   `cd informatikk-prosjektarbeid/mysite`
+-   `make build`
+-   `make runserver`
 
 Om du lurer på noe angående hvordan prosjektet er satt opp, sjekk ut prosjektets wiki sider, der ligger det mye oppdatert informasjon. 

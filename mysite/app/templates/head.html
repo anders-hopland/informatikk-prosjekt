@@ -10,13 +10,13 @@
         {% if rolle == "manager" %}
             <a href="">MAILBOX</a>
             <a href="">Registrer band</a>
-            <a href=" {% url 'redigerband' %}">Rediger band</a>
+            <a href="{% url 'redigerband' %}">Rediger band</a>
         {% elif rolle == "bookingansvarlig" %}
-            <a href="">Book band</a>
+            <a href="{% url 'tilbud_liste_bookingansvarlig' %}">MAILBOX</a>
             <a href="{%  url 'tidligere_konserter' %}">Tidligere festivaler</a>
             <a href="">Tidligere band</a>
             <a href="{% url 'lag_tilbud' %}">Send forslag</a>
-            <a href="{% url 'band_search' %}">Info om band</a>
+            <a href="">Info om band</a>
         {% elif rolle == "bookingsjef" %}
             <a href="{% url 'tilbud_liste_bookingsjef' %}">MAILBOX</a>
             <a href="">Økonomi</a>

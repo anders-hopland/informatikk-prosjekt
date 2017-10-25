@@ -1,13 +1,19 @@
 from django import forms
 from django.forms import ModelChoiceField
 
-from . models import Artist, Tilbud
+from . models import Artist, Tilbud, Behov
 
 
 #The choices html attribute with all artists in th database
 class MyModelChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
         return obj.navn
+
+
+#The choices html attribute with all artists in th database
+class BehovTypeModelChoiceField(ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj
 
 
 class RegistrerTilbudForm(forms.ModelForm):
@@ -36,10 +42,19 @@ class GodkjennTilbudBookingSjefForm(forms.ModelForm):
         fields = ('godkjent_av_bookingssjef',)
 
 
-class GodkjennTilbudManager(forms.ModelForm):
+class SendTilbudBookingAnsvarligForm(forms.ModelForm):
 
     class Meta:
         model = Tilbud
-        fields = ('godkjent_av_manager',)
+        fields = ('sendt_av_ansvarlig',)
 
+
+class LeggTilBehovForm(forms.ModelForm):
+    behov_typer = ['instrymenter', 'lyd', 'lys', 'andre']
+    type = BehovTypeModelChoiceField(behov_typer)
+    behov = forms.CharField(max_length=200)
+
+    class Meta:
+        model = Behov
+        fields = ('type', 'behov',)
 
