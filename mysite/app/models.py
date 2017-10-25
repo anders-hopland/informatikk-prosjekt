@@ -87,7 +87,6 @@ class Behov(models.Model):
 class Artist(models.Model):
     navn = models.CharField(max_length=250, unique=True)
     sjanger = models.CharField(max_length=250)
-    behov = models.ManyToManyField(Behov)
     manager = models.ManyToManyField(Extend_user)
     slug = models.SlugField(max_length=50, blank=True, unique=True)
 
@@ -107,9 +106,10 @@ class Artist(models.Model):
 
 class Consert(models.Model):
     artist = models.ForeignKey(Artist, related_name='concert')
+    behov = models.ManyToManyField(Behov, blank=True)
     tidspunkt = models.DateField()
     sceneNavn = models.CharField(max_length=250, choices=SCENER)
-    rigging = models.ManyToManyField(Rigging)
+    rigging = models.ManyToManyField(Rigging, blank=True)
     tilskuertall = models.IntegerField(default=1000, blank=True)
     inntekter = models.IntegerField(default=20000, blank=True)
 
