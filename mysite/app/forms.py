@@ -47,23 +47,8 @@ class SendTilbudBookingAnsvarligForm(forms.ModelForm):
         model = Tilbud
         fields = ('sendt_av_ansvarlig',)
 
-class LeggTilBehovForm(forms.ModelForm):
-    behov_typer = ['instrumenter', 'lyd', 'lys', 'andre']
-
-    #type = BehovTypeModelChoiceField(behov_typer)
-    behov = forms.CharField(max_length=200)
-
-    class Meta:
-        model = Behov
-        fields = ('type', 'behov',)
-
-
-
 
 class LeggTilBehovForm(forms.ModelForm):
-    behov_typer = ['instrymenter', 'lyd', 'lys', 'andre']
-    type = BehovTypeModelChoiceField(behov_typer)
-    behov = forms.CharField(max_length=200)
 
     class Meta:
         model = Behov
