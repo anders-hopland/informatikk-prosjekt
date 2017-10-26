@@ -304,16 +304,22 @@ def vurder_marked(request):
     rolle = user.profile.role
     if rolle == 'bookingsjef':
         current_scene = request.POST.get('booking-scene')
-        if current_scene is not None and current_scene != 'alle':
+        current_genre = request.POST.get('booking-genre')
+        if current_scene is not None and current_genre is not None and current_scene != 'alle' and current_genre == 'alle':
             concert_list = Consert.objects.filter(sceneNavn=current_scene).exclude(tidspunkt__year='2017')
+        elif current_scene is not None and current_genre is not None and current_scene == 'alle' and current_genre != 'alle':
+            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__year='2017')
+        elif current_scene is not None and current_genre is not None and current_scene != 'alle' and current_genre != 'alle':
+            concert_list = Consert.objects.filter(sceneNavn=current_scene, artist__sjanger=current_genre).exclude(tidspunkt__year='2017')
         else:
-            concert_list = Consert.objects.exclude(tidspunkt__year='2016')
+            concert_list = Consert.objects.exclude(tidspunkt__year='2017')
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
+        genre_list = Artist.objects.values('sjanger').distinct()
 
         return render(request, 'app/vurder_marked.html',
-                      {'conserts': concert_list, 'rolle': rolle, 'sceneliste': scene_list,
-                       'current_scene': current_scene})
+                      {'conserts': concert_list, 'rolle': rolle, 'sceneliste': scene_list, 'sjangerliste': genre_list,
+                       'current_scene': current_scene, 'current_genre': current_genre})
     else:
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 

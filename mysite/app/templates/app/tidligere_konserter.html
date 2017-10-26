@@ -12,7 +12,7 @@
         <form action="{% url 'tidligere_konserter' %}" method="post">
             {% csrf_token %}
             <select onchange="this.form.submit()"
-                    name="sjanger-choices" id="scene-choices" class="scene-choices">
+                    name="sjanger-choices" id="scene-choices" class="">
                 <option value="alle">Alle</option>
                 {% for sjangerTittel in sjangerliste %}
                     {% if sjangerTittel.sjanger == current_genre %}
