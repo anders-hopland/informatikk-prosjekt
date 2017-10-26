@@ -240,19 +240,14 @@ def manager(request):
     else:
         return redirect('dashboard')
 
-def legg_til_behov_manager(request, year, month, day, post_id):
+def legg_til_behov_manager(request, artist, concert_id):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'manager':
-        try:
-            consert = Consert.objects.get(id=post_id)
-        except:
-            #should have a more suitable error here
-            FileNotFoundError
-
+        consert = Consert.objects.get(id=concert_id)
         behov_form = LeggTilBehovForm()
         if request.method == 'POST':
             form = LeggTilBehovForm(request.POST)
@@ -265,11 +260,11 @@ def legg_til_behov_manager(request, year, month, day, post_id):
                                                            'consert': consert
                                                            })
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 
-def delete_behov_manager(request, pk):
-    return
+def delete_behov_manager(request, artist, concert_id):
+    return redirect('dashboard')
     #return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
                                                        #'rolle': rolle,
                                                        #'artist': current_artist
@@ -324,7 +319,7 @@ def lag_tilbud(request):
         return redirect('dashboard')
 
 
-#Bookingsjef får liste over tilbud og kan godkjenne
+# Bookingsjef får liste over tilbud og kan godkjenne
 def tilbud_liste_bookingsjef(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -333,7 +328,7 @@ def tilbud_liste_bookingsjef(request):
     rolle = user.profile.role
     if rolle == 'bookingsjef':
         object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=None)
-        #num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
+        # Num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
 
         return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list,
                                                                      'rolle': rolle
@@ -342,7 +337,7 @@ def tilbud_liste_bookingsjef(request):
         return redirect('dashboard')
 
 
-def godkjenn_tilbud_bookingsjef(request, tilbud_id):
+def godkjenn_tilbud_bookingsjef(request, artist, tilbud_id):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})

@@ -104,6 +104,7 @@ class Artist(models.Model):
         verbose_name = 'Artist'
         verbose_name_plural = 'Artister'
 
+
 class Consert(models.Model):
     artist = models.ForeignKey(Artist, related_name='concert')
     behov = models.ManyToManyField(Behov, blank=True)

@@ -30,7 +30,7 @@
                         <td>{{ consert.artist.sjanger }}</td>
                         <td>{{ consert.inntekter }} kr</td>
                         <td>
-                            <a href="{% url 'legg_til_behov_manager' consert.consert_url %}" class="btn-greeny">
+                            <a href="{% url 'legg_til_behov_manager' consert.artist consert.id %}" class="btn-greeny">
                                 Rediger behov
                             </a>
                         </td>
