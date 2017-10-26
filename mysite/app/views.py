@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Count
-from . models import Artist, Consert, Tilbud
+from . models import Artist, Consert, Tilbud, Behov
 
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm
 from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
@@ -248,6 +248,9 @@ def legg_til_behov_manager(request, artist, concert_id):
     rolle = user.profile.role
     if rolle == 'manager':
         consert = Consert.objects.get(id=concert_id)
+        #To avoid spaces in url
+        artist_slug = consert.artist.slug
+
         behov_form = LeggTilBehovForm()
         if request.method == 'POST':
             form = LeggTilBehovForm(request.POST)
@@ -257,21 +260,17 @@ def legg_til_behov_manager(request, artist, concert_id):
 
         return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
                                                            'rolle': rolle,
-                                                           'consert': consert
+                                                           'consert': consert,
+                                                           'artist_slug': artist_slug
                                                            })
     else:
         return redirect('dashboard')
 
 
-def delete_behov_manager(request, artist, concert_id):
-    return redirect('dashboard')
-    #return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
-                                                       #'rolle': rolle,
-                                                       #'artist': current_artist
-                                                       #})
-    #query = Behov.objects.get(pk=id)
-    #query.delete()
-    #return HttpResponse("Deleted!")
+def delete_behov_manager(request, artist, concert_id, behov_id):
+    Behov.objects.filter(id=behov_id).delete()
+
+    return redirect('legg_til_behov_manager', artist, concert_id)
 
 def artist(request, navn):
     user = request.user

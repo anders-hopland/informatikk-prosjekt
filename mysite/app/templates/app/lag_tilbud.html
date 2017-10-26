@@ -9,11 +9,13 @@
 <div class="page-container">
     <h1>Lag Tilbud</h1>
     <div class="page-content">
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit" />
-        </form>
+        <div class="detail-info">
+            <form action="" method="post" class="dynamic-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -11,11 +11,11 @@
 
     <div id="pageContent" class="page-content space-between">
         <div class="detail-info">
-            <form id="behovFrm" action="" method="post">
+            <form id="behovFrm" action="" method="post" class="dynamic-form">
                 <h5>Redigeringsskjema:</h5>
                 {% csrf_token %}
                 {{ behov_form.as_p }}
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Lagre" />
             </form>
         </div>
 
@@ -35,8 +35,10 @@
                             <td>{{ behov.type }}</td>
                             <td>{{ behov.behov }}</td>
                             <td>
-                                <a href="{% url 'delete_behov' consert.artist consert.id %}" class="btn-small btn-greeny red">
-                                    Delete
+                                <a href="{% url 'delete_behov_manager'
+                                        artist_slug consert.id behov.id %}"
+                                   class="btn-small btn-greeny red">
+                                    Slett
                                 </a>
                             </td>
                         </tr>
