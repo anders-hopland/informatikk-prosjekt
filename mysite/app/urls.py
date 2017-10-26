@@ -56,6 +56,10 @@ urlpatterns = [
         legg_til_behov_manager,
         name='legg_til_behov_manager'),
 
+    url (r'^delete_behov_manager/(?P<artist>\w+)/(?P<concert_id>\d+)/(?P<behov_id>\d+)/$',
+         delete_behov_manager,
+         name='delete_behov_manager'),
+
     url(r'^bookingansvarlig/$',
         bookingansvarlig,
         name='bookingansvarlig'),
