@@ -306,13 +306,13 @@ def vurder_marked(request):
         current_scene = request.POST.get('booking-scene')
         current_genre = request.POST.get('booking-genre')
         if current_scene is not None and current_genre is not None and current_scene != 'alle' and current_genre == 'alle':
-            concert_list = Consert.objects.filter(sceneNavn=current_scene).exclude(tidspunkt__year='2017')
+            concert_list = Consert.objects.filter(sceneNavn=current_scene).exclude(tidspunkt__year='2017').order_by('tidspunkt')
         elif current_scene is not None and current_genre is not None and current_scene == 'alle' and current_genre != 'alle':
-            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__year='2017')
+            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__year='2017').order_by('tidspunkt')
         elif current_scene is not None and current_genre is not None and current_scene != 'alle' and current_genre != 'alle':
-            concert_list = Consert.objects.filter(sceneNavn=current_scene, artist__sjanger=current_genre).exclude(tidspunkt__year='2017')
+            concert_list = Consert.objects.filter(sceneNavn=current_scene, artist__sjanger=current_genre).exclude(tidspunkt__year='2017').order_by('tidspunkt')
         else:
-            concert_list = Consert.objects.exclude(tidspunkt__year='2017')
+            concert_list = Consert.objects.exclude(tidspunkt__year='2017').order_by('tidspunkt')
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
         genre_list = Artist.objects.values('sjanger').distinct()
