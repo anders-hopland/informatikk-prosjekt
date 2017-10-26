@@ -19,6 +19,7 @@ class RegistrerTilbudForm(forms.ModelForm):
     artist = MyModelChoiceField(queryset=Artist.objects.all())
     soknad = forms.CharField(widget=forms.Textarea)
     pris = forms.CharField()
+    tidspunkt = forms.DateField()
 
     class Meta:
         model = Tilbud
@@ -26,6 +27,7 @@ class RegistrerTilbudForm(forms.ModelForm):
             'artist',
             'soknad',
             'pris',
+            'tidspunkt'
             ]
 
     def save(self):
