@@ -11,7 +11,7 @@
 
     <div id="pageContent" class="page-content space-between">
         <div class="detail-info">
-            <form id="behovFrm" action="" method="post">
+            <form id="behovFrm" action="" method="post" class="dynamic-form">
                 <h5>Redigeringsskjema:</h5>
                 {% csrf_token %}
                 {{ behov_form.as_p }}

@@ -10,7 +10,7 @@
     <h1>Lag Tilbud</h1>
     <div class="page-content">
         <div class="detail-info">
-            <form action="" method="post">
+            <form action="" method="post" class="dynamic-form">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="Submit" />

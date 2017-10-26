@@ -172,7 +172,7 @@ nav {
 
 
 /* buttons */
-.btn-greeny, #behovFrm > input {
+.btn-greeny, .dynamic-form > input {
     background-color: #23C000;
     border-radius: 0.2em;
     color: white;
@@ -225,11 +225,11 @@ nav {
     padding: 0 1em;
 }
 
-.detail-info h3, #behovFrm h5 {
+.detail-info h3, .dynamic-form h5 {
     margin-top: 1em;
 }
 
-.detail-info > label, #behovFrm label {
+.detail-info > label, .dynamic-form label {
     color: #6d6d6d;
     font-weight: bold;
     margin: 1em 0 0.2em 0;
@@ -288,17 +288,17 @@ nav {
     font-size: 1.4em;
 }
 
-#behovFrm {
+.dynamic-form {
     display: flex;
     flex-direction: column;
 }
 
-#behovFrm p {
+.dynamic-form p {
     display: flex;
     flex-direction: column;
 }
 
-#behovFrm p label {
+.dynamic-form p label {
     margin: 0;
 }
 
