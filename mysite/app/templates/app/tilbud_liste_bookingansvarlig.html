@@ -7,27 +7,24 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over konserter:</h1>
+    <h1>Oversikt over godkjente tilbud</h1>
+    <br>
     <div class="page-content">
         <table>
             <thead>
                 <tr>
                     <th>Artist navn</th>
-                    <th>Tidspunkt</th>
-                    <th>Scene</th>
-                    <th>Sjanger</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                {% for consert in conserts %}
+                {% for tilbud in tilbuds %}
                     <tr>
-                        <td>{{ consert.artist.navn }}</td>
-                        <td>{{ consert.tidspunkt }}</td>
-                        <td>{{ consert.sceneNavn }}</td>
-                        <td>{{ consert.artist.sjanger }}</td>
+                        {% for artist in tilbud.artist.all %}
+                            <td>{{ artist.navn }}</td>
+                        {% endfor %}
                         <td>
-                            <a href="{{ consert.consert_url }}" class="btn-greeny">
+                            <a href="{% url 'send_tilbud_bookingansvarlig' tilbud.id %}" class="info-button">
                                 Se detaljer
                             </a>
                         </td>
