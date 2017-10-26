@@ -314,6 +314,28 @@ def tilbud_liste_bookingsjef(request):
         return render(request, 'dashboard', {'rolle': rolle})
 
 
+def vurder_marked(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingsjef':
+        current_scene = request.POST.get('booking-scene')
+        if current_scene is not None and current_scene != 'alle':
+            concert_list = Consert.objects.filter(sceneNavn=current_scene).exclude(tidspunkt__year='2017')
+        else:
+            concert_list = Consert.objects.exclude(tidspunkt__year='2016')
+
+        scene_list = Consert.objects.values('sceneNavn').distinct()
+
+        return render(request, 'app/vurder_marked.html',
+                      {'conserts': concert_list, 'rolle': rolle, 'sceneliste': scene_list,
+                       'current_scene': current_scene})
+    else:
+        return render(request, 'app/dashboard.html', {'rolle': rolle})
+
+
 def godkjenn_tilbud_bookingsjef(request, tilbud_id):
     user = request.user
     if not request.user.is_authenticated():

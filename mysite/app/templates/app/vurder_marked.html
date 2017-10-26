@@ -1,0 +1,54 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div id="scene-valg">
+    <h1>Økonomisk oversikt over konserter i utvalgte sjangere på alle forskjellige scener:</h1>
+    <form action="{% url 'vurder_marked' %}" method="post">
+            {% csrf_token %}
+            <select onchange="this.form.submit()" name="booking-scene" class="scene-choices">
+                <option value="alle">Alle</option>
+                {% for scene in sceneliste %}
+                    {% if scene.sceneNavn == current_scene %}
+                        <option value="{{ scene.sceneNavn.lower }}" selected="selected">
+                            {{ scene.sceneNavn }}
+                        </option>
+                    {% else %}
+                        <option value="{{ scene.sceneNavn.lower }}">
+                            {{ scene.sceneNavn }}
+                        </option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <div class="page-content">
+        <table id="vurder_marked-oversikt">
+            <thead>
+                <tr>
+                    <th>Placeholder</th>
+                    <th>Placeholder 2</th>
+                    <th>Place 3</th>
+                    <th>Placeholder 4</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consert in conserts %}
+                    <tr>
+                        <td>{{ consert.artist.navn }}</td>
+                        <td>{{ consert.tidspunkt }}</td>
+                        <td>{{ consert.sceneNavn }}</td>
+                        <td>{{ consert.tilskuertall }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
