@@ -10,7 +10,6 @@ class MyModelChoiceField(ModelChoiceField):
         return obj.navn
 
 
-#The choices html attribute with all artists in th database
 class BehovTypeModelChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
         return obj
@@ -50,9 +49,6 @@ class SendTilbudBookingAnsvarligForm(forms.ModelForm):
 
 
 class LeggTilBehovForm(forms.ModelForm):
-    behov_typer = ['instrymenter', 'lyd', 'lys', 'andre']
-    type = BehovTypeModelChoiceField(behov_typer)
-    behov = forms.CharField(max_length=200)
 
     class Meta:
         model = Behov

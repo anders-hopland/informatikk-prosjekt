@@ -1,0 +1,49 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Rediger tekniske behov for: {{ consert.artist }}</h1>
+
+    <div id="pageContent" class="page-content space-between">
+        <div class="detail-info">
+            <form id="behovFrm" action="" method="post">
+                <h5>Redigeringsskjema:</h5>
+                {% csrf_token %}
+                {{ behov_form.as_p }}
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+
+        <div class="detail-info">
+            <h5>Tabelloversikt over tekniske behov</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Beskrivelse</th>
+                        <th>Slett</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for behov in consert.behov.all %}
+                        <tr>
+                            <td>{{ behov.type }}</td>
+                            <td>{{ behov.behov }}</td>
+                            <td>
+                                <a href="{% url 'delete_behov' consert.artist consert.id %}" class="btn-small btn-greeny red">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

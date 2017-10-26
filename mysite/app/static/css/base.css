@@ -170,24 +170,34 @@ nav {
     border-bottom: 1px solid #b9b9b9;
 }
 
-#arrangor-oversikt tbody tr:hover {
-    background-color: #dadada
-}
 
-.info-button {
+/* buttons */
+.btn-greeny, #behovFrm > input {
     background-color: #23C000;
     border-radius: 0.2em;
     color: white;
     display: inline-block;
     font-size: 1em;
-    padding: 1em 2.2em;
+    padding: 1em;
     text-align: center;
     text-decoration: none;
 }
 
-.info-button:hover {
+.btn-greeny:hover {
     background-color: #23A000;
     color: white;
+}
+
+.red {
+    background: red;
+}
+
+.red:hover {
+    background: darkred;
+}
+
+.btn-small {
+    padding: 0.5em 1em 0.5em 1em;
 }
 
 /* konsert detaljer fra oversikt*/
@@ -215,21 +225,22 @@ nav {
     padding: 0 1em;
 }
 
-.detail-info h3 {
+.detail-info h3, #behovFrm h5 {
     margin-top: 1em;
 }
 
-.detail-info > label {
+.detail-info > label, #behovFrm label {
     color: #6d6d6d;
     font-weight: bold;
-}
-
-.detail-info > label {
     margin: 1em 0 0.2em 0;
 }
 
 .detail-info > span {
     margin: -1.3em 2em 1em 5em;
+}
+
+.detail-info th {
+    min-width: 100px;
 }
 
 .btn-reg {
@@ -238,12 +249,12 @@ nav {
 }
 
 .content-border > h4{
-    margin: 1em 0;
+    margin: 0 0 1em 0;
 }
 
 .content-border {
     border-bottom: 1px solid #ddd;
-    padding: 0 1em 0 1em;
+    padding: 1em;
 }
 
 .content-border:last-child {
@@ -251,13 +262,13 @@ nav {
 }
 
 /* valg av scene rulle meny */
-.scene-valg{
+.choice-menu {
     display: flex;
     justify-content: center;
     margin:0 0 2em 0;
 }
 
-.scene-choices{
+.choice-menu select {
     margin: 0.4em 0 0 1em;
     font-size:1.2em;
 }
@@ -267,6 +278,31 @@ nav {
     border-bottom: 1px solid #b9b9b9;
 }
 
-.page-content tbody tr:hover {
-    background-color: #dadada
+/* manager redigeringsside */
+.space-between {
+    justify-content: space-around;
+}
+
+.page-content h5 {
+    margin: 0 0 1em 0;
+    font-size: 1.4em;
+}
+
+#behovFrm {
+    display: flex;
+    flex-direction: column;
+}
+
+#behovFrm p {
+    display: flex;
+    flex-direction: column;
+}
+
+#behovFrm p label {
+    margin: 0;
+}
+
+/* logout */
+#logoutP {
+    margin: 0;
 }
