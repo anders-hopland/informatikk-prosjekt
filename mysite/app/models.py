@@ -87,7 +87,7 @@ class Behov(models.Model):
 class Artist(models.Model):
     navn = models.CharField(max_length=250, unique=True)
     sjanger = models.CharField(max_length=250)
-    behov = models.ManyToManyField(Behov)
+    behov = models.ManyToManyField(Behov, blank=True)
     manager = models.ManyToManyField(Extend_user)
     slug = models.SlugField(max_length=50, blank=True, unique=True)
 
@@ -130,6 +130,7 @@ class Consert(models.Model):
     class Meta:
         verbose_name = 'consert'
         verbose_name_plural = 'conserts'
+        unique_together = ('tidspunkt', 'sceneNavn',)
 
 
 #not used yet, will be used in a later sprint
@@ -137,9 +138,10 @@ class Tilbud(models.Model):
     artist = models.ManyToManyField(Artist)
     soknad = models.TextField()
     pris = models.IntegerField()
-    godkjent_av_bookingssjef = models.BooleanField(blank=True, default=False)
-    sendt_av_ansvarlig = models.BooleanField(blank=True, default=False)
-    godkjent_av_manager = models.BooleanField(blank=True, default=False)
+    tidspunkt = models.DateField()
+    godkjent_av_bookingssjef = models.NullBooleanField(blank=True, null=True, default=None)
+    sendt_av_ansvarlig = models.NullBooleanField(blank=True, null=True, default=None)
+    godkjent_av_manager = models.NullBooleanField(blank=True, null=True, default=None)
 
     def __str__(self):
         return 'tilbud'

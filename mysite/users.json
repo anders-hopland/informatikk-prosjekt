@@ -1,0 +1,176 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$tmtdK44FDJpJ$hlT3H+QaXbnuoiIXvy3ADCdiKFON/5uZeneQKph685g=",
+        "last_login": "2017-10-25T10:32:54.435Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@example.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2017-10-25T09:32:48.775Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$tYVGjxHoGHyo$MgW009s4xu7/5ecVN0RkYjEijqFGksoziSSQopAiSHg=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "arr",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-10-25T10:27:48.455Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$o8RGpCvbBXUC$Fn9QFR6zmLaqUoXiSdfcAn0afO30I8EgDZ3rAEgboaQ=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "ba",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-10-25T10:47:13.016Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$ZLs2Y7tDpxUf$TuCutB+gvYe5TPUJgp/09zoVJMS2lLxXJ6o+T3s9F0E=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "bs",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-10-25T10:47:26.329Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$Rmhf8t4s4aHq$9lVVa9CIRnwkfCxW+urXe5fZDhaw1Kgb6fZ2u8gOZtc=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "man",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-10-25T10:47:42.681Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$CeOLegib9KjN$SQ6WGra05t6eXK9fVLeNkHxGuti2SH23RV/XaakCrYI=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "lys",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-10-25T10:47:57.362Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$36000$BOZ4kCTYq83Q$Nh2740966Vw1JSknVhEpwb0m/IRaIChRD2QRtnCLShU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "lyd",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2017-10-25T10:48:12.048Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "app.extend_user",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "role": "arrangor"
+    }
+},
+{
+    "model": "app.extend_user",
+    "pk": 2,
+    "fields": {
+        "user": 3,
+        "role": "bookingansvarlig"
+    }
+},
+{
+    "model": "app.extend_user",
+    "pk": 3,
+    "fields": {
+        "user": 4,
+        "role": "bookingsjef"
+    }
+},
+{
+    "model": "app.extend_user",
+    "pk": 4,
+    "fields": {
+        "user": 5,
+        "role": "manager"
+    }
+},
+{
+    "model": "app.extend_user",
+    "pk": 5,
+    "fields": {
+        "user": 6,
+        "role": "lystekniker"
+    }
+},
+{
+    "model": "app.extend_user",
+    "pk": 6,
+    "fields": {
+        "user": 7,
+        "role": "lydtekniker"
+    }
+}
+]
