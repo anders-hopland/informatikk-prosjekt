@@ -111,7 +111,6 @@ class Consert(models.Model):
     tidspunkt = models.DateField()
     sceneNavn = models.CharField(max_length=250, choices=SCENER)
     rigging = models.ManyToManyField(Rigging, blank=True)
-    behov = models.ManyToManyField(Behov, blank=True)
     tilskuertall = models.IntegerField(default=1000, blank=True)
     inntekter = models.IntegerField(default=20000, blank=True)
 
