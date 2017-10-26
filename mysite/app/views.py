@@ -269,8 +269,6 @@ def legg_til_behov_manager(request, artist, concert_id):
 
 def delete_behov_manager(request, artist, concert_id, behov_id):
     Behov.objects.filter(id=behov_id).delete()
-    print(2423)
-
 
     return redirect('legg_til_behov_manager', artist, concert_id)
 
