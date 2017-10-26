@@ -248,13 +248,12 @@ def legg_til_behov_manager(request, artist, concert_id):
     rolle = user.profile.role
     if rolle == 'manager':
         consert = Consert.objects.get(id=concert_id)
-        print(consert)
         behov_form = LeggTilBehovForm()
         if request.method == 'POST':
             form = LeggTilBehovForm(request.POST)
             if form.is_valid():
                 behov = form.save()
-                Consert.behov.add(behov)
+                consert.behov.add(behov)
 
         return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
                                                            'rolle': rolle,
