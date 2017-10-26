@@ -118,7 +118,7 @@ def konsert(request, year, month, day, post_id):
         lys_list = {}
 
         for consert in Consert.objects.filter(id=post_id).all():
-            for behov in consert.artist.behov.all():
+            for behov in consert.behov.all():
                 if behov.type == 'instrumenter':
                     instrument_list[behov] = behov
                 elif behov.type == 'andre':

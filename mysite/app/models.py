@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.forms import forms
 
 STATUS_CHOICES = (
     ('arrangor', 'Arrangør'),
@@ -123,7 +124,7 @@ class Consert(models.Model):
     class Meta:
         verbose_name = 'consert'
         verbose_name_plural = 'conserts'
-        unique_together = ('tidspunkt', 'sceneNavn',)
+        unique_together = ('tidspunkt', 'sceneNavn')
 
 
 #not used yet, will be used in a later sprint
