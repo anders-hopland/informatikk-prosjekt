@@ -35,8 +35,8 @@
                             <td>{{ behov.type }}</td>
                             <td>{{ behov.behov }}</td>
                             <td>
-                                <a href="#" class="btn-small btn-greeny red">
-                                    Slett
+                                <a href="{% url 'delete_behov' consert.artist consert.id %}" class="btn-small btn-greeny red">
+                                    Delete
                                 </a>
                             </td>
                         </tr>

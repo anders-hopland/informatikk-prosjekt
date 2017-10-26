@@ -263,7 +263,7 @@ def legg_til_behov_manager(request, artist, concert_id):
         return redirect('dashboard')
 
 
-def delete_behov_manager(request, pk):
+def delete_behov_manager(request, artist, concert_id):
     return redirect('dashboard')
     #return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
                                                        #'rolle': rolle,
