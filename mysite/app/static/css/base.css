@@ -310,5 +310,5 @@ nav {
 /* for <p> when table is empty */
 .greyed {
     color: #6d6d6d;
-    margin: -1em 0;
+    margin: 0;
 }
