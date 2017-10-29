@@ -7,11 +7,11 @@
 
 {% block content %}
 <div class="page-container">
-    <div class="scene-valg">
+    <div class="choice-menu">
         <h1>Oversikt over konserter på scene:</h1>
         <form action="{% url 'arrangor' %}" method="post">
             {% csrf_token %}
-            <select onchange="this.form.submit()" name="scene-choices" class="scene-choices">
+            <select onchange="this.form.submit()" name="scene-choices">
                 <option value="alle">Alle</option>
                 {% for scene in sceneliste %}
                     {% if scene.sceneNavn == current_consert %}
@@ -28,25 +28,25 @@
         </form>
     </div>
 
-    <div class="page-content">
-        <table id="arrangor-oversikt">
+    <div id="overview" class="page-content">
+        <table class="arrangor-oversikt">
             <thead>
                 <tr>
                     <th>Artist navn</th>
                     <th>Tidspunkt</th>
                     <th>Scene</th>
                     <th>Sjanger</th>
-                    <th></th>
+                    <th>Detaljer</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tableBdy">
                 {% for consert in conserts %}
                     <tr>
                         <td>{{ consert.artist.navn }}</td>
                         <td>{{ consert.tidspunkt }}</td>
                         <td>{{ consert.sceneNavn }}</td>
                         <td>{{ consert.artist.sjanger }}</td>
-                        <td><a href="{{ consert.consert_url }}" class="info-button">Se detaljer</a></td>
+                        <td><a href="{{ consert.consert_url }}" class="btn-greeny">Se detaljer</a></td>
                     </tr>
                 {% endfor %}
             </tbody>

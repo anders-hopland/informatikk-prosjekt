@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse, reverse_lazy
-from django import forms
+from django.forms import forms
 
 STATUS_CHOICES = (
     ('arrangor', 'Arrangør'),
@@ -87,7 +87,6 @@ class Behov(models.Model):
 class Artist(models.Model):
     navn = models.CharField(max_length=250, unique=True)
     sjanger = models.CharField(max_length=250)
-    behov = models.ManyToManyField(Behov, blank=True)
     manager = models.ManyToManyField(Extend_user)
     slug = models.SlugField(max_length=50, blank=True, unique=True)
 
@@ -105,18 +104,13 @@ class Artist(models.Model):
         verbose_name = 'Artist'
         verbose_name_plural = 'Artister'
 
-class ArtistForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    class Meta:
-        model = Artist
-        fields = ['navn', 'sjanger', 'behov', 'manager', 'slug']
-
 
 class Consert(models.Model):
     artist = models.ForeignKey(Artist, related_name='concert')
+    behov = models.ManyToManyField(Behov, blank=True)
     tidspunkt = models.DateField()
     sceneNavn = models.CharField(max_length=250, choices=SCENER)
-    rigging = models.ManyToManyField(Rigging)
+    rigging = models.ManyToManyField(Rigging, blank=True)
     tilskuertall = models.IntegerField(default=1000, blank=True)
     inntekter = models.IntegerField(default=20000, blank=True)
     kostnader = models.IntegerField(default=10000, blank=True)
@@ -131,7 +125,7 @@ class Consert(models.Model):
     class Meta:
         verbose_name = 'consert'
         verbose_name_plural = 'conserts'
-        unique_together = ('tidspunkt', 'sceneNavn',)
+        unique_together = ('tidspunkt', 'sceneNavn')
 
 
 #not used yet, will be used in a later sprint

@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.db.models import Count
-from . models import Artist, Consert, Tilbud
+from . models import Artist, Consert, Tilbud, Behov
 
-from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm, SendTilbudBookingAnsvarligForm
+from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm
+from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
 
 
 '''
@@ -70,7 +71,8 @@ def lydtekniker(request):
     rolle = user.profile.role
     if rolle == 'lydtekniker':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/lydtekniker.html', {'conserts': object_list, 'rolle': rolle})
+        return render(request, 'app/lydtekniker.html', {'conserts': object_list,
+                                                        'rolle': rolle})
     else:
         return redirect('dashboard')
 
@@ -82,7 +84,8 @@ def lystekniker(request):
     rolle = user.profile.role
     if rolle == 'lystekniker':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/lystekniker.html', {'conserts': object_list, 'rolle': rolle})
+        return render(request, 'app/lystekniker.html', {'conserts': object_list,
+                                                        'rolle': rolle})
     else:
         return redirect('dashboard')
 
@@ -115,7 +118,7 @@ def konsert(request, year, month, day, post_id):
         lys_list = {}
 
         for consert in Consert.objects.filter(id=post_id).all():
-            for behov in consert.artist.behov.all():
+            for behov in consert.behov.all():
                 if behov.type == 'instrumenter':
                     instrument_list[behov] = behov
                 elif behov.type == 'andre':
@@ -147,9 +150,11 @@ def detaljer_scener(request, navn):
     rolle = user.profile.role
     if rolle == 'arrangor':
         object_list = Consert.objects.filter(sceneNavn=navn)
-        return render(request, 'app/sceneDetaljer.html', {'conserts': object_list, 'rolle': rolle})
+        return render(request, 'app/sceneDetaljer.html', {'conserts': object_list,
+                                                          'rolle': rolle
+                                                          })
     else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        return redirect('dashboard')
 
 
 def bookingansvarlig(request):
@@ -167,7 +172,10 @@ def bookingansvarlig(request):
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
 
-        return render(request, 'app/bookingansvarlig.html', {'conserts': object_list,  'rolle': rolle, 'sceneliste': scene_list, 'current_consert': current_consert})
+        return render(request, 'app/bookingansvarlig.html', {'conserts': object_list,
+                                                             'rolle': rolle,
+                                                             'sceneliste': scene_list,
+                                                             'current_consert': current_consert})
     else:
         return redirect('dashboard')
 
@@ -186,7 +194,11 @@ def tidligere_konserter(request):
 
         sjanger_list = Artist.objects.values('sjanger').distinct()
 
-        return render(request, 'app/tidligere_konserter.html', {'conserts': concert_list, 'rolle': rolle, 'sjangerliste': sjanger_list, 'current_genre': current_genre})
+        return render(request, 'app/tidligere_konserter.html', {'conserts': concert_list,
+                                                                'rolle': rolle,
+                                                                'sjangerliste': sjanger_list,
+                                                                'current_genre': current_genre
+                                                                })
     else:
         return redirect('dashboard')
 
@@ -198,7 +210,9 @@ def bookingsjef(request):
     rolle = user.profile.role
     if rolle == 'bookingsjef':
         object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/manager.html', {'conserts': object_list, 'rolle': rolle})
+        return render(request, 'app/manager.html', {'conserts': object_list,
+                                                    'rolle': rolle
+                                                    })
     else:
         return redirect('dashboard')
 
@@ -211,33 +225,52 @@ def manager(request):
     rolle = user.profile.role
     if rolle == 'manager':
 
-        current_artist = request.POST.get('artist-choices')
+        all_conserts = Consert.objects.all().order_by('tidspunkt')
+        artist_list = Artist.objects.filter(manager=user.profile).order_by('navn')
+        conserts = []
 
-        if current_artist is not None and current_artist != 'velgBand':
-            object_list = Artist.objects.filter(manager=user.profile).order_by('navn')
-        else:
-            object_list = Artist.objects.all().order_by('navn')
+        for consert in all_conserts:
+            if consert.artist in artist_list:
+                conserts.append(consert)
 
-        return render(request, 'app/manager.html', {'artists': object_list,
-                                                    'rolle': rolle,
-                                                    'current_artist': current_artist
+        return render(request, 'app/manager.html', {
+                                                    'conserts': conserts,
+                                                    'rolle': rolle
                                                     })
     else:
         return redirect('dashboard')
 
-
-def redigerband(request):
+def legg_til_behov_manager(request, artist, concert_id):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
     rolle = user.profile.role
     if rolle == 'manager':
-        object_list = Artist.objects.filter(manager=user.profile).order_by('navn')
-        return render(request, 'app/redigerBand.html', {'artists': object_list, 'rolle': rolle})
-    else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        consert = Consert.objects.get(id=concert_id)
+        #To avoid spaces in url
+        artist_slug = consert.artist.slug
 
+        behov_form = LeggTilBehovForm()
+        if request.method == 'POST':
+            form = LeggTilBehovForm(request.POST)
+            if form.is_valid():
+                behov = form.save()
+                consert.behov.add(behov)
+
+        return render(request, 'app/legg_til_behov.html', {'behov_form': behov_form,
+                                                           'rolle': rolle,
+                                                           'consert': consert,
+                                                           'artist_slug': artist_slug
+                                                           })
+    else:
+        return redirect('dashboard')
+
+
+def delete_behov_manager(request, artist, concert_id, behov_id):
+    Behov.objects.filter(id=behov_id).delete()
+
+    return redirect('legg_til_behov_manager', artist, concert_id)
 
 def artist(request, navn):
     user = request.user
@@ -248,7 +281,10 @@ def artist(request, navn):
     if rolle == 'manager':
         band = Artist.objects.get(slug=navn)
         object_list = Consert.objects.filter(artist=band)
-        return render(request, 'app/artist.html', {'conserts': object_list, 'rolle': rolle})
+
+        return render(request, 'app/artist.html', {'conserts': object_list,
+                                                   'rolle': rolle
+                                                   })
     else:
         return redirect('dashboard')
 
@@ -275,12 +311,14 @@ def lag_tilbud(request):
                 form.save()
                 redirect('dashboard')
         form = RegistrerTilbudForm()
-        return render(request, 'app/lag_tilbud.html', {'form': form, 'rolle': rolle})
+        return render(request, 'app/lag_tilbud.html', {'form': form,
+                                                       'rolle': rolle
+                                                       })
     else:
         return redirect('dashboard')
 
 
-#Bookingsjef får liste over tilbud og kan godkjenne
+# Bookingsjef får liste over tilbud og kan godkjenne
 def tilbud_liste_bookingsjef(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -289,9 +327,11 @@ def tilbud_liste_bookingsjef(request):
     rolle = user.profile.role
     if rolle == 'bookingsjef':
         object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=None)
-        #num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
+        # Num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
 
-        return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list, 'rolle': rolle})
+        return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list,
+                                                                     'rolle': rolle
+                                                                     })
     else:
         return redirect('dashboard')
 
@@ -324,7 +364,7 @@ def vurder_marked(request):
         return render(request, 'app/dashboard.html', {'rolle': rolle})
 
 
-def godkjenn_tilbud_bookingsjef(request, tilbud_id):
+def godkjenn_tilbud_bookingsjef(request, artist, tilbud_id):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
@@ -340,7 +380,10 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
                 form.save()
                 return redirect('tilbud_liste_bookingsjef')
 
-        return render(request, 'app/godkjenn_tilbud_bookingsjef.html', {'tilbud': tilbud, 'form': form, 'rolle': rolle})
+        return render(request, 'app/godkjenn_tilbud_bookingsjef.html', {'tilbud': tilbud,
+                                                                        'form': form,
+                                                                        'rolle': rolle
+                                                                        })
     else:
         return redirect('dashboard')
 
