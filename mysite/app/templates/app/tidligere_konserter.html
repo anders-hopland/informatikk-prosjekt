@@ -12,7 +12,7 @@
         <form action="{% url 'tidligere_konserter' %}" method="post">
             {% csrf_token %}
             <select onchange="this.form.submit()"
-                    name="sjanger-choices" id="scene-choices" class="choices">
+                    name="sjanger-choices" id="scene-choices">
                 <option value="alle">Alle</option>
                 {% for sjangerTittel in sjangerliste %}
                     {% if sjangerTittel.sjanger == current_genre %}
@@ -29,7 +29,7 @@
         </form>
     </div>
 
-    <div class="page-content">
+    <div id="overview" class="page-content">
         <table id="tidligere_konserter-oversikt">
             <thead>
                 <tr>
@@ -39,7 +39,7 @@
                     <th>Publikumsantall</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tableBdy">
                 {% for consert in conserts %}
                     <tr>
                         <td>{{ consert.artist.navn }}</td>
