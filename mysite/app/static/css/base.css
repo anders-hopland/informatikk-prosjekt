@@ -166,7 +166,7 @@ nav {
 }
 
 /* arrangør oversikt */
-#arrangor-oversikt th, td{
+.arrangor-oversikt th, td{
     border-bottom: 1px solid #b9b9b9;
 }
 
@@ -305,4 +305,9 @@ nav {
 /* logout */
 #logoutP {
     margin: 0;
+}
+
+/* for <p> when table is empty */
+.greyed {
+    color: #6d6d6d;
 }

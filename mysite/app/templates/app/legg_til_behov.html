@@ -9,7 +9,7 @@
 <div class="page-container">
     <h1>Rediger tekniske behov for: {{ consert.artist }}</h1>
 
-    <div id="pageContent" class="page-content space-between">
+    <div id="overview" class="page-content space-between">
         <div class="detail-info">
             <form id="behovFrm" action="" method="post" class="dynamic-form">
                 <h5>Redigeringsskjema:</h5>
@@ -29,7 +29,7 @@
                         <th>Slett</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tableBdy">
                     {% for behov in consert.behov.all %}
                         <tr>
                             <td>{{ behov.type }}</td>
