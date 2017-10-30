@@ -11,7 +11,6 @@ window.onload = function() {
         return;
     }
 
-
     if (tableBody.children.length === 0) {
         let newP = document.createElement("p");
         newP.innerHTML = "Du har ikke noe registrert.";
@@ -20,4 +19,6 @@ window.onload = function() {
         overview.appendChild(newP);
     }
 };
+
+
 
