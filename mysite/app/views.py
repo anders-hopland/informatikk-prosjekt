@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Count
 from . models import Artist, Consert, Tilbud, Behov
 
-from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm
+from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm, godkjenntilbudManagerForm
 from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
 
 

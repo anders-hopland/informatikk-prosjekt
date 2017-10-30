@@ -50,6 +50,13 @@ class SendTilbudBookingAnsvarligForm(forms.ModelForm):
         fields = ('sendt_av_ansvarlig',)
 
 
+class GodkjennTilbudManagerForm(forms.ModelForm):
+
+    class Meta:
+        model = Tilbud
+        fields = ('godkjent_av_bookingssjef',)
+
+
 class LeggTilBehovForm(forms.ModelForm):
 
     class Meta:
