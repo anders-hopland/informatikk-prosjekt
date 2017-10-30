@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Count
 from . models import Artist, Consert, Tilbud, Behov
 
-from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm, godkjenntilbudManagerForm
+from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm, GodkjennTilbudManagerForm
 from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
 
 
@@ -398,7 +398,7 @@ def send_tilbud_bookingansvarlig(request, tilbud_id):
         return redirect('dashboard')
 
 
-def godkjenn_tilbud_bookingsjef(request, artist, tilbud_id):
+def godkjenn_tilbud_manager(request, artist, tilbud_id):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
