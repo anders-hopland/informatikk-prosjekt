@@ -397,3 +397,27 @@ def send_tilbud_bookingansvarlig(request, tilbud_id):
     else:
         return redirect('dashboard')
 
+
+def godkjenn_tilbud_bookingsjef(request, artist, tilbud_id):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'manager':
+        tilbud = Tilbud.objects.get(id=tilbud_id)
+        form = GodkjennTilbudBookingSjefForm(instance=tilbud)
+
+        if request.method == 'POST':
+            form = GodkjennTilbudManagerForm(request.POST, instance=tilbud)
+            if form.is_valid():
+                form.save()
+                return redirect('tilbud_liste_manager')
+
+        return render(request, 'app/godkjenn_tilbud_manager.html', {'tilbud': tilbud,
+                                                                        'form': form,
+                                                                        'rolle': rolle
+                                                                        })
+    else:
+        return redirect('dashboard')
+
