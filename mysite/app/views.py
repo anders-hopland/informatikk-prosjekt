@@ -397,3 +397,24 @@ def send_tilbud_bookingansvarlig(request, tilbud_id):
     else:
         return redirect('dashboard')
 
+
+'''
+###############
+Bookingmanager mailbox
+###############
+'''
+
+def tilbud_liste_bookingmanager(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingsjef':
+        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=True)
+        #num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
+
+        return render(request, 'app/tilbud_liste_bookingansvarlig.html', {'tilbuds': object_list, 'rolle': rolle})
+    else:
+        return redirect('dashboard')
+
