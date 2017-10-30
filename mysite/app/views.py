@@ -398,6 +398,27 @@ def send_tilbud_bookingansvarlig(request, tilbud_id):
         return redirect('dashboard')
 
 
+'''
+###############
+Bookingmanager mailbox
+###############
+'''
+
+def tilbud_liste_manager(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'manager':
+        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=True)
+        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=True).count()
+
+        return render(request, 'app/tilbud_liste_manager.html', {'tilbuds': object_list, "antall_tilbud": num_tilbud, 'rolle': rolle})
+    else:
+        return redirect('dashboard')
+
+
 def godkjenn_tilbud_manager(request, artist, tilbud_id):
     user = request.user
     if not request.user.is_authenticated():
@@ -405,6 +426,7 @@ def godkjenn_tilbud_manager(request, artist, tilbud_id):
 
     rolle = user.profile.role
     if rolle == 'manager':
+
         tilbud = Tilbud.objects.get(id=tilbud_id)
         form = GodkjennTilbudBookingSjefForm(instance=tilbud)
 
@@ -415,9 +437,11 @@ def godkjenn_tilbud_manager(request, artist, tilbud_id):
                 return redirect('tilbud_liste_manager')
 
         return render(request, 'app/godkjenn_tilbud_manager.html', {'tilbud': tilbud,
-                                                                        'form': form,
-                                                                        'rolle': rolle
-                                                                        })
+                                                                    'form': form,
+                                                                    'rolle': rolle
+                                                                    })
     else:
         return redirect('dashboard')
+
+
 

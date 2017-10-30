@@ -9,7 +9,7 @@
         </a>
         {% if rolle == "manager" %}
             <a {% if 'tilbudsliste_manager' in request.path %} class="active" {% endif %}
-                    href="">
+                    href="{% url 'tilbud_liste_manager' %}">
                 MAILBOX
             </a>
         {% elif rolle == "bookingansvarlig" %}
