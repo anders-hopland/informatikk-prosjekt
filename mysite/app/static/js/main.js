@@ -19,6 +19,3 @@ window.onload = function() {
         overview.appendChild(newP);
     }
 };
-
-
-
