@@ -414,7 +414,7 @@ def tilbud_liste_manager(request):
         object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=True)
         num_tilbud = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=True).count()
 
-        return render(request, 'app/tilbud_liste_manager.html', {'tilbuds': object_list, 'rolle': rolle})
+        return render(request, 'app/tilbud_liste_manager.html', {'tilbuds': object_list, "antall_tilbud": num_tilbud, 'rolle': rolle})
     else:
         return redirect('dashboard')
 
