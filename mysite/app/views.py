@@ -404,7 +404,7 @@ Bookingmanager mailbox
 ###############
 '''
 
-def tilbud_liste_bookingmanager(request):
+def tilbud_liste_manager(request):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
