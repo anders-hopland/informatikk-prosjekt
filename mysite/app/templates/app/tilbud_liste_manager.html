@@ -11,7 +11,7 @@
     <br>
     <h3>Du har {{ antall_tilbud }} tilbud som du må se igjennom</h3>
     <br>
-    <div class="page-content">
+    <div id="overview" class="page-content">
         <table>
             <thead>
                 <tr>
@@ -19,7 +19,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tableBdy">
                 {% for tilbud in tilbuds %}
                     <tr>
                         {% for artist in tilbud.artist.all %}

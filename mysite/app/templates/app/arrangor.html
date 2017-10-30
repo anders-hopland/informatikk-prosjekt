@@ -28,8 +28,8 @@
         </form>
     </div>
 
-    <div class="page-content">
-        <table id="arrangor-oversikt">
+    <div id="overview" class="page-content">
+        <table class="arrangor-oversikt">
             <thead>
                 <tr>
                     <th>Artist navn</th>
@@ -39,7 +39,7 @@
                     <th>Detaljer</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tableBdy">
                 {% for consert in conserts %}
                     <tr>
                         <td>{{ consert.artist.navn }}</td>
