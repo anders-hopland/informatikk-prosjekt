@@ -8,6 +8,10 @@
             <img id="logoImg" src="{% static "../static/images/logo.png" %}">
         </a>
         {% if rolle == "manager" %}
+            <a {% if 'tilbud_liste_manager' in request.path %} class="active" {% endif %}
+                    href="{% url 'tilbud_liste_manager' %}">
+                MAILBOX
+            </a>
             <a {% if 'tilbudsliste_manager' in request.path %} class="active" {% endif %}
                     href="">
                 MAILBOX

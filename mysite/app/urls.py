@@ -4,7 +4,7 @@ from app.views import arrangor, lydtekniker, dashboard, lystekniker, artist
 from app.views import legg_til_behov_manager, lag_tilbud, godkjenn_tilbud_bookingsjef
 from app.views import manager, bookingansvarlig, bookingsjef, konsert, detaljer_scener
 from app.views import tidligere_konserter, tilbud_liste_bookingsjef, band_search, delete_behov_manager
-from app.views import tilbud_liste_bookingansvarlig, send_tilbud_bookingansvarlig
+from app.views import tilbud_liste_bookingansvarlig, send_tilbud_bookingansvarlig, tilbud_liste_manager
 
 from django.contrib.auth import views as auth_views
 
@@ -91,6 +91,10 @@ urlpatterns = [
     url(r'^send_tilbud_bookingansvarlig/(?P<tilbud_id>\d+)/$',
         send_tilbud_bookingansvarlig,
         name='send_tilbud_bookingansvarlig'),
+
+    url(r'^tilbudsliste_manager/$',
+        tilbud_liste_manager,
+        name='tilbud_liste_manager'),
 
     #login logout
     url('^',
