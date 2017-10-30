@@ -104,7 +104,7 @@ nav {
     transition: 0.7s ease;
 }
 
-.nav-cont1 > a:not(:first-child):hover, .nav-cont2 > a:last-child:hover {
+.nav-cont1 > a:not(:first-child):hover, .nav-cont2 > a:last-child:hover, .active {
     background-color: whitesmoke;
     transition: background-color 0.2s ease;
 }
