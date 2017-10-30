@@ -8,7 +8,7 @@
 {% block content %}
 <div class="page-container">
     <h1>Konserter som bandet/artisten skal spille</h1>
-    <div class="page-content">
+    <div id="overview" class="page-content">
         <table>
             <thead>
                 <tr>
@@ -17,7 +17,7 @@
                     <th>Honorar</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tableBdy">
                 {% for consert in conserts %}
                 <tr>
                     <td>{{ consert.tidspunkt }}</td>
