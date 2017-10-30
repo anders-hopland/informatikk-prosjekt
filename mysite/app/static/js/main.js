@@ -7,6 +7,11 @@ window.onload = function() {
     let overview = document.getElementById("overview");
     let tableBody = document.getElementById("tableBdy");
 
+    if (!tableBody) {
+        return;
+    }
+
+
     if (tableBody.children.length === 0) {
         let newP = document.createElement("p");
         newP.innerHTML = "Du har ikke noe registrert.";
