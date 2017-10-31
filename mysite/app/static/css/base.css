@@ -283,29 +283,33 @@ nav {
 }
 
 /* bookingansvarlig band info generel og tidligere */
-.search-bar{
+.search-bar {
     display:flex;
-    justify-content: center;
+    justify-content: space-around;
     margin: 1em 0 2em 0;
+    padding: 0 1em 0 1em;
 }
 
-.search-input{
+.search-input {
     border: 0.05em solid #c8c8c8;
     border-radius: 0.2em;
+    flex: 2;
     font-size: 1em;
     height: 2.5em;
     padding: 1em;
-    width: 50%;
+    margin-left: 1em;
 }
 
-.search-button{
+.search-button {
     background-color: #6dcf50;
     border: 0.05em solid #c8c8c8;
     border-radius: 0.2em;
     color: white;
+    cursor: pointer;
+    flex: 1;
     font-size:1em;
     height:2.5em;
-    width:8em;
+    margin: 0 1em 0 1em;
 }
 
 .search-button:hover {
@@ -318,7 +322,7 @@ nav {
 }
 
 /* bookingansvarlig tidligere band side */
-.previous-bands-btn{
+.previous-bands-btn {
     color:black;
     display: inline-block;
     font-size: 1em;
@@ -327,12 +331,12 @@ nav {
     text-decoration: none;
 }
 
-.previous-bands{
+.previous-bands {
     flex-wrap: wrap;
     text-decoration: none;
 }
 
-#previous-band-details{
+#previous-band-details {
     margin: 2em 0 0 0;
     max-width: 70em;
 }
