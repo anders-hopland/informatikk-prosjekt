@@ -1,0 +1,38 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    {% for consert in artist %}
+        <h1>Detaljeside for {{ consert.artist }}</h1>
+    {% endfor %}
+    <div class="page-content">
+        {% for concert in artist %}
+            <table id="previous_band_details">
+            <thead>
+                <tr>
+                    <th>Navn</th>
+                    <th>Nøkkel informasjon</th>
+                    <th>Tidligere spilte konserter</th>
+                    <th>Publikumtall</th>
+                    <th>Honorar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ concert.artist }}</td>
+                    <td>{{ concert.nokkelInfo }}</td>
+                    <td>{{ concert.tidspunkt }}</td>
+                    <td>{{ concert.tilskuertall }}</td>
+                    <td>{{ concert.inntekter }} kr</td>
+                </tr>
+            </tbody>
+         </table>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

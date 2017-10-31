@@ -1,0 +1,25 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Liste over band som har spilt på en scene tidligere</h1>
+    <form action="" method="GET" class="search-bar">
+        <input type="text" name="q"  placeholder="Filtrer hvilket band du vil se" value="{{ request.GET.q }}" class="search-input">
+        <input type="submit" value="Filtrer" class="search-button">
+    </form>
+    <div class="page-content" id="previous_bands">
+        {% for concert in conserts %}
+            <table>
+            <tr>
+                <td><a href="{{ concert.band_detaljer_url }}" class="previous_bands_btn">{{ concert.artist.navn }}</a></td>
+            </tr>
+            </table>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -271,7 +271,6 @@ def artist(request, navn):
         return render(request, 'dashboard', {'rolle': rolle})
 
 def band_info(request):
-
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
@@ -283,7 +282,6 @@ def band_info(request):
         if query:
             object_list = object_list.filter(band__icontains=query)
 
-
         context = {
             'bandInfo': object_list,
             'rolle': rolle
@@ -293,6 +291,39 @@ def band_info(request):
     else:
         return redirect('dashboard')
 
+def tidligere_band(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig':
+        object_list = Consert.objects.all().order_by('artist__navn').exclude(tidspunkt__year='2017')
+        query = request.GET.get("q")
+        if query:
+            object_list = object_list.filter(artist__navn__icontains=query).exclude(tidspunkt__year='2017')
+
+        context = {
+            'conserts': object_list,
+            'rolle': rolle,
+        }
+
+        return render(request, 'app/tidligere_band.html', context)
+    else:
+        return redirect('dashboard')
+
+def band_detaljer(request, post_id):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig':
+
+        object_list = Consert.objects.filter(id=post_id)
+        return render(request, 'app/band_detaljer.html', {'artist': object_list, 'rolle': rolle})
+    else:
+        return redirect('dashboard')
 
 
 def lag_tilbud(request):

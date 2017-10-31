@@ -26,15 +26,15 @@
                 href="{%  url 'tidligere_konserter' %}">
                 Tidligere festivaler
             </a>
-            <a {% if 'tidligere_band' in request.path %} class="active" {% endif %}
-                    href="">
+            <a {% if 'tidligere_band' in request.path or 'band_detaljer' in request.path %} class="active" {% endif %}
+                    href="{% url 'tidligere_band' %}">
                 Tidligere band
             </a>
             <a {% if 'lag_tilbud' in request.path %} class="active" {% endif %}
                     href="{% url 'lag_tilbud' %}">
                 Send forslag
             </a>
-            <a {% if 'info_om_band' in request.path %} class="active" {% endif %}
+            <a {% if 'band_info' in request.path %} class="active" {% endif %}
                     href="{% url 'band_info' %}">
                 Info om band
             </a>
