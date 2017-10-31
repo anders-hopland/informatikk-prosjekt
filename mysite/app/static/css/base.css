@@ -40,8 +40,8 @@ table tr td {
     position: fixed;
     top: 0;
     left: 0;
-    object-fit: contain;
-    width: 100vw;
+        object-fit: contain;
+        width: 100vw;
     z-index: -1;
 }
 
@@ -318,7 +318,7 @@ nav {
 }
 
 /* bookingansvarlig tidligere band side */
-.previous_bands_btn{
+.previous-bands-btn{
     color:black;
     display: inline-block;
     font-size: 1em;
@@ -327,17 +327,17 @@ nav {
     text-decoration: none;
 }
 
-#previous_bands{
+.previous-bands{
     flex-wrap: wrap;
     text-decoration: none;
 }
 
-#previous_band_details{
+#previous-band-details{
     margin: 2em 0 0 0;
     max-width: 70em;
 }
 
-#previous_band_details > th, td{
+#previous-band-details > th, td{
     max-width: 40em;
 }
 

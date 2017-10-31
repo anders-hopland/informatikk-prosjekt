@@ -12,12 +12,16 @@
         <input type="text" name="q"  placeholder="Filtrer hvilket band du vil se" value="{{ request.GET.q }}" class="search-input">
         <input type="submit" value="Filtrer" class="search-button">
     </form>
-    <div class="page-content" id="previous_bands">
+    <div class="page-content" class="previous-bands">
         {% for concert in conserts %}
             <table>
-            <tr>
-                <td><a href="{{ concert.band_detaljer_url }}" class="previous_bands_btn">{{ concert.artist.navn }}</a></td>
-            </tr>
+                <tr>
+                    <td>
+                        <a href="{{ concert.band_detaljer_url }}" class="previous-bands-btn">
+                            {{ concert.artist.navn }}
+                        </a>
+                    </td>
+                </tr>
             </table>
         {% endfor %}
     </div>
