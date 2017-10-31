@@ -173,6 +173,7 @@ def manager(request):
     rolle = user.profile.role
     if rolle == 'manager':
         object_list = Artist.objects.filter(manager=user.profile).order_by('navn')
+
         return render(request, 'app/manager.html', {'artists': object_list, 'rolle': rolle})
     else:
         return render(request, 'dashboard', {'rolle': rolle})
@@ -190,16 +191,28 @@ def artist(request, navn):
     else:
         return render(request, 'dashboard', {'rolle': rolle})
 
-def band_search(request):
+def band_info(request):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
+
     rolle = user.profile.role
+
+
     if rolle == 'bookingansvarlig':
-        object_list = Band_Info.objects.order_by('artist')
-        return render(request, 'app/bandSearch.html', {'artist': object_list, 'rolle': rolle})
-    else:
-        return render(request, 'dashboard', {'rolle': rolle})
+        object_list = Band_Info.objects.all()
+        query = request.GET.get("q")
+        if query:
+            object_list = object_list.filter(band__icontains=query)
+
+
+    context = {
+        'bandInfo': object_list,
+        'rolle': rolle
+    }
+
+    return render(request, 'app/bandSearch.html', context)
+
 
 def lag_tilbud(request):
     user = request.user

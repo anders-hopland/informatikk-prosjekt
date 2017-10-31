@@ -7,25 +7,44 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Band med nøkkel informasjon:</h1>
+    <h1>Søk om band informasjon:</h1>
+
+    <form action="" method="GET" class="search-bar">
+        <input type="text" name="q"  placeholder="Hvilket band vil du ha informasjon om?" value="{{ request.GET.q }}" class="search-input">
+        <input type="submit" value="Søk" class="search-button">
+    </form>
+
     <div class="page-content">
-        {% for band_info in band_info %}
-            <label for="artist">Navn:</label>
-            <span id="artist">{{ band_info.artist }}</span>
-
-            <label for="nokkelInfo">Nøkkel informasjon:</label>
-            <span id="nokkelInfo">{{ band_info.nokkelInfo }}</span>
-
-            <label for="stromtjeneste">Strømtjeneste:</label>
-            <span id="stromtjeneste">{{ band_info.stromtjeneste }}</span>
-
-            <label for="albumSalg">Album Salg:</label>
-            <span id="albumSalg">{{ band_info.artist.albumSalg }}</span>
-
-            <label for="norskeKonserter">Tidligere Norske konserter:</label>
-            <span id="norskeKonserter">{{ band_info.norskeKonserter }}</span>
-
-        {% endfor %}
+    {%  if request.GET.q%}
+        {% if bandInfo %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Band/Artist</th>
+                    <th>Nøkkel informasjon</th>
+                    <th>Strømtjeneste</th>
+                    <th>Album Salg</th>
+                    <th>Tidligere konserter i Norge</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for info in bandInfo %}
+                <tr>
+                    <td>{{ info.band }}</td>
+                    <td>{{ info.nokkelInfo }}</td>
+                    <td>{{ info.stromtjeneste }}</td>
+                    <td>{{ info.albumSalg }}</td>
+                    <td>{{ info.norskeKonserter }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+         </table>
+        {% else %}
+            <p class="search-fallback">Ingen artist eller band funnet med det navnet</p>
+        {% endif %}
+    {% else %}
+        <p class="search-fallback">Ingen søk gjort enda.</p>
+    {% endif %}
     </div>
 </div>
 {% endblock %}
