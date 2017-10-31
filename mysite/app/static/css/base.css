@@ -14,10 +14,6 @@ h1, h2 {
     margin: 0;
 }
 
-h1 {
-    margin-bottom:0.5em;
-}
-
 /* reservert til logintittel */
 h2 {
     color: white;
@@ -30,7 +26,8 @@ h3 {
 }
 
 table tr td {
-    padding: 2em;
+    margin-top: 1em;
+    padding: 1em;
     text-align: center;
 }
 
@@ -49,16 +46,18 @@ table tr td {
 }
 
 .page-container {
-    margin: 7em 10vw 3em 10vw;
+    margin: 2em 10vw 3em 10vw;
 }
 
 .page-content {
     display: flex;
     justify-content: center;
+    margin-top: 1em;
 }
 
 
 /* navbar */
+
 nav {
     background-color: white;
     box-shadow: 0 0.2em 0 #23C000;
@@ -68,7 +67,6 @@ nav {
     top: 0;
     width: 100%;
     display: flex;
-    position: fixed;
 }
 
 .nav-cont > a {
@@ -106,7 +104,7 @@ nav {
     transition: 0.7s ease;
 }
 
-.nav-cont1 > a:not(:first-child):hover, .nav-cont2 > a:last-child:hover {
+.nav-cont1 > a:not(:first-child):hover, .nav-cont2 > a:last-child:hover, .active {
     background-color: whitesmoke;
     transition: background-color 0.2s ease;
 }
@@ -168,28 +166,38 @@ nav {
 }
 
 /* arrangør oversikt */
-#arrangor-oversikt th, td{
+.arrangor-oversikt th, td{
     border-bottom: 1px solid #b9b9b9;
 }
 
-#arrangor-oversikt tbody tr:hover {
-    background-color: #dadada
-}
 
-.info-button {
-    background-color: #7c97af;
+/* buttons */
+.btn-greeny, .dynamic-form > input {
+    background-color: #23C000;
     border-radius: 0.2em;
     color: white;
     display: inline-block;
     font-size: 1em;
-    padding: 1em 2.2em;
+    padding: 1em;
     text-align: center;
     text-decoration: none;
 }
 
-.info-button:hover {
-    background-color: #9cbcd4;
+.btn-greeny:hover {
+    background-color: #23A000;
     color: white;
+}
+
+.red {
+    background: red;
+}
+
+.red:hover {
+    background: darkred;
+}
+
+.btn-small {
+    padding: 0.5em 1em 0.5em 1em;
 }
 
 /* konsert detaljer fra oversikt*/
@@ -209,45 +217,58 @@ nav {
     padding: 0.5em 0 0.5em 0;
 }
 
+.detail-info {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: left;
+    padding: 0 1em;
+}
+
+.detail-info h3, .dynamic-form h5 {
+    margin-top: 1em;
+}
+
+.detail-info > label, .dynamic-form label {
+    color: #6d6d6d;
+    font-weight: bold;
+    margin: 1em 0 0.2em 0;
+}
+
+.detail-info > span {
+    margin: -1.3em 2em 1em 5em;
+}
+
+.detail-info th {
+    min-width: 100px;
+}
+
+.btn-reg {
+    margin-top: 1em;
+    padding: 0.5em;
+}
+
 .content-border > h4{
-    margin: 1em 0;
+    margin: 0 0 1em 0;
 }
 
 .content-border {
     border-bottom: 1px solid #ddd;
-    padding: 0 1em 0 1em;
+    padding: 1em;
 }
 
 .content-border:last-child {
     border-bottom: transparent;
 }
 
-.detail-info {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    text-align: left;
-    padding:1em;
-
-}
-
-.detail-info > label {
-    color: #6d6d6d;
-    font-weight: bold;
-}
-
-.detail-info > span {
-    margin: -1em 2em 1em 5em;
-}
-
 /* valg av scene rulle meny */
-#scene-valg{
+.choice-menu {
     display: flex;
     justify-content: center;
     margin:0 0 2em 0;
 }
 
-#scene-choices{
+.choice-menu select {
     margin: 0.4em 0 0 1em;
     font-size:1.2em;
 }
@@ -267,7 +288,7 @@ nav {
 .search-bar{
     display:flex;
     justify-content: center;
-    margin: 0 0 2em 0;
+    margin: 1em 0 2em 0;
 }
 
 .search-input{
@@ -294,6 +315,42 @@ nav {
     color: white;
 }
 
-.search-fallback{
+.search-fallback {
     color: #808080;
+}
+
+
+/* manager redigeringsside */
+.space-between {
+    justify-content: space-around;
+}
+
+.page-content h5 {
+    margin: 0 0 1em 0;
+    font-size: 1.4em;
+}
+
+.dynamic-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.dynamic-form p {
+    display: flex;
+    flex-direction: column;
+}
+
+.dynamic-form p label {
+    margin: 0;
+}
+
+/* logout */
+#logoutP {
+    margin: 0;
+}
+
+/* for <p> when table is empty */
+.greyed {
+    color: #6d6d6d;
+    margin: 0;
 }

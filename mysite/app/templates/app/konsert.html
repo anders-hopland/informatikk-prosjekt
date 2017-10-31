@@ -31,11 +31,8 @@
                     <span id="sjanger">{{ consert.artist.sjanger }}</span>
 
                     {% if rolle == "manager" %}
-                        <label for="tilskuertall">Tilskuertall:</label>
-                        <span id="tilskuertall">{{ consert.tilskuertall }}</span>
-
-                        <label for="inntekter">Sjanger:</label>
-                        <span id="inntekter">{{ consert.inntekter }}</span>
+                        <label for="inntekter">Inntekter:</label>
+                        <span id="inntekter">{{ consert.inntekter }} kr</span>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -49,7 +46,7 @@
                     <h4>Lydteknikere:</h4>
                     {% if lydteknikere %}
                         {% for person in lydteknikere %}
-                            <p>{{ person }}</p>
+                            {{ person }};
                         {% endfor %}
                     {% else %}
                         <p>Ingen lydteknikere.</p>
@@ -59,7 +56,7 @@
                     <h4>Lysteknikere:</h4>
                     {% if lysteknikere %}
                         {% for lys in lysteknikere %}
-                            <p>{{ lys }}</p>
+                            {{ lys }};
                         {% endfor %}
                     {% else %}
                         <p>Ingen lysteknikere.</p>
@@ -69,7 +66,7 @@
                     <h4>Andre:</h4>
                     {% if andre %}
                         {% for person in andre %}
-                            <p>{{ person }}</p>
+                            {{ person }};
                         {% endfor %}
                     {% else %}
                         <p>Ingen andre.</p>
@@ -87,10 +84,10 @@
                <h4>Behov for instrumenter:</h4>
                 {% if instruments %}
                     {% for instrument in instruments %}
-                        <p>{{ instrument }}</p>
+                        {{ instrument }};
                     {% endfor %}
                 {% else %}
-                    <p>Ingen behov.</p>
+                    <p>Ingen behov meldt inn.</p>
                 {% endif %}
             </div>
 
@@ -98,30 +95,31 @@
                 <h4>Behov for lyd:</h4>
                 {% if lyd_list %}
                     {% for lyd in lyd_list %}
-                        <p>{{ lyd }}</p>
+                        {{ lyd }};
                     {% endfor %}
+                    <p></p>
                 {% else %}
-                    <p>Ingen behov.</p>
+                    <p>Ingen behov meldt inn.</p>
                 {% endif %}
             </div>
             <div class="content-border">
                 <h4>Behov for lys:</h4>
                 {% if lys_list %}
                     {% for lys in lys_list %}
-                        <p>{{ lys }}</p>
+                        {{ lys }};
                     {% endfor %}
                 {% else %}
-                    <p>Ingen behov.</p>
+                    <p>Ingen behov meldt inn.</p>
                 {% endif %}
             </div>
             <div class="content-border">
                 <h4>Andre behov:</h4>
                 {% if annet_list %}
                     {% for annet in annet_list %}
-                        <p>{{ annet }}</p>
+                        {{ annet }};
                     {% endfor %}
                 {% else %}
-                    <p>Ingen behov.</p>
+                    <p>Ingen behov meldt inn.</p>
                 {% endif %}
             </div>
         </div>

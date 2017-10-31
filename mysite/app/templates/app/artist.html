@@ -8,23 +8,21 @@
 {% block content %}
 <div class="page-container">
     <h1>Konserter som bandet/artisten skal spille</h1>
-    <div class="page-content">
+    <div id="overview" class="page-content">
         <table>
             <thead>
                 <tr>
                     <th>Tidspunkt</th>
                     <th>Scene</th>
                     <th>Honorar</th>
-                    <th>Tekniske Behov</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tableBdy">
                 {% for consert in conserts %}
                 <tr>
                     <td>{{ consert.tidspunkt }}</td>
                     <td>{{ consert.sceneNavn }}</td>
                     <td>{{ consert.inntekter }} kr</td>
-                    <td>Legge til knapp for detaljer, eller ha liste lagt til/ingen behov meldt inn</td>
                 </tr>
                 {% endfor %}
             </tbody>

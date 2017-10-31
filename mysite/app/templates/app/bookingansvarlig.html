@@ -8,7 +8,7 @@
 {% block content %}
 <div class="page-container">
     <h1>Oversikt over konserter:</h1>
-    <div class="page-content">
+    <div id="overview" class="page-content">
         <table>
             <thead>
                 <tr>
@@ -16,17 +16,21 @@
                     <th>Tidspunkt</th>
                     <th>Scene</th>
                     <th>Sjanger</th>
-                    <th>Detaljer</th>
+                    <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tableBdy">
                 {% for consert in conserts %}
                     <tr>
                         <td>{{ consert.artist.navn }}</td>
                         <td>{{ consert.tidspunkt }}</td>
                         <td>{{ consert.sceneNavn }}</td>
                         <td>{{ consert.artist.sjanger }}</td>
-                        <td><a href="{{ consert.consert_url }}" class="info-button">Se detaljer</a></td>
+                        <td>
+                            <a href="{{ consert.consert_url }}" class="btn-greeny">
+                                Se detaljer
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

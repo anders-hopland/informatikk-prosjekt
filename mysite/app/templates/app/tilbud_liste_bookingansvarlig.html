@@ -7,8 +7,7 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over tilbud:</h1>
-    <h3>For å få mer informasjon om et tilbud og eventuelt godkjenne, klikk på se mer</h3>
+    <h1>Oversikt over godkjente tilbud</h1>
     <br>
     <div id="overview" class="page-content">
         <table>
@@ -24,7 +23,11 @@
                         {% for artist in tilbud.artist.all %}
                             <td>{{ artist.navn }}</td>
                         {% endfor %}
-                        <td><a href="{% url 'godkjenn_tilbud_bookingsjef' tilbud.id %}" class="info-button">Se detaljer</a></td>
+                        <td>
+                            <a href="{% url 'send_tilbud_bookingansvarlig' tilbud.id %}" class="info-button">
+                                Se detaljer
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -7,23 +7,39 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over dine band</h1>
-    <div class="page-content">
+    <h1>Oversikt over dine bands konserter</h1>
+    <div id="overview" class="page-content">
         <table>
             <thead>
                 <tr>
-                    <th>Band</th>
+                    <th>Band navn</th>
+                    <th>Tidspunkt</th>
+                    <th>Scene</th>
                     <th>Sjanger</th>
-                    <th></th>
+                    <th>Honorar</th>
+                    <th>Behov</th>
+                    <th>Detaljer</th>
                 </tr>
             </thead>
-            <tbody>
-                {% for artist in artists %}
-                <tr>
-                    <td>{{ artist.navn }}</td>
-                    <td>{{ artist.sjanger }}</td>
-                    <td><a href="{% url 'artist' artist.slug %}" class="info-button">Se detaljer</a></td>
-                </tr>
+            <tbody id="tableBdy">
+                {% for consert in conserts %}
+                    <tr>
+                        <td>{{ consert.artist.navn }}</td>
+                        <td>{{ consert.tidspunkt }}</td>
+                        <td>{{ consert.sceneNavn }}</td>
+                        <td>{{ consert.artist.sjanger }}</td>
+                        <td>{{ consert.inntekter }} kr</td>
+                        <td>
+                            <a href="{% url 'legg_til_behov_manager' consert.artist.slug consert.id %}" class="btn-greeny">
+                                Rediger behov
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ consert.consert_url }}" class="btn-greeny">
+                                Se detaljer
+                            </a>
+                        </td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>

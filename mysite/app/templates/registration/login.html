@@ -7,14 +7,14 @@
 
 <img id="bgImg" src="../../static/images/login.jpg" alt="">
 
-<div class="login-container">
-    <div class="login-content">
+<div class="login-container flex">
+    <div class="login-content flex">
     <div class="login-form">
         <h2>Green Week</h2>
         <form action="{% url 'login' %}" method="post" class="form-group">
-            <input id="id_username" type="text" name="username" maxlength="254"
+            <input id="id_username" class="flex" type="text" name="username" maxlength="254"
                placeholder="Brukernavn" autofocus required>
-            <input id="id_password" type="password" name="password"
+            <input id="id_password" class="flex" type="password" name="password"
                    placeholder="Passord" required>
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ dashboard }}" />

@@ -8,19 +8,20 @@
 {% block content %}
 <div class="page-container">
     <div class="choice-menu">
-        <h1>Oversikt over konserter på scene:</h1>
-        <form action="{% url 'arrangor' %}" method="post">
+        <h1>Tidligere konserter i sjanger:</h1>
+        <form action="{% url 'tidligere_konserter' %}" method="post">
             {% csrf_token %}
-            <select onchange="this.form.submit()" name="scene-choices">
+            <select onchange="this.form.submit()"
+                    name="sjanger-choices" id="scene-choices">
                 <option value="alle">Alle</option>
-                {% for scene in sceneliste %}
-                    {% if scene.sceneNavn == current_consert %}
-                        <option value="{{ scene.sceneNavn.lower }}" selected="selected">
-                            {{ scene.sceneNavn }}
+                {% for sjangerTittel in sjangerliste %}
+                    {% if sjangerTittel.sjanger == current_genre %}
+                        <option value="{{ sjangerTittel.sjanger }}" selected="selected">
+                            {{ sjangerTittel.sjanger }}
                         </option>
                     {% else %}
-                        <option value="{{ scene.sceneNavn.lower }}">
-                            {{ scene.sceneNavn }}
+                        <option value="{{ sjangerTittel.sjanger }}">
+                            {{ sjangerTittel.sjanger }}
                         </option>
                     {% endif %}
                 {% endfor %}
@@ -29,14 +30,13 @@
     </div>
 
     <div id="overview" class="page-content">
-        <table class="arrangor-oversikt">
+        <table id="tidligere_konserter-oversikt">
             <thead>
                 <tr>
                     <th>Artist navn</th>
-                    <th>Tidspunkt</th>
+                    <th>Dato</th>
                     <th>Scene</th>
-                    <th>Sjanger</th>
-                    <th>Detaljer</th>
+                    <th>Publikumsantall</th>
                 </tr>
             </thead>
             <tbody id="tableBdy">
@@ -45,8 +45,7 @@
                         <td>{{ consert.artist.navn }}</td>
                         <td>{{ consert.tidspunkt }}</td>
                         <td>{{ consert.sceneNavn }}</td>
-                        <td>{{ consert.artist.sjanger }}</td>
-                        <td><a href="{{ consert.consert_url }}" class="btn-greeny">Se detaljer</a></td>
+                        <td>{{ consert.tilskuertall }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
