@@ -9,7 +9,7 @@
 <div class="page-container">
     <h1>Rediger tekniske behov for: {{ consert.artist }}</h1>
 
-    <div id="overview" class="page-content space-between">
+    <div class="page-content space-between">
         <div class="detail-info">
             <form id="behovFrm" action="" method="post" class="dynamic-form">
                 <h5>Redigeringsskjema:</h5>
@@ -21,29 +21,34 @@
 
         <div class="detail-info">
             <h5>Tabelloversikt over tekniske behov</h5>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Type</th>
-                        <th>Beskrivelse</th>
-                        <th>Slett</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBdy">
-                    {% for behov in consert.behov.all %}
+
+            {% if consert.behov %}
+                <table>
+                    <thead>
                         <tr>
-                            <td>{{ behov.type }}</td>
-                            <td>{{ behov.behov }}</td>
-                            <td>
-                                <a href="{% url 'delete_behov_manager' artist_slug consert.id behov.id %}"
-                                   class="btn-small btn-greeny red">
-                                    Slett
-                                </a>
-                            </td>
+                            <th>Type</th>
+                            <th>Beskrivelse</th>
+                            <th>Slett</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for behov in consert.behov.all %}
+                            <tr>
+                                <td>{{ behov.type }}</td>
+                                <td>{{ behov.behov }}</td>
+                                <td>
+                                    <a href="{% url 'delete_behov_manager' artist_slug consert.id behov.id %}"
+                                       class="btn-small btn-greeny red">
+                                        Slett
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="greyed">Du har ikke noe registrert.</p>
+            {% endif %}
         </div>
     </div>
 </div>

@@ -8,25 +8,29 @@
 {% block content %}
 <div class="page-container">
     <h1>Konserter som bandet/artisten skal spille</h1>
-    <div id="overview" class="page-content">
-        <table>
-            <thead>
-                <tr>
-                    <th>Tidspunkt</th>
-                    <th>Scene</th>
-                    <th>Honorar</th>
-                </tr>
-            </thead>
-            <tbody id="tableBdy">
-                {% for consert in conserts %}
-                <tr>
-                    <td>{{ consert.tidspunkt }}</td>
-                    <td>{{ consert.sceneNavn }}</td>
-                    <td>{{ consert.inntekter }} kr</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="page-content">
+        {% if conserts %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tidspunkt</th>
+                        <th>Scene</th>
+                        <th>Honorar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for consert in conserts %}
+                    <tr>
+                        <td>{{ consert.tidspunkt }}</td>
+                        <td>{{ consert.sceneNavn }}</td>
+                        <td>{{ consert.inntekter }} kr</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="greyed">Du har ikke noe registrert.</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
