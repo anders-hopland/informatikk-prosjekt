@@ -13,25 +13,25 @@
     <div class="page-content">
         {% for concert in artist %}
             <table id="previous-band-details">
-            <thead>
-                <tr>
-                    <th>Navn</th>
-                    <th>Nøkkel informasjon</th>
-                    <th>Tidligere spilte konserter</th>
-                    <th>Publikumtall</th>
-                    <th>Honorar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ concert.artist }}</td>
-                    <td>{{ concert.nokkelInfo }}</td>
-                    <td>{{ concert.tidspunkt }}</td>
-                    <td>{{ concert.tilskuertall }}</td>
-                    <td>{{ concert.inntekter }} kr</td>
-                </tr>
-            </tbody>
-         </table>
+                <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <th>Nøkkel informasjon</th>
+                        <th>Tidligere spilte konserter</th>
+                        <th>Publikumtall</th>
+                        <th>Honorar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ concert.artist }}</td>
+                        <td>{{ concert.nokkelInfo }}</td>
+                        <td>{{ concert.tidspunkt }}</td>
+                        <td>{{ concert.tilskuertall }}</td>
+                        <td>{{ concert.inntekter }} kr</td>
+                    </tr>
+                </tbody>
+            </table>
         {% endfor %}
     </div>
 </div>

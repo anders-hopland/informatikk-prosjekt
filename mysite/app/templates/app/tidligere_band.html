@@ -9,7 +9,8 @@
 <div class="page-container">
     <h1>Liste over band som har spilt på en scene tidligere</h1>
     <form action="" method="GET" class="search-bar">
-        <input type="text" name="q"  placeholder="Filtrer hvilket band du vil se" value="{{ request.GET.q }}" class="search-input">
+        <input type="text" name="q"  placeholder="Filtrer hvilket band du vil se"
+               value="{{ request.GET.q }}" class="search-input">
         <input type="submit" value="Filtrer" class="search-button">
     </form>
     <div class="page-content" class="previous-bands">
