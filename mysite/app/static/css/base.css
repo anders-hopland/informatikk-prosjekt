@@ -285,7 +285,7 @@ nav {
 /* bookingansvarlig band info generel og tidligere */
 .search-bar {
     display:flex;
-    justify-content: space-around;
+    justify-content: center;
     margin: 1em 0 2em 0;
     padding: 0 1em 0 1em;
 }
@@ -298,6 +298,7 @@ nav {
     height: 2.5em;
     padding: 1em;
     margin-left: 1em;
+    max-width: 30em;
 }
 
 .search-button {
@@ -310,6 +311,7 @@ nav {
     font-size:1em;
     height:2.5em;
     margin: 0 1em 0 1em;
+    max-width: 10em;
 }
 
 .search-button:hover {
