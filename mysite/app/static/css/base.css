@@ -322,15 +322,6 @@ nav {
 }
 
 /* bookingansvarlig tidligere band side */
-.previous-bands-btn {
-    color:black;
-    display: inline-block;
-    font-size: 1em;
-    padding: 0.5em;
-    text-align: center;
-    text-decoration: none;
-}
-
 .previous-bands {
     flex-wrap: wrap;
     text-decoration: none;

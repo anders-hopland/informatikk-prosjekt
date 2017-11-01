@@ -312,20 +312,6 @@ def tidligere_band(request):
     else:
         return redirect('dashboard')
 
-def band_detaljer(request, post_id):
-    user = request.user
-    if not request.user.is_authenticated():
-        return render(request, 'registration/login.html', {})
-
-    rolle = user.profile.role
-    if rolle == 'bookingansvarlig':
-
-        object_list = Consert.objects.filter(id=post_id)
-        return render(request, 'app/band_detaljer.html', {'artist': object_list, 'rolle': rolle})
-    else:
-        return redirect('dashboard')
-
-
 def lag_tilbud(request):
     user = request.user
     if not request.user.is_authenticated():

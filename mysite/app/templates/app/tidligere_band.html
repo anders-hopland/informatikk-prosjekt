@@ -18,9 +18,7 @@
 
     <div class="page-content" >
     {%  if request.GET.q%}
-
         {% if conserts %}
-
             <table class="previous-band-details">
                 <thead>
                     <tr>
@@ -31,7 +29,6 @@
                         <th>Honorar</th>
                     </tr>
                 </thead>
-
             {% for concert in conserts %}
                 <tbody>
                     <tr>
@@ -43,15 +40,11 @@
                     </tr>
                 </tbody>
             {% endfor %}
-
             </table>
-
         {% else %}
             <p class="search-fallback">Ingen artist eller band funnet med det navnet</p>
         {% endif %}
-
     {% else %}
-
         <table class="previous-band-details">
             <thead>
                 <tr>
@@ -62,9 +55,7 @@
                     <th>Honorar</th>
                 </tr>
             </thead>
-
         {% for concert in conserts %}
-
             <tbody>
                 <tr>
                     <td>{{ concert.artist }}</td>
