@@ -378,7 +378,7 @@ def vurder_marked(request):
                       {'conserts': concert_list, 'rolle': rolle, 'sceneliste': scene_list, 'sjangerliste': genre_list,
                        'current_scene': current_scene, 'current_genre': current_genre})
     else:
-        return render(request, 'app/dashboard.html', {'rolle': rolle})
+        return redirect('dashboard')
 
 
 

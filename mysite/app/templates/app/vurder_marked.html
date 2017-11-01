@@ -8,8 +8,8 @@
 {% block content %}
 <div class="page-container">
     <div class="choice-menu">
-    <h1>Økonomisk oversikt over konserter i utvalgte sjangere på forskjellige scener:</h1>
-    <form action="{% url 'vurder_marked' %}" method="post">
+        <h1>Oversikt over konserter på scene med sjanger:</h1>
+        <form action="{% url 'vurder_marked' %}" method="post">
             {% csrf_token %}
             <select onchange="this.form.submit()" name="booking-scene" class="choice-menu">
                 <option value="alle">Alle</option>
@@ -43,32 +43,36 @@
     </div>
 
     <div class="page-content">
-        <table id="vurder_marked-oversikt">
-            <thead>
-                <tr>
-                    <th>Navn</th>
-                    <th>Tidspunkt</th>
-                    <th>Scene</th>
-                    <th>Sjanger</th>
-                    <th>Publikumstall</th>
-                    <th>Kostnader</th>
-                    <th>Inntekter</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for consert in conserts %}
+        {% if conserts %}
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ consert.artist.navn }}</td>
-                        <td>{{ consert.tidspunkt }}</td>
-                        <td>{{ consert.sceneNavn }}</td>
-                        <td>{{ consert.artist.sjanger }}</td>
-                        <td>{{ consert.tilskuertall }}</td>
-                        <td>{{ consert.kostnader }}</td>
-                        <td>{{ consert.inntekter }}</td>
+                        <th>Navn</th>
+                        <th>Tidspunkt</th>
+                        <th>Scene</th>
+                        <th>Sjanger</th>
+                        <th>Publikumstall</th>
+                        <th>Kostnader</th>
+                        <th>Inntekter</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for consert in conserts %}
+                        <tr>
+                            <td>{{ consert.artist.navn }}</td>
+                            <td>{{ consert.tidspunkt }}</td>
+                            <td>{{ consert.sceneNavn }}</td>
+                            <td>{{ consert.artist.sjanger }}</td>
+                            <td>{{ consert.tilskuertall }}</td>
+                            <td>{{ consert.kostnader }}</td>
+                            <td>{{ consert.inntekter }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="greyed">Du har ikke noe registrert.</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
