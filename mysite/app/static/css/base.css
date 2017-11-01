@@ -327,12 +327,11 @@ nav {
     text-decoration: none;
 }
 
-#previous-band-details {
-    margin: 2em 0 0 0;
+.previous-band-details {
     max-width: 70em;
 }
 
-#previous-band-details > th, td{
+.previous-band-details > th, td {
     max-width: 40em;
 }
 
