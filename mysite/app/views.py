@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Count
 from . models import Artist, Consert, Tilbud, Behov
+from datetime import datetime
 
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm
 from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
@@ -188,9 +189,9 @@ def tidligere_konserter(request):
     if rolle == 'bookingansvarlig':
         current_genre = request.POST.get('sjanger-choices')
         if current_genre is not None and current_genre != 'alle':
-            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__year='2017')
+            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__gte=datetime.now(), tidspunkt__year='2017')
         else:
-            concert_list = Consert.objects.exclude(tidspunkt__year='2017')
+            concert_list = Consert.objects.exclude(tidspunkt__gte=datetime.now(), tidspunkt__year='2017')
 
         sjanger_list = Artist.objects.values('sjanger').distinct()
 
@@ -225,7 +226,7 @@ def manager(request):
     rolle = user.profile.role
     if rolle == 'manager':
 
-        all_conserts = Consert.objects.all().order_by('tidspunkt')
+        all_conserts = Consert.objects.all().exclude(tidspunkt__lte=datetime.now()).order_by('tidspunkt')
         artist_list = Artist.objects.filter(manager=user.profile).order_by('navn')
         conserts = []
 
@@ -346,13 +347,13 @@ def vurder_marked(request):
         current_scene = request.POST.get('booking-scene')
         current_genre = request.POST.get('booking-genre')
         if current_scene is not None and current_genre is not None and current_scene != 'alle' and current_genre == 'alle':
-            concert_list = Consert.objects.filter(sceneNavn=current_scene).exclude(tidspunkt__year='2017').order_by('tidspunkt')
+            concert_list = Consert.objects.filter(sceneNavn=current_scene).exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
         elif current_scene is not None and current_genre is not None and current_scene == 'alle' and current_genre != 'alle':
-            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__year='2017').order_by('tidspunkt')
+            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
         elif current_scene is not None and current_genre is not None and current_scene != 'alle' and current_genre != 'alle':
-            concert_list = Consert.objects.filter(sceneNavn=current_scene, artist__sjanger=current_genre).exclude(tidspunkt__year='2017').order_by('tidspunkt')
+            concert_list = Consert.objects.filter(sceneNavn=current_scene, artist__sjanger=current_genre).exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
         else:
-            concert_list = Consert.objects.exclude(tidspunkt__year='2017').order_by('tidspunkt')
+            concert_list = Consert.objects.exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
         genre_list = Artist.objects.values('sjanger').distinct()

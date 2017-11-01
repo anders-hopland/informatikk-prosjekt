@@ -7,11 +7,11 @@
 
 {% block content %}
 <div class="page-container">
-    <div id="scene-valg">
+    <div class="choice-menu">
     <h1>Økonomisk oversikt over konserter i utvalgte sjangere på forskjellige scener:</h1>
     <form action="{% url 'vurder_marked' %}" method="post">
             {% csrf_token %}
-            <select onchange="this.form.submit()" name="booking-scene" class="scene-choices">
+            <select onchange="this.form.submit()" name="booking-scene" class="choice-menu">
                 <option value="alle">Alle</option>
                 {% for scene in sceneliste %}
                     {% if scene.sceneNavn == current_scene %}
@@ -25,7 +25,7 @@
                     {% endif %}
                 {% endfor %}
             </select>
-            <select onchange="this.form.submit()" name="booking-genre" id="booking-genre" class="scene-choices">
+            <select onchange="this.form.submit()" name="booking-genre" id="booking-genre" class="choice-menu">
                 <option value="alle">Alle</option>
                 {% for sjangerTittel in sjangerliste %}
                     {% if sjangerTittel.sjanger == current_genre %}
