@@ -65,6 +65,8 @@ nav {
     font-size: 1.3em;
     margin: 0;
     padding: 0;
+    position: sticky;
+    position: -webkit-sticky;
     top: 0;
     width: 100%;
 }
