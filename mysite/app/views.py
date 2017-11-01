@@ -336,7 +336,7 @@ def tilbud_liste_bookingsjef(request):
         return redirect('dashboard')
 
 
-def godkjenn_tilbud_bookingsjef(request, artist, tilbud_id):
+def godkjenn_tilbud_bookingsjef(request, tilbud_id):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
@@ -419,7 +419,7 @@ def tilbud_liste_manager(request):
         return redirect('dashboard')
 
 
-def godkjenn_tilbud_manager(request, artist, tilbud_id):
+def godkjenn_tilbud_manager(request, tilbud_id):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
@@ -442,6 +442,5 @@ def godkjenn_tilbud_manager(request, artist, tilbud_id):
                                                                     })
     else:
         return redirect('dashboard')
-
 
 

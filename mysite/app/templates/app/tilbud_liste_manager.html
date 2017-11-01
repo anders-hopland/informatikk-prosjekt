@@ -7,10 +7,12 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over tilbud:</h1>
-    <br>
-    <h3>Du har {{ antall_tilbud }} tilbud i innboksen din</h3>
-    <br>
+    <div class="space_around">
+        <h1>Oversikt over tilbud:</h1>
+    </div>
+    <div class="space_around">
+        <h3>Du har {{ antall_tilbud }} tilbud i innboksen din</h3>
+    </div>
     <div id="overview" class="page-content">
         <table>
             <thead>
@@ -35,3 +37,4 @@
     </div>
 </div>
 {% endblock %}
+

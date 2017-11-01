@@ -30,15 +30,12 @@
         </div>
     </div>
 
-    <br>
-    <br>
-
-    <center>
+    <div class="form-group space-between">
         <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Submit" />
         </form>
-    </center>
+    </div>
 </div>
 {% endblock %}

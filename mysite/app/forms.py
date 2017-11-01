@@ -18,8 +18,8 @@ class BehovTypeModelChoiceField(ModelChoiceField):
 class RegistrerTilbudForm(forms.ModelForm):
     artist = MyModelChoiceField(queryset=Artist.objects.all())
     soknad = forms.CharField(widget=forms.Textarea)
-    pris = forms.CharField()
-    tidspunkt = forms.DateField()
+    pris = forms.IntegerField()
+    tidspunkt = forms.DateField(widget=forms.SelectDateWidget())
 
     class Meta:
         model = Tilbud

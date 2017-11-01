@@ -283,6 +283,10 @@ nav {
     justify-content: space-around;
 }
 
+.space_around {
+    margin: 20px;
+}
+
 .page-content h5 {
     margin: 0 0 1em 0;
     font-size: 1.4em;

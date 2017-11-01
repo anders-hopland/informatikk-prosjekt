@@ -96,6 +96,10 @@ urlpatterns = [
         tilbud_liste_manager,
         name='tilbud_liste_manager'),
 
+    url(r'^send_tilbud_bookingansvarlig/(?P<tilbud_id>\d+)/$',
+        send_tilbud_bookingansvarlig,
+        name='send_tilbud_bookingansvarlig'),
+
     #login logout
     url('^',
         include('django.contrib.auth.urls')),
