@@ -37,6 +37,7 @@
                         <th>Artist navn</th>
                         <th>Dato</th>
                         <th>Scene</th>
+                        <th>Sjanger</th>
                         <th>Publikumsantall</th>
                     </tr>
                 </thead>
@@ -46,6 +47,7 @@
                             <td>{{ consert.artist.navn }}</td>
                             <td>{{ consert.tidspunkt }}</td>
                             <td>{{ consert.sceneNavn }}</td>
+                            <td>{{ consert.artist.sjanger }}</td>
                             <td>{{ consert.tilskuertall }}</td>
                         </tr>
                     {% endfor %}
