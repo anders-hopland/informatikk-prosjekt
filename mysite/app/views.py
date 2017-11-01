@@ -379,6 +379,26 @@ def generer_billettpris(request):
 
     rolle = user.profile.role
     if rolle == 'bookingsjef':
+        current_scene = request.POST.get('booking-scene')
+        current_artist = request.POST.get('booking-artist')
+        if current_scene is not None and current_artist is not None and current_scene != 'alle' and current_artist == 'alle':
+            concert_list = Consert.objects.filter(sceneNavn=current_scene).exclude(
+                tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+        elif current_scene is not None and current_artist is not None and current_scene == 'alle' and current_artist != 'alle':
+            concert_list = Consert.objects.filter(artist=current_artist).exclude(
+                tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+        elif current_scene is not None and current_artist is not None and current_scene != 'alle' and current_artist != 'alle':
+            concert_list = Consert.objects.filter(sceneNavn=current_scene, artist=current_artist).exclude(
+                tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+        else:
+            concert_list = Consert.objects.exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+
+        scene_list = Consert.objects.values('sceneNavn').distinct()
+        artist_list = Artist.objects.values('navn').distinct()
+
+
+
+
         return render(request, 'app/generer_billettpris.html',
                       {'rolle': rolle})
     else:
