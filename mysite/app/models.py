@@ -114,6 +114,7 @@ class Consert(models.Model):
     tilskuertall = models.IntegerField(default=1000, blank=True)
     inntekter = models.IntegerField(default=20000, blank=True)
     kostnader = models.IntegerField(default=10000, blank=True)
+    nokkelInfo = models.CharField(max_length=2000, blank=True)
 
     def __str__(self):
         return self.artist.navn
@@ -121,6 +122,9 @@ class Consert(models.Model):
     def consert_url(self):
         return reverse('konsert', args=[self.tidspunkt.year, self.tidspunkt.strftime('%m'),
                                         self.tidspunkt.strftime('%d'), self.id])
+
+    def band_detaljer_url(self):
+        return reverse('band_detaljer', args=[self.id])
 
     class Meta:
         verbose_name = 'consert'
@@ -145,4 +149,16 @@ class Tilbud(models.Model):
         verbose_name = 'tilbud'
         verbose_name_plural = 'tilbud'
 
+class Band_Info(models.Model):
+    band = models.CharField(max_length=500)
+    nokkelInfo = models.CharField(max_length=2000)
+    stromtjeneste = models.CharField(max_length=500)
+    albumSalg = models.CharField(max_length=2000)
+    norskeKonserter = models.CharField(max_length=2000)
 
+    def __str__(self):
+        return self.band
+
+    class Meta:
+        verbose_name = 'Band Info'
+        verbose_name_plural = 'Band Information'

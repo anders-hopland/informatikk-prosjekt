@@ -8,30 +8,33 @@
 {% block content %}
 <div class="page-container">
     <h1>Oversikt over godkjente tilbud</h1>
-    <br>
-    <div id="overview" class="page-content">
-        <table>
-            <thead>
-                <tr>
-                    <th>Artist navn</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="tableBdy">
-                {% for tilbud in tilbuds %}
+    <div class="page-content">
+        {% if tilbuds %}
+            <table>
+                <thead>
                     <tr>
-                        {% for artist in tilbud.artist.all %}
-                            <td>{{ artist.navn }}</td>
-                        {% endfor %}
-                        <td>
-                            <a href="{% url 'send_tilbud_bookingansvarlig' tilbud.id %}" class="info-button">
-                                Se detaljer
-                            </a>
-                        </td>
+                        <th>Artist navn</th>
+                        <th></th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for tilbud in tilbuds %}
+                        <tr>
+                            {% for artist in tilbud.artist.all %}
+                                <td>{{ artist.navn }}</td>
+                            {% endfor %}
+                            <td>
+                                <a href="{% url 'send_tilbud_bookingansvarlig' tilbud.id %}" class="info-button">
+                                    Se detaljer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="greyed">Du har ikke noe registrert.</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

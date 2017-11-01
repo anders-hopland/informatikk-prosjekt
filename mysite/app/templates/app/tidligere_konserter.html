@@ -29,27 +29,31 @@
         </form>
     </div>
 
-    <div id="overview" class="page-content">
-        <table id="tidligere_konserter-oversikt">
-            <thead>
-                <tr>
-                    <th>Artist navn</th>
-                    <th>Dato</th>
-                    <th>Scene</th>
-                    <th>Publikumsantall</th>
-                </tr>
-            </thead>
-            <tbody id="tableBdy">
-                {% for consert in conserts %}
+    <div class="page-content">
+        {% if conserts %}
+            <table id="tidligere_konserter-oversikt">
+                <thead>
                     <tr>
-                        <td>{{ consert.artist.navn }}</td>
-                        <td>{{ consert.tidspunkt }}</td>
-                        <td>{{ consert.sceneNavn }}</td>
-                        <td>{{ consert.tilskuertall }}</td>
+                        <th>Artist navn</th>
+                        <th>Dato</th>
+                        <th>Scene</th>
+                        <th>Publikumsantall</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for consert in conserts %}
+                        <tr>
+                            <td>{{ consert.artist.navn }}</td>
+                            <td>{{ consert.tidspunkt }}</td>
+                            <td>{{ consert.sceneNavn }}</td>
+                            <td>{{ consert.tilskuertall }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="greyed">Du har ikke noe registrert.</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

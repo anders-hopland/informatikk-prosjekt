@@ -8,33 +8,37 @@
 {% block content %}
 <div class="page-container">
     <h1>Oversikt over konserter:</h1>
-    <div id="overview" class="page-content">
-        <table>
-            <thead>
-                <tr>
-                    <th>Artist navn</th>
-                    <th>Tidspunkt</th>
-                    <th>Scene</th>
-                    <th>Sjanger</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="tableBdy">
-                {% for consert in conserts %}
+    <div class="page-content">
+        {% if conserts %}
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ consert.artist.navn }}</td>
-                        <td>{{ consert.tidspunkt }}</td>
-                        <td>{{ consert.sceneNavn }}</td>
-                        <td>{{ consert.artist.sjanger }}</td>
-                        <td>
-                            <a href="{{ consert.consert_url }}" class="btn-greeny">
-                                Se detaljer
-                            </a>
-                        </td>
+                        <th>Artist navn</th>
+                        <th>Tidspunkt</th>
+                        <th>Scene</th>
+                        <th>Sjanger</th>
+                        <th></th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for consert in conserts %}
+                        <tr>
+                            <td>{{ consert.artist.navn }}</td>
+                            <td>{{ consert.tidspunkt }}</td>
+                            <td>{{ consert.sceneNavn }}</td>
+                            <td>{{ consert.artist.sjanger }}</td>
+                            <td>
+                                <a href="{{ consert.consert_url }}" class="btn-greeny">
+                                    Se detaljer
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="greyed">Du har ikke noe registrert.</p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
