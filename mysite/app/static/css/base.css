@@ -368,3 +368,13 @@ nav {
     margin: 0;
     text-align: center;
 }
+
+/* footer */
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: grey;
+    text-align: center;
+}
