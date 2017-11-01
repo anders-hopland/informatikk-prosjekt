@@ -5,6 +5,7 @@ from . models import Artist, Consert, Tilbud, Behov, Band_Info
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm
 from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
 
+from django.db.models import Q
 
 '''
 INFO
@@ -50,9 +51,9 @@ def arrangor(request):
     if rolle == 'arrangor':
         current_consert = request.POST.get('scene-choices')
         if current_consert is not None and current_consert != 'alle':
-            object_list = Consert.objects.filter(sceneNavn=current_consert).order_by('tidspunkt')
+            object_list = Consert.objects.filter(sceneNavn=current_consert).order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
         else:
-            object_list = Consert.objects.all().order_by('tidspunkt')
+            object_list = Consert.objects.all().order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
 
@@ -70,7 +71,7 @@ def lydtekniker(request):
 
     rolle = user.profile.role
     if rolle == 'lydtekniker':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
+        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
         return render(request, 'app/lydtekniker.html', {'conserts': object_list,
                                                         'rolle': rolle})
     else:
@@ -83,7 +84,7 @@ def lystekniker(request):
 
     rolle = user.profile.role
     if rolle == 'lystekniker':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
+        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
         return render(request, 'app/lystekniker.html', {'conserts': object_list,
                                                         'rolle': rolle})
     else:
@@ -150,9 +151,9 @@ def bookingansvarlig(request):
     if rolle == 'bookingansvarlig':
         current_consert = request.POST.get('scene-choices')
         if current_consert is not None and current_consert != 'alle':
-            object_list = Consert.objects.order_by('tidspunkt')
+            object_list = Consert.objects.order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
         else:
-            object_list = Consert.objects.all().order_by('tidspunkt')
+            object_list = Consert.objects.all().order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
 
@@ -208,7 +209,7 @@ def manager(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
-        all_conserts = Consert.objects.all().order_by('tidspunkt')
+        all_conserts = Consert.objects.all().order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
         artist_list = Artist.objects.filter(manager=user.profile).order_by('navn')
         conserts = []
 
