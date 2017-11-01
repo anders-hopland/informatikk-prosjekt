@@ -47,7 +47,7 @@ table tr td {
 
 .page-container {
     margin: 2em 10vw 0 10vw;
-    min-height: 79%;
+    min-height: 82%;
 }
 
 .page-content {
@@ -375,6 +375,4 @@ nav {
     color: grey;
     font-size:0.9em;
     text-align: center;
-    width: 100%;
-    margin: auto;
 }
