@@ -1,0 +1,51 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Søk om band informasjon:</h1>
+
+    <form action="" method="GET" class="search-bar">
+        <input type="text" name="q"  placeholder="Hvilket band vil du ha informasjon om?"
+               value="{{ request.GET.q }}" class="search-input">
+        <input type="submit" value="Søk" class="search-button">
+    </form>
+
+    <div class="page-content">
+    {%  if request.GET.q%}
+        {% if bandInfo %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Navn</th>
+                    <th>Nøkkel informasjon</th>
+                    <th>Strømtjeneste</th>
+                    <th>Album Salg</th>
+                    <th>Tidligere konserter i Norge</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for info in bandInfo %}
+                <tr>
+                    <td>{{ info.band }}</td>
+                    <td>{{ info.nokkelInfo }}</td>
+                    <td>{{ info.stromtjeneste }}</td>
+                    <td>{{ info.albumSalg }}</td>
+                    <td>{{ info.norskeKonserter }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+         </table>
+        {% else %}
+            <p class="search-fallback">Ingen artist eller band funnet med det navnet</p>
+        {% endif %}
+    {% else %}
+        <p class="search-fallback">Ingen søk gjort enda.</p>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
