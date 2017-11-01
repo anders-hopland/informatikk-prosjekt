@@ -7,32 +7,24 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over konserter:</h1>
+    <h1>Konserter som bandet/artisten skal spille</h1>
     <div class="page-content">
         {% if conserts %}
             <table>
                 <thead>
                     <tr>
-                        <th>Artist navn</th>
                         <th>Tidspunkt</th>
                         <th>Scene</th>
-                        <th>Sjanger</th>
-                        <th></th>
+                        <th>Honorar</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for consert in conserts %}
-                        <tr>
-                            <td>{{ consert.artist.navn }}</td>
-                            <td>{{ consert.tidspunkt }}</td>
-                            <td>{{ consert.sceneNavn }}</td>
-                            <td>{{ consert.artist.sjanger }}</td>
-                            <td>
-                                <a href="{{ consert.consert_url }}" class="btn-greeny">
-                                    Se detaljer
-                                </a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ consert.tidspunkt }}</td>
+                        <td>{{ consert.sceneNavn }}</td>
+                        <td>{{ consert.inntekter }} kr</td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>

@@ -1,0 +1,21 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Lag Tilbud</h1>
+    <div class="page-content">
+        <div class="detail-info">
+            <form action="" method="post" class="dynamic-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

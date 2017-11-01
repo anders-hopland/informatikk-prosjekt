@@ -6,22 +6,37 @@
 {% endblock %}
 
 {% block content %}
-<table>
-    <thead>
-        <tr>
-            <th>Band</th>
-            <th>Tidspunkt</th>
-            <th>Scene</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for consert in conserts %}
-        <tr>
-            <td>{{ consert.artist }}</td>
-            <td>{{ consert.tidspunkt }}</td>
-            <td>{{ consert.sceneNavn }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="page-container">
+    <h1>Oversikt over konserter du skal rigge for:</h1>
+    <div class="page-content">
+        {% if conserts %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Band</th>
+                        <th>Før konsert</th>
+                        <th>Etter konsert</th>
+                        <th>Dato</th>
+                        <th>Scene</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for consert in conserts %}
+                    <tr>
+                        <td>{{ consert.artist }}</td>
+                        {% for rigging in consert.rigging.all %}
+                            <td>kl. {{ rigging.tidspunkt_for_konsert}}</td>
+                            <td>kl. {{ rigging.tidspunkt_etter_konsert }}</td>
+                        {% endfor %}
+                        <td>{{ consert.tidspunkt }}</td>
+                        <td>{{ consert.sceneNavn }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="greyed">Du har ikke noe registrert.</p>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

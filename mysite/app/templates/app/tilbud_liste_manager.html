@@ -7,31 +7,24 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over konserter:</h1>
+    <h1>Oversikt over tilbud:</h1>
+    <h3>Du har {{ antall_tilbud }} tilbud i innboksen din</h3>
     <div class="page-content">
-        {% if conserts %}
+        {% if tilbuds %}
             <table>
                 <thead>
                     <tr>
                         <th>Artist navn</th>
-                        <th>Tidspunkt</th>
-                        <th>Scene</th>
-                        <th>Sjanger</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for consert in conserts %}
+                    {% for tilbud in tilbuds %}
                         <tr>
-                            <td>{{ consert.artist.navn }}</td>
-                            <td>{{ consert.tidspunkt }}</td>
-                            <td>{{ consert.sceneNavn }}</td>
-                            <td>{{ consert.artist.sjanger }}</td>
-                            <td>
-                                <a href="{{ consert.consert_url }}" class="btn-greeny">
-                                    Se detaljer
-                                </a>
-                            </td>
+                            {% for artist in tilbud.artist.all %}
+                                <td>{{ artist.navn }}</td>
+                            {% endfor %}
+                            <td><a href="{% url 'godkjenn_tilbud_bookingsjef' tilbud.id %}" class="info-button">Se detaljer</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
