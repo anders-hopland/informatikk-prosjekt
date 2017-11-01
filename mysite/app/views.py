@@ -298,7 +298,7 @@ def tidligere_band(request):
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        object_list = Consert.objects.all().order_by('artist__navn').exclude(tidspunkt__year='2017')
+        object_list = Consert.objects.order_by('artist__navn').exclude(tidspunkt__year='2017')
         query = request.GET.get("q")
         if query:
             object_list = object_list.filter(artist__navn__icontains=query).exclude(tidspunkt__year='2017')

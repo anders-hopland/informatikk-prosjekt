@@ -40,8 +40,8 @@ table tr td {
     position: fixed;
     top: 0;
     left: 0;
-        object-fit: contain;
-        width: 100vw;
+    object-fit: contain;
+    width: 100vw;
     z-index: -1;
 }
 
