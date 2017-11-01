@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 
 from . models import Artist, Consert, Tilbud, Behov, Band_Info
+from datetime import datetime
 
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm
 from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
@@ -368,6 +369,18 @@ def godkjenn_tilbud_bookingsjef(request, artist, tilbud_id):
                                                                         'form': form,
                                                                         'rolle': rolle
                                                                         })
+    else:
+        return redirect('dashboard')
+
+def generer_billettpris(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingsjef':
+        return render(request, 'app/generer_billettpris.html',
+                      {'rolle': rolle})
     else:
         return redirect('dashboard')
 
