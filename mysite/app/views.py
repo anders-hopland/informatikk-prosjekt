@@ -348,12 +348,8 @@ def tilbud_liste_bookingsjef(request):
     else:
         return redirect('dashboard')
 
-<<<<<<< HEAD
 
 def godkjenn_tilbud_bookingsjef(request, tilbud_id):
-=======
-def godkjenn_tilbud_bookingsjef(request, artist, tilbud_id):
->>>>>>> fe37117118b6226975f576d074ff971e40fd99ee
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})

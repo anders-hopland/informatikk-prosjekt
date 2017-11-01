@@ -14,6 +14,7 @@
         <h3>Du har {{ antall_tilbud }} tilbud i innboksen din</h3>
     </div>
     <div id="overview" class="page-content">
+        {% if antall_tilbud > 0 %}
         <table>
             <thead>
                 <tr>
@@ -27,22 +28,11 @@
                         {% for artist in tilbud.artist.all %}
                             <td>{{ artist.navn }}</td>
                         {% endfor %}
-                        <td>
-                            <a href="{% url 'godkjenn_tilbud_manager' tilbud.id %}" class="info-button">Se detaljer</a>
-                        </td>
+                        <td><a href="{% url 'godkjenn_tilbud_bookingsjef' tilbud.id %}" class="info-button">Se detaljer</a></td>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for tilbud in tilbuds %}
-                        <tr>
-                            {% for artist in tilbud.artist.all %}
-                                <td>{{ artist.navn }}</td>
-                            {% endfor %}
-                            <td><a href="{% url 'godkjenn_tilbud_bookingsjef' tilbud.id %}" class="info-button">Se detaljer</a></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                {% endfor %}
+            </tbody>
+        </table>
         {% else %}
             <p class="greyed">Du har ikke noe registrert.</p>
         {% endif %}
