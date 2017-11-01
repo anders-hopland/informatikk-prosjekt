@@ -371,11 +371,10 @@ nav {
 }
 
 /* footer */
-.footer{
-    bottom: 0;
+.footer {
     color: grey;
     font-size:0.9em;
-    position: absolute;
+    position: relative;
     text-align: center;
     width: 100%;
     margin: auto;
