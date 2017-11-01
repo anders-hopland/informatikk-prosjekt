@@ -32,7 +32,7 @@
             </a>
             <a {% if 'band_info' in request.path %} class="active" {% endif %}
                     href="{% url 'band_info' %}">
-                Info om band
+                Bandinfo
             </a>
         {% elif rolle == "bookingsjef" %}
             <a {% if 'tilbudsliste_bookingsjef' in request.path %} class="active" {% endif %}
