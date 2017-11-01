@@ -3,7 +3,7 @@ from django.conf.urls import url, include
 from . views import arrangor, lydtekniker, dashboard, lystekniker, artist
 from . views import legg_til_behov_manager, lag_tilbud, godkjenn_tilbud_bookingsjef
 from . views import manager, bookingansvarlig, bookingsjef, konsert
-from . views import tidligere_konserter, tilbud_liste_bookingsjef, band_info, delete_behov_manager, tidligere_band
+from . views import tidligere_konserter, tilbud_liste_bookingsjef, band_info, delete_behov_manager, tidligere_band, vurder_marked
 from . views import tilbud_liste_bookingansvarlig, send_tilbud_bookingansvarlig, tilbud_liste_manager
 
 from django.contrib.auth import views as auth_views
@@ -67,6 +67,10 @@ urlpatterns = [
     url(r'^bookingsjef/$',
         bookingsjef,
         name='bookingsjef'),
+
+    url(r'^bookingsjef/vurder_marked/$',
+        vurder_marked,
+        name='vurder_marked'),
 
     url(r'^band_info/$',
         band_info,

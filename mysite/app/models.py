@@ -113,6 +113,7 @@ class Consert(models.Model):
     rigging = models.ManyToManyField(Rigging, blank=True)
     tilskuertall = models.IntegerField(default=1000, blank=True)
     inntekter = models.IntegerField(default=20000, blank=True)
+    kostnader = models.IntegerField(default=10000, blank=True)
     nokkelInfo = models.CharField(max_length=2000, blank=True)
 
     def __str__(self):
