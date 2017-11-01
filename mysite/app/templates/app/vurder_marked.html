@@ -8,11 +8,24 @@
 {% block content %}
 <div class="page-container">
     <div class="choice-menu">
-        <h1>Tidligere konserter i sjanger:</h1>
-        <form action="{% url 'tidligere_konserter' %}" method="post">
+        <h1>Oversikt over konserter på scene med sjanger:</h1>
+        <form action="{% url 'vurder_marked' %}" method="post">
             {% csrf_token %}
-            <select onchange="this.form.submit()"
-                    name="sjanger-choices" id="scene-choices" class="choice-menu">
+            <select onchange="this.form.submit()" name="booking-scene" class="choice-menu">
+                <option value="alle">Alle</option>
+                {% for scene in sceneliste %}
+                    {% if scene.sceneNavn == current_scene %}
+                        <option value="{{ scene.sceneNavn.lower }}" selected="selected">
+                            {{ scene.sceneNavn }}
+                        </option>
+                    {% else %}
+                        <option value="{{ scene.sceneNavn.lower }}">
+                            {{ scene.sceneNavn }}
+                        </option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <select onchange="this.form.submit()" name="booking-genre" id="booking-genre" class="choice-menu">
                 <option value="alle">Alle</option>
                 {% for sjangerTittel in sjangerliste %}
                     {% if sjangerTittel.sjanger == current_genre %}
@@ -31,13 +44,16 @@
 
     <div class="page-content">
         {% if conserts %}
-            <table id="tidligere_konserter-oversikt">
+            <table>
                 <thead>
                     <tr>
-                        <th>Artist navn</th>
-                        <th>Dato</th>
+                        <th>Navn</th>
+                        <th>Tidspunkt</th>
                         <th>Scene</th>
-                        <th>Publikumsantall</th>
+                        <th>Sjanger</th>
+                        <th>Publikumstall</th>
+                        <th>Kostnader</th>
+                        <th>Inntekter</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +62,10 @@
                             <td>{{ consert.artist.navn }}</td>
                             <td>{{ consert.tidspunkt }}</td>
                             <td>{{ consert.sceneNavn }}</td>
+                            <td>{{ consert.artist.sjanger }}</td>
                             <td>{{ consert.tilskuertall }}</td>
+                            <td>{{ consert.kostnader }}</td>
+                            <td>{{ consert.inntekter }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
