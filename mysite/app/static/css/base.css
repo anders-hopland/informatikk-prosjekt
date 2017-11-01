@@ -47,6 +47,7 @@ table tr td {
 
 .page-container {
     margin: 2em 10vw 3em 10vw;
+    min-height: 79%;
 }
 
 .page-content {
@@ -371,11 +372,8 @@ nav {
 
 /* footer */
 .footer{
-    bottom: 0;
     color: grey;
     font-size:0.9em;
-    left: 0;
-    position: fixed;
+    position: relative;
     text-align: center;
-    width: 100%;
 }
