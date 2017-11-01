@@ -31,6 +31,10 @@ table tr td {
     text-align: center;
 }
 
+table thead tr th {
+    padding: 0 0.5em 0 0.5em;
+}
+
 #logoImg {
     height: 3em;
 }
