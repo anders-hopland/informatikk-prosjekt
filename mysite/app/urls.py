@@ -1,10 +1,18 @@
 from django.conf.urls import url, include
 
+<<<<<<< HEAD
 from app.views import arrangor, lydtekniker, dashboard, lystekniker, artist, godkjenn_tilbud_manager
 from app.views import legg_til_behov_manager, lag_tilbud, godkjenn_tilbud_bookingsjef
 from app.views import manager, bookingansvarlig, bookingsjef, konsert, detaljer_scener
 from app.views import tidligere_konserter, tilbud_liste_bookingsjef, band_search, delete_behov_manager
 from app.views import tilbud_liste_bookingansvarlig, send_tilbud_bookingansvarlig, tilbud_liste_manager
+=======
+from . views import arrangor, lydtekniker, dashboard, lystekniker, artist
+from . views import legg_til_behov_manager, lag_tilbud, godkjenn_tilbud_bookingsjef
+from . views import manager, bookingansvarlig, bookingsjef, konsert
+from . views import tidligere_konserter, tilbud_liste_bookingsjef, band_info, delete_behov_manager, tidligere_band
+from . views import tilbud_liste_bookingansvarlig, send_tilbud_bookingansvarlig, tilbud_liste_manager
+>>>>>>> fe37117118b6226975f576d074ff971e40fd99ee
 
 from django.contrib.auth import views as auth_views
 
@@ -68,9 +76,9 @@ urlpatterns = [
         bookingsjef,
         name='bookingsjef'),
 
-    url(r'^band_search/$',
-        band_search,
-        name='band_search'),
+    url(r'^band_info/$',
+        band_info,
+        name='band_info'),
 
     url(r'^lag_tilbud/$',
         lag_tilbud,
@@ -99,6 +107,9 @@ urlpatterns = [
     url(r'^send_tilbud_bookingansvarlig/(?P<tilbud_id>\d+)/$',
         send_tilbud_bookingansvarlig,
         name='send_tilbud_bookingansvarlig'),
+    url(r'^tidligere_band/$',
+        tidligere_band,
+        name='tidligere_band'),
 
     #login logout
     url('^',
@@ -116,4 +127,3 @@ urlpatterns = [
         auth_views.login,
         name='login'),
 ]
-

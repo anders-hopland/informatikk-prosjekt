@@ -1,0 +1,48 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+
+    <h1>Liste over band som har spilt på en scene tidligere</h1>
+
+    <form action="" method="GET" class="search-bar">
+        <input type="text" name="q"  placeholder="Filtrer hvilket band du vil se"
+               value="{{ request.GET.q }}" class="search-input">
+        <input type="submit" value="Filtrer" class="search-button">
+    </form>
+
+    <div class="page-content" >
+        {% if conserts %}
+            <table class="previous-band-details">
+                <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <th>Nøkkel informasjon</th>
+                        <th>Tidligere spilte konserter</th>
+                        <th>Tilskuertall</th>
+                        <th>Honorar</th>
+                    </tr>
+                </thead>
+            {% for concert in conserts %}
+                <tbody>
+                    <tr>
+                        <td>{{ concert.artist }}</td>
+                        <td>{{ concert.nokkelInfo }}</td>
+                        <td>{{ concert.tidspunkt }}</td>
+                        <td>{{ concert.tilskuertall }}</td>
+                        <td>{{ concert.inntekter }} kr</td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+            </table>
+        {% else %}
+            <p class="search-fallback">Ingen artist eller band funnet med det navnet</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
