@@ -35,6 +35,7 @@
                 <thead>
                     <tr>
                         <th>Artist navn</th>
+                        <th>Sjanger</th>
                         <th>Dato</th>
                         <th>Scene</th>
                         <th>Publikumsantall</th>
@@ -44,6 +45,7 @@
                     {% for consert in conserts %}
                         <tr>
                             <td>{{ consert.artist.navn }}</td>
+                            <td>{{ consert.artist.sjanger }}</td>
                             <td>{{ consert.tidspunkt }}</td>
                             <td>{{ consert.sceneNavn }}</td>
                             <td>{{ consert.tilskuertall }}</td>
