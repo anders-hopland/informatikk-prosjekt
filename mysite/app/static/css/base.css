@@ -183,6 +183,7 @@ nav {
     background-color: #23C000;
     border-radius: 0.2em;
     color: white;
+    cursor: pointer;
     display: inline-block;
     font-size: 1em;
     padding: 1em;
