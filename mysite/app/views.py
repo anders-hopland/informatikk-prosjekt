@@ -415,12 +415,12 @@ def tilbud_liste_bookingansvarlig(request):
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        no_status_tilbud = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=None)
-        approved = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=None)
-        denied = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=None)
-        #num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
+        tilbuds = Tilbud.objects.filter(sendt_av_ansvarlig=None)
+        num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
 
-        return render(request, 'app/tilbud_liste_bookingansvarlig.html', {'tilbuds': object_list, 'rolle': rolle})
+        return render(request, 'app/tilbud_liste_bookingansvarlig.html', {'tilbuds': tilbuds,
+                                                                          'num_concerts': num_conserts,
+                                                                          'rolle': rolle})
     else:
         return redirect('dashboard')
 

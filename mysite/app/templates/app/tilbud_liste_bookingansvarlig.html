@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over godkjente tilbud</h1>
+    <h1>Oversikt over godkjente tilbud. Du har totalt mottatt {{ num_tilbud }} tilbud</h1>
     <div class="page-content">
         {% if tilbuds %}
             <table>
@@ -15,6 +15,7 @@
                     <tr>
                         <th>Artist navn</th>
                         <th></th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,15 @@
                                     Se detaljer
                                 </a>
                             </td>
+                        <td>
+                            {% if tilbud.godkjent_av_bookingsjef == true %}
+                                <span>Godkjent</span>
+                            {% elif tilbud.godkjent_av_bookingsjef == false %}
+                                <span>Avslått</span>
+                            {% else %}
+                                <span>Ubehandlet</span>
+                            {% endif %}
+                        </td>
                         </tr>
                     {% endfor %}
                 </tbody>
