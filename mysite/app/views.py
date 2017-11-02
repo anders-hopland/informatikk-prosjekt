@@ -4,6 +4,7 @@ from django.db.models import Count
 from . models import Artist, Consert, Tilbud, Behov, Band_Info
 from datetime import datetime
 from random import randint
+import math
 
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm
 from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
@@ -429,11 +430,9 @@ def generer_billettpris(request):
                     tilskuertall_snitt = 0.9*consert.tilskuertall
 
                 totale_kostnader = consert.kostnader
-                for behov in consert.behov.all():
-                    totale_kostnader += 500
+                totale_kostnader += 500*len(consert.behov.all())
 
-                for person in consert.rigging.all():
-                    totale_kostnader += 2000
+                totale_kostnader += 2000*len(consert.rigging.all())
 
                 if consert.sceneNavn == 'hallen':
                     totale_kostnader += 15000
@@ -442,7 +441,9 @@ def generer_billettpris(request):
                 else:
                     totale_kostnader += 30000
 
-                consert.billettpris = round(((totale_kostnader+(tilskuertall_snitt*300)) / tilskuertall_snitt) * 1.2)
+                pris = ((totale_kostnader+(tilskuertall_total*175)) / tilskuertall_snitt) * 1.2
+                pris = math.ceil(pris/10)
+                consert.billettpris = pris*10
 
         return render(request, 'app/generer_billettpris.html', {'conserts': future_concerts, 'rolle': rolle})
     else:
