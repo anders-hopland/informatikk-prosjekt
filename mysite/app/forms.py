@@ -3,6 +3,10 @@ from django.forms import ModelChoiceField
 
 from . models import Artist, Tilbud, Behov
 
+MESSAGE_STATUS = (
+    (True, "Yes I acknowledge this"),
+    (False, "No, I do not like this")
+)
 
 #The choices html attribute with all artists in th database
 class MyModelChoiceField(ModelChoiceField):
@@ -41,6 +45,9 @@ class GodkjennTilbudBookingSjefForm(forms.ModelForm):
     class Meta:
         model = Tilbud
         fields = ('godkjent_av_bookingssjef',)
+        widgets = {
+            'sendt_av_ansvarlig': forms.RadioSelect(choices=MESSAGE_STATUS),
+        }
 
 
 class SendTilbudBookingAnsvarligForm(forms.ModelForm):
@@ -48,6 +55,9 @@ class SendTilbudBookingAnsvarligForm(forms.ModelForm):
     class Meta:
         model = Tilbud
         fields = ('sendt_av_ansvarlig',)
+        widgets = {
+            'sendt_av_ansvarlig': forms.RadioSelect(choices=MESSAGE_STATUS),
+        }
 
 
 class GodkjennTilbudManagerForm(forms.ModelForm):
@@ -55,6 +65,9 @@ class GodkjennTilbudManagerForm(forms.ModelForm):
     class Meta:
         model = Tilbud
         fields = ('godkjent_av_bookingssjef',)
+        widgets = {
+            'sendt_av_ansvarlig': forms.RadioSelect(choices=MESSAGE_STATUS),
+        }
 
 
 class LeggTilBehovForm(forms.ModelForm):
