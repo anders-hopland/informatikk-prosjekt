@@ -212,7 +212,7 @@ def manager(request):
     rolle = user.profile.role
     if rolle == 'manager':
 
-        all_conserts = Consert.objects.all().exclude(tidspunkt__lte=datetime.now()).order_by('tidspunkt')
+        all_conserts = Consert.objects.all().order_by('tidspunkt')
         artist_list = Artist.objects.filter(manager=user.profile).order_by('navn')
         conserts = []
 
