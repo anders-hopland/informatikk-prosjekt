@@ -31,6 +31,10 @@ table tr td {
     text-align: center;
 }
 
+table thead tr th {
+    padding: 0 0.5em 0 0.5em;
+}
+
 #logoImg {
     height: 3em;
 }
@@ -46,7 +50,8 @@ table tr td {
 }
 
 .page-container {
-    margin: 2em 10vw 3em 10vw;
+    margin: 2em 10vw 0 10vw;
+    min-height: 82%;
 }
 
 .page-content {
@@ -372,5 +377,12 @@ nav {
 .greyed {
     color: #6d6d6d;
     margin: 0;
+    text-align: center;
+}
+
+/* footer */
+.footer {
+    color: grey;
+    font-size:0.9em;
     text-align: center;
 }

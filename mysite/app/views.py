@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+from django.db.models import Count
 from . models import Artist, Consert, Tilbud, Behov, Band_Info
+from datetime import datetime
 
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm, GodkjennTilbudManagerForm
 from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
@@ -174,9 +176,9 @@ def tidligere_konserter(request):
     if rolle == 'bookingansvarlig':
         current_genre = request.POST.get('sjanger-choices')
         if current_genre is not None and current_genre != 'alle':
-            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__year='2017')
+            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__gte=datetime.now(), tidspunkt__year='2017')
         else:
-            concert_list = Consert.objects.exclude(tidspunkt__year='2017')
+            concert_list = Consert.objects.exclude(tidspunkt__gte=datetime.now(), tidspunkt__year='2017')
 
         sjanger_list = Artist.objects.values('sjanger').distinct()
 
@@ -210,7 +212,8 @@ def manager(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
-        all_conserts = Consert.objects.all().order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
+
+        all_conserts = Consert.objects.all().exclude(tidspunkt__lte=datetime.now()).order_by('tidspunkt')
         artist_list = Artist.objects.filter(manager=user.profile).order_by('navn')
         conserts = []
 
@@ -349,6 +352,36 @@ def tilbud_liste_bookingsjef(request):
                                                                      })
     else:
         return redirect('dashboard')
+
+
+
+def vurder_marked(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingsjef':
+        current_scene = request.POST.get('booking-scene')
+        current_genre = request.POST.get('booking-genre')
+        if current_scene is not None and current_genre is not None and current_scene != 'alle' and current_genre == 'alle':
+            concert_list = Consert.objects.filter(sceneNavn=current_scene).exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+        elif current_scene is not None and current_genre is not None and current_scene == 'alle' and current_genre != 'alle':
+            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+        elif current_scene is not None and current_genre is not None and current_scene != 'alle' and current_genre != 'alle':
+            concert_list = Consert.objects.filter(sceneNavn=current_scene, artist__sjanger=current_genre).exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+        else:
+            concert_list = Consert.objects.exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+
+        scene_list = Consert.objects.values('sceneNavn').distinct()
+        genre_list = Artist.objects.values('sjanger').distinct()
+
+        return render(request, 'app/vurder_marked.html',
+                      {'conserts': concert_list, 'rolle': rolle, 'sceneliste': scene_list, 'sjangerliste': genre_list,
+                       'current_scene': current_scene, 'current_genre': current_genre})
+    else:
+        return redirect('dashboard')
+
 
 
 def godkjenn_tilbud_bookingsjef(request, tilbud_id):
