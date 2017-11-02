@@ -327,8 +327,7 @@ def lag_tilbud(request):
             form = RegistrerTilbudForm(request.POST)
             if form.is_valid():
                 form.save()
-                messages.add_message(request, messages.INFO, 'Hello world.')
-                redirect('dashboard', {'message: message'})
+                redirect('dashboard')
         form = RegistrerTilbudForm()
         return render(request, 'app/lag_tilbud.html', {'form': form,
                                                        'rolle': rolle
@@ -416,7 +415,9 @@ def tilbud_liste_bookingansvarlig(request):
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=None)
+        no_status_tilbud = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=None)
+        approved = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=None)
+        denied = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=None)
         #num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
 
         return render(request, 'app/tilbud_liste_bookingansvarlig.html', {'tilbuds': object_list, 'rolle': rolle})
