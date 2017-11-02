@@ -57,7 +57,9 @@ class SendTilbudBookingAnsvarligForm(forms.ModelForm):
         fields = ('sendt_av_ansvarlig',)
         widgets = {
             'sendt_av_ansvarlig': forms.RadioSelect(choices=MESSAGE_STATUS),
+
         }
+
 
 
 class GodkjennTilbudManagerForm(forms.ModelForm):

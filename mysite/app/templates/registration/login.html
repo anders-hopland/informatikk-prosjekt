@@ -8,12 +8,12 @@
 <img id="bgImg" src="../../static/images/login.jpg" alt="">
 
 <div class="login-container flex">
-    {% if form.errors %}
-        <div>
+    <div class="login-content flex">
+        {% if form.errors %}
+        <div class="error">
             <p>Tou tried to log in with an invalid username and password</p>
         </div>
-    {% endif %}
-    <div class="login-content flex">
+        {% endif %}
         <div class="login-form">
             <h2>Green Week</h2>
             <form action="{% url 'login' %}" method="post" class="form-group">

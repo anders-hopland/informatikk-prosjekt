@@ -140,6 +140,7 @@ nav {
     align-items: center;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .login-form {
@@ -385,4 +386,20 @@ nav {
     color: grey;
     font-size:0.9em;
     text-align: center;
+}
+
+.success {
+    text-align: center;
+    padding: 15px;
+    background-color: #4aa74e;
+    color: whitesmoke;
+    margin-bottom: 20px;
+}
+
+.error {
+    text-align: center;
+    padding: 15px;
+    background-color: #e44034;
+    color: whitesmoke;
+    margin-bottom: 20px;
 }

@@ -327,7 +327,9 @@ def lag_tilbud(request):
             form = RegistrerTilbudForm(request.POST)
             if form.is_valid():
                 form.save()
-                redirect('dashboard')
+                messages.success(request, 'Tilbudet ble sendt')
+            else:
+                messages.error(request, 'Tilbudet ble ikke sendt, vennligst prøv igjen')
         form = RegistrerTilbudForm()
         return render(request, 'app/lag_tilbud.html', {'form': form,
                                                        'rolle': rolle
