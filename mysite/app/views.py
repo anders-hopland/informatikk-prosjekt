@@ -419,15 +419,18 @@ def generer_billettpris(request):
         if future_concerts is not None:
             for consert in future_concerts:
                 prev_concerts = Consert.objects.filter(artist__navn=consert.artist.navn, sceneNavn=consert.sceneNavn).exclude(tidspunkt__gte=datetime.now())
+
+                tilskuertall_count = 0
+                tilskuertall_total = consert.tilskuertall
+                tilskuertall_snitt = 0.9*tilskuertall_total
+
                 if prev_concerts is not None:
-                    tilskuertall_total = 0
-                    tilskuertall_count = 0
                     for con in prev_concerts:
+                        tilskuertall_total = 0
                         tilskuertall_total += con.tilskuertall
                         tilskuertall_count += 1
-                    tilskuertall_snitt = tilskuertall_total/tilskuertall_count
-                else:
-                    tilskuertall_snitt = 0.9*consert.tilskuertall
+
+                        tilskuertall_snitt = tilskuertall_total/tilskuertall_count
 
                 totale_kostnader = consert.kostnader
                 totale_kostnader += 500*len(consert.behov.all())
@@ -445,7 +448,10 @@ def generer_billettpris(request):
                 pris = math.ceil(pris/10)
                 consert.billettpris = pris*10
 
-        return render(request, 'app/generer_billettpris.html', {'conserts': future_concerts, 'rolle': rolle})
+        return render(request, 'app/generer_billettpris.html', {
+                                                                'conserts': future_concerts,
+                                                                'rolle': rolle
+                                                                })
     else:
         return redirect('dashboard')
 
