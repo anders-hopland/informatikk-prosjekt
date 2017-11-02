@@ -114,7 +114,7 @@ class Consert(models.Model):
     tilskuertall = models.IntegerField(default=1000, blank=True)
     inntekter = models.IntegerField(default=20000, blank=True)
     kostnader = models.IntegerField(default=10000, blank=True)
-    nokkelInfo = models.CharField(max_length=2000, blank=True)
+    nokkelInfo = models.TextField(blank=True)
 
     def __str__(self):
         return self.artist.navn
@@ -150,11 +150,11 @@ class Tilbud(models.Model):
         verbose_name_plural = 'tilbud'
 
 class Band_Info(models.Model):
-    band = models.CharField(max_length=500)
-    nokkelInfo = models.CharField(max_length=2000)
-    stromtjeneste = models.CharField(max_length=500)
-    albumSalg = models.CharField(max_length=2000)
-    norskeKonserter = models.CharField(max_length=2000)
+    band = models.CharField(max_length=250)
+    nokkelInfo = models.TextField()
+    stromtjeneste = models.TextField()
+    albumSalg = models.TextField()
+    norskeKonserter = models.TextField()
 
     def __str__(self):
         return self.band
