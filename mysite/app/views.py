@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Count
 from . models import Artist, Consert, Tilbud, Behov, Band_Info
 from datetime import datetime
+from random import randint
 
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm
 from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
@@ -412,28 +413,38 @@ def generer_billettpris(request):
 
     rolle = user.profile.role
     if rolle == 'bookingsjef':
-        current_scene = request.POST.get('booking-scene')
-        current_artist = request.POST.get('booking-artist')
-        if current_scene is not None and current_artist is not None and current_scene != 'alle' and current_artist == 'alle':
-            concert_list = Consert.objects.filter(sceneNavn=current_scene).exclude(
-                tidspunkt__gte=datetime.now()).order_by('tidspunkt')
-        elif current_scene is not None and current_artist is not None and current_scene == 'alle' and current_artist != 'alle':
-            concert_list = Consert.objects.filter(artist=current_artist).exclude(
-                tidspunkt__gte=datetime.now()).order_by('tidspunkt')
-        elif current_scene is not None and current_artist is not None and current_scene != 'alle' and current_artist != 'alle':
-            concert_list = Consert.objects.filter(sceneNavn=current_scene, artist=current_artist).exclude(
-                tidspunkt__gte=datetime.now()).order_by('tidspunkt')
-        else:
-            concert_list = Consert.objects.exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+        future_concerts = Consert.objects.exclude(tidspunkt__lte=datetime.now()).order_by('tidspunkt')
 
-        scene_list = Consert.objects.values('sceneNavn').distinct()
-        artist_list = Artist.objects.values('navn').distinct()
+        if future_concerts is not None:
+            for consert in future_concerts:
+                prev_concerts = Consert.objects.filter(artist__navn=consert.artist.navn, sceneNavn=consert.sceneNavn).exclude(tidspunkt__gte=datetime.now())
+                if prev_concerts is not None:
+                    tilskuertall_total = 0
+                    tilskuertall_count = 0
+                    for con in prev_concerts:
+                        tilskuertall_total += con.tilskuertall
+                        tilskuertall_count += 1
+                    tilskuertall_snitt = tilskuertall_total/tilskuertall_count
+                else:
+                    tilskuertall_snitt = 0.9*consert.tilskuertall
 
+                totale_kostnader = consert.kostnader
+                for behov in consert.behov.all():
+                    totale_kostnader += 500
 
+                for person in consert.rigging.all():
+                    totale_kostnader += 2000
 
+                if consert.sceneNavn == 'hallen':
+                    totale_kostnader += 15000
+                elif consert.sceneNavn == 'storhallen':
+                    totale_kostnader += 20000
+                else:
+                    totale_kostnader += 30000
 
-        return render(request, 'app/generer_billettpris.html',
-                      {'rolle': rolle})
+                consert.billettpris = round(((totale_kostnader+(tilskuertall_snitt*300)) / tilskuertall_snitt) * 1.2)
+
+        return render(request, 'app/generer_billettpris.html', {'conserts': future_concerts, 'rolle': rolle})
     else:
         return redirect('dashboard')
 

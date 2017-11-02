@@ -115,6 +115,7 @@ class Consert(models.Model):
     inntekter = models.IntegerField(default=20000, blank=True)
     kostnader = models.IntegerField(default=10000, blank=True)
     nokkelInfo = models.CharField(max_length=2000, blank=True)
+    billettpris = models.IntegerField(editable=False, null=True)
 
     def __str__(self):
         return self.artist.navn
