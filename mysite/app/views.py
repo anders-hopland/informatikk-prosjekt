@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
 from . models import Artist, Consert, Tilbud, Behov, Band_Info
 
@@ -323,7 +324,8 @@ def lag_tilbud(request):
             form = RegistrerTilbudForm(request.POST)
             if form.is_valid():
                 form.save()
-                redirect('dashboard')
+                messages.add_message(request, messages.INFO, 'Hello world.')
+                redirect('dashboard', {'message: message'})
         form = RegistrerTilbudForm()
         return render(request, 'app/lag_tilbud.html', {'form': form,
                                                        'rolle': rolle
