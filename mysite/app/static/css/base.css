@@ -305,7 +305,7 @@ nav {
 }
 
 .search-button {
-    background-color: #6dcf50;
+    background-color: #23C000;
     border: 0.05em solid #c8c8c8;
     border-radius: 0.2em;
     color: white;
@@ -318,7 +318,7 @@ nav {
 }
 
 .search-button:hover {
-    background-color: #286039;
+    background-color: #23A000;
     color: white;
 }
 
