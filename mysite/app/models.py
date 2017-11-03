@@ -18,7 +18,12 @@ SCENER = (
     ('storhallen', 'Storhallen')
 )
 
-
+NEED_CHOICES = (
+    ('instrumenter', 'Instrumenter'),
+    ('lyd', 'Lyd'),
+    ('lys', 'Lys'),
+    ('andre', 'Andre')
+)
 
 STATUS_FOR_TILBUD = (
     (None, "Ubehandlet"),
@@ -78,7 +83,7 @@ Each user can have many needs, to maintain the integrity of the database,
 we must therefore make Behov a new model
 '''
 class Behov(models.Model):
-    type = models.CharField(max_length=250, choices=STATUS_CHOICES)
+    type = models.CharField(max_length=250, choices=NEED_CHOICES)
     behov = models.CharField(max_length=250)
 
     def __str__(self):
