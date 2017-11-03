@@ -465,13 +465,13 @@ def tilbud_liste_bookingansvarlig(request):
     if rolle == 'bookingansvarlig':
         tilbuds = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
                                               sendt_av_ansvarlig=None)
-        num_conserts = Consert.objects.filter(godkjent_av_bookingsjef=True,
+        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
                                               sendt_av_ansvarlig=None).count()
 
         return render(request,
                       'app/tilbud_liste_bookingansvarlig.html',
                       {'tilbuds': tilbuds,
-                       'num_concerts': num_conserts,
+                       'num_tilbud': num_tilbud,
                        'rolle': rolle})
     else:
         return redirect('dashboard')
@@ -495,7 +495,9 @@ def send_tilbud_bookingansvarlig(request, tilbud_id):
                 return redirect('tilbud_liste_bookingansvarlig')
 
         return render(request, 'app/send_tilbud_bookingansvarlig.html',
-                      {'tilbud': tilbud, 'form': form, 'rolle': rolle})
+                      {'tilbud': tilbud,
+                       'form': form,
+                       'rolle': rolle})
     else:
         return redirect('dashboard')
 
@@ -516,7 +518,7 @@ def tilbud_liste_manager(request):
 
         return render(request, 'app/tilbud_liste_manager.html',
                       {'tilbuds': object_list,
-                       'antall_tilbud': num_tilbud,
+                       'num_tilbud': num_tilbud,
                        'rolle': rolle})
     else:
         return redirect('dashboard')

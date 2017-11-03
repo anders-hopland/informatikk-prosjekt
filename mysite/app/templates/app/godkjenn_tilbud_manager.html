@@ -14,7 +14,7 @@
 
             <div class="content-border">
                <h4>Artist</h4>
-               {% for artist in tilbud.artist.all %}
+               {% for artist in tilbud.artist.all() %}
                     <p>{{ artist.navn }}</p>
                {% endfor %}
             </div>

@@ -11,7 +11,11 @@
         <h1>Oversikt over tilbud:</h1>
     </div>
     <div class="space-around">
-        <h3>Du har {{ antall_tilbud }} ubehandlede tilbud</h3>
+        {% if num_tilbud == 1 %}
+            <h3>Du har {{ num_tilbud }} ubehandlet tilbud</h3>
+        {% else %}
+            <h3>Du har {{ num_tilbud }} ubehandlede tilbud</h3>
+        {% endif %}
     </div>
     <div class="page-content">
         {% if tilbuds %}
