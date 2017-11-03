@@ -14,7 +14,8 @@
                 <thead>
                     <tr>
                         <th>Artist navn</th>
-                        <th></th>
+                        <th>Detaljer</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,11 +24,37 @@
                             {% for artist in tilbud.artist.all %}
                                 <td>{{ artist.navn }}</td>
                             {% endfor %}
-                            <td><a href="{% url 'godkjenn_tilbud_bookingsjef' tilbud.id %}" class="info-button">Se detaljer</a></td>
+
+                            {% if tilbud.godkjent_av_bookingsjef == true %}
+                                <td>
+                                    <a href="{% url 'godkjenn_tilbud_bookingsjef' tilbud.id %}" class="info-button">
+                                        Se detaljer
+                                    </a>
+                                </td>
+                                <td>
+                                    <span>Godkjent</span>
+                                </td>
+                            {% elif tilbud.godkjent_av_bookingsjef == false %}
+                                <td>
+
+                                </td>
+                                <td>
+                                    <span>Avslått</span>
+                                </td>
+                            {% else %}
+                                <td>
+
+                                </td>
+                                <td>
+                                    <span>Ubehandlet</span>
+                                </td>
+                            {% endif %}
+
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
+
         {% else %}
             <p class="greyed">Du har ikke noe registrert.</p>
         {% endif %}

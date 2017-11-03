@@ -465,7 +465,7 @@ def tilbud_liste_bookingansvarlig(request):
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
         tilbuds = Tilbud.objects.filter(sendt_av_ansvarlig=None)
-        num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
+        num_conserts = Consert.objects.filter(godkjent_av_bookingsjef=True).count()
 
         return render(request,
                       'app/tilbud_liste_bookingansvarlig.html',
