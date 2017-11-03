@@ -373,8 +373,8 @@ def tilbud_liste_bookingsjef(request):
 
     rolle = user.profile.role
     if rolle == 'bookingsjef':
-        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=None)
-        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingssjef=None).count()
+        object_list = Tilbud.objects.filter(godkjent_av_bookingsjef=None)
+        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=None).count()
         return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list,
                                                                      'rolle': rolle,
                                                                      'num_tilbud': num_tilbud})
@@ -559,10 +559,10 @@ def tilbud_liste_manager(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
-        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True,
+        object_list = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
                                            sendt_av_ansvarlig=True,
                                            godkjent_av_manager=None)
-        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingssjef=True,
+        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
                                            sendt_av_ansvarlig=True,
                                            godkjent_av_manager=None).count()
 

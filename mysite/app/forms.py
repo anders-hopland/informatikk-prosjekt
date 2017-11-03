@@ -52,7 +52,7 @@ class GodkjennTilbudBookingSjefForm(forms.ModelForm):
 
     class Meta:
         model = Tilbud
-        fields = ('godkjent_av_bookingssjef',)
+        fields = ('godkjent_av_bookingsjef',)
         widgets = {
             'sendt_av_ansvarlig': forms.RadioSelect(choices=MESSAGE_STATUS),
         }

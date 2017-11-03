@@ -84,11 +84,11 @@ urlpatterns = [
         lag_tilbud,
         name='lag_tilbud'),
 
-    url(r'^tilbudsliste_bookingsjef/$',
+    url(r'^tilbud_liste_bookingsjef/$',
         tilbud_liste_bookingsjef,
         name='tilbud_liste_bookingsjef'),
 
-    url(r'^tilbudsliste_bookingansvarlig/$',
+    url(r'^tilbud_liste_bookingansvarlig/$',
         tilbud_liste_bookingansvarlig,
         name='tilbud_liste_bookingansvarlig'),
 
@@ -100,7 +100,7 @@ urlpatterns = [
         godkjenn_tilbud_manager,
         name='godkjenn_tilbud_manager'),
 
-    url(r'^tilbudsliste_manager/$',
+    url(r'^tilbud_liste_manager/$',
         tilbud_liste_manager,
         name='tilbud_liste_manager'),
 
