@@ -55,9 +55,14 @@ def arrangor(request):
     if rolle == 'arrangor':
         current_consert = request.POST.get('scene-choices')
         if current_consert is not None and current_consert != 'alle':
-            object_list = Consert.objects.filter(sceneNavn=current_consert).order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
+            object_list = Consert.objects.filter(
+                sceneNavn=current_consert).order_by(
+                'tidspunkt').exclude(
+                ~Q(tidspunkt__year='2017'))
         else:
-            object_list = Consert.objects.all().order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
+            object_list = Consert.objects.all().order_by(
+                'tidspunkt').exclude(
+                ~Q(tidspunkt__year='2017'))
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
 
@@ -75,7 +80,10 @@ def lydtekniker(request):
 
     rolle = user.profile.role
     if rolle == 'lydtekniker':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
+        object_list = Consert.objects.filter(
+            rigging__person__username=user.username).order_by(
+            'tidspunkt').exclude(
+            ~Q(tidspunkt__year='2017'))
         return render(request, 'app/lydtekniker.html', {'conserts': object_list,
                                                         'rolle': rolle})
     else:
@@ -88,7 +96,11 @@ def lystekniker(request):
 
     rolle = user.profile.role
     if rolle == 'lystekniker':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
+        object_list = Consert.objects.filter(
+            rigging__person__username=user.username).order_by(
+            'tidspunkt').exclude(
+            ~Q(tidspunkt__year='2017'))
+
         return render(request, 'app/lystekniker.html', {'conserts': object_list,
                                                         'rolle': rolle})
     else:
@@ -155,13 +167,18 @@ def bookingansvarlig(request):
     if rolle == 'bookingansvarlig':
         current_consert = request.POST.get('scene-choices')
         if current_consert is not None and current_consert != 'alle':
-            object_list = Consert.objects.order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
+            object_list = Consert.objects.order_by(
+                'tidspunkt').exclude(
+                ~Q(tidspunkt__year='2017'))
         else:
-            object_list = Consert.objects.all().order_by('tidspunkt').exclude(~Q(tidspunkt__year='2017'))
+            object_list = Consert.objects.all().order_by(
+                'tidspunkt').exclude(
+                ~Q(tidspunkt__year='2017'))
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
 
-        return render(request, 'app/bookingansvarlig.html', {'conserts': object_list,
+        return render(request,
+                      'app/bookingansvarlig.html', {'conserts': object_list,
                                                              'rolle': rolle,
                                                              'sceneliste': scene_list,
                                                              'current_consert': current_consert})
@@ -177,7 +194,10 @@ def tidligere_konserter(request):
     if rolle == 'bookingansvarlig':
         current_genre = request.POST.get('sjanger-choices')
         if current_genre is not None and current_genre != 'alle':
-            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__gte=datetime.now(), tidspunkt__year='2017')
+            concert_list = Consert.objects.filter(
+                artist__sjanger=current_genre).exclude(
+                tidspunkt__gte=datetime.now(),
+                tidspunkt__year='2017')
         else:
             concert_list = Consert.objects.exclude(tidspunkt__gte=datetime.now(), tidspunkt__year='2017')
 
@@ -304,10 +324,15 @@ def tidligere_band(request):
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        object_list = Consert.objects.order_by('artist__navn').exclude(tidspunkt__year='2017')
+        object_list = Consert.objects.order_by(
+            'artist__navn').exclude(
+            tidspunkt__year='2017')
+
         query = request.GET.get("q")
         if query:
-            object_list = object_list.filter(artist__navn__icontains=query).exclude(tidspunkt__year='2017')
+            object_list = object_list.filter(
+                artist__navn__icontains=query).\
+                exclude(tidspunkt__year='2017')
 
         context = {
             'conserts': object_list,
@@ -371,21 +396,37 @@ def vurder_marked(request):
                         current_scene != 'alle' and current_genre == 'alle':
             concert_list = Consert.objects.filter(
                 sceneNavn=current_scene).exclude(
-                tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+                tidspunkt__gte=datetime.now())\
+                .order_by('tidspunkt')
+        elif current_scene is not None \
+                and current_genre is not None\
+                and current_scene == 'alle' \
+                and current_genre != 'alle':
+            concert_list = Consert.objects.filter(
+                artist__sjanger=current_genre).exclude(
+                tidspunkt__gte=datetime.now())\
+                .order_by('tidspunkt')
+
         elif current_scene is not None and current_genre is not None\
-                and current_scene == 'alle' and current_genre != 'alle':
-            concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
-        elif current_scene is not None and current_genre is not None and current_scene != 'alle' and current_genre != 'alle':
-            concert_list = Consert.objects.filter(sceneNavn=current_scene, artist__sjanger=current_genre).exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+                and current_scene != 'alle' \
+                and current_genre != 'alle':
+            concert_list = Consert.objects.filter(
+                sceneNavn=current_scene, artist__sjanger=current_genre).exclude(
+                tidspunkt__gte=datetime.now()).order_by('tidspunkt')
         else:
-            concert_list = Consert.objects.exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+            concert_list = Consert.objects.exclude(
+                tidspunkt__gte=datetime.now())\
+                .order_by('tidspunkt')
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
         genre_list = Artist.objects.values('sjanger').distinct()
 
         return render(request, 'app/vurder_marked.html',
-                      {'conserts': concert_list, 'rolle': rolle, 'sceneliste': scene_list, 'sjangerliste': genre_list,
-                       'current_scene': current_scene, 'current_genre': current_genre})
+                      {'conserts': concert_list, 'rolle': rolle,
+                       'sceneliste': scene_list,
+                       'sjangerliste': genre_list,
+                       'current_scene': current_scene,
+                       'current_genre': current_genre})
     else:
         return redirect('dashboard')
 
@@ -426,9 +467,11 @@ def tilbud_liste_bookingansvarlig(request):
         tilbuds = Tilbud.objects.filter(sendt_av_ansvarlig=None)
         num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
 
-        return render(request, 'app/tilbud_liste_bookingansvarlig.html', {'tilbuds': tilbuds,
-                                                                          'num_concerts': num_conserts,
-                                                                          'rolle': rolle})
+        return render(request,
+                      'app/tilbud_liste_bookingansvarlig.html',
+                      {'tilbuds': tilbuds,
+                       'num_concerts': num_conserts,
+                       'rolle': rolle})
     else:
         return redirect('dashboard')
 
@@ -475,7 +518,9 @@ def tilbud_liste_manager(request):
                                            sendt_av_ansvarlig=True).count()
 
         return render(request, 'app/tilbud_liste_manager.html',
-                      {'tilbuds': object_list, "antall_tilbud": num_tilbud, 'rolle': rolle})
+                      {'tilbuds': object_list,
+                       'antall_tilbud': num_tilbud,
+                       'rolle': rolle})
     else:
         return redirect('dashboard')
 
