@@ -11,31 +11,40 @@
         <h1>Oversikt over tilbud:</h1>
     </div>
     <div class="space-around">
-        <h3>Du har {{ antall_tilbud }} tilbud i innboksen din</h3>
+        <h3>Du har {{ antall_tilbud }} ubehandlede tilbud</h3>
     </div>
     <div class="page-content">
-        {% if antall_tilbud > 0 %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Artist navn</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="tableBdy">
-                {% for tilbud in tilbuds %}
+        {% if tilbuds %}
+            <table>
+                <thead>
                     <tr>
-                        {% for artist in tilbud.artist.all %}
-                            <td>{{ artist.navn }}</td>
-                        {% endfor %}
-                        <td>
-                            <a href="{% url 'godkjenn_tilbud_manager' tilbud.id %}"
-                               class="info-button">
-                                Se detaljer</a></td>
+                        <th>Artist navn</th>
+                        <th>Detaljer</th>
+                        <th>Status</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for tilbud in tilbuds %}
+                        <tr>
+                            {% for artist in tilbud.artist.all %}
+                                <td>{{ artist.navn }}</td>
+                            {% endfor %}
+
+                            <td>
+                                <a href="{% url 'godkjenn_tilbud_manager' tilbud.id %}"
+                                   class="info-button">
+                                    Se detaljer
+                                </a>
+                            </td>
+                            <td>
+                                <span>Ubehandlet</span>
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
         {% else %}
             <p class="greyed">Du har ikke noe registrert.</p>
         {% endif %}

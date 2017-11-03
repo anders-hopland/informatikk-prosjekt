@@ -372,11 +372,10 @@ def tilbud_liste_bookingsjef(request):
     rolle = user.profile.role
     if rolle == 'bookingsjef':
         object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=None)
-        # Num_conserts = Consert.objects.filter(tidspunkt__year=2017).count()
-
+        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingssjef=None).count()
         return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list,
-                                                                     'rolle': rolle
-                                                                     })
+                                                                     'rolle': rolle,
+                                                                     'num_tilbud': num_tilbud})
     else:
         return redirect('dashboard')
 
@@ -464,8 +463,10 @@ def tilbud_liste_bookingansvarlig(request):
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        tilbuds = Tilbud.objects.filter(sendt_av_ansvarlig=None)
-        num_conserts = Consert.objects.filter(godkjent_av_bookingsjef=True).count()
+        tilbuds = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
+                                              sendt_av_ansvarlig=None)
+        num_conserts = Consert.objects.filter(godkjent_av_bookingsjef=True,
+                                              sendt_av_ansvarlig=None).count()
 
         return render(request,
                       'app/tilbud_liste_bookingansvarlig.html',
@@ -507,9 +508,11 @@ def tilbud_liste_manager(request):
     rolle = user.profile.role
     if rolle == 'manager':
         object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True,
-                                            sendt_av_ansvarlig=True)
+                                           sendt_av_ansvarlig=True,
+                                           godkjent_av_manager=None)
         num_tilbud = Tilbud.objects.filter(godkjent_av_bookingssjef=True,
-                                           sendt_av_ansvarlig=True).count()
+                                           sendt_av_ansvarlig=True,
+                                           godkjent_av_manager=None).count()
 
         return render(request, 'app/tilbud_liste_manager.html',
                       {'tilbuds': object_list,
@@ -521,7 +524,6 @@ def tilbud_liste_manager(request):
 
 def godkjenn_tilbud_manager(request, tilbud_id):
     user = request.user
-    print("tesst")
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
@@ -535,18 +537,20 @@ def godkjenn_tilbud_manager(request, tilbud_id):
             form = GodkjennTilbudManagerForm(request.POST, instance=tilbud)
             if form.is_valid():
                 form.save()
+                cd = form.cleaned_data
+                print(cd)
+                #Accepted offer
+                if cd['godkjent_av_manager'] == True:
 
-                #getting artist from manytomanyfield
-                #There will only be one artist in each tilbud
-                artist_id = 1
-                for a in tilbud.artist.all():
-                    artist_id = a.id
+                    #getting artist from manytomanyfield
+                    artist_id = 1
+                    for a in tilbud.artist.all():
+                        artist_id = a.id
 
-                artist = Artist.objects.get(id=artist_id)
-
-                consert = Consert.objects.create(artist=artist,
-                                                 tidspunkt=tilbud.tidspunkt,
-                                                 sceneNavn=tilbud.scene_navn)
+                    artist = Artist.objects.get(id=artist_id)
+                    Consert.objects.create(artist=artist,
+                                           tidspunkt=tilbud.tidspunkt,
+                                           sceneNavn=tilbud.scene_navn)
 
                 return redirect('tilbud_liste_manager')
 
@@ -569,7 +573,7 @@ def tilbud_detaljer(request, tilbud_id):
                 'manager':
         tilbud = Tilbud.objects.get(id=tilbud_id)
 
-        return render(request, 'app/send_tilbud_bookingansvarlig.html',
+        return render(request, 'app/tilbud_detaljer.html',
                       {'tilbud': tilbud, 'rolle': rolle})
     else:
         return redirect('dashboard')

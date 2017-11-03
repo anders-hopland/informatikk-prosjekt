@@ -7,7 +7,12 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over godkjente tilbud. Du har totalt mottatt {{ num_tilbud }} tilbud</h1>
+    <div class="space-around">
+        <h1>Oversikt over tilbud:</h1>
+    </div>
+    <div class="space-around">
+        <h3>Du har {{ num_tilbud }} ubehandlede tilbud</h3>
+    </div>
     <div class="page-content">
         {% if tilbuds %}
             <table>
@@ -25,39 +30,15 @@
                                 <td>{{ artist.navn }}</td>
                             {% endfor %}
 
-                            {% if tilbud.godkjent_av_bookingsjef == true
-                                    and tilbud.sendt_av_ansvarlig == None %}
-                                <td>
-                                    <a href="{% url 'send_tilbud_bookingansvarlig' tilbud.id %}"
-                                       class="info-button">
-                                        Detaljer
-                                    </a>
-                                </td>
-                                <td>
-                                    <span>Ubehandlet</span>
-                                </td>
-                            {% elif tilbud.godkjent_av_bookingsjef == false %}
-                                <td>
-
-                                </td>
-                                <td>
-                                    <span>Avslått</span>
-                                </td>
-                            {% elif tilbud.godkjent_av_bookingsjef == None %}
-                                <td>
-
-                                </td>
-                                <td>
-                                    <span>Venter på svar</span>
-                                </td>
-                            {% else %}
-                                <td>
-
-                                </td>
-                                <td>
-                                    <span>Ubehandlet</span>
-                                </td>
-                            {% endif %}
+                            <td>
+                                <a href="{% url 'send_tilbud_ansvarlig' tilbud.id %}"
+                                   class="info-button">
+                                    Se detaljer
+                                </a>
+                            </td>
+                            <td>
+                                <span>Ubehandlet</span>
+                            </td>
 
                         </tr>
                     {% endfor %}
