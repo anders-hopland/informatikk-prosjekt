@@ -25,28 +25,29 @@
                                 <td>{{ artist.navn }}</td>
                             {% endfor %}
 
-                            {% if tilbud.godkjent_av_bookingsjef == true %}
+                            {% if tilbud.godkjent_av_bookingsjef == None %}
                                 <td>
-                                    <a href="{% url 'godkjenn_tilbud_bookingsjef' tilbud.id %}" class="info-button">
+                                    <a href="{% url 'godkjenn_tilbud_bookingsjef' tilbud.id %}"
+                                       class="info-button">
                                         Se detaljer
                                     </a>
                                 </td>
                                 <td>
-                                    <span>Godkjent</span>
+                                    <span>Ubehandlet</span>
                                 </td>
                             {% elif tilbud.godkjent_av_bookingsjef == false %}
                                 <td>
-
+                                    {{ tilbud }}
                                 </td>
                                 <td>
                                     <span>Avslått</span>
                                 </td>
                             {% else %}
                                 <td>
-
+                                    {{ tilbud }}
                                 </td>
                                 <td>
-                                    <span>Ubehandlet</span>
+                                    <span>Godkjent</span>
                                 </td>
                             {% endif %}
 

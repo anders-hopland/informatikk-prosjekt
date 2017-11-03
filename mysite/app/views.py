@@ -499,12 +499,6 @@ def send_tilbud_bookingansvarlig(request, tilbud_id):
         return redirect('dashboard')
 
 
-'''
-###############
-Bookingmanager mailbox
-###############
-'''
-
 def tilbud_liste_manager(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -563,3 +557,19 @@ def godkjenn_tilbud_manager(request, tilbud_id):
     else:
         return redirect('dashboard')
 
+
+def tilbud_detaljer(request, tilbud_id):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingansvarlig' or \
+                'bookingsjef' or \
+                'manager':
+        tilbud = Tilbud.objects.get(id=tilbud_id)
+
+        return render(request, 'app/send_tilbud_bookingansvarlig.html',
+                      {'tilbud': tilbud, 'rolle': rolle})
+    else:
+        return redirect('dashboard')

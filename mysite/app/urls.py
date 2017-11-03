@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 
 from app.views import arrangor, lydtekniker, dashboard, lystekniker, artist, godkjenn_tilbud_manager
 from app.views import legg_til_behov_manager, lag_tilbud, godkjenn_tilbud_bookingsjef, band_info, tidligere_band
-from app.views import manager, bookingansvarlig, bookingsjef, konsert, vurder_marked
+from app.views import manager, bookingansvarlig, bookingsjef, konsert, vurder_marked, tilbud_detaljer
 from app.views import tidligere_konserter, tilbud_liste_bookingsjef, delete_behov_manager
 from app.views import tilbud_liste_bookingansvarlig, send_tilbud_bookingansvarlig, tilbud_liste_manager
 
@@ -103,9 +103,14 @@ urlpatterns = [
     url(r'^send_tilbud_bookingansvarlig/(?P<tilbud_id>\d+)/$',
         send_tilbud_bookingansvarlig,
         name='send_tilbud_bookingansvarlig'),
+
     url(r'^tidligere_band/$',
         tidligere_band,
         name='tidligere_band'),
+
+    url(r'^tilbud_detaljer/(?P<tilbud_id>\d+)/$',
+        tilbud_detaljer,
+        name='tilbud_detaljer'),
 
     #login logout
     url('^',
