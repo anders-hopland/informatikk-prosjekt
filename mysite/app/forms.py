@@ -1,11 +1,17 @@
 from django import forms
 from django.forms import ModelChoiceField
 
-from . models import Artist, Tilbud, Behov
+from . models import Artist, Tilbud, Behov, Consert
 
 MESSAGE_STATUS = (
     (True, "Yes I acknowledge this"),
     (False, "No, I do not like this")
+)
+
+SCENER = (
+    ('hallen', 'Hallen'),
+    ('hovedscenen', 'Hovedscenen'),
+    ('storhallen', 'Storhallen')
 )
 
 #The choices html attribute with all artists in th database
@@ -24,6 +30,7 @@ class RegistrerTilbudForm(forms.ModelForm):
     soknad = forms.CharField(widget=forms.Textarea)
     pris = forms.IntegerField()
     tidspunkt = forms.DateField(widget=forms.SelectDateWidget())
+    scene_navn = forms.Select(choices=SCENER)
 
     class Meta:
         model = Tilbud
@@ -31,7 +38,8 @@ class RegistrerTilbudForm(forms.ModelForm):
             'artist',
             'soknad',
             'pris',
-            'tidspunkt'
+            'tidspunkt',
+            'scene_navn'
             ]
 
     def save(self):
@@ -66,9 +74,9 @@ class GodkjennTilbudManagerForm(forms.ModelForm):
 
     class Meta:
         model = Tilbud
-        fields = ('godkjent_av_bookingssjef',)
+        fields = ('godkjent_av_manager',)
         widgets = {
-            'sendt_av_ansvarlig': forms.RadioSelect(choices=MESSAGE_STATUS),
+            'godkjent_av_manager': forms.RadioSelect(choices=MESSAGE_STATUS),
         }
 
 

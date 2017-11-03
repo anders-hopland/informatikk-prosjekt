@@ -139,6 +139,7 @@ class Tilbud(models.Model):
     soknad = models.TextField()
     pris = models.IntegerField()
     tidspunkt = models.DateField()
+    scene_navn = models.CharField(max_length=250, choices=SCENER)
     godkjent_av_bookingssjef = models.NullBooleanField(blank=True, null=True, default=None)
     sendt_av_ansvarlig = models.NullBooleanField(blank=True, null=True, default=None)
     godkjent_av_manager = models.NullBooleanField(blank=True, null=True, default=None)

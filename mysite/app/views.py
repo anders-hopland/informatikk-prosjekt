@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.core import serializers
 
 from django.db.models import Count
 from . models import Artist, Consert, Tilbud, Behov, Band_Info
@@ -365,9 +366,14 @@ def vurder_marked(request):
     if rolle == 'bookingsjef':
         current_scene = request.POST.get('booking-scene')
         current_genre = request.POST.get('booking-genre')
-        if current_scene is not None and current_genre is not None and current_scene != 'alle' and current_genre == 'alle':
-            concert_list = Consert.objects.filter(sceneNavn=current_scene).exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
-        elif current_scene is not None and current_genre is not None and current_scene == 'alle' and current_genre != 'alle':
+        if current_scene is not None and \
+                        current_genre is not None and \
+                        current_scene != 'alle' and current_genre == 'alle':
+            concert_list = Consert.objects.filter(
+                sceneNavn=current_scene).exclude(
+                tidspunkt__gte=datetime.now()).order_by('tidspunkt')
+        elif current_scene is not None and current_genre is not None\
+                and current_scene == 'alle' and current_genre != 'alle':
             concert_list = Consert.objects.filter(artist__sjanger=current_genre).exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
         elif current_scene is not None and current_genre is not None and current_scene != 'alle' and current_genre != 'alle':
             concert_list = Consert.objects.filter(sceneNavn=current_scene, artist__sjanger=current_genre).exclude(tidspunkt__gte=datetime.now()).order_by('tidspunkt')
@@ -444,7 +450,8 @@ def send_tilbud_bookingansvarlig(request, tilbud_id):
                 form.save()
                 return redirect('tilbud_liste_bookingansvarlig')
 
-        return render(request, 'app/send_tilbud_bookingansvarlig.html', {'tilbud': tilbud, 'form': form, 'rolle': rolle})
+        return render(request, 'app/send_tilbud_bookingansvarlig.html',
+                      {'tilbud': tilbud, 'form': form, 'rolle': rolle})
     else:
         return redirect('dashboard')
 
@@ -462,16 +469,20 @@ def tilbud_liste_manager(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
-        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=True)
-        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingssjef=True, sendt_av_ansvarlig=True).count()
+        object_list = Tilbud.objects.filter(godkjent_av_bookingssjef=True,
+                                            sendt_av_ansvarlig=True)
+        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingssjef=True,
+                                           sendt_av_ansvarlig=True).count()
 
-        return render(request, 'app/tilbud_liste_manager.html', {'tilbuds': object_list, "antall_tilbud": num_tilbud, 'rolle': rolle})
+        return render(request, 'app/tilbud_liste_manager.html',
+                      {'tilbuds': object_list, "antall_tilbud": num_tilbud, 'rolle': rolle})
     else:
         return redirect('dashboard')
 
 
 def godkjenn_tilbud_manager(request, tilbud_id):
     user = request.user
+    print("tesst")
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
 
@@ -479,12 +490,25 @@ def godkjenn_tilbud_manager(request, tilbud_id):
     if rolle == 'manager':
 
         tilbud = Tilbud.objects.get(id=tilbud_id)
-        form = GodkjennTilbudBookingSjefForm(instance=tilbud)
+        form = GodkjennTilbudManagerForm(instance=tilbud)
 
         if request.method == 'POST':
             form = GodkjennTilbudManagerForm(request.POST, instance=tilbud)
             if form.is_valid():
                 form.save()
+
+                #getting artist from manytomanyfield
+                #There will only be one artist in each tilbud
+                artist_id = 1
+                for a in tilbud.artist.all():
+                    artist_id = a.id
+
+                artist = Artist.objects.get(id=artist_id)
+
+                consert = Consert.objects.create(artist=artist,
+                                                 tidspunkt=tilbud.tidspunkt,
+                                                 sceneNavn=tilbud.scene_navn)
+
                 return redirect('tilbud_liste_manager')
 
         return render(request, 'app/godkjenn_tilbud_manager.html', {'tilbud': tilbud,
