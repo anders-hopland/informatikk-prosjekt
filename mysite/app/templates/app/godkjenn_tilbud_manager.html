@@ -8,8 +8,8 @@
 {% block content %}
 <div class="page-container">
     <h1>Godkjenn tilbud</h1>
-    <div class="page-content">
-        <div class="detail-container">
+    <div class="page-content col">
+        <div class="detail-container detail-center">
             <h3>Tekniske behov:</h3>
 
             <div class="content-border">
@@ -28,14 +28,14 @@
                 <p>{{ tilbud.pris }}</p>
             </div>
         </div>
-    </div>
 
-    <div class="form-group space-between">
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit" class="btn-greeny" />
-        </form>
+        <div class="detail-center form-group space-between">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit" class="btn-greeny wide" />
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

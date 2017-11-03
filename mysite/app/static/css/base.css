@@ -180,7 +180,7 @@ nav {
 
 
 /* buttons */
-.btn-greeny, .dynamic-form > input, .detail-center select {
+.btn-greeny, .dynamic-form > input {
     background-color: #23C000;
     border-radius: 0.2em;
     color: white;
@@ -394,6 +394,15 @@ nav {
     text-align: center;
 }
 
+ul li {
+    list-style-type: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
 /* footer */
 .footer {
     color: grey;
@@ -415,4 +424,8 @@ nav {
     background-color: #e44034;
     color: whitesmoke;
     margin-bottom: 20px;
+}
+
+.wide {
+    width: 100%;
 }
