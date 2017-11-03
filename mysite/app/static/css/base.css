@@ -180,7 +180,7 @@ nav {
 
 
 /* buttons */
-.btn-greeny, .dynamic-form > input {
+.btn-greeny, .dynamic-form > input, .detail-center select {
     background-color: #23C000;
     border-radius: 0.2em;
     color: white;
@@ -225,6 +225,15 @@ nav {
     padding: 0.5em 0 0.5em 0;
 }
 
+.detail-center {
+    max-width: 33%;
+    margin: 0 auto 0 auto;
+}
+
+.detail-center input {
+
+}
+
 .detail-info {
     display: flex;
     flex-wrap: wrap;
@@ -249,6 +258,10 @@ nav {
 
 .detail-info th {
     min-width: 100px;
+}
+
+.col {
+    flex-direction: column;
 }
 
 .btn-reg {
