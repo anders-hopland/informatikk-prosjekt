@@ -25,7 +25,8 @@
                     {% endif %}
                 {% endfor %}
             </select>
-            <select onchange="this.form.submit()" name="booking-genre" id="booking-genre" class="choice-menu">
+            <select onchange="this.form.submit()" name="booking-genre" id="booking-genre"
+                    class="choice-menu">
                 <option value="alle">Alle</option>
                 {% for sjangerTittel in sjangerliste %}
                     {% if sjangerTittel.sjanger == current_genre %}
