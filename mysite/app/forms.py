@@ -14,11 +14,6 @@ SCENER = (
     ('storhallen', 'Storhallen')
 )
 
-#The choices html attribute with all artists in th database
-class MyModelChoiceField(ModelChoiceField):
-    def label_from_instance(self, obj):
-        return obj.navn
-
 
 class BehovTypeModelChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
@@ -26,11 +21,14 @@ class BehovTypeModelChoiceField(ModelChoiceField):
 
 
 class RegistrerTilbudForm(forms.ModelForm):
-    artist = MyModelChoiceField(queryset=Artist.objects.all())
-    soknad = forms.CharField(widget=forms.Textarea)
-    pris = forms.IntegerField()
-    tidspunkt = forms.DateField(widget=forms.SelectDateWidget())
-    scene_navn = forms.Select(choices=SCENER)
+
+    def __init__(self, *args, **kwargs):
+        super(RegistrerTilbudForm, self).__init__(*args, **kwargs)
+
+        #Have to load choices each time
+        artist_choices = tuple(Artist.objects.all().values_list('id', 'navn'))
+        self.fields['artist'].choices = artist_choices
+
 
     class Meta:
         model = Tilbud
@@ -43,9 +41,14 @@ class RegistrerTilbudForm(forms.ModelForm):
             ]
 
     def save(self):
-        tilbud = super(RegistrerTilbudForm, self).save(commit=False)
-        tilbud.save()
+        tilbud = super(RegistrerTilbudForm, self).save()
         return tilbud
+
+    artist = forms.ChoiceField()
+    soknad = forms.CharField(widget=forms.Textarea)
+    pris = forms.IntegerField()
+    tidspunkt = forms.DateField(widget=forms.SelectDateWidget())
+    scene_navn = forms.Select(choices=SCENER)
 
 
 class GodkjennTilbudBookingSjefForm(forms.ModelForm):
@@ -67,7 +70,6 @@ class SendTilbudBookingAnsvarligForm(forms.ModelForm):
             'sendt_av_ansvarlig': forms.RadioSelect(choices=MESSAGE_STATUS),
 
         }
-
 
 
 class GodkjennTilbudManagerForm(forms.ModelForm):
