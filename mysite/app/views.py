@@ -25,12 +25,8 @@ in, an html page and a dictionary with data from the database. The data from the
 dictionary will in turn be rendered in the html by the templating engine jinja
 '''
 
+SCENER = ['hallen', 'hovedscenen', 'storhallen']
 
-SCENER = (
-    ('hallen', 'Hallen'),
-    ('hovedscenen', 'Hovedscenen'),
-    ('storhallen', 'Storhallen')
-)
 
 def dashboard(request):
     user = request.user
@@ -231,25 +227,28 @@ def bookingsjef(request):
         start_date = datetime.date(2018, 6, 10)
         end_date = datetime.date(2018, 6, 16)
 
-        scene_list = ["hovedscenen", "hallen", "storhallen"]
+        all_conserts = Consert.objects.filter(tidspunkt__range=(start_date, end_date))
 
         num_available = {}
         num_tilbud = {}
         num_booked = {}
 
-        date = start_date
-        for i in range(7):
-            for scene in SCENER:
-                if
-
-            date += datetime.timedelta(days=1)
-
-        all_conserts = Consert.objects.filter(tidspunkt__range=(start_date, end_date))
-
-        for c in all_conserts:
-            print(c.tidspunkt)
 
         print(all_conserts)
+
+        date = start_date
+        while date != end_date + datetime.timedelta(days=1):
+            newlist = all_conserts.exclude(~Q(tidspunkt=date))
+            for scene in SCENER:
+                newlist = newlist.exclude(~Q(sceneNavn=scene))
+                print(newlist)
+                print(scene)
+                if len(newlist) != 0:
+                    print(2342)
+                else:
+                    print(newlist)
+
+            date += datetime.timedelta(days=1)
 
         return render(request, 'app/bookingsjef.html', {
                                                         'rolle': rolle,
