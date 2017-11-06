@@ -227,21 +227,9 @@ def bookingsjef(request):
 
         scene_list = ["hovedscenen", "hallen", "storhallen"]
 
-
-        object_list = {}
-
         num_available = {}
         num_tilbud = {}
         num_booked = {}
-
-        for i in range(7):
-            db = {
-                "storhallen": None,
-                "hallen": consert,
-                "hovedscenen": None
-            }
-            object_list[i] = db
-
 
 
         all_conserts = Consert.objects.filter(tidspunkt__range=(start_date, end_date))
