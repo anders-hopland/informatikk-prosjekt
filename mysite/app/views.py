@@ -229,13 +229,10 @@ def bookingsjef(request):
 
         all_conserts = Consert.objects.filter(tidspunkt__range=(start_date, end_date))
 
-        num_available = {}
-        num_tilbud = {}
-        num_booked = {}
-
+        num_available = 7
         arr = []
 
-
+        num_booked_scenes = 0
         print(len(all_conserts))
 
         date = start_date
@@ -245,12 +242,20 @@ def bookingsjef(request):
                 newlist = newlist.exclude(~Q(sceneNavn=scene))
                 if len(newlist) != 0:
                     arr.append(newlist[0])
+                    num_booked_scenes += 1
                 else:
                     arr.append(None)
+
+            if num_booked_scenes == 3:
+                num_available -= 1
+            num_booked_scenes = 0
 
             date += datetime.timedelta(days=1)
 
         print(arr)
+
+        num_tilbud = {}
+        num_booked = 7 - num_available
 
         return render(request, 'app/bookingsjef.html', {
                                                         'rolle': rolle,
