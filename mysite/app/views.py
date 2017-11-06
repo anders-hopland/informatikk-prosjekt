@@ -233,22 +233,24 @@ def bookingsjef(request):
         num_tilbud = {}
         num_booked = {}
 
+        arr = []
 
-        print(all_conserts)
+
+        print(len(all_conserts))
 
         date = start_date
         while date != end_date + datetime.timedelta(days=1):
             newlist = all_conserts.exclude(~Q(tidspunkt=date))
             for scene in SCENER:
                 newlist = newlist.exclude(~Q(sceneNavn=scene))
-                print(newlist)
-                print(scene)
                 if len(newlist) != 0:
-                    print(2342)
+                    arr.append(newlist[0])
                 else:
-                    print(newlist)
+                    arr.append(None)
 
             date += datetime.timedelta(days=1)
+
+        print(arr)
 
         return render(request, 'app/bookingsjef.html', {
                                                         'rolle': rolle,
