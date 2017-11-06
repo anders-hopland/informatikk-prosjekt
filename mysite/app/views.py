@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from . models import Artist, Consert, Tilbud, Behov, Band_Info
-from datetime import datetime
+from datetime import datetime, timedelta
 import math
 
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm, GodkjennTilbudManagerForm
@@ -220,8 +220,8 @@ def bookingsjef(request):
     rolle = user.profile.role
     if rolle == 'bookingsjef':
 
-        start_date = datetime.date(2018, 6, 10)
-        end_date = datetime.date(2018, 6, 16)
+        start_date = datetime(2018, 6, 10)
+        end_date = datetime(2018, 6, 16)
 
         all_conserts = Consert.objects.filter(tidspunkt__range=(start_date, end_date))
 
@@ -231,7 +231,7 @@ def bookingsjef(request):
         week_list = {}
 
         for i in range(7):
-            newlist = all_conserts.exclude(~Q(tidspunkt=start_date + datetime.timedelta(days=i)))
+            newlist = all_conserts.exclude(~Q(tidspunkt=start_date + timedelta(days=i)))
             week_list[i] = {}
 
             for scene in SCENER:
