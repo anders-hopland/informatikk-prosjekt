@@ -1,12 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.core import serializers
 
-from django.db.models import Count
 from . models import Artist, Consert, Tilbud, Behov, Band_Info
 from datetime import datetime
-from random import randint
-import datetime
 import math
 
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm, GodkjennTilbudManagerForm
