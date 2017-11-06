@@ -225,6 +225,25 @@ def bookingsjef(request):
         start_date = datetime.date(2018, 6, 10)
         end_date = datetime.date(2018, 6, 16)
 
+        scene_list = ["hovedscenen", "hallen", "storhallen"]
+
+
+        object_list = {}
+
+        num_available = {}
+        num_tilbud = {}
+        num_booked = {}
+
+        for i in range(7):
+            db = {
+                "storhallen": None,
+                "hallen": consert,
+                "hovedscenen": None
+            }
+            object_list[i] = db
+
+
+
         all_conserts = Consert.objects.filter(tidspunkt__range=(start_date, end_date))
 
         for c in all_conserts:
@@ -233,7 +252,10 @@ def bookingsjef(request):
         print(all_conserts)
 
         return render(request, 'app/bookingsjef.html', {
-                                                        'rolle': rolle
+                                                        'rolle': rolle,
+                                                        'num_available': num_available,
+                                                        'num_booked': num_booked,
+                                                        'num_tilbud': num_tilbud
                                                         })
     else:
         return redirect('dashboard')
