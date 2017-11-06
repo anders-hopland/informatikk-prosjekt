@@ -1,0 +1,148 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Oversikt for bookingsjef</h1>
+    <div class="page-content calendar">
+
+        <div>
+            <span>Antall ledige datoer: {num_available}</span>
+            <span>Antall booket datoer: {num_booked}</span>
+            <span>Antall tilbud sendt: {num_tilbud}</span>
+        </div>
+
+        <div class="day-cont">
+            <div class="day">
+                <span>Dato: <b>10.06.2018</b></span>
+                <div class="day-info">
+                    <label>Hallen</label>
+                    <span>{isBooked av bandnavn}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Storhallen</label>
+                    <span>{bandnavn / ledig}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Hovedscenen</label>
+                    <span>{booked av bandnavn / ledig}</span>
+                </div>
+            </div>
+
+            <div class="day">
+                <span>Dato: <b>11.06.2018</b></span>
+                <div class="day-info">
+                    <label>Hallen</label>
+                    <span>{isBooked av bandnavn}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Storhallen</label>
+                    <span>{bandnavn / ledig}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Hovedscenen</label>
+                    <span>{booked av bandnavn / ledig}</span>
+                </div>
+            </div>
+
+            <div class="day">
+                <span>Dato: {date}</span>
+                <div class="day-info">
+                    <label>Hallen</label>
+                    <span>{isBooked av bandnavn}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Storhallen</label>
+                    <span>{bandnavn / ledig}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Hovedscenen</label>
+                    <span>{booked av bandnavn / ledig}</span>
+                </div>
+            </div>
+
+            <div class="day">
+                <span>Dato: {date}</span>
+                <div class="day-info">
+                    <label>Hallen</label>
+                    <span>{isBooked av bandnavn}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Storhallen</label>
+                    <span>{bandnavn / ledig}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Hovedscenen</label>
+                    <span>{booked av bandnavn / ledig}</span>
+                </div>
+            </div>
+
+            <div class="day">
+                <span>Dato: {date}</span>
+                <div class="day-info">
+                    <label>Hallen</label>
+                    <span>{isBooked av bandnavn}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Storhallen</label>
+                    <span>{bandnavn / ledig}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Hovedscenen</label>
+                    <span>{booked av bandnavn / ledig}</span>
+                </div>
+            </div>
+
+            <div class="day">
+                <span>Dato: {date}</span>
+                <div class="day-info">
+                    <label>Hallen</label>
+                    <span>{isBooked av bandnavn}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Storhallen</label>
+                    <span>{bandnavn / ledig}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Hovedscenen</label>
+                    <span>{booked av bandnavn / ledig}</span>
+                </div>
+            </div>
+
+            <div class="day">
+                <span>Dato: {date}</span>
+                <div class="day-info">
+                    <label>Hallen</label>
+                    <span>{isBooked av bandnavn}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Storhallen</label>
+                    <span>{bandnavn / ledig}</span>
+                </div>
+
+                <div class="day-info">
+                    <label>Hovedscenen</label>
+                    <span>{booked av bandnavn / ledig}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -251,13 +251,13 @@ nav {
     margin-top: 1em;
 }
 
-.detail-info > label, .dynamic-form label {
+.detail-info label, .dynamic-form label, .day label {
     color: #6d6d6d;
     font-weight: bold;
     margin: 1em 0 0.2em 0;
 }
 
-.detail-info > span {
+.detail-info span, .day span {
     margin: -1.3em 2em 1em 5em;
 }
 
@@ -431,4 +431,33 @@ ul {
 
 .wide {
     width: 100%;
+}
+
+/* bookingsjef */
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.day-cont {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.day {
+    flex: 1;
+    padding: 0.5em;
+    border: 1px solid grey;
+    max-width: 30%;
+    min-width: 10%;
+}
+
+.day span {
+    margin: 0;
+}
+
+.day-info {
+
 }
