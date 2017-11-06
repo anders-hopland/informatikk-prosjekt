@@ -8,6 +8,13 @@
 {% block content %}
 <div class="page-container">
     <h1>Lag Tilbud</h1>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <div class="page-content">
         <div class="detail-info">
             <form action="" method="post" class="dynamic-form">

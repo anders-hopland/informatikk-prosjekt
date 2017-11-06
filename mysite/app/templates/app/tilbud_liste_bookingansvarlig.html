@@ -7,28 +7,45 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over godkjente tilbud</h1>
+    <div class="space-around">
+        <h1>Oversikt over tilbud:</h1>
+    </div>
+    <div class="space-around">
+        {% if num_tilbud == 1 %}
+            <h3>Du har {{ num_tilbud }} ubehandlet tilbud</h3>
+        {% else %}
+            <h3>Du har {{ num_tilbud }} ubehandlede tilbud</h3>
+        {% endif %}
+    </div>
     <div class="page-content">
         {% if tilbuds %}
             <table>
                 <thead>
                     <tr>
                         <th>Artist navn</th>
-                        <th></th>
+                        <th>Detaljer</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for tilbud in tilbuds %}
                         <tr>
-                            {% for artist in tilbud.artist.all %}
-                                <td>{{ artist.navn }}</td>
-                            {% endfor %}
+                            <td>
+                                {% for artist in tilbud.artist.all %}
+                                    {{ artist.navn }}
+                                {% endfor %}
+                            </td>
+
                             <td>
                                 <a href="{% url 'send_tilbud_bookingansvarlig' tilbud.id %}"
                                    class="info-button">
                                     Se detaljer
                                 </a>
                             </td>
+                            <td>
+                                <span>Ubehandlet</span>
+                            </td>
+
                         </tr>
                     {% endfor %}
                 </tbody>

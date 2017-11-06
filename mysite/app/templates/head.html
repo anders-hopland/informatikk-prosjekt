@@ -9,12 +9,12 @@
             <img title="Home screen" id="logoImg" src="{% static "../static/images/logo.png" %}">
         </a>
         {% if rolle == "manager" %}
-            <a {% if 'tilbudsliste_manager' in request.path %} class="active" {% endif %}
+            <a {% if 'tilbud_liste_manager' in request.path %} class="active" {% endif %}
                     href="{% url 'tilbud_liste_manager' %}">
                 MAILBOX
             </a>
         {% elif rolle == "bookingansvarlig" %}
-            <a {% if 'tilbudsliste_bookingansvarlig' in request.path %} class="active" {% endif %}
+            <a {% if 'tilbud_liste_bookingansvarlig' in request.path %} class="active" {% endif %}
                     href="{% url 'tilbud_liste_bookingansvarlig' %}">
                 MAILBOX
             </a>
@@ -35,7 +35,7 @@
                 Bandinfo
             </a>
         {% elif rolle == "bookingsjef" %}
-            <a {% if 'tilbudsliste_bookingsjef' in request.path %} class="active" {% endif %}
+            <a {% if 'tilbud_liste_bookingsjef' in request.path %} class="active" {% endif %}
                     href="{% url 'tilbud_liste_bookingsjef' %}">
                 MAILBOX
             </a>
