@@ -233,14 +233,11 @@ def bookingsjef(request):
 
         scene_list = ["hovedscenen", "hallen", "storhallen"]
 
-
-        object_list = {}
-
         num_available = {}
         num_tilbud = {}
         num_booked = {}
 
-        date = date = start_date
+        date = start_date
         for i in range(7):
             for scene in SCENER:
                 if
