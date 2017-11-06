@@ -10,8 +10,9 @@
     <h1>Godkjenn tilbud</h1>
     <div class="page-content col">
         <div class="detail-container detail-center">
-            <h3>Tekniske behov:</h3>
-
+            {% for artist in tilbud.artist.all %}
+                <h3>Tilbud for: {{ artist }}</h3>
+            {% endfor %}
             <div class="content-border">
                <h4>Artist</h4>
                {% for artist in tilbud.artist.all %}
