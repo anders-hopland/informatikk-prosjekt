@@ -17,131 +17,25 @@
         </div>
 
         <div class="day-cont">
-            <div class="day">
-                <span>Dato: <b>10.06.2018</b></span>
-                <div class="day-info">
-                    <label>Hallen</label><br>
-                    <span>{isBooked av bandnavn}</span>
-                </div>
+            {% for day, object in week_list.items %}
+                <div class="day">
+                    <span>Dato: <b>1{{ day }}.06.2018</b></span>
 
-                <div class="day-info">
-                    <label>Storhallen</label><br>
-                    <span>{bandnavn / ledig}</span>
-                </div>
+                    {% for scene, consert in object.items %}
 
-                <div class="day-info">
-                    <label>Hovedscenen</label><br>
-                    <span>{booked av bandnavn / ledig}</span>
+                        <div class="day-info">
+                            <label>{{ scene|title }}</label><br>
+                            <span>
+                                {% if concert %}
+                                    {{ concert.artist.navn }}
+                                {% else %}
+                                    Ledig
+                                {% endif %}
+                            </span>
+                        </div>
+                    {% endfor %}
                 </div>
-            </div>
-
-            <div class="day">
-                <span>Dato: <b>11.06.2018</b></span>
-                <div class="day-info">
-                    <label>Hallen</label><br>
-                    <span>{isBooked av bandnavn}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Storhallen</label><br>
-                    <span>{bandnavn / ledig}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Hovedscenen</label><br>
-                    <span>{booked av bandnavn / ledig}</span>
-                </div>
-            </div>
-
-            <div class="day">
-                <span>Dato: <b>12.06.2018</b></span>
-                <div class="day-info">
-                    <label>Hallen</label><br>
-                    <span>{isBooked av bandnavn}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Storhallen</label><br>
-                    <span>{bandnavn / ledig}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Hovedscenen</label><br>
-                    <span>{booked av bandnavn / ledig}</span>
-                </div>
-            </div>
-
-            <div class="day">
-                <span>Dato: <b>13.06.2018</b></span>
-                <div class="day-info">
-                    <label>Hallen</label><br>
-                    <span>{isBooked av bandnavn}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Storhallen</label><br>
-                    <span>{bandnavn / ledig}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Hovedscenen</label><br>
-                    <span>{booked av bandnavn / ledig}</span>
-                </div>
-            </div>
-
-            <div class="day">
-                <span>Dato: <b>14.06.2018</b></span>
-                <div class="day-info">
-                    <label>Hallen</label><br>
-                    <span>{isBooked av bandnavn}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Storhallen</label><br>
-                    <span>{bandnavn / ledig}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Hovedscenen</label><br>
-                    <span>{booked av bandnavn / ledig}</span>
-                </div>
-            </div>
-
-            <div class="day">
-                <span>Dato: <b>15.06.2018</b></span>
-                <div class="day-info">
-                    <label>Hallen</label><br>
-                    <span>{isBooked av bandnavn}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Storhallen</label><br>
-                    <span>{bandnavn / ledig}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Hovedscenen</label><br>
-                    <span>{booked av bandnavn / ledig}</span>
-                </div>
-            </div>
-
-            <div class="day">
-                <span>Dato: <b>16.06.2018</b></span>
-                <div class="day-info">
-                    <label>Hallen</label><br>
-                    <span>{isBooked av bandnavn}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Storhallen</label><br>
-                    <span>{bandnavn / ledig}</span>
-                </div>
-
-                <div class="day-info">
-                    <label>Hovedscenen</label><br>
-                    <span>{booked av bandnavn / ledig}</span>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

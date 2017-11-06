@@ -230,37 +230,44 @@ def bookingsjef(request):
         all_conserts = Consert.objects.filter(tidspunkt__range=(start_date, end_date))
 
         num_available = 7
+        num_booked_scenes = 0
         arr = []
 
-        num_booked_scenes = 0
+        week_list = {}
+        day_list = {}
 
-        date = start_date
-        while date != end_date + datetime.timedelta(days=1):
-            newlist = all_conserts.exclude(~Q(tidspunkt=date))
+        for i in range(7):
+            newlist = all_conserts.exclude(~Q(tidspunkt=start_date + datetime.timedelta(days=i)))
             for scene in SCENER:
                 if len(newlist) > 0:
                     if newlist[0].sceneNavn == scene:
-                        arr.append(newlist[0])
+                        day_list[scene] = newlist[0]
+                        #print(newlist[0], " hh")
+                        #arr.append(newlist[0])
                         num_booked_scenes += 1
                 else:
-                    arr.append(None)
+                    day_list[scene] = None
+                    #arr.append(None)
+
+            week_list[i] = day_list
 
             if num_booked_scenes == 3:
                 num_available -= 1
             num_booked_scenes = 0
 
-            date += datetime.timedelta(days=1)
-
-        print(arr)
 
         num_tilbud = {}
         num_booked = 7 - num_available
+
+        print(len(week_list[0]))
 
         return render(request, 'app/bookingsjef.html', {
                                                         'rolle': rolle,
                                                         'num_available': num_available,
                                                         'num_booked': num_booked,
-                                                        'num_tilbud': num_tilbud
+                                                        'num_tilbud': num_tilbud,
+                                                        'arr': arr,
+                                                        'week_list': week_list
                                                         })
     else:
         return redirect('dashboard')
