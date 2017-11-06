@@ -25,13 +25,11 @@
 
                         <div class="day-info">
                             <label>{{ scene|title }}</label><br>
-                            <span>
-                                {% if concert %}
-                                    {{ concert.artist.navn }}
-                                {% else %}
-                                    Ledig
-                                {% endif %}
-                            </span>
+                            {% if consert %}
+                                <span>{{ consert|title }}</span>
+                            {% else %}
+                                <span>Ledig</span>
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </div>
