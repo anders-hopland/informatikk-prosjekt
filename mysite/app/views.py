@@ -220,10 +220,16 @@ def bookingsjef(request):
 
     rolle = user.profile.role
     if rolle == 'bookingsjef':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/bookingsjef.html', {'conserts': object_list,
-                                                    'rolle': rolle
-                                                    })
+
+        all_conserts = Consert.objects.exclude(
+            ~Q(tidspunkt__year='2018'))
+
+        for consert in all_conserts:
+            print(consert)
+
+        return render(request, 'app/bookingsjef.html', {
+                                                        'rolle': rolle
+                                                        })
     else:
         return redirect('dashboard')
 
