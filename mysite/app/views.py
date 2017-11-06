@@ -26,6 +26,12 @@ dictionary will in turn be rendered in the html by the templating engine jinja
 '''
 
 
+SCENER = (
+    ('hallen', 'Hallen'),
+    ('hovedscenen', 'Hovedscenen'),
+    ('storhallen', 'Storhallen')
+)
+
 def dashboard(request):
     user = request.user
     if not user.is_authenticated():
@@ -234,15 +240,12 @@ def bookingsjef(request):
         num_tilbud = {}
         num_booked = {}
 
+        date = date = start_date
         for i in range(7):
-            db = {
-                "storhallen": None,
-                "hallen": consert,
-                "hovedscenen": None
-            }
-            object_list[i] = db
+            for scene in SCENER:
+                if
 
-
+            date += datetime.timedelta(days=1)
 
         all_conserts = Consert.objects.filter(tidspunkt__range=(start_date, end_date))
 
