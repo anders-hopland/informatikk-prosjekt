@@ -39,13 +39,13 @@
                     href="{% url 'tilbud_liste_bookingsjef' %}">
                 MAILBOX
             </a>
-            <a {% if 'okonomi' in request.path %} class="active" {% endif %}
-                    href="">
-                Økonomi
+            <a {% if 'generer_billettpris' in request.path %} class="active" {% endif %}
+                    href="{% url 'generer_billettpris' %}">
+                Billettpriser
             </a>
             <a {% if 'vurder_marked' in request.path %} class="active" {% endif %}
                     href="{% url 'vurder_marked' %}">
-                Vurder marked
+                Markedsoversikt
             </a>
         {% endif %}
     </div>

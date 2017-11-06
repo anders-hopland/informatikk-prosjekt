@@ -1,0 +1,41 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Forslag til billettpris for kommende konserter:</h1>
+    <div class="page-content">
+
+        {% if conserts %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <th>Tidspunkt</th>
+                        <th>Scene</th>
+                        <th>Sjanger</th>
+                        <th>Prisforslag</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for consert in conserts %}
+                        <tr>
+                            <td>{{ consert.artist.navn }}</td>
+                            <td>{{ consert.tidspunkt }}</td>
+                            <td>{{ consert.sceneNavn }}</td>
+                            <td>{{ consert.artist.sjanger }}</td>
+                            <td>{{ consert.billettpris }} kr</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="greyed">Det finnes ingen kommende konserter å generere billettpriser for</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

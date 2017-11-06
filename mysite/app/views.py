@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.db.models import Count
 from . models import Artist, Consert, Tilbud, Behov, Band_Info
 from datetime import datetime
+from random import randint
+import math
 
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm
 from . forms import RegistrerTilbudForm, GodkjennTilbudBookingSjefForm
@@ -402,6 +404,54 @@ def godkjenn_tilbud_bookingsjef(request, artist, tilbud_id):
                                                                         'form': form,
                                                                         'rolle': rolle
                                                                         })
+    else:
+        return redirect('dashboard')
+
+def generer_billettpris(request):
+    user = request.user
+    if not request.user.is_authenticated():
+        return render(request, 'registration/login.html', {})
+
+    rolle = user.profile.role
+    if rolle == 'bookingsjef':
+        future_concerts = Consert.objects.exclude(tidspunkt__lte=datetime.now()).order_by('tidspunkt')
+
+        if future_concerts is not None:
+            for consert in future_concerts:
+                prev_concerts = Consert.objects.filter(artist__navn=consert.artist.navn, sceneNavn=consert.sceneNavn).exclude(tidspunkt__gte=datetime.now())
+
+                tilskuertall_count = 0
+                tilskuertall_total = consert.tilskuertall
+                tilskuertall_snitt = 0.9*tilskuertall_total
+
+                if prev_concerts is not None:
+                    for con in prev_concerts:
+                        tilskuertall_total = 0
+                        tilskuertall_total += con.tilskuertall
+                        tilskuertall_count += 1
+
+                        tilskuertall_snitt = tilskuertall_total/tilskuertall_count
+
+                totale_kostnader = consert.kostnader
+                totale_kostnader += 500*len(consert.behov.all())
+
+                totale_kostnader += 2000*len(consert.rigging.all())
+
+                if consert.sceneNavn == 'hallen':
+                    totale_kostnader += 15000
+                elif consert.sceneNavn == 'storhallen':
+                    totale_kostnader += 20000
+                else:
+                    totale_kostnader += 30000
+
+                pris = ((totale_kostnader+(tilskuertall_total*300)) / tilskuertall_snitt) * 1.2
+                pris = math.ceil(pris/10)
+                consert.billettpris = pris*10
+
+        return render(request, 'app/generer_billettpris.html', {
+                                                                'conserts': future_concerts,
+                                                                'rolle': rolle
+                                                                })
     else:
         return redirect('dashboard')
 
