@@ -1,13 +1,18 @@
 from django import forms
 from django.forms import ModelChoiceField
 
-from . models import Artist, Tilbud, Behov
+from . models import Artist, Tilbud, Behov, Consert
 
+MESSAGE_STATUS = (
+    (True, "Yes I acknowledge this"),
+    (False, "No, I do not like this")
+)
 
-#The choices html attribute with all artists in th database
-class MyModelChoiceField(ModelChoiceField):
-    def label_from_instance(self, obj):
-        return obj.navn
+SCENER = (
+    ('hallen', 'Hallen'),
+    ('hovedscenen', 'Hovedscenen'),
+    ('storhallen', 'Storhallen')
+)
 
 
 class BehovTypeModelChoiceField(ModelChoiceField):
@@ -16,10 +21,14 @@ class BehovTypeModelChoiceField(ModelChoiceField):
 
 
 class RegistrerTilbudForm(forms.ModelForm):
-    artist = MyModelChoiceField(queryset=Artist.objects.all())
-    soknad = forms.CharField(widget=forms.Textarea)
-    pris = forms.CharField()
-    tidspunkt = forms.DateField()
+
+    def __init__(self, *args, **kwargs):
+        super(RegistrerTilbudForm, self).__init__(*args, **kwargs)
+
+        #Have to load choices each time
+        artist_choices = tuple(Artist.objects.all().values_list('id', 'navn'))
+        self.fields['artist'].choices = artist_choices
+
 
     class Meta:
         model = Tilbud
@@ -27,20 +36,29 @@ class RegistrerTilbudForm(forms.ModelForm):
             'artist',
             'soknad',
             'pris',
-            'tidspunkt'
+            'tidspunkt',
+            'scene_navn'
             ]
 
     def save(self):
-        tilbud = super(RegistrerTilbudForm, self).save(commit=False)
-        tilbud.save()
+        tilbud = super(RegistrerTilbudForm, self).save()
         return tilbud
+
+    artist = forms.ChoiceField()
+    soknad = forms.CharField(widget=forms.Textarea)
+    pris = forms.IntegerField()
+    tidspunkt = forms.DateField(widget=forms.SelectDateWidget())
+    scene_navn = forms.Select(choices=SCENER)
 
 
 class GodkjennTilbudBookingSjefForm(forms.ModelForm):
 
     class Meta:
         model = Tilbud
-        fields = ('godkjent_av_bookingssjef',)
+        fields = ('godkjent_av_bookingsjef',)
+        widgets = {
+            'sendt_av_ansvarlig': forms.RadioSelect(choices=MESSAGE_STATUS),
+        }
 
 
 class SendTilbudBookingAnsvarligForm(forms.ModelForm):
@@ -48,6 +66,20 @@ class SendTilbudBookingAnsvarligForm(forms.ModelForm):
     class Meta:
         model = Tilbud
         fields = ('sendt_av_ansvarlig',)
+        widgets = {
+            'sendt_av_ansvarlig': forms.RadioSelect(choices=MESSAGE_STATUS),
+
+        }
+
+
+class GodkjennTilbudManagerForm(forms.ModelForm):
+
+    class Meta:
+        model = Tilbud
+        fields = ('godkjent_av_manager',)
+        widgets = {
+            'godkjent_av_manager': forms.RadioSelect(choices=MESSAGE_STATUS),
+        }
 
 
 class LeggTilBehovForm(forms.ModelForm):

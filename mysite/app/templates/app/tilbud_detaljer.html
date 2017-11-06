@@ -7,15 +7,15 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Godkjenn tilbud</h1>
-    <div class="page-content col">
-        <div class="detail-container detail-center">
+    <h1>Detaljer tilbud</h1>
+    <div class="page-content">
+        <div class="detail-container">
             <h3>Tekniske behov:</h3>
 
             <div class="content-border">
                <h4>Artist</h4>
                {% for artist in tilbud.artist.all %}
-                    <p>{{ artist }}</p>
+                    <p>{{ artist.navn }}</p>
                {% endfor %}
             </div>
 
@@ -27,14 +27,6 @@
                 <h4>Pris:</h4>
                 <p>{{ tilbud.pris }}</p>
             </div>
-        </div>
-
-        <div class="detail-center">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Send" class="btn-greeny wide" />
-            </form>
         </div>
     </div>
 </div>

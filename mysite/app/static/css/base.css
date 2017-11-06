@@ -140,6 +140,7 @@ nav {
     align-items: center;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .login-form {
@@ -225,6 +226,15 @@ nav {
     padding: 0.5em 0 0.5em 0;
 }
 
+.detail-center {
+    max-width: 33%;
+    margin: 0 auto 0 auto;
+}
+
+.detail-center input {
+
+}
+
 .detail-info {
     display: flex;
     flex-wrap: wrap;
@@ -249,6 +259,10 @@ nav {
 
 .detail-info th {
     min-width: 100px;
+}
+
+.col {
+    flex-direction: column;
 }
 
 .btn-reg {
@@ -346,6 +360,10 @@ nav {
     justify-content: space-around;
 }
 
+.space-around {
+    margin: 20px;
+}
+
 .page-content h5 {
     font-size: 1.4em;
     margin: 0 0 1em 0;
@@ -377,9 +395,38 @@ nav {
     text-align: center;
 }
 
+ul li {
+    list-style-type: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
 /* footer */
 .footer {
     color: grey;
     font-size:0.9em;
     text-align: center;
+}
+
+.success {
+    text-align: center;
+    padding: 15px;
+    background-color: #4aa74e;
+    color: whitesmoke;
+    margin-bottom: 20px;
+}
+
+.error {
+    text-align: center;
+    padding: 15px;
+    background-color: #e44034;
+    color: whitesmoke;
+    margin-bottom: 20px;
+}
+
+.wide {
+    width: 100%;
 }

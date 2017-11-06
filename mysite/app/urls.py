@@ -1,8 +1,8 @@
 from django.conf.urls import url, include
 
-from . views import arrangor, lydtekniker, dashboard, lystekniker, artist
+from . views import arrangor, lydtekniker, dashboard, lystekniker, artist, godkjenn_tilbud_manager
 from . views import legg_til_behov_manager, lag_tilbud, godkjenn_tilbud_bookingsjef, generer_billettpris
-from . views import manager, bookingansvarlig, bookingsjef, konsert
+from . views import manager, bookingansvarlig, bookingsjef, konsert, tilbud_detaljer
 from . views import tidligere_konserter, tilbud_liste_bookingsjef, band_info, delete_behov_manager, tidligere_band, vurder_marked
 from . views import tilbud_liste_bookingansvarlig, send_tilbud_bookingansvarlig, tilbud_liste_manager
 
@@ -84,11 +84,11 @@ urlpatterns = [
         lag_tilbud,
         name='lag_tilbud'),
 
-    url(r'^tilbudsliste_bookingsjef/$',
+    url(r'^tilbud_liste_bookingsjef/$',
         tilbud_liste_bookingsjef,
         name='tilbud_liste_bookingsjef'),
 
-    url(r'^tilbudsliste_bookingansvarlig/$',
+    url(r'^tilbud_liste_bookingansvarlig/$',
         tilbud_liste_bookingansvarlig,
         name='tilbud_liste_bookingansvarlig'),
 
@@ -96,17 +96,25 @@ urlpatterns = [
         godkjenn_tilbud_bookingsjef,
         name='godkjenn_tilbud_bookingsjef'),
 
+    url(r'^godkjenn_tilbud_manager/(?P<tilbud_id>\d+)/$',
+        godkjenn_tilbud_manager,
+        name='godkjenn_tilbud_manager'),
+
+    url(r'^tilbud_liste_manager/$',
+        tilbud_liste_manager,
+        name='tilbud_liste_manager'),
+
     url(r'^send_tilbud_bookingansvarlig/(?P<tilbud_id>\d+)/$',
         send_tilbud_bookingansvarlig,
         name='send_tilbud_bookingansvarlig'),
 
-    url(r'^tilbudsliste_manager/$',
-        tilbud_liste_manager,
-        name='tilbud_liste_manager'),
-
     url(r'^tidligere_band/$',
         tidligere_band,
         name='tidligere_band'),
+
+    url(r'^tilbud_detaljer/(?P<tilbud_id>\d+)/$',
+        tilbud_detaljer,
+        name='tilbud_detaljer'),
 
     #login logout
     url('^',

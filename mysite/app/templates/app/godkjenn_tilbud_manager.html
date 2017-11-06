@@ -15,7 +15,7 @@
             <div class="content-border">
                <h4>Artist</h4>
                {% for artist in tilbud.artist.all %}
-                    <p>{{ artist }}</p>
+                    <p>{{ artist.navn }}</p>
                {% endfor %}
             </div>
 
@@ -29,11 +29,11 @@
             </div>
         </div>
 
-        <div class="detail-center">
+        <div class="detail-center form-group space-between">
             <form action="" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type="submit" value="Send" class="btn-greeny wide" />
+                <input type="submit" value="Submit" class="btn-greeny wide" />
             </form>
         </div>
     </div>
