@@ -100,7 +100,7 @@ class Artist(models.Model):
         return self.navn
 
     def create_slug(self):
-        self.slug = self.navn.replace(' ','')
+        self.slug = self.navn.replace(' ','_')
 
     def save(self, *args, **kwargs):
         self.create_slug()
@@ -122,7 +122,6 @@ class Consert(models.Model):
     nokkelInfo = models.TextField(blank=True)
     kostnader = models.IntegerField(default=10000, blank=True)
     billettpris = models.IntegerField(editable=False, null=True)
-    nokkelInfo = models.TextField(blank=True)
 
     def __str__(self):
         return self.artist.navn
