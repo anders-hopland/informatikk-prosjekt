@@ -233,16 +233,15 @@ def bookingsjef(request):
         arr = []
 
         num_booked_scenes = 0
-        print(len(all_conserts))
 
         date = start_date
         while date != end_date + datetime.timedelta(days=1):
             newlist = all_conserts.exclude(~Q(tidspunkt=date))
             for scene in SCENER:
-                newlist = newlist.exclude(~Q(sceneNavn=scene))
-                if len(newlist) != 0:
-                    arr.append(newlist[0])
-                    num_booked_scenes += 1
+                if len(newlist) > 0:
+                    if newlist[0].sceneNavn == scene:
+                        arr.append(newlist[0])
+                        num_booked_scenes += 1
                 else:
                     arr.append(None)
 
