@@ -6,6 +6,7 @@ from django.db.models import Count
 from . models import Artist, Consert, Tilbud, Behov, Band_Info
 from datetime import datetime
 from random import randint
+import datetime
 import math
 
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm, GodkjennTilbudManagerForm
@@ -221,11 +222,15 @@ def bookingsjef(request):
     rolle = user.profile.role
     if rolle == 'bookingsjef':
 
-        all_conserts = Consert.objects.exclude(
-            ~Q(tidspunkt__year='2018'))
+        start_date = datetime.date(2018, 6, 10)
+        end_date = datetime.date(2018, 6, 16)
 
-        for consert in all_conserts:
-            print(consert)
+        all_conserts = Consert.objects.filter(tidspunkt__range=(start_date, end_date))
+
+        for c in all_conserts:
+            print(c.tidspunkt)
+
+        print(all_conserts)
 
         return render(request, 'app/bookingsjef.html', {
                                                         'rolle': rolle
@@ -371,6 +376,7 @@ def lag_tilbud(request):
     else:
         return redirect('dashboard')
 
+
 # Bookingsjef får liste over tilbud og kan godkjenne
 def tilbud_liste_bookingsjef(request):
     user = request.user
@@ -386,7 +392,6 @@ def tilbud_liste_bookingsjef(request):
                                                                      'num_tilbud': num_tilbud})
     else:
         return redirect('dashboard')
-
 
 
 def vurder_marked(request):
