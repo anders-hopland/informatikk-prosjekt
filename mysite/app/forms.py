@@ -4,8 +4,8 @@ from django.forms import ModelChoiceField
 from . models import Artist, Tilbud, Behov, Consert
 
 MESSAGE_STATUS = (
-    (True, "Yes I acknowledge this"),
-    (False, "No, I do not like this")
+    (True, "Ja"),
+    (False, "Nei")
 )
 
 SCENER = (
