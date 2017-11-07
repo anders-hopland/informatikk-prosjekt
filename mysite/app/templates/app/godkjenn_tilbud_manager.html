@@ -19,14 +19,9 @@
                     <p>{{ artist.navn }}</p>
                {% endfor %}
             </div>
-
             <div class="content-border">
-                <h4>Søknad</h4>
-                <p>{{ tilbud.soknad }}</p>
-            </div>
-            <div class="content-border">
-                <h4>Pris:</h4>
-                <p>{{ tilbud.pris }}</p>
+                <h4>Honorar:</h4>
+                <p>{{ tilbud.pris }} kr</p>
             </div>
             <div class="content-border">
                 <h4>Dato:</h4>
@@ -42,7 +37,7 @@
             <form action="" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type="submit" value="Submit" class="btn-greeny wide" />
+                <input type="submit" value="Send" class="btn-greeny wide" />
             </form>
         </div>
     </div>
