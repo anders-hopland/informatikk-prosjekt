@@ -220,35 +220,62 @@ def bookingsjef(request):
     rolle = user.profile.role
     if rolle == 'bookingsjef':
 
+        # Static chosen dates for consistency
         start_date = datetime(2018, 6, 10)
         end_date = datetime(2018, 6, 16)
 
+        # All concerts between chosen dates
         all_conserts = Consert.objects.filter(tidspunkt__range=(start_date, end_date))
 
+        # Number ov avaiable dates where at least one scene is avaiable
         num_available = 7
+
+        # Number of scenes that are booked that day
         num_booked_scenes = 0
 
+        # Nested dict for each day:
+        # weeklist { day1: {scene: concert_object, scene2... }, day2: {scene: ...}...}
+        # Consists  of 7 days with each has a dict with 3 scene keys and eventually
+        # containing None or Concert objects if booked
         week_list = {}
 
+        # Go through days
         for i in range(7):
+            # List consisting of all concerts at date = current day = i
             newlist = all_conserts.exclude(~Q(tidspunkt=start_date + timedelta(days=i)))
+
+            # Creates an empty dict for a day object
             week_list[i] = {}
 
+            # Goes through each scene
             for scene in SCENER:
+                #if there are registered a concert for current date
                 if len(newlist) > 0:
+                    #if there is registered a concert for current scne
                     if newlist[0].sceneNavn == scene:
+                        # Add the concert for current day and scene
                         week_list[i][scene] = newlist[0]
+                        #Increase number of booked scenes that day
                         num_booked_scenes += 1
                     else:
+                        # Set the scenes value as None (which means its avaiable)
                         week_list[i][scene] = None
                 else:
+                    # Set the scenes value as None (which means its avaiable)
                     week_list[i][scene] = None
 
+            #For each day, if the day has 3 booked scenes means
+            #it is booked for the current day and number of available is decreased by one day
             if num_booked_scenes == 3:
                 num_available -= 1
+
+            # Resets number of booked scenes for the next day
             num_booked_scenes = 0
 
+        #TODO Number of tilbud is not implemented yet
         num_tilbud = 0
+
+        # Number of booked is 7 days minus number of avaiable
         num_booked = 7 - num_available
 
         return render(request, 'app/bookingsjef.html', {
