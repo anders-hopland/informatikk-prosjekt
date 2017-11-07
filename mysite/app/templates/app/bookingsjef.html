@@ -1,0 +1,40 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Oversikt over festivaluke:</h1>
+    <div class="page-content calendar">
+
+        <div class="date-view">
+            <span>Antall ledige datoer: {{ num_available }}</span>
+            <span>Antall booket datoer: {{ num_booked }}</span>
+            <span>Antall tilbud sendt: {{ num_tilbud }}</span>
+        </div>
+
+        <div class="day-cont">
+            {% for day, object in week_list.items %}
+                <div class="day">
+                    <span>Dato: <b>1{{ day }}.06.2018</b></span>
+
+                    {% for scene, consert in object.items %}
+
+                        <div>
+                            <label>{{ scene|title }}</label><br>
+                            {% if consert %}
+                                <span>{{ consert|title }}</span>
+                            {% else %}
+                                <span>Ledig</span>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

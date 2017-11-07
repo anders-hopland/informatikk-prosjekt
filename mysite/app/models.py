@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.forms import forms
+from django.core.urlresolvers import reverse
 
 STATUS_CHOICES = (
     ('arrangor', 'Arrangør'),

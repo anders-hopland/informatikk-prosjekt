@@ -33,13 +33,17 @@
                     {% if rolle == "manager" %}
                         <label for="inntekter">Honorar:</label>
                         <span id="inntekter">{{ consert.inntekter }} kr</span>
+                    {% endif %}
+            </div>
+                {% if rolle == "manager" %}
+                    <div style="display: flex; flex-direction: column; margin: 0 1em 0 1em;">
                         <a href="{% url 'legg_til_behov_manager' consert.artist.slug consert.id %}"
                            class="btn-greeny">
                             Rediger behov
                         </a>
-                    {% endif %}
-                {% endfor %}
-            </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
 
         {% if rolle != "manager" %}

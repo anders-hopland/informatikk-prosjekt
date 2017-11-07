@@ -1,11 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.core import serializers
 
-from django.db.models import Count
 from . models import Artist, Consert, Tilbud, Behov, Band_Info
-from datetime import datetime
-from random import randint
+from datetime import datetime, timedelta
 import math
 
 from . forms import LeggTilBehovForm, SendTilbudBookingAnsvarligForm, GodkjennTilbudManagerForm
@@ -23,6 +20,8 @@ takes three parameters, the request which holds data such as which user is logge
 in, an html page and a dictionary with data from the database. The data from the
 dictionary will in turn be rendered in the html by the templating engine jinja
 '''
+
+SCENER = ['hallen', 'hovedscenen', 'storhallen']
 
 
 def dashboard(request):
@@ -60,11 +59,11 @@ def arrangor(request):
             object_list = Consert.objects.filter(
                 sceneNavn=current_consert).order_by(
                 'tidspunkt').exclude(
-                ~Q(tidspunkt__year='2017'))
+                ~Q(tidspunkt__year='2018'))
         else:
             object_list = Consert.objects.all().order_by(
                 'tidspunkt').exclude(
-                ~Q(tidspunkt__year='2017'))
+                ~Q(tidspunkt__year='2018'))
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
 
@@ -85,7 +84,7 @@ def lydtekniker(request):
         object_list = Consert.objects.filter(
             rigging__person__username=user.username).order_by(
             'tidspunkt').exclude(
-            ~Q(tidspunkt__year='2017'))
+            ~Q(tidspunkt__year='2018'))
         return render(request, 'app/lydtekniker.html', {'conserts': object_list,
                                                         'rolle': rolle})
     else:
@@ -101,7 +100,7 @@ def lystekniker(request):
         object_list = Consert.objects.filter(
             rigging__person__username=user.username).order_by(
             'tidspunkt').exclude(
-            ~Q(tidspunkt__year='2017'))
+            ~Q(tidspunkt__year='2018'))
 
         return render(request, 'app/lystekniker.html', {'conserts': object_list,
                                                         'rolle': rolle})
@@ -171,11 +170,11 @@ def bookingansvarlig(request):
         if current_consert is not None and current_consert != 'alle':
             object_list = Consert.objects.order_by(
                 'tidspunkt').exclude(
-                ~Q(tidspunkt__year='2017'))
+                ~Q(tidspunkt__year='2018'))
         else:
             object_list = Consert.objects.all().order_by(
                 'tidspunkt').exclude(
-                ~Q(tidspunkt__year='2017'))
+                ~Q(tidspunkt__year='2018'))
 
         scene_list = Consert.objects.values('sceneNavn').distinct()
 
@@ -199,9 +198,9 @@ def tidligere_konserter(request):
             concert_list = Consert.objects.filter(
                 artist__sjanger=current_genre).exclude(
                 tidspunkt__gte=datetime.now(),
-                tidspunkt__year='2017')
+                tidspunkt__year='2018')
         else:
-            concert_list = Consert.objects.exclude(tidspunkt__gte=datetime.now(), tidspunkt__year='2017')
+            concert_list = Consert.objects.exclude(tidspunkt__gte=datetime.now(), tidspunkt__year='2018')
 
         sjanger_list = Artist.objects.values('sjanger').distinct()
 
@@ -220,10 +219,72 @@ def bookingsjef(request):
 
     rolle = user.profile.role
     if rolle == 'bookingsjef':
-        object_list = Consert.objects.filter(rigging__person__username=user.username).order_by('tidspunkt')
-        return render(request, 'app/manager.html', {'conserts': object_list,
-                                                    'rolle': rolle
-                                                    })
+
+        # Static chosen dates for consistency
+        start_date = datetime(2018, 6, 10)
+        end_date = datetime(2018, 6, 16)
+
+        # All concerts between chosen dates
+        all_conserts = Consert.objects.filter(tidspunkt__range=(start_date, end_date))
+
+        # Number ov avaiable dates where at least one scene is avaiable
+        num_available = 7
+
+        # Number of scenes that are booked that day
+        num_booked_scenes = 0
+
+        # Nested dict for each day:
+        # weeklist { day1: {scene: concert_object, scene2... }, day2: {scene: ...}...}
+        # Consists  of 7 days with each has a dict with 3 scene keys and eventually
+        # containing None or Concert objects if booked
+        week_list = {}
+
+        # Go through days
+        for i in range(7):
+            # List consisting of all concerts at date = current day = i
+            newlist = all_conserts.exclude(~Q(tidspunkt=start_date + timedelta(days=i)))
+
+            # Creates an empty dict for a day object
+            week_list[i] = {}
+
+            # Goes through each scene
+            for scene in SCENER:
+                #if there are registered a concert for current date
+                if len(newlist) > 0:
+                    #if there is registered a concert for current scne
+                    if newlist[0].sceneNavn == scene:
+                        # Add the concert for current day and scene
+                        week_list[i][scene] = newlist[0]
+                        #Increase number of booked scenes that day
+                        num_booked_scenes += 1
+                    else:
+                        # Set the scenes value as None (which means its avaiable)
+                        week_list[i][scene] = None
+                else:
+                    # Set the scenes value as None (which means its avaiable)
+                    week_list[i][scene] = None
+
+            #For each day, if the day has 3 booked scenes means
+            #it is booked for the current day and number of available is decreased by one day
+            if num_booked_scenes == 3:
+                num_available -= 1
+
+            # Resets number of booked scenes for the next day
+            num_booked_scenes = 0
+
+        #TODO Number of tilbud is not implemented yet
+        num_tilbud = 0
+
+        # Number of booked is 7 days minus number of avaiable
+        num_booked = 7 - num_available
+
+        return render(request, 'app/bookingsjef.html', {
+                                                        'rolle': rolle,
+                                                        'num_available': num_available,
+                                                        'num_booked': num_booked,
+                                                        'num_tilbud': num_tilbud,
+                                                        'week_list': week_list
+                                                        })
     else:
         return redirect('dashboard')
 
@@ -328,13 +389,13 @@ def tidligere_band(request):
     if rolle == 'bookingansvarlig':
         object_list = Consert.objects.order_by(
             'artist__navn').exclude(
-            tidspunkt__year='2017')
+            tidspunkt__year='2018')
 
         query = request.GET.get("q")
         if query:
             object_list = object_list.filter(
                 artist__navn__icontains=query).\
-                exclude(tidspunkt__year='2017')
+                exclude(tidspunkt__year='2018')
 
         context = {
             'conserts': object_list,
@@ -365,6 +426,7 @@ def lag_tilbud(request):
     else:
         return redirect('dashboard')
 
+
 # Bookingsjef får liste over tilbud og kan godkjenne
 def tilbud_liste_bookingsjef(request):
     user = request.user
@@ -380,7 +442,6 @@ def tilbud_liste_bookingsjef(request):
                                                                      'num_tilbud': num_tilbud})
     else:
         return redirect('dashboard')
-
 
 
 def vurder_marked(request):

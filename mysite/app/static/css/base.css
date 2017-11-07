@@ -14,6 +14,10 @@ h1, h2 {
     margin: 0;
 }
 
+h1 {
+    margin-bottom: 0.5em;
+}
+
 /* reservert til logintittel */
 h2 {
     color: white;
@@ -57,7 +61,6 @@ table thead tr th {
 .page-content {
     display: flex;
     justify-content: center;
-    margin-top: 1em;
 }
 
 
@@ -184,6 +187,7 @@ nav {
     background-color: #23C000;
     border-radius: 0.2em;
     color: white;
+    cursor: pointer;
     display: inline-block;
     font-size: 1em;
     padding: 1em;
@@ -240,19 +244,20 @@ nav {
     flex-direction: column;
     text-align: left;
     padding: 0 1em;
+    min-height: 52%;
 }
 
 .detail-info h3, .dynamic-form h5 {
     margin-top: 1em;
 }
 
-.detail-info > label, .dynamic-form label {
+.detail-info label, .dynamic-form label, .day label {
     color: #6d6d6d;
     font-weight: bold;
     margin: 1em 0 0.2em 0;
 }
 
-.detail-info > span {
+.detail-info span, .day span {
     margin: -1.3em 2em 1em 5em;
 }
 
@@ -286,7 +291,7 @@ nav {
 .choice-menu {
     display: flex;
     justify-content: center;
-    margin:0 0 2em 0;
+    margin:0 0 1em 0;
 }
 
 .choice-menu select {
@@ -412,20 +417,50 @@ ul {
 
 .success {
     text-align: center;
-    padding: 15px;
+    padding: 1em;
     background-color: #4aa74e;
     color: whitesmoke;
-    margin-bottom: 20px;
 }
 
 .error {
     text-align: center;
-    padding: 15px;
+    padding: 1em;
     background-color: #e44034;
     color: whitesmoke;
-    margin-bottom: 20px;
 }
 
 .wide {
     width: 100%;
+}
+
+/* bookingsjef */
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.day-cont {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.day {
+    flex: 1;
+    padding: 0.5em;
+    border: 1px solid grey;
+    max-width: 30%;
+    min-width: 10%;
+}
+
+.day span {
+    display: block;
+    margin: 0 0 0.5em 0;
+}
+
+.date-view {
+    display: flex;
+    justify-content:space-around;
+    margin-bottom:1em;
 }
