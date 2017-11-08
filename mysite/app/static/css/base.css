@@ -423,10 +423,12 @@ ul {
 }
 
 .error {
+    border-radius: 2em;
     text-align: center;
     padding: 1em;
     background-color: #e44034;
     color: whitesmoke;
+    margin-bottom: 1em;
 }
 
 .wide {
@@ -463,4 +465,12 @@ ul {
     display: flex;
     justify-content:space-around;
     margin-bottom:1em;
+}
+
+.ledig {
+    color: #23C000;
+}
+
+.denied {
+    color: red;
 }

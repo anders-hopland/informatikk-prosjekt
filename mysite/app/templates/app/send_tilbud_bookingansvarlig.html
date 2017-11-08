@@ -7,7 +7,17 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Send godkjent tilbud</h1>
+    {% if tilbud.godkjent_av_bookingsjef == True and tilbud.sendt_av_ansvarlig != True %}
+        <h1>Send tilbud til manager</h1>
+    {% elif tilbud.godkjent_av_manager == True %}
+        <h1>Godkjent tilbud</h1>
+    {% elif tilbud.godkjent_av_bookingsjef == True and tilbud.sendt_av_ansvarlig == True and tilbud.godkjent_av_manager != False %}
+        <h1>Tilbud sendt til manager</h1>
+        {% elif tilbud.godkjent_av_bookingsjef == None %}
+        <h1>Tilbud sendt til bookingsjef</h1>
+    {% else %}
+        <h1>Avslått tilbud</h1>
+    {% endif %}
     <div class="page-content col">
         <div class="detail-container detail-center">
             <h3>Tilbud:</h3>
@@ -39,13 +49,15 @@
             </div>
         </div>
 
-        <div class="detail-center form-group space-between">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Send" class="btn-greeny wide"/>
-            </form>
-        </div>
+        {% if tilbud and tilbud.godkjent_av_bookingsjef == True and tilbud.sendt_av_ansvarlig != True %}
+            <div class="detail-center form-group space-between">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Send" class="btn-greeny wide"/>
+                </form>
+            </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

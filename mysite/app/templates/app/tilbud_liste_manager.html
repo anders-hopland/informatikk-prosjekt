@@ -18,7 +18,7 @@
         {% endif %}
     </div>
     <div class="page-content">
-        {% if tilbuds %}
+        {% if manager_tilbud_list %}
             <table>
                 <thead>
                     <tr>
@@ -28,14 +28,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for tilbud in tilbuds %}
+                    {% for tilbud in manager_tilbud_list %}
                         <tr>
+                        {% for artist in tilbud.artist.all %}
                             <td>
-                                {% for artist in tilbud.artist.all %}
-                                    {{ artist.navn }}
-                                {% endfor %}
+                                {{ artist.navn }}
                             </td>
-
+                        {% endfor %}
                             <td>
                                 <a href="{% url 'godkjenn_tilbud_manager' tilbud.id %}"
                                    class="btn-greeny">

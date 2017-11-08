@@ -18,17 +18,18 @@
         {% endif %}
     </div>
     <div class="page-content">
-        {% if tilbuds %}
+        {% if tilbuds_liste %}
             <table>
                 <thead>
                     <tr>
                         <th>Artist navn</th>
                         <th>Detaljer</th>
-                        <th>Status</th>
+                        <th>Status bookingsjef</th>
+                        <th>Status manager</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for tilbud in tilbuds %}
+                    {% for tilbud in tilbuds_liste %}
                         <tr>
                             <td>
                                 {% for artist in tilbud.artist.all %}
@@ -42,9 +43,38 @@
                                     Se detaljer
                                 </a>
                             </td>
-                            <td>
-                                <span>Ubehandlet</span>
-                            </td>
+
+                            {% if tilbud.godkjent_av_bookingsjef == True %}
+                                <td>
+                                    <span class="ledig">Godkjent</span>
+                                </td>
+                            {% elif tilbud.godkjent_av_bookingsjef == False %}
+                                <td>
+                                    <span class="denied">Avslått</span>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <span>Sendt</span>
+                                </td>
+                            {% endif %}
+
+                            {% if tilbud.godkjent_av_manager == True %}
+                                <td>
+                                    <span class="ledig">Godkjent</span>
+                                </td>
+                            {% elif tilbud.godkjent_av_manager == False %}
+                                <td>
+                                    <span class="denied">Avslått</span>
+                                </td>
+                            {% elif tilbud.sendt_av_ansvarlig == True and tilbud.godkjent_av_manager != True %}
+                                <td>
+                                    <span>Sendt</span>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <span>Ubehandlet</span>
+                                </td>
+                            {% endif %}
 
                         </tr>
                     {% endfor %}

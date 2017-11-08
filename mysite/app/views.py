@@ -239,30 +239,22 @@ def bookingsjef(request):
         # containing None or Concert objects if booked
         week_list = {}
 
+        curr_date = start_date
         # Go through days
-        for i in range(7):
-            # List consisting of all concerts at date = current day = i
-            newlist = all_conserts.exclude(~Q(tidspunkt=start_date + timedelta(days=i)))
+        for day in range(7):
 
-            # Creates an empty dict for a day object
-            week_list[i] = {}
+            week_list[day] = {}
 
-            # Goes through each scene
+            # Sets all scenes as none (not booked) for this day
             for scene in SCENER:
-                #if there are registered a concert for current date
-                if len(newlist) > 0:
-                    #if there is registered a concert for current scne
-                    if newlist[0].sceneNavn == scene:
-                        # Add the concert for current day and scene
-                        week_list[i][scene] = newlist[0]
-                        #Increase number of booked scenes that day
-                        num_booked_scenes += 1
-                    else:
-                        # Set the scenes value as None (which means its avaiable)
-                        week_list[i][scene] = None
-                else:
-                    # Set the scenes value as None (which means its avaiable)
-                    week_list[i][scene] = None
+                week_list[day][scene] = None
+
+            # For every concert that has a scene matching the scenes for this day
+            # Replace None with concert
+            # Add number of booked scenes by one
+            for concert in all_conserts.filter(tidspunkt=curr_date).all():
+                week_list[day][concert.sceneNavn] = concert
+                num_booked_scenes += 1
 
             #For each day, if the day has 3 booked scenes means
             #it is booked for the current day and number of available is decreased by one day
@@ -271,6 +263,8 @@ def bookingsjef(request):
 
             # Resets number of booked scenes for the next day
             num_booked_scenes = 0
+
+            curr_date += timedelta(days=1)
 
         num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
                                            sendt_av_ansvarlig=True,
@@ -438,6 +432,7 @@ def tilbud_liste_bookingsjef(request):
     if rolle == 'bookingsjef':
         object_list = Tilbud.objects.filter(godkjent_av_bookingsjef=None)
         num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=None).count()
+
         return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list,
                                                                      'rolle': rolle,
                                                                      'num_tilbud': num_tilbud})
@@ -511,12 +506,13 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
                 form.save()
                 return redirect('tilbud_liste_bookingsjef')
 
-        return render(request, 'app/godkjenn_tilbud_bookingsjef.html', {'tilbud': tilbud,
-                                                                        'form': form,
-                                                                        'rolle': rolle
-                                                                        })
+        return render(request, 'app/godkjenn_tilbud_bookingsjef.html',
+                      {'tilbud': tilbud,
+                       'form': form,
+                       'rolle': rolle})
     else:
         return redirect('dashboard')
+
 
 def generer_billettpris(request):
     user = request.user
@@ -525,42 +521,38 @@ def generer_billettpris(request):
 
     rolle = user.profile.role
     if rolle == 'bookingsjef':
-        future_concerts = Consert.objects.exclude(tidspunkt__lte=datetime.now()).order_by('tidspunkt')
 
-        if future_concerts is not None:
-            for consert in future_concerts:
-                prev_concerts = Consert.objects.filter(artist__navn=consert.artist.navn, sceneNavn=consert.sceneNavn).exclude(tidspunkt__gte=datetime.now())
+        consert_list = Consert.objects.all()
+        for consert in consert_list:
+            tilskuertall_total = consert.tilskuertall
+            tilskuertall_snitt = 0.9*tilskuertall_total
 
-                tilskuertall_count = 0
-                tilskuertall_total = consert.tilskuertall
-                tilskuertall_snitt = 0.9*tilskuertall_total
+            totale_kostnader = consert.kostnader
+            totale_kostnader += 500*consert.behov.all().count()
+            totale_kostnader += 2000*consert.rigging.all().count()
 
-                if prev_concerts is not None:
-                    for con in prev_concerts:
-                        tilskuertall_total = 0
-                        tilskuertall_total += con.tilskuertall
-                        tilskuertall_count += 1
+            if consert.sceneNavn == 'hallen':
+                totale_kostnader += 15000
+            elif consert.sceneNavn == 'storhallen':
+                totale_kostnader += 20000
+            else:
+                totale_kostnader += 30000
 
-                        tilskuertall_snitt = tilskuertall_total/tilskuertall_count
+            if tilskuertall_snitt <= 0.0:
+                tilskuertall_snitt = 0.5 * tilskuertall_total
 
-                totale_kostnader = consert.kostnader
-                totale_kostnader += 500*len(consert.behov.all())
+            if tilskuertall_snitt <= 0:
+                pris = 0
+            else:
+                pris = math.ceil(((totale_kostnader+(tilskuertall_total*300)) / tilskuertall_snitt) * 1.2)
 
-                totale_kostnader += 2000*len(consert.rigging.all())
+            if pris <= 350:
+                pris = 350
 
-                if consert.sceneNavn == 'hallen':
-                    totale_kostnader += 15000
-                elif consert.sceneNavn == 'storhallen':
-                    totale_kostnader += 20000
-                else:
-                    totale_kostnader += 30000
-
-                pris = ((totale_kostnader+(tilskuertall_total*300)) / tilskuertall_snitt) * 1.2
-                pris = math.ceil(pris/10)
-                consert.billettpris = pris*10
+            consert.billettpris = pris
 
         return render(request, 'app/generer_billettpris.html', {
-                                                                'conserts': future_concerts,
+                                                                'conserts': consert_list,
                                                                 'rolle': rolle
                                                                 })
     else:
@@ -575,20 +567,15 @@ def tilbud_liste_bookingansvarlig(request):
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        tilbuds = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
-                                              sendt_av_ansvarlig=None)
-        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
-                                              sendt_av_ansvarlig=None).count()
+        tilbuds_liste = Tilbud.objects.all()
 
         return render(request,
                       'app/tilbud_liste_bookingansvarlig.html',
-                      {'tilbuds': tilbuds,
-                       'num_tilbud': num_tilbud,
+                      {'tilbuds_liste': tilbuds_liste,
+                       'num_tilbud': tilbuds_liste.count(),
                        'rolle': rolle})
     else:
         return redirect('dashboard')
-
-
 
 def send_tilbud_bookingansvarlig(request, tilbud_id):
     user = request.user
@@ -622,23 +609,20 @@ def tilbud_liste_manager(request):
     rolle = user.profile.role
     if rolle == 'manager':
 
-        all_tilbuds = Tilbud.objects.all()
-        manager_tilbud_list = {}
-        for tilbud in all_tilbuds:
-            for artist in tilbud.artist.all():
-                manager_tilbud_list[artist.navn] = tilbud
+        artists_of_manager = Artist.objects.filter(manager=user.profile)
 
+        #Alle tilbud
+        all_tilbuds = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
+                                            sendt_av_ansvarlig=True,
+                                            godkjent_av_manager=None)
 
-        print(manager_tilbud_list)
+        #Filtrerer ut tilbud til gitt manager
+        manager_tilbud_list = all_tilbuds.exclude(~Q(artist__in=artists_of_manager))
 
-        object_list = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
-                                           sendt_av_ansvarlig=True,
-                                           godkjent_av_manager=None)
-
-        num_tilbud = object_list.count()
+        num_tilbud = len(manager_tilbud_list)
 
         return render(request, 'app/tilbud_liste_manager.html',
-                      {'tilbuds': object_list,
+                      {'manager_tilbud_list': manager_tilbud_list,
                        'num_tilbud': num_tilbud,
                        'rolle': rolle})
     else:
@@ -661,7 +645,6 @@ def godkjenn_tilbud_manager(request, tilbud_id):
             if form.is_valid():
                 form.save()
                 cd = form.cleaned_data
-                print(cd)
                 #Accepted offer
                 if cd['godkjent_av_manager'] == True:
 
@@ -673,7 +656,8 @@ def godkjenn_tilbud_manager(request, tilbud_id):
                     artist = Artist.objects.get(id=artist_id)
                     Consert.objects.create(artist=artist,
                                            tidspunkt=tilbud.tidspunkt,
-                                           sceneNavn=tilbud.scene_navn)
+                                           sceneNavn=tilbud.scene_navn,
+                                           inntekter=tilbud.pris)
 
                 return redirect('tilbud_liste_manager')
 
