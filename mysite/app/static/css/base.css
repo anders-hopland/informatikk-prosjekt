@@ -423,10 +423,12 @@ ul {
 }
 
 .error {
+    border-radius: 2em;
     text-align: center;
     padding: 1em;
     background-color: #e44034;
     color: whitesmoke;
+    margin-bottom: 1em;
 }
 
 .wide {

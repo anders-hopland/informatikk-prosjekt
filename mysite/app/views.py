@@ -625,7 +625,7 @@ def tilbud_liste_manager(request):
 
         #All tilbuds
         all_tilbuds = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
-                                            sendt_av_ansvarlig=None,
+                                            sendt_av_ansvarlig=True,
                                             godkjent_av_manager=None)
 
         #Managerlist of tilbud
@@ -680,7 +680,8 @@ def godkjenn_tilbud_manager(request, tilbud_id):
                     artist = Artist.objects.get(id=artist_id)
                     Consert.objects.create(artist=artist,
                                            tidspunkt=tilbud.tidspunkt,
-                                           sceneNavn=tilbud.scene_navn)
+                                           sceneNavn=tilbud.scene_navn,
+                                           kostnader=tilbud.pris)
 
                 return redirect('tilbud_liste_manager')
 
