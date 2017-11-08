@@ -116,10 +116,10 @@ class Consert(models.Model):
     tidspunkt = models.DateField()
     sceneNavn = models.CharField(max_length=250, choices=SCENER)
     rigging = models.ManyToManyField(Rigging, blank=True)
-    tilskuertall = models.IntegerField(default=1000, blank=True)
-    inntekter = models.IntegerField(default=20000, blank=True)
+    tilskuertall = models.IntegerField(default=0, blank=True)
+    inntekter = models.IntegerField(default=0, blank=True)
     nokkelInfo = models.TextField(blank=True)
-    kostnader = models.IntegerField(default=10000, blank=True)
+    kostnader = models.IntegerField(default=0, blank=True)
     billettpris = models.IntegerField(editable=False, null=True)
 
     def __str__(self):
