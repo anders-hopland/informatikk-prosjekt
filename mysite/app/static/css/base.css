@@ -14,6 +14,10 @@ h1, h2 {
     margin: 0;
 }
 
+h1 {
+    margin-bottom: 0.5em;
+}
+
 /* reservert til logintittel */
 h2 {
     color: white;
@@ -57,7 +61,6 @@ table thead tr th {
 .page-content {
     display: flex;
     justify-content: center;
-    margin-top: 1em;
 }
 
 
@@ -140,6 +143,7 @@ nav {
     align-items: center;
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
 .login-form {
@@ -183,6 +187,7 @@ nav {
     background-color: #23C000;
     border-radius: 0.2em;
     color: white;
+    cursor: pointer;
     display: inline-block;
     font-size: 1em;
     padding: 1em;
@@ -224,30 +229,44 @@ nav {
     padding: 0.5em 0 0.5em 0;
 }
 
+.detail-center {
+    max-width: 33%;
+    margin: 0 auto 0 auto;
+}
+
+.detail-center input {
+
+}
+
 .detail-info {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     text-align: left;
     padding: 0 1em;
+    min-height: 52%;
 }
 
 .detail-info h3, .dynamic-form h5 {
     margin-top: 1em;
 }
 
-.detail-info > label, .dynamic-form label {
+.detail-info label, .dynamic-form label, .day label {
     color: #6d6d6d;
     font-weight: bold;
     margin: 1em 0 0.2em 0;
 }
 
-.detail-info > span {
+.detail-info span, .day span {
     margin: -1.3em 2em 1em 5em;
 }
 
 .detail-info th {
     min-width: 100px;
+}
+
+.col {
+    flex-direction: column;
 }
 
 .btn-reg {
@@ -272,7 +291,7 @@ nav {
 .choice-menu {
     display: flex;
     justify-content: center;
-    margin:0 0 2em 0;
+    margin:0 0 1em 0;
 }
 
 .choice-menu select {
@@ -305,7 +324,7 @@ nav {
 }
 
 .search-button {
-    background-color: #6dcf50;
+    background-color: #23C000;
     border: 0.05em solid #c8c8c8;
     border-radius: 0.2em;
     color: white;
@@ -318,7 +337,7 @@ nav {
 }
 
 .search-button:hover {
-    background-color: #286039;
+    background-color: #23A000;
     color: white;
 }
 
@@ -343,6 +362,10 @@ nav {
 /* manager redigeringsside */
 .space-between {
     justify-content: space-around;
+}
+
+.space-around {
+    margin: 20px;
 }
 
 .page-content h5 {
@@ -376,9 +399,78 @@ nav {
     text-align: center;
 }
 
+ul li {
+    list-style-type: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
 /* footer */
 .footer {
     color: grey;
     font-size:0.9em;
     text-align: center;
+}
+
+.success {
+    text-align: center;
+    padding: 1em;
+    background-color: #4aa74e;
+    color: whitesmoke;
+}
+
+.error {
+    border-radius: 2em;
+    text-align: center;
+    padding: 1em;
+    background-color: #e44034;
+    color: whitesmoke;
+    margin-bottom: 1em;
+}
+
+.wide {
+    width: 100%;
+}
+
+/* bookingsjef */
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.day-cont {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.day {
+    flex: 1;
+    padding: 0.5em;
+    border: 1px solid grey;
+    max-width: 30%;
+    min-width: 10%;
+}
+
+.day span {
+    display: block;
+    margin: 0 0 0.5em 0;
+}
+
+.date-view {
+    display: flex;
+    justify-content:space-around;
+    margin-bottom:1em;
+}
+
+.ledig {
+    color: #23C000;
+}
+
+.denied {
+    color: red;
 }

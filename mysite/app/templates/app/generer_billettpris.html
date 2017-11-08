@@ -7,19 +7,18 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over dine bands konserter</h1>
+    <h1>Forslag til billettpris for kommende konserter:</h1>
     <div class="page-content">
+
         {% if conserts %}
             <table>
                 <thead>
                     <tr>
-                        <th>Band navn</th>
+                        <th>Navn</th>
                         <th>Tidspunkt</th>
                         <th>Scene</th>
                         <th>Sjanger</th>
-                        <th>Honorar</th>
-                        <th>Behov</th>
-                        <th>Detaljer</th>
+                        <th>Prisforslag</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,24 +28,13 @@
                             <td>{{ consert.tidspunkt }}</td>
                             <td>{{ consert.sceneNavn }}</td>
                             <td>{{ consert.artist.sjanger }}</td>
-                            <td>{{ consert.inntekter }} kr</td>
-                            <td>
-                                <a href="{% url 'legg_til_behov_manager' consert.artist.slug consert.id %}"
-                                   class="btn-greeny">
-                                    Rediger behov
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{{ consert.consert_url }}" class="btn-greeny">
-                                    Se detaljer
-                                </a>
-                            </td>
+                            <td>{{ consert.billettpris }} kr</td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
-            <p class="greyed">Du har ikke noe registrert.</p>
+            <p class="greyed">Det finnes ingen kommende konserter å generere billettpriser for</p>
         {% endif %}
     </div>
 </div>

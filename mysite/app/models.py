@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.forms import forms
+from django.core.urlresolvers import reverse
 
 STATUS_CHOICES = (
     ('arrangor', 'Arrangør'),
@@ -23,6 +22,12 @@ NEED_CHOICES = (
     ('lyd', 'Lyd'),
     ('lys', 'Lys'),
     ('andre', 'Andre')
+)
+
+STATUS_FOR_TILBUD = (
+    (None, "Ubehandlet"),
+    (True, "Godkjenn"),
+    (False, "Avslå")
 )
 
 
@@ -94,7 +99,7 @@ class Artist(models.Model):
         return self.navn
 
     def create_slug(self):
-        self.slug = self.navn.replace(' ','')
+        self.slug = self.navn.replace(' ','_')
 
     def save(self, *args, **kwargs):
         self.create_slug()
@@ -111,10 +116,11 @@ class Consert(models.Model):
     tidspunkt = models.DateField()
     sceneNavn = models.CharField(max_length=250, choices=SCENER)
     rigging = models.ManyToManyField(Rigging, blank=True)
-    tilskuertall = models.IntegerField(default=1000, blank=True)
-    inntekter = models.IntegerField(default=20000, blank=True)
-    kostnader = models.IntegerField(default=10000, blank=True)
-    nokkelInfo = models.CharField(max_length=2000, blank=True)
+    tilskuertall = models.IntegerField(default=0, blank=True)
+    inntekter = models.IntegerField(default=0, blank=True)
+    nokkelInfo = models.TextField(blank=True)
+    kostnader = models.IntegerField(default=0, blank=True)
+    billettpris = models.IntegerField(editable=False, null=True)
 
     def __str__(self):
         return self.artist.navn
@@ -138,7 +144,8 @@ class Tilbud(models.Model):
     soknad = models.TextField()
     pris = models.IntegerField()
     tidspunkt = models.DateField()
-    godkjent_av_bookingssjef = models.NullBooleanField(blank=True, null=True, default=None)
+    scene_navn = models.CharField(max_length=250, choices=SCENER)
+    godkjent_av_bookingsjef = models.NullBooleanField(blank=True, null=True, default=None)
     sendt_av_ansvarlig = models.NullBooleanField(blank=True, null=True, default=None)
     godkjent_av_manager = models.NullBooleanField(blank=True, null=True, default=None)
 
@@ -150,11 +157,11 @@ class Tilbud(models.Model):
         verbose_name_plural = 'tilbud'
 
 class Band_Info(models.Model):
-    band = models.CharField(max_length=500)
-    nokkelInfo = models.CharField(max_length=2000)
-    stromtjeneste = models.CharField(max_length=500)
-    albumSalg = models.CharField(max_length=2000)
-    norskeKonserter = models.CharField(max_length=2000)
+    band = models.CharField(max_length=250)
+    nokkelInfo = models.TextField()
+    stromtjeneste = models.TextField()
+    albumSalg = models.TextField()
+    norskeKonserter = models.TextField()
 
     def __str__(self):
         return self.band

@@ -8,12 +8,19 @@
 {% block content %}
 <div class="page-container">
     <h1>Lag Tilbud</h1>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     <div class="page-content">
         <div class="detail-info">
             <form action="" method="post" class="dynamic-form">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Send" class="btn-greeny"/>
             </form>
         </div>
     </div>

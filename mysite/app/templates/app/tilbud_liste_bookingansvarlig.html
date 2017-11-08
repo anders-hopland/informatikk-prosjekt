@@ -7,27 +7,75 @@
 
 {% block content %}
 <div class="page-container">
-    <h1>Oversikt over godkjente tilbud</h1>
+    <div class="space-around">
+        <h1>Oversikt over tilbud:</h1>
+    </div>
+    <div class="space-around">
+        {% if num_tilbud == 1 %}
+            <h3>Du har {{ num_tilbud }} ubehandlet tilbud</h3>
+        {% else %}
+            <h3>Du har {{ num_tilbud }} ubehandlede tilbud</h3>
+        {% endif %}
+    </div>
     <div class="page-content">
-        {% if tilbuds %}
+        {% if tilbuds_liste %}
             <table>
                 <thead>
                     <tr>
                         <th>Artist navn</th>
-                        <th></th>
+                        <th>Detaljer</th>
+                        <th>Status bookingsjef</th>
+                        <th>Status manager</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for tilbud in tilbuds %}
+                    {% for tilbud in tilbuds_liste %}
                         <tr>
-                            {% for artist in tilbud.artist.all %}
-                                <td>{{ artist.navn }}</td>
-                            {% endfor %}
                             <td>
-                                <a href="{% url 'send_tilbud_bookingansvarlig' tilbud.id %}" class="info-button">
+                                {% for artist in tilbud.artist.all %}
+                                    {{ artist.navn }}
+                                {% endfor %}
+                            </td>
+
+                            <td>
+                                <a href="{% url 'send_tilbud_bookingansvarlig' tilbud.id %}"
+                                   class="btn-greeny">
                                     Se detaljer
                                 </a>
                             </td>
+
+                            {% if tilbud.godkjent_av_bookingsjef == True %}
+                                <td>
+                                    <span class="ledig">Godkjent</span>
+                                </td>
+                            {% elif tilbud.godkjent_av_bookingsjef == False %}
+                                <td>
+                                    <span class="denied">Avslått</span>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <span>Sendt</span>
+                                </td>
+                            {% endif %}
+
+                            {% if tilbud.godkjent_av_manager == True %}
+                                <td>
+                                    <span class="ledig">Godkjent</span>
+                                </td>
+                            {% elif tilbud.godkjent_av_manager == False %}
+                                <td>
+                                    <span class="denied">Avslått</span>
+                                </td>
+                            {% elif tilbud.sendt_av_ansvarlig == True and tilbud.godkjent_av_manager != True %}
+                                <td>
+                                    <span>Sendt</span>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <span>Ubehandlet</span>
+                                </td>
+                            {% endif %}
+
                         </tr>
                     {% endfor %}
                 </tbody>
