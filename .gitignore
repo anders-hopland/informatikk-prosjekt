@@ -90,3 +90,5 @@ local_settings.py
 
 *.env
 *.sqlite3
+
+*.json

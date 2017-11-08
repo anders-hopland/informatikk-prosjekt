@@ -51,16 +51,6 @@ class RegistrerTilbudForm(forms.ModelForm):
     scene_navn = forms.Select(choices=SCENER)
 
 
-class GodkjennTilbudBookingSjefForm(forms.ModelForm):
-
-    class Meta:
-        model = Tilbud
-        fields = ('godkjent_av_bookingsjef',)
-        widgets = {
-            'sendt_av_ansvarlig': forms.RadioSelect(choices=MESSAGE_STATUS),
-        }
-
-
 class SendTilbudBookingAnsvarligForm(forms.ModelForm):
 
     class Meta:
@@ -79,8 +69,19 @@ class GodkjennTilbudManagerForm(forms.ModelForm):
         fields = ('godkjent_av_manager',)
         widgets = {
             'godkjent_av_manager': forms.RadioSelect(choices=MESSAGE_STATUS),
+
         }
 
+
+class GodkjennTilbudBookingSjefForm(forms.ModelForm):
+
+    class Meta:
+        model = Tilbud
+        fields = ('godkjent_av_bookingsjef',)
+        widgets = {
+            'godkjent_av_bookingsjef': forms.RadioSelect(choices=MESSAGE_STATUS),
+
+        }
 
 class LeggTilBehovForm(forms.ModelForm):
 

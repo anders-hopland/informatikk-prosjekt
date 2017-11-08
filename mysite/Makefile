@@ -1,6 +1,5 @@
 default: migrate
 
-#hente data: python3 manage.py dumpdata --exclude contenttypes --exclude admin.logentry --exclude auth.permission --exclude sessions.session --indent 4 > user.json
 rebuild-db:
 	@echo Rebuilding database
 	@rm -rf db.sqlite3
@@ -26,5 +25,10 @@ build:
 
 	@echo "\nLoading user objects"
 	@python3 manage.py loaddata users.json
+
+save-data-from-db:
+	@python3 manage.py dumpdata --exclude contenttypes --exclude admin.logentry --exclude auth.permission --exclude sessions.session --indent 4 > users.json
+	@echo "\nCloned data from databse to file"
+
 
 

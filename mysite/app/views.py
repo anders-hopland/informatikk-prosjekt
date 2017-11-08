@@ -508,12 +508,12 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
             form = GodkjennTilbudBookingSjefForm(request.POST, instance=tilbud)
             if form.is_valid():
                 form.save()
-                return redirect('tilbud_liste_bookingsjef')
+                return redirect('tilbud_liste_bookingansvarlig')
 
-        return render(request, 'app/godkjenn_tilbud_bookingsjef.html', {'tilbud': tilbud,
-                                                                        'form': form,
-                                                                        'rolle': rolle
-                                                                        })
+        return render(request, 'app/tilbud_liste_bookingsjef.html',
+                      {'tilbud': tilbud,
+                       'form': form,
+                       'rolle': rolle})
     else:
         return redirect('dashboard')
 
