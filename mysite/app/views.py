@@ -641,13 +641,7 @@ def tilbud_liste_manager(request):
             if manager == user.profile:
                 manager_tilbud_list[artist.navn] = tilbud
 
-
-
-
         num_tilbud = len(manager_tilbud_list)
-
-        print(num_tilbud)
-        print(manager_tilbud_list)
 
         return render(request, 'app/tilbud_liste_manager.html',
                       {'manager_tilbud_list': manager_tilbud_list,
