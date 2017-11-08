@@ -631,7 +631,8 @@ def tilbud_liste_manager(request):
         all_tilbuds = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
                                             sendt_av_ansvarlig=True,
                                             godkjent_av_manager=None)
-       
+
+        #Filtrerer ut tilbud til gitt manager
         manager_tilbud_list = all_tilbuds.exclude(~Q(artist__in=artists_of_manager))
 
         num_tilbud = len(manager_tilbud_list)
