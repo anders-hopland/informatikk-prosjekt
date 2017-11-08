@@ -30,9 +30,11 @@
                 <tbody>
                     {% for tilbud in manager_tilbud_list %}
                         <tr>
+                        {% for artist in tilbud.artist.all %}
                             <td>
-                                {{ tilbud.artist }}
+                                {{ artist.navn }}
                             </td>
+                        {% endfor %}
                             <td>
                                 <a href="{% url 'godkjenn_tilbud_manager' tilbud.id %}"
                                    class="btn-greeny">
