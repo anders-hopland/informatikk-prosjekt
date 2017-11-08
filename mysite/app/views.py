@@ -641,13 +641,7 @@ def tilbud_liste_manager(request):
             if manager == user.profile:
                 manager_tilbud_list[artist.navn] = tilbud
 
-
-
-
         num_tilbud = len(manager_tilbud_list)
-
-        print(num_tilbud)
-        print(manager_tilbud_list)
 
         return render(request, 'app/tilbud_liste_manager.html',
                       {'manager_tilbud_list': manager_tilbud_list,
@@ -684,7 +678,8 @@ def godkjenn_tilbud_manager(request, tilbud_id):
                     artist = Artist.objects.get(id=tilbud_id)
                     Consert.objects.create(artist=artist,
                                            tidspunkt=tilbud.tidspunkt,
-                                           sceneNavn=tilbud.scene_navn)
+                                           sceneNavn=tilbud.scene_navn,
+                                           kostnader=tilbud.pris)
 
                 return redirect('tilbud_liste_manager')
 
