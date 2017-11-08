@@ -509,7 +509,7 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
             form = GodkjennTilbudBookingSjefForm(request.POST, instance=tilbud)
             if form.is_valid():
                 form.save()
-                return redirect('tilbud_liste_bookingansvarlig')
+                return redirect('tilbud_liste_bookingsjef')
 
         return render(request, 'app/tilbud_liste_bookingsjef.html',
                       {'tilbud': tilbud,
@@ -661,7 +661,6 @@ def godkjenn_tilbud_manager(request, tilbud_id):
             if form.is_valid():
                 form.save()
                 cd = form.cleaned_data
-                print(cd)
                 #Accepted offer
                 if cd['godkjent_av_manager'] == True:
 
