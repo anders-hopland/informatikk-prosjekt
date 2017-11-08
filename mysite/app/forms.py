@@ -71,7 +71,7 @@ class GodkjennTilbudManagerForm(forms.ModelForm):
         model = Tilbud
         fields = ('godkjent_av_manager',)
         labels = {
-            'godkjent_av_manager': 'Godkjenn og send'
+            'godkjent_av_manager': 'Godkjenn og book konsert'
         }
         widgets = {
             'godkjent_av_manager': forms.RadioSelect(choices=MESSAGE_STATUS),

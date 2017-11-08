@@ -619,11 +619,15 @@ def tilbud_liste_manager(request):
     rolle = user.profile.role
     if rolle == 'manager':
 
-        #All tilbuds
+        artists_of_manager = Artist.objects.filter(manager=user.profile)
+
+        #Alle tilbud
         all_tilbuds = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
                                             sendt_av_ansvarlig=True,
                                             godkjent_av_manager=None)
-
+        for t in all_tilbuds:
+            print(t)
+        '''
         #Managerlist of tilbud
         manager_tilbud_list = {}
 
@@ -635,6 +639,11 @@ def tilbud_liste_manager(request):
                 for manager in artist.manager.all():
                     if manager == user.profile:
                         manager_tilbud_list[artist.navn] = tilbud
+        for til in all_tilbuds:
+            print(til.artist)
+        #Filtrerer ut band uten gitt manager
+        '''
+        manager_tilbud_list = all_tilbuds.exclude(~Q(artist__in=artists_of_manager))
 
         num_tilbud = len(manager_tilbud_list)
 
