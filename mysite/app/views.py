@@ -239,30 +239,22 @@ def bookingsjef(request):
         # containing None or Concert objects if booked
         week_list = {}
 
+        curr_date = start_date
         # Go through days
-        for i in range(7):
-            # List consisting of all concerts at date = current day = i
-            newlist = all_conserts.exclude(~Q(tidspunkt=start_date + timedelta(days=i)))
+        for day in range(7):
 
-            # Creates an empty dict for a day object
-            week_list[i] = {}
+            week_list[day] = {}
 
-            # Goes through each scene
+            # Sets all scenes as none (not booked) for this day
             for scene in SCENER:
-                #if there are registered a concert for current date
-                if len(newlist) > 0:
-                    #if there is registered a concert for current scne
-                    if newlist[0].sceneNavn == scene:
-                        # Add the concert for current day and scene
-                        week_list[i][scene] = newlist[0]
-                        #Increase number of booked scenes that day
-                        num_booked_scenes += 1
-                    else:
-                        # Set the scenes value as None (which means its avaiable)
-                        week_list[i][scene] = None
-                else:
-                    # Set the scenes value as None (which means its avaiable)
-                    week_list[i][scene] = None
+                week_list[day][scene] = None
+
+            # For every concert that has a scene matching the scenes for this day
+            # Replace None with concert
+            # Add number of booked scenes by one
+            for concert in all_conserts.filter(tidspunkt=curr_date).all():
+                week_list[day][concert.sceneNavn] = concert
+                num_booked_scenes += 1
 
             #For each day, if the day has 3 booked scenes means
             #it is booked for the current day and number of available is decreased by one day
@@ -271,6 +263,8 @@ def bookingsjef(request):
 
             # Resets number of booked scenes for the next day
             num_booked_scenes = 0
+
+            curr_date += timedelta(days=1)
 
         num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
                                            sendt_av_ansvarlig=True,
