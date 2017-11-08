@@ -557,8 +557,14 @@ def generer_billettpris(request):
                 else:
                     totale_kostnader += 30000
 
-                pris = ((totale_kostnader+(tilskuertall_total*300)) / tilskuertall_snitt) * 1.2
-                pris = math.ceil(pris/10)
+                if tilskuertall_snitt <= 0.0:
+                    tilskuertall_snitt = 0.5 * tilskuertall_total
+
+                if tilskuertall_snitt <= 0:
+                    pris = 0
+                else:
+                    pris = math.ceil(((totale_kostnader+(tilskuertall_total*300)) / tilskuertall_snitt) * 1.2)
+
                 consert.billettpris = pris*10
 
         return render(request, 'app/generer_billettpris.html', {
