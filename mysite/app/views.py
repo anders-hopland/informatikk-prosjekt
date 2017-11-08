@@ -519,6 +519,7 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
     else:
         return redirect('dashboard')
 
+
 def generer_billettpris(request):
     user = request.user
     if not request.user.is_authenticated():
@@ -631,13 +632,16 @@ def tilbud_liste_manager(request):
         #Managerlist of tilbud
         manager_tilbud_list = {}
 
+
         #For all tilbuds, get artist for current tilbud
         #If the artist has this manager as manager, add it to managerlist
         for tilbud in all_tilbuds.all():
-            for artist in tilbud.artist.all():
-                for manager in artist.manager.all():
-                    if manager == user.profile:
-                        manager_tilbud_list[artist.navn] = tilbud
+            artist = tilbud.artist[0]
+            manager = artist.manager[0]
+            if manager == user.profile:
+                manager_tilbud_list[artist.navn] = tilbud
+
+
 
 
         num_tilbud = len(manager_tilbud_list)
@@ -677,7 +681,7 @@ def godkjenn_tilbud_manager(request, tilbud_id):
                     for a in tilbud.artist.all():
                         artist_id = a.id
 
-                    artist = Artist.objects.get(id=artist_id)
+                    artist = Artist.objects.get(id=tilbud_id)
                     Consert.objects.create(artist=artist,
                                            tidspunkt=tilbud.tidspunkt,
                                            sceneNavn=tilbud.scene_navn,
