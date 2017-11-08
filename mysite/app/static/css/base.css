@@ -467,6 +467,10 @@ ul {
     margin-bottom:1em;
 }
 
-.day .ledig-dato {
+.ledig {
     color: #23C000;
+}
+
+.denied {
+    color: red;
 }

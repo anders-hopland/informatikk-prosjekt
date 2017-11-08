@@ -140,7 +140,7 @@ class Consert(models.Model):
 
 #not used yet, will be used in a later sprint
 class Tilbud(models.Model):
-    artist = models.ForeignKey(Artist)
+    artist = models.ManyToManyField(Artist)
     soknad = models.TextField()
     pris = models.IntegerField()
     tidspunkt = models.DateField()

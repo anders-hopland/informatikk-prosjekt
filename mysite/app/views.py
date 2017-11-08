@@ -577,20 +577,15 @@ def tilbud_liste_bookingansvarlig(request):
 
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
-        tilbuds = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
-                                              sendt_av_ansvarlig=None)
-        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
-                                              sendt_av_ansvarlig=None).count()
+        tilbuds_liste = Tilbud.objects.all()
 
         return render(request,
                       'app/tilbud_liste_bookingansvarlig.html',
-                      {'tilbuds': tilbuds,
-                       'num_tilbud': num_tilbud,
+                      {'tilbuds_liste': tilbuds_liste,
+                       'num_tilbud': tilbuds_liste.count(),
                        'rolle': rolle})
     else:
         return redirect('dashboard')
-
-
 
 def send_tilbud_bookingansvarlig(request, tilbud_id):
     user = request.user
@@ -636,10 +631,10 @@ def tilbud_liste_manager(request):
         #For all tilbuds, get artist for current tilbud
         #If the artist has this manager as manager, add it to managerlist
         for tilbud in all_tilbuds.all():
-            artist = tilbud.artist[0]
-            manager = artist.manager[0]
-            if manager == user.profile:
-                manager_tilbud_list[artist.navn] = tilbud
+            for artist in tilbud.all():
+                for manager in artist.manager.all():
+                    if manager == user.profile:
+                        manager_tilbud_list[artist.navn] = tilbud
 
         num_tilbud = len(manager_tilbud_list)
 

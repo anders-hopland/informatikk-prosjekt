@@ -39,13 +39,15 @@
             </div>
         </div>
 
-        <div class="detail-center form-group space-between">
-            <form action="" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Send" class="btn-greeny wide"/>
-            </form>
-        </div>
+        {% if tilbud and tilbud.godkjent_av_bookingskjef == True %}
+            <div class="detail-center form-group space-between">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Send" class="btn-greeny wide"/>
+                </form>
+            </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
