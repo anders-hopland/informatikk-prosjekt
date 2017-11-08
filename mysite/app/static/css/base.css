@@ -464,3 +464,7 @@ ul {
     justify-content:space-around;
     margin-bottom:1em;
 }
+
+.day span.ledig-dato{
+    color: #23C000;
+}
