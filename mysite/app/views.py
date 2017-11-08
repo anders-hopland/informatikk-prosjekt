@@ -272,8 +272,9 @@ def bookingsjef(request):
             # Resets number of booked scenes for the next day
             num_booked_scenes = 0
 
-        #TODO Number of tilbud is not implemented yet
-        num_tilbud = 0
+        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
+                                           sendt_av_ansvarlig=True,
+                                           godkjent_av_manager=None).count()
 
         # Number of booked is 7 days minus number of avaiable
         num_booked = 7 - num_available
@@ -620,12 +621,21 @@ def tilbud_liste_manager(request):
 
     rolle = user.profile.role
     if rolle == 'manager':
+
+        all_tilbuds = Tilbud.objects.all()
+        manager_tilbud_list = {}
+        for tilbud in all_tilbuds:
+            for artist in tilbud.artist.all():
+                manager_tilbud_list[artist.navn] = tilbud
+
+
+        print(manager_tilbud_list)
+
         object_list = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
                                            sendt_av_ansvarlig=True,
                                            godkjent_av_manager=None)
-        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
-                                           sendt_av_ansvarlig=True,
-                                           godkjent_av_manager=None).count()
+
+        num_tilbud = object_list.count()
 
         return render(request, 'app/tilbud_liste_manager.html',
                       {'tilbuds': object_list,
