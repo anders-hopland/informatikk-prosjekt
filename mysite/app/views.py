@@ -438,6 +438,7 @@ def tilbud_liste_bookingsjef(request):
     if rolle == 'bookingsjef':
         object_list = Tilbud.objects.filter(godkjent_av_bookingsjef=None)
         num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=None).count()
+
         return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list,
                                                                      'rolle': rolle,
                                                                      'num_tilbud': num_tilbud})
@@ -622,23 +623,30 @@ def tilbud_liste_manager(request):
     rolle = user.profile.role
     if rolle == 'manager':
 
-        all_tilbuds = Tilbud.objects.all()
+        #All tilbuds
+        all_tilbuds = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
+                                            sendt_av_ansvarlig=None,
+                                            godkjent_av_manager=None)
+
+        #Managerlist of tilbud
         manager_tilbud_list = {}
-        for tilbud in all_tilbuds:
+
+        #For all tilbuds, get artist for current tilbud
+        #If the artist has this manager as manager, add it to managerlist
+        for tilbud in all_tilbuds.all():
             for artist in tilbud.artist.all():
-                manager_tilbud_list[artist.navn] = tilbud
+                for manager in artist.manager.all():
+                    if manager == user.profile:
+                        manager_tilbud_list[artist.navn] = tilbud
 
 
+        num_tilbud = len(manager_tilbud_list)
+
+        print(num_tilbud)
         print(manager_tilbud_list)
 
-        object_list = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
-                                           sendt_av_ansvarlig=True,
-                                           godkjent_av_manager=None)
-
-        num_tilbud = object_list.count()
-
         return render(request, 'app/tilbud_liste_manager.html',
-                      {'tilbuds': object_list,
+                      {'manager_tilbud_list': manager_tilbud_list,
                        'num_tilbud': num_tilbud,
                        'rolle': rolle})
     else:

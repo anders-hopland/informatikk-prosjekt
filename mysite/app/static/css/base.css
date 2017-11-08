@@ -465,6 +465,6 @@ ul {
     margin-bottom:1em;
 }
 
-.day span.ledig-dato{
+.day .ledig-dato {
     color: #23C000;
 }
