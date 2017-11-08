@@ -511,7 +511,7 @@ def godkjenn_tilbud_bookingsjef(request, tilbud_id):
                 form.save()
                 return redirect('tilbud_liste_bookingsjef')
 
-        return render(request, 'app/tilbud_liste_bookingsjef.html',
+        return render(request, 'app/godkjenn_tilbud_bookingsjef.html',
                       {'tilbud': tilbud,
                        'form': form,
                        'rolle': rolle})
