@@ -54,7 +54,7 @@
                                 </td>
                             {% else %}
                                 <td>
-                                    <span>Ubehandlet</span>
+                                    <span>Sendt</span>
                                 </td>
                             {% endif %}
 
@@ -65,6 +65,10 @@
                             {% elif tilbud.godkjent_av_manager == False %}
                                 <td>
                                     <span class="denied">Avslått</span>
+                                </td>
+                            {% elif tilbud.sendt_av_ansvarlig == True and tilbud.godkjent_av_manager != True %}
+                                <td>
+                                    <span>Sendt</span>
                                 </td>
                             {% else %}
                                 <td>

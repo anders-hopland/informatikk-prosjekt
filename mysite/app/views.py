@@ -631,7 +631,7 @@ def tilbud_liste_manager(request):
         #For all tilbuds, get artist for current tilbud
         #If the artist has this manager as manager, add it to managerlist
         for tilbud in all_tilbuds.all():
-            for artist in tilbud.all():
+            for artist in tilbud.artist.all():
                 for manager in artist.manager.all():
                     if manager == user.profile:
                         manager_tilbud_list[artist.navn] = tilbud
@@ -670,11 +670,11 @@ def godkjenn_tilbud_manager(request, tilbud_id):
                     for a in tilbud.artist.all():
                         artist_id = a.id
 
-                    artist = Artist.objects.get(id=tilbud_id)
+                    artist = Artist.objects.get(id=artist_id)
                     Consert.objects.create(artist=artist,
                                            tidspunkt=tilbud.tidspunkt,
                                            sceneNavn=tilbud.scene_navn,
-                                           kostnader=tilbud.pris)
+                                           inntekter=tilbud.pris)
 
                 return redirect('tilbud_liste_manager')
 
