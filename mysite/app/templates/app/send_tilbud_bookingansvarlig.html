@@ -13,6 +13,8 @@
         <h1>Godkjent tilbud</h1>
     {% elif tilbud.godkjent_av_bookingsjef == True and tilbud.sendt_av_ansvarlig == True and tilbud.godkjent_av_manager != False %}
         <h1>Tilbud sendt til manager</h1>
+        {% elif tilbud.godkjent_av_bookingsjef == None %}
+        <h1>Tilbud sendt til bookingsjef</h1>
     {% else %}
         <h1>Avslått tilbud</h1>
     {% endif %}
