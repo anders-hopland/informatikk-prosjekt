@@ -32,9 +32,7 @@
                     {% for tilbud in tilbuds_liste %}
                         <tr>
                             <td>
-                                {% for artist in tilbud.artist.all %}
-                                    {{ artist.navn }}
-                                {% endfor %}
+                                {{ tilbud.artist.navn }}
                             </td>
 
                             <td>

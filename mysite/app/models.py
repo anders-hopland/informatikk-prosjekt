@@ -140,7 +140,7 @@ class Consert(models.Model):
 
 #not used yet, will be used in a later sprint
 class Tilbud(models.Model):
-    artist = models.ManyToManyField(Artist)
+    artist = models.ForeignKey(Artist)
     soknad = models.TextField()
     pris = models.IntegerField()
     tidspunkt = models.DateField()
@@ -150,7 +150,7 @@ class Tilbud(models.Model):
     godkjent_av_manager = models.NullBooleanField(blank=True, null=True, default=None)
 
     def __str__(self):
-        return 'tilbud'
+        return 'tilbud til ' + str(self.artist.navn)
 
     class Meta:
         verbose_name = 'tilbud'

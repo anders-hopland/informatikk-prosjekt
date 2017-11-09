@@ -10,14 +10,10 @@
     <h1>Godkjenn tilbud</h1>
     <div class="page-content col">
         <div class="detail-container detail-center">
-            {% for artist in tilbud.artist.all %}
-                <h3>Tilbud for: {{ artist }}</h3>
-            {% endfor %}
+            <h3>Tilbud for: {{ tilbud.artist.navn }}</h3>
             <div class="content-border">
                <h4>Artist</h4>
-               {% for artist in tilbud.artist.all %}
-                    <p>{{ artist.navn }}</p>
-               {% endfor %}
+                <p>{{ tilbud.artist.navn }}</p>
             </div>
             <div class="content-border">
                 <h4>Honorar:</h4>

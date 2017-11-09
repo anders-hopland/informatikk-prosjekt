@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 
-from . views import arrangor, lydtekniker, dashboard, lystekniker, artist, godkjenn_tilbud_manager
+from . views import arrangor, lydtekniker, dashboard, lystekniker, godkjenn_tilbud_manager
 from . views import legg_til_behov_manager, lag_tilbud, godkjenn_tilbud_bookingsjef, generer_billettpris
 from . views import manager, bookingansvarlig, bookingsjef, konsert, tilbud_detaljer
 from . views import tidligere_konserter, tilbud_liste_bookingsjef, band_info, delete_behov_manager, tidligere_band, vurder_marked
@@ -20,10 +20,6 @@ it easier to refer to the url in our html using jinja
 
 
 urlpatterns = [
-    url(r'^artist/(?P<navn>\w+)$',
-        artist,
-        name='artist'),
-
     url(r'^arrangor/$',
         arrangor,
         name='arrangor'),
