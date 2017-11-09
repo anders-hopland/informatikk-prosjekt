@@ -268,7 +268,8 @@ def bookingsjef(request):
 
         # All concerts between chosen dates
         num_tilbud = Tilbud.objects.filter(tidspunkt__range=(start_date, end_date),
-                                           godkjent_av_bookingsjef=None).count()
+                                           godkjent_av_bookingsjef=True,
+                                           sendt_av_ansvarlig=True).count()
 
         # Number of booked is 7 days minus number of avaiable
         num_booked = 7 - num_available
