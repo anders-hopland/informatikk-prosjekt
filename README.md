@@ -28,4 +28,9 @@ Om du har make (unix kommando) kan du skrive:
 -   `make build`
 -   `make runserver`
 
+For å hente inn eksempeldata kan du skrive:
+-    `make rebuild-db`
+
+Denne kommandoen henter inn eksempeldata fra users.json og skriver inn til databasen. Om kommandoen ikke fungerer, sjekk at du har filen users.json. Ved problemer, kontakt Anders Mølster Hopland.
+
 Om du lurer på noe angående hvordan prosjektet er satt opp, sjekk ut prosjektets wiki sider, der ligger det mye oppdatert informasjon. 
