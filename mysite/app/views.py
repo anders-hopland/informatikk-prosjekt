@@ -539,7 +539,7 @@ def generer_billettpris(request):
                 totale_kostnader += 30000
 
             if tilskuertall_snitt <= 0.0:
-                tilskuertall_snitt = 0.5 * tilskuertall_total
+                tilskuertall_snitt = 0.9 * tilskuertall_total
 
             if tilskuertall_snitt <= 0:
                 pris = 0
