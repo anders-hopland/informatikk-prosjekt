@@ -1650,6 +1650,39 @@
     }
 },
 {
+    "model": "app.band_info",
+    "pk": 19,
+    "fields": {
+        "band": "Fifth Harmony",
+        "nokkelInfo": "Fifth Harmony er en amerikansk jentegruppe som ble dannet i den andre sesongen av X-Factor. Gruppen best\u00e5r av Dinah Jane Hansen, Lauren Jauregui, Ally Brooke Hernandez og Normani Kordei.",
+        "stromtjeneste": "14,517,661 m\u00e5nedlige lyttere, 94. plass i verden. (Spotify)",
+        "albumSalg": "Estimert salg: 1 million plater",
+        "norskeKonserter": "Oktober 2016,"
+    }
+},
+{
+    "model": "app.band_info",
+    "pk": 20,
+    "fields": {
+        "band": "Beyonce",
+        "nokkelInfo": "Beyonc\u00e9 Giselle Knowles-Carter er en amerikansk R&B og popsanger. Hun er ogs\u00e5 en komponist, plateprodusent, skuespiller og danser.",
+        "stromtjeneste": "19,180,911 m\u00e5nedlige lyttere, 54 plass i verden. (Spotify)",
+        "albumSalg": "Estimert Salg: 100 millioner plater.",
+        "norskeKonserter": "Mai 2007, Mai 2013"
+    }
+},
+{
+    "model": "app.band_info",
+    "pk": 21,
+    "fields": {
+        "band": "Kygo",
+        "nokkelInfo": "Kyrre G\u00f8rvell-Dahll, bedre kjent under artistnavnet Kygo, er en EDM-musiker fra Fana i Bergen i Hordaland. Han ble kjent gjennom nettstedene YouTube og SoundCloud, der han publiserer sin musikk som samlet har over 400 millioner treff.",
+        "stromtjeneste": "29,461,933 m\u00e5nedlige lyttere, 15. plass i verden. (Spotify)",
+        "albumSalg": "Estimert salg: over 60 000 plater",
+        "norskeKonserter": "-"
+    }
+},
+{
     "model": "auth.user",
     "pk": 1,
     "fields": {
