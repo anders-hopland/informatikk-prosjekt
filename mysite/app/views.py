@@ -522,8 +522,8 @@ def generer_billettpris(request):
     rolle = user.profile.role
     if rolle == 'bookingsjef':
 
-        consert_list = Consert.objects.all()
-        for consert in consert_list:
+        future_conserts = Consert.objects.exclude(tidspunkt__lte=datetime.now()).order_by('tidspunkt')
+        for consert in future_conserts:
             tilskuertall_total = consert.tilskuertall
             tilskuertall_snitt = 0.9*tilskuertall_total
 
@@ -545,6 +545,8 @@ def generer_billettpris(request):
                 pris = 0
             else:
                 pris = math.ceil(((totale_kostnader+(tilskuertall_total*300)) / tilskuertall_snitt) * 1.2)
+                pris = math.ceil(pris / 10)
+                pris = pris*10
 
             if pris <= 350:
                 pris = 350
@@ -552,7 +554,7 @@ def generer_billettpris(request):
             consert.billettpris = pris
 
         return render(request, 'app/generer_billettpris.html', {
-                                                                'conserts': consert_list,
+                                                                'conserts': future_conserts,
                                                                 'rolle': rolle
                                                                 })
     else:
