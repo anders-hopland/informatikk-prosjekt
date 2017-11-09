@@ -266,9 +266,9 @@ def bookingsjef(request):
 
             curr_date += timedelta(days=1)
 
-        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=True,
-                                           sendt_av_ansvarlig=True,
-                                           godkjent_av_manager=None).count()
+        # All concerts between chosen dates
+        num_tilbud = Tilbud.objects.filter(tidspunkt__range=(start_date, end_date),
+                                           godkjent_av_bookingsjef=None).count()
 
         # Number of booked is 7 days minus number of avaiable
         num_booked = 7 - num_available
