@@ -522,7 +522,7 @@ def generer_billettpris(request):
     rolle = user.profile.role
     if rolle == 'bookingsjef':
 
-        future_conserts = Consert.objects.exclude(tidspunkt__lte=datetime.now()).order_by('tidspunkt')
+        future_conserts = Consert.objects.exclude(tidspunkt__lte=datetime.now()).exclude(tidspunkt__year="2017").order_by('tidspunkt')
         for consert in future_conserts:
             tilskuertall_total = consert.tilskuertall
             tilskuertall_snitt = 0.9*tilskuertall_total
