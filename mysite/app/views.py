@@ -544,7 +544,7 @@ def generer_billettpris(request):
             if tilskuertall_snitt <= 0:
                 pris = 0
             else:
-                pris = math.ceil(((totale_kostnader+(tilskuertall_total*300)) / tilskuertall_snitt) * 1.2)
+                pris = ((totale_kostnader+(tilskuertall_total*300)) / tilskuertall_snitt) * 1.2
                 pris = math.ceil(pris / 10)
                 pris = pris*10
 
