@@ -405,6 +405,7 @@ def lag_tilbud(request):
     user = request.user
     if not request.user.is_authenticated():
         return render(request, 'registration/login.html', {})
+
     rolle = user.profile.role
     if rolle == 'bookingansvarlig':
         if request.method == 'POST':
@@ -414,6 +415,7 @@ def lag_tilbud(request):
                 messages.success(request, 'Tilbudet ble sendt')
             else:
                 messages.error(request, 'Tilbudet ble ikke sendt, vennligst prøv igjen')
+
         form = RegistrerTilbudForm()
         return render(request, 'app/lag_tilbud.html', {'form': form,
                                                        'rolle': rolle
@@ -431,11 +433,12 @@ def tilbud_liste_bookingsjef(request):
     rolle = user.profile.role
     if rolle == 'bookingsjef':
         object_list = Tilbud.objects.filter(godkjent_av_bookingsjef=None)
-        num_tilbud = Tilbud.objects.filter(godkjent_av_bookingsjef=None).count()
+        num_tilbud = object_list.count()
 
         return render(request, 'app/tilbud_liste_bookingsjef.html', {'tilbuds': object_list,
                                                                      'rolle': rolle,
-                                                                     'num_tilbud': num_tilbud})
+                                                                     'num_tilbud': num_tilbud
+                                                                     })
     else:
         return redirect('dashboard')
 
@@ -647,14 +650,7 @@ def godkjenn_tilbud_manager(request, tilbud_id):
                 cd = form.cleaned_data
                 #Accepted offer
                 if cd['godkjent_av_manager'] == True:
-
-                    #getting artist from manytomanyfield
-                    artist_id = 1
-                    for a in tilbud.artist.all():
-                        artist_id = a.id
-
-                    artist = Artist.objects.get(id=artist_id)
-                    Consert.objects.create(artist=artist,
+                    Consert.objects.create(artist=tilbud.artist,
                                            tidspunkt=tilbud.tidspunkt,
                                            sceneNavn=tilbud.scene_navn,
                                            inntekter=tilbud.pris)

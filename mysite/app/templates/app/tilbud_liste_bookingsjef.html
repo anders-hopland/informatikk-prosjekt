@@ -31,9 +31,7 @@
                     {% for tilbud in tilbuds %}
                         <tr>
                             <td>
-                                {% for artist in tilbud.artist.all %}
-                                    {{ artist.navn }}
-                                {% endfor %}
+                                {{ tilbud.artist.navn }}
                             </td>
                             <td>
                                 <a href="{% url 'godkjenn_tilbud_bookingsjef' tilbud.id %}"

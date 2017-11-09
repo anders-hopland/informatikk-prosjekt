@@ -44,7 +44,7 @@ class RegistrerTilbudForm(forms.ModelForm):
         tilbud = super(RegistrerTilbudForm, self).save()
         return tilbud
 
-    artist = forms.ChoiceField()
+    artist = forms.Select(choices=Artist.objects.all())
     soknad = forms.CharField(widget=forms.Textarea)
     pris = forms.IntegerField()
     tidspunkt = forms.DateField(widget=forms.SelectDateWidget())
